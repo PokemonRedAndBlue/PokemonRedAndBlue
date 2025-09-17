@@ -55,7 +55,7 @@ public class Game1 : Core
             if (i >= regionsToDraw)
                 break;
 
-            region.Value.Draw(SpriteBatch, new Vector2(640, 360), Color.White, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0f);
+            region.Value.Draw(SpriteBatch, new Vector2(608, 328), Color.White, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0f);
             i++;
         }
 
