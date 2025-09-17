@@ -11,8 +11,8 @@ namespace MonoGameLibrary.Graphics;
 
 public class TextureAtlas
 {
-    private Dictionary<string, TextureRegion> _regions;
-    private Dictionary<string, Animation> _animations;
+    public Dictionary<string, TextureRegion> _regions;
+    public Dictionary<string, Animation> _animations;
 
 
     /// <summary>

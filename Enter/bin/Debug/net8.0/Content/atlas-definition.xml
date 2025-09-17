@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+    <Texture>images/Pokemon_BACK</Texture>
+    <Regions>
+    <Region name="bulbasaur-back" x="1" y="1" width="32" height="32"/>
+    <Region name="Ivysaur-back" x="34" y="1" width="32" height="32"/>
+    <Region name="Venusaur-back" x="67" y="1" width="32" height="32"/>
+    <Region name="charmander-back" x="100" y="1" width="32" height="32"/>
+    <Region name="Charmeleon-back" x="133" y="1" width="32" height="32"/>
+    <Region name="Charizard-back" x="166" y="1" width="32" height="32"/>
+    <Region name="squirtle-back" x="199" y="1" width="32" height="32"/>
+    <Region name="Wartortle-back" x="232" y="1" width="32" height="32"/>
+    <Region name="Blastoise-back" x="265" y="1" width="32" height="32"/>
+    <Region name="caterpie-back" x="298" y="1" width="32" height="32"/>
+    <Region name="Metapod-back" x="331" y="1" width="32" height="32"/>
+    <Region name="Butterfree-back" x="364" y="1" width="32" height="32"/>
+    <Region name="weedle-back" x="397" y="1" width="32" height="32"/>
+    <Region name="Kakuna-back" x="430" y="1" width="32" height="32"/>
+    <Region name="Beedrill-back" x="1" y="34" width="32" height="32"/>
+    <Region name="pidgey-back" x="34" y="34" width="32" height="32"/>
+    <Region name="Pidgeotto-back" x="67" y="34" width="32" height="32"/>
+    <Region name="Pidgeot-back" x="100" y="34" width="32" height="32"/>
+    <Region name="rattata-back" x="133" y="34" width="32" height="32"/>
+    <Region name="Raticate-back" x="166" y="34" width="32" height="32"/>
+    <Region name="spearow-back" x="199" y="34" width="32" height="32"/>
+    <Region name="Fearow-back" x="232" y="34" width="32" height="32"/>
+    <Region name="ekans-back" x="265" y="34" width="32" height="32"/>
+    <Region name="Arbok-back" x="298" y="34" width="32" height="32"/>
+    <Region name="pikachu-back" x="331" y="34" width="32" height="32"/>
+    <Region name="Raichu-back" x="364" y="34" width="32" height="32"/>
+    <Region name="sandshrew-back" x="397" y="34" width="32" height="32"/>
+    <Region name="Sandslash-back" x="430" y="34" width="32" height="32"/>
+    </Regions>
+    <Animations>
+    </Animations>
+</TextureAtlas>

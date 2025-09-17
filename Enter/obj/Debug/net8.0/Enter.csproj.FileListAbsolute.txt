@@ -22,3 +22,16 @@ C:\Users\jenin\OneDrive\Documents\GitHub\PokemonRedAndBlue\Enter\obj\Debug\net8.
 C:\Users\jenin\OneDrive\Documents\GitHub\PokemonRedAndBlue\Enter\obj\Debug\net8.0\Enter.dll
 C:\Users\jenin\OneDrive\Documents\GitHub\PokemonRedAndBlue\Enter\obj\Debug\net8.0\refint\Enter.dll
 C:\Users\jenin\OneDrive\Documents\GitHub\PokemonRedAndBlue\Enter\obj\Debug\net8.0\Enter.pdb
+C:\Users\jenin\OneDrive\Documents\GitHub\PokemonRedAndBlue\Enter\bin\Debug\net8.0\Enter.exe
+C:\Users\jenin\OneDrive\Documents\GitHub\PokemonRedAndBlue\Enter\bin\Debug\net8.0\Enter.deps.json
+C:\Users\jenin\OneDrive\Documents\GitHub\PokemonRedAndBlue\Enter\bin\Debug\net8.0\Enter.runtimeconfig.json
+C:\Users\jenin\OneDrive\Documents\GitHub\PokemonRedAndBlue\Enter\bin\Debug\net8.0\Enter.dll
+C:\Users\jenin\OneDrive\Documents\GitHub\PokemonRedAndBlue\Enter\bin\Debug\net8.0\Enter.pdb
+C:\Users\jenin\OneDrive\Documents\GitHub\PokemonRedAndBlue\Enter\obj\Debug\net8.0\Enter.csproj.Up2Date
+C:\Users\jenin\OneDrive\Documents\GitHub\PokemonRedAndBlue\Enter\obj\Debug\net8.0\Enter.genruntimeconfig.cache
+C:\Users\jenin\OneDrive\Documents\GitHub\PokemonRedAndBlue\Enter\obj\Debug\net8.0\ref\Enter.dll
+C:\Users\jenin\OneDrive\Documents\GitHub\PokemonRedAndBlue\Enter\bin\Debug\net8.0\Content\atlas-definition.xml
+C:\Users\jenin\OneDrive\Documents\GitHub\PokemonRedAndBlue\Enter\bin\Debug\net8.0\Content\File.xml
+C:\Users\jenin\OneDrive\Documents\GitHub\PokemonRedAndBlue\Enter\bin\Debug\net8.0\Content\images\Pokemon_BACK.xnb
+C:\Users\jenin\OneDrive\Documents\GitHub\PokemonRedAndBlue\Enter\bin\Debug\net8.0\Content\images\Pokemon_FRONT.xnb
+C:\Users\jenin\OneDrive\Documents\GitHub\PokemonRedAndBlue\Enter\bin\Debug\net8.0\Content\images\Pokemon_FRONT_Grayscale.xnb

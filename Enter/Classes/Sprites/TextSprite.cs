@@ -19,7 +19,7 @@ public class TextSprite : Sprite
         _textSize = _font.MeasureString(_text);
     }
 
-    public void Draw(SpriteBatch spriteBatch, Vector2 position)
+    public void DrawTextSprite(SpriteBatch spriteBatch, Vector2 position)
     {
         spriteBatch.DrawString(_font, _text, position, _color);
     }

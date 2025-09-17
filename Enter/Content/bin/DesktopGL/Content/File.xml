@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+    <Texture>images/Pokemon_BACK</Texture>
+    <Regions>
+        <Region name= "bulbasaur-back" x="1" y="1" width="32" height="32"/>
+        <Region name= "Ivysaur-back" x="35" y="1" width="32" height="32"/>
+        <Region name= "Venusaur-back" x="69" y="1" width="32" height="32"/>
+        <Region name= "charmander-back" x="103" y="1" width="32" height="32"/>
+        <Region name= "Charmeleon-back" x="137" y="1" width="32" height="32"/>
+        <Region name= "Charizard-back" x="171" y="1" width="32" height="32"/>
+        <Region name= "squirtle-back" x="205" y="1" width="32" height="32"/>
+        <Region name= "Wartortle-back" x="239" y="1" width="32" height="32"/>
+        <Region name= "Blastoise-back" x="273" y="1" width="32" height="32"/>
+        <Region name= "caterpie-back" x="307" y="1" width="32" height="32"/>
+        <Region name= "Metapod-back" x="341" y="1" width="32" height="32"/>
+        <Region name= "Butterfree-back" x="375" y="1" width="32" height="32"/>
+        <Region name= "weedle-back" x="409" y="1" width="32" height="32"/>
+        <Region name= "Kakuna-back" x="443" y="1" width="32" height="32"/>
+        <Region name= "Beedrill-back" x="1" y="35" width="32" height="32"/>
+        <Region name= "pidgey-back" x="35" y="35" width="32" height="32"/>
+        <Region name= "Pidgeotto-back" x="69" y="35" width="32" height="32"/>
+        <Region name= "Pidgeot-back" x="103" y="35" width="32" height="32"/>
+        <Region name= "rattata-back" x="137" y="35" width="32" height="32"/>
+        <Region name= "Raticate-back" x="171" y="35" width="32" height="32"/>
+        <Region name= "spearow-back" x="205" y="35" width="32" height="32"/>
+        <Region name= "Fearow-back" x="239" y="35" width="32" height="32"/>
+        <Region name= "ekans-back" x="273" y="35" width="32" height="32"/>
+        <Region name= "Arbok-back" x="307" y="35" width="32" height="32"/>
+        <Region name= "pikachu-back" x="341" y="35" width="32" height="32"/>
+        <Region name= "Raichu-back" x="375" y="35" width="32" height="32"/>
+        <Region name= "sandshrew-back" x="409" y="35" width="32" height="32"/>
+        <Region name= "Sandslash-back" x="443" y="35" width="32" height="32"/>
+    </Regions>
+</TextureAtlas>
