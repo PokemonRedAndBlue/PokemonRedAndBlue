@@ -17,6 +17,8 @@ public class Game1 : Core
     private int regionsToDraw = 0;     
 
     private AnimatedSprite _bulbasaurFront;
+    private AnimatedSprite _ivysaurFront;
+    private AnimatedSprite _venusaurFront;
 
     private enum _FrontPokemonState
     {
@@ -42,8 +44,10 @@ public class Game1 : Core
         _PokemonBackAtlas = TextureAtlas.FromFile(Content, "Pokemon_BACK.xml");
         _PokemonFrontAtlas = TextureAtlas.FromFile(Content, "Pokemon_FRONT.xml");
 
-        // Create Bulbasaurs Animated Sprite
+        // Create Bulbasaurs Evolution Animated Sprites
         _bulbasaurFront = _PokemonFrontAtlas.CreateAnimatedSprite("bulbasaur-front");
+        _ivysaurFront = _PokemonFrontAtlas.CreateAnimatedSprite("ivysaur-front");
+        _venusaurFront = _PokemonFrontAtlas.CreateAnimatedSprite("venusaur-front"); 
 
         base.LoadContent();
     }
@@ -57,9 +61,12 @@ public class Game1 : Core
             regionsToDraw++;
             elapsedTime = 0; // reset timer
 
+            // update idle front sprites if in attack state
             if (currentFrontState == _FrontPokemonState.Attack)
             {
                 _bulbasaurFront.Update(gameTime);
+                _ivysaurFront.Update(gameTime);
+                _venusaurFront.Update(gameTime);
             }
         }
     }
@@ -79,11 +86,12 @@ public class Game1 : Core
             region.Value.Draw(SpriteBatch, new Vector2(308, 328), Color.White, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0f);
             i++;
         }
-
-            _bulbasaurFront.Draw(SpriteBatch, new Vector2(908, 228), Color.White, 0f, Vector2.Zero, 3f, SpriteEffects.None, 0f);
+            // Draw Bulbasaur Evolution Animated Sprites
+            _bulbasaurFront.Draw(SpriteBatch, new Vector2(825, 456), Color.White, 0f, Vector2.Zero, 3f, SpriteEffects.None, 0f);
+            _ivysaurFront.Draw(SpriteBatch, new Vector2(950, 456), Color.White, 0f, Vector2.Zero, 3f, SpriteEffects.None, 0f);
+            _venusaurFront.Draw(SpriteBatch, new Vector2(1100, 456), Color.White, 0f, Vector2.Zero, 3f, SpriteEffects.None, 0f);
 
         SpriteBatch.End();
-
         base.Draw(gameTime);
     }
 }

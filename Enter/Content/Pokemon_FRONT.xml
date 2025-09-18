@@ -4,8 +4,10 @@
     <Regions>
         <Region name="bulbasaur-front-idle" x="17" y="46" width="40" height="40"/>
         <Region name="bulbasaur-front-attack" x="74" y="46" width="40" height="40"/>
-        <Region name="ivysaur-front-idle" x="91" y="38" width="50" height="50"/>
-        <Region name="ivysaur-front-attack" x="100" y="38" width="50" height="50"/>
+        <Region name="ivysaur-front-idle" x="131" y="38" width="48" height="48"/>
+        <Region name="ivysaur-front-attack" x="188" y="38" width="48" height="48"/>
+        <Region name="venusaur-front-idle" x="237" y="30" width="56" height="56"/>
+        <Region name="venusaur-front-attack" x="294" y="30" width="56" height="56"/>
     </Regions>
     <Animations>
         <Animation name="bulbasaur-front" frameCount="3" frameDuration="2" scale="4">
@@ -17,6 +19,11 @@
             <Frame region="ivysaur-front-idle" />
             <Frame region="ivysaur-front-attack" />
             <Frame region="ivysaur-front-idle" />
+        </Animation>
+        <Animation name="venusaur-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="venusaur-front-idle" />
+            <Frame region="venusaur-front-attack" />
+            <Frame region="venusaur-front-idle" />
         </Animation>
     </Animations>
 </TextureAtlas>
