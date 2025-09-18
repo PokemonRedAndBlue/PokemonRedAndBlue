@@ -444,19 +444,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jenin\\.nuget\\packages\\": {}
+    "/Users/klee/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jenin\\OneDrive\\Documents\\GitHub\\PokemonRedAndBlue\\Enter\\Enter.csproj",
+      "projectUniqueName": "/Users/klee/Desktop/CSE3902/PokemonRedAndBlue/Enter/Enter.csproj",
       "projectName": "Enter",
-      "projectPath": "C:\\Users\\jenin\\OneDrive\\Documents\\GitHub\\PokemonRedAndBlue\\Enter\\Enter.csproj",
-      "packagesPath": "C:\\Users\\jenin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jenin\\OneDrive\\Documents\\GitHub\\PokemonRedAndBlue\\Enter\\obj\\",
+      "projectPath": "/Users/klee/Desktop/CSE3902/PokemonRedAndBlue/Enter/Enter.csproj",
+      "packagesPath": "/Users/klee/.nuget/packages/",
+      "outputPath": "/Users/klee/Desktop/CSE3902/PokemonRedAndBlue/Enter/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\jenin\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/klee/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -479,7 +479,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0": {
@@ -505,12 +506,26 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[8.0.19, 8.0.19]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.osx-arm64",
+            "version": "[8.0.19, 8.0.19]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[8.0.19, 8.0.19]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.414/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.304/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
