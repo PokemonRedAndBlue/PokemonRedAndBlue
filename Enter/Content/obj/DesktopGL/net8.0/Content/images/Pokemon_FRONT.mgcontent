@@ -3,11 +3,11 @@
   <SourceFile>C:/Users/jenin/OneDrive/Documents/GitHub/PokemonRedAndBlue/Enter/Content/images/Pokemon_FRONT.png</SourceFile>
   <SourceTime>2025-09-17T15:35:05.0773444-04:00</SourceTime>
   <DestFile>C:/Users/jenin/OneDrive/Documents/GitHub/PokemonRedAndBlue/Enter/Content/bin/DesktopGL/Content/images/Pokemon_FRONT.xnb</DestFile>
-  <DestTime>2025-09-17T17:26:17.4181364-04:00</DestTime>
+  <DestTime>2025-09-18T15:23:07.5882545-04:00</DestTime>
   <Importer>TextureImporter</Importer>
-  <ImporterTime>2025-06-02T10:31:02-04:00</ImporterTime>
+  <ImporterTime>2025-06-27T15:05:04-04:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
-  <ProcessorTime>2025-06-02T10:31:02-04:00</ProcessorTime>
+  <ProcessorTime>2025-06-27T15:05:04-04:00</ProcessorTime>
   <Parameters>
     <Key>ColorKeyColor</Key>
     <Value>255,0,255,255</Value>

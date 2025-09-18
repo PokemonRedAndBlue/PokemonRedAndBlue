@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGameLibrary;
 using MonoGameLibrary.Graphics;
 using System;
+using System.Data;
 using System.Threading.Tasks;
 
 namespace GameFile;
@@ -15,6 +16,15 @@ public class Game1 : Core
     private double elapsedTime = 0;    
     private int regionsToDraw = 0;     
 
+    private AnimatedSprite _bulbasaurFront;
+
+    private enum _FrontPokemonState
+    {
+        Idle,
+        Attack
+    }
+
+    private _FrontPokemonState currentFrontState = _FrontPokemonState.Attack;
 
     public Game1() : base("PokemonRedAndBlue", 1280, 720, false)
     {
@@ -31,6 +41,10 @@ public class Game1 : Core
         // Load the atlas texture using the content manager from the XML configuration file
         _PokemonBackAtlas = TextureAtlas.FromFile(Content, "Pokemon_BACK.xml");
         _PokemonFrontAtlas = TextureAtlas.FromFile(Content, "Pokemon_FRONT.xml");
+
+        // Create Bulbasaurs Animated Sprite
+        _bulbasaurFront = _PokemonFrontAtlas.CreateAnimatedSprite("bulbasaur-front");
+
         base.LoadContent();
     }
 
@@ -42,6 +56,11 @@ public class Game1 : Core
         {
             regionsToDraw++;
             elapsedTime = 0; // reset timer
+
+            if (currentFrontState == _FrontPokemonState.Attack)
+            {
+                _bulbasaurFront.Update(gameTime);
+            }
         }
     }
 
@@ -52,24 +71,16 @@ public class Game1 : Core
         SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
         int i = 0;
-        int j = 0;
         foreach (var region in _PokemonBackAtlas._regions)
         {
             if (i >= regionsToDraw)
                 break;
 
-            region.Value.Draw(SpriteBatch, new Vector2(608, 328), Color.White, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0f);
+            region.Value.Draw(SpriteBatch, new Vector2(308, 328), Color.White, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0f);
             i++;
         }
 
-        // foreach (var region in _PokemonFrontAtlas._regions)
-        // {
-        //     if (j >= regionsToDraw)
-        //         break;
-
-        //     region.Value.Draw(SpriteBatch, new Vector2(200, 328), Color.White, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0f);
-        //     j++;
-        // }
+            _bulbasaurFront.Draw(SpriteBatch, new Vector2(908, 228), Color.White, 0f, Vector2.Zero, 3f, SpriteEffects.None, 0f);
 
         SpriteBatch.End();
 
