@@ -9,6 +9,7 @@ public class PokemonBackFactory
 {
     private static PokemonBackFactory _instance;
     private ContentManager _content;
+    private TextureAtlas _PokemonBackAtlas;
 
     // Singleton Instance
     public static PokemonBackFactory Instance
@@ -25,19 +26,15 @@ public class PokemonBackFactory
 
     private PokemonBackFactory() { }
 
-    public void LoadAllTextures(ContentManager content)
+    public void LoadAllTextures(ContentManager Content)
     {
-        _content = content;
+        _content = Content;
 
         // Example: Load your textures here
-        // ExampleTexture = _content.Load<Texture2D>("Sprites/ExampleSprite");
+        _PokemonBackAtlas = TextureAtlas.FromFile(_content, "Pokemon_BACK.xml");
     }
-
-    // Example factory methods
-
-    public Sprite CreateAnimatedSprite()
+    public Sprite CreateStaticSprite(String spriteName)
     {
-        // return new AnimatedSprite(ExampleTexture);
-        return null;
+        return _PokemonBackAtlas.CreateSprite(spriteName);
     }
 }

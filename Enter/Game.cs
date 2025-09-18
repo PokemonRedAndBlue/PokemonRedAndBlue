@@ -40,15 +40,6 @@ public class Game1 : Core
 
     protected override void LoadContent()
     {
-        // Load the atlas texture using the content manager from the XML configuration file
-        _PokemonBackAtlas = TextureAtlas.FromFile(Content, "Pokemon_BACK.xml");
-        _PokemonFrontAtlas = TextureAtlas.FromFile(Content, "Pokemon_FRONT.xml");
-
-        // Create Bulbasaurs Evolution Animated Sprites
-        _bulbasaurFront = _PokemonFrontAtlas.CreateAnimatedSprite("bulbasaur-front");
-        _ivysaurFront = _PokemonFrontAtlas.CreateAnimatedSprite("ivysaur-front");
-        _venusaurFront = _PokemonFrontAtlas.CreateAnimatedSprite("venusaur-front"); 
-
         base.LoadContent();
     }
 

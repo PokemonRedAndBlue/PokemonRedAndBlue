@@ -9,6 +9,7 @@ public class PokemonFrontFactory
 {
     private static PokemonFrontFactory _instance;
     private ContentManager _content;
+    private TextureAtlas _PokemonFrontAtlas;
 
     // Singleton Instance
     public static PokemonFrontFactory Instance
@@ -25,19 +26,15 @@ public class PokemonFrontFactory
 
     private PokemonFrontFactory() { }
 
-    public void LoadAllTextures(ContentManager content)
+    public void LoadAllTextures(ContentManager Content)
     {
-        _content = content;
+        _content = Content;
 
         // Example: Load your textures here
-        // ExampleTexture = _content.Load<Texture2D>("Sprites/ExampleSprite");
+        _PokemonFrontAtlas = TextureAtlas.FromFile(_content, "Pokemon_FRONT.xml");
     }
-
-    // Example factory methods
-
-    public Sprite CreateStaticSprite()
+    public Sprite CreateAnimatedSprite(String spriteName)
     {
-        // return new StaticSprite(ExampleTexture);
-        return null;
+        return _PokemonFrontAtlas.CreateAnimatedSprite(spriteName);
     }
 }
