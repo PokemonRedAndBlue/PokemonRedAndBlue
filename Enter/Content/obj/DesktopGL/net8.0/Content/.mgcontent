@@ -6,10 +6,8 @@
   <SourceFiles>
     <File>C:/Users/jenin/OneDrive/Documents/GitHub/PokemonRedAndBlue/Enter/Content/images/Pokemon_BACK.png</File>
     <File>C:/Users/jenin/OneDrive/Documents/GitHub/PokemonRedAndBlue/Enter/Content/images/Pokemon_FRONT.png</File>
-    <File>C:/Users/jenin/OneDrive/Documents/GitHub/PokemonRedAndBlue/Enter/Content/images/Pokemon_FRONT_Grayscale.png</File>
   </SourceFiles>
   <DestFiles>
-    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>

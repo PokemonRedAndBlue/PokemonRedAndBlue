@@ -13,9 +13,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin images/File.xml
-/copy:File.xml;atlas-definition.xml
-
 #begin images/Pokemon_BACK.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -40,14 +37,9 @@
 /processorParam:TextureFormat=Color
 /build:images/Pokemon_FRONT.png
 
-#begin images/Pokemon_FRONT_Grayscale.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:images/Pokemon_FRONT_Grayscale.png
+#begin Pokemon_BACK.xml
+/copy:Pokemon_BACK.xml
+
+#begin Pokemon_FRONT.xml
+/copy:Pokemon_FRONT.xml
+

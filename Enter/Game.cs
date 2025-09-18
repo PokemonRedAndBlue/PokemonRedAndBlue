@@ -11,6 +11,7 @@ namespace GameFile;
 public class Game1 : Core
 {
     private TextureAtlas _PokemonBackAtlas;
+    private TextureAtlas _PokemonFrontAtlas;
     private double elapsedTime = 0;    
     private int regionsToDraw = 0;     
 
@@ -28,7 +29,8 @@ public class Game1 : Core
     protected override void LoadContent()
     {
         // Load the atlas texture using the content manager from the XML configuration file
-        _PokemonBackAtlas = TextureAtlas.FromFile(Content, "atlas-definition.xml");
+        _PokemonBackAtlas = TextureAtlas.FromFile(Content, "Pokemon_BACK.xml");
+        _PokemonFrontAtlas = TextureAtlas.FromFile(Content, "Pokemon_FRONT.xml");
         base.LoadContent();
     }
 
@@ -36,7 +38,7 @@ public class Game1 : Core
     {
         elapsedTime += gameTime.ElapsedGameTime.TotalSeconds;
 
-        if (elapsedTime >= 0.5 && regionsToDraw < _PokemonBackAtlas._regions.Count)
+        if (elapsedTime >= 0.2 && regionsToDraw < _PokemonBackAtlas._regions.Count)
         {
             regionsToDraw++;
             elapsedTime = 0; // reset timer
@@ -50,6 +52,7 @@ public class Game1 : Core
         SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
         int i = 0;
+        int j = 0;
         foreach (var region in _PokemonBackAtlas._regions)
         {
             if (i >= regionsToDraw)
@@ -58,6 +61,15 @@ public class Game1 : Core
             region.Value.Draw(SpriteBatch, new Vector2(608, 328), Color.White, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0f);
             i++;
         }
+
+        // foreach (var region in _PokemonFrontAtlas._regions)
+        // {
+        //     if (j >= regionsToDraw)
+        //         break;
+
+        //     region.Value.Draw(SpriteBatch, new Vector2(200, 328), Color.White, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0f);
+        //     j++;
+        // }
 
         SpriteBatch.End();
 

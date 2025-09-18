@@ -35,3 +35,6 @@ C:\Users\jenin\OneDrive\Documents\GitHub\PokemonRedAndBlue\Enter\bin\Debug\net8.
 C:\Users\jenin\OneDrive\Documents\GitHub\PokemonRedAndBlue\Enter\bin\Debug\net8.0\Content\images\Pokemon_BACK.xnb
 C:\Users\jenin\OneDrive\Documents\GitHub\PokemonRedAndBlue\Enter\bin\Debug\net8.0\Content\images\Pokemon_FRONT.xnb
 C:\Users\jenin\OneDrive\Documents\GitHub\PokemonRedAndBlue\Enter\bin\Debug\net8.0\Content\images\Pokemon_FRONT_Grayscale.xnb
+C:\Users\jenin\OneDrive\Documents\GitHub\PokemonRedAndBlue\Enter\bin\Debug\net8.0\Content\Pokemon_BACK.xml
+C:\Users\jenin\OneDrive\Documents\GitHub\PokemonRedAndBlue\Enter\bin\Debug\net8.0\Content\Pokemon_FRONT.xnb
+C:\Users\jenin\OneDrive\Documents\GitHub\PokemonRedAndBlue\Enter\bin\Debug\net8.0\Content\Pokemon_FRONT.xml
