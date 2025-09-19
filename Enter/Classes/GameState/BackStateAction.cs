@@ -5,27 +5,18 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MonoGameLibrary.Graphics;
 
-public class BackStateAction
+public class BackStateAction : StateActions
 {
     public void IdleBackAction()
     {
         // Implement idle back action logic here
-        
-
+        // do nothing
     }
 
     public void AttackBackAction()
     {
         // Implement attack back action logic here
-    }
-
-    public void HurtBackAction()
-    {
-        // Implement hurt back action logic here
-    }
-
-    public void DeathBackAction()
-    {
-        // Implement death back action logic here
+        // Make sprite move forward and back quickly
+        // TODO: add attack animation
     }
 }
