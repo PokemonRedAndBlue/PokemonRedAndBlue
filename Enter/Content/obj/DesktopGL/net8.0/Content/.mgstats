@@ -1,5 +1,11 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+<<<<<<< HEAD
 "C:/Users/jenin/OneDrive/Documents/GitHub/PokemonRedAndBlue/Enter/Content/images/Pokemon_BACK.png","C:/Users/jenin/OneDrive/Documents/GitHub/PokemonRedAndBlue/Enter/Content/bin/DesktopGL/Content/images/Pokemon_BACK.xnb","TextureProcessor","Texture2DContent",100071,1346489,0.1782052
 "C:/Users/jenin/OneDrive/Documents/GitHub/PokemonRedAndBlue/Enter/Content/images/Pokemon_FRONT.png","C:/Users/jenin/OneDrive/Documents/GitHub/PokemonRedAndBlue/Enter/Content/bin/DesktopGL/Content/images/Pokemon_FRONT.xnb","TextureProcessor","Texture2DContent",362417,6334721,0.1790521
 "C:/Users/jenin/OneDrive/Documents/GitHub/PokemonRedAndBlue/Enter/Content/Pokemon_BACK.xml","C:\Users\jenin\OneDrive\Documents\GitHub\PokemonRedAndBlue\Enter\Content\bin\DesktopGL\Content\Pokemon_BACK.xml","CopyItem","File",11372,11372,0.0014287
 "C:/Users/jenin/OneDrive/Documents/GitHub/PokemonRedAndBlue/Enter/Content/Pokemon_FRONT.xml","C:\Users\jenin\OneDrive\Documents\GitHub\PokemonRedAndBlue\Enter\Content\bin\DesktopGL\Content\Pokemon_FRONT.xml","CopyItem","File",1495,1495,0.0017138
+=======
+"/Users/klee/Desktop/CSE3902/PokemonRedAndBlue/Enter/Content/images/Pokeball.png","/Users/klee/Desktop/CSE3902/PokemonRedAndBlue/Enter/Content/bin/DesktopGL/Content/images/Pokeball.xnb","TextureProcessor","Texture2DContent",448,5717,0.084951
+"/Users/klee/Desktop/CSE3902/PokemonRedAndBlue/Enter/Content/images/Pokemon_BACK.png","/Users/klee/Desktop/CSE3902/PokemonRedAndBlue/Enter/Content/bin/DesktopGL/Content/images/Pokemon_BACK.xnb","TextureProcessor","Texture2DContent",100071,1346489,0.029873
+"/Users/klee/Desktop/CSE3902/PokemonRedAndBlue/Enter/Content/images/Pokemon_FRONT.png","/Users/klee/Desktop/CSE3902/PokemonRedAndBlue/Enter/Content/bin/DesktopGL/Content/images/Pokemon_FRONT.xnb","TextureProcessor","Texture2DContent",362417,6334721,0.088063
+>>>>>>> main
