@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGameLibrary;
 using MonoGameLibrary.Graphics;
 using System;
+using System.Data;
 using System.Threading.Tasks;
 
 namespace GameFile;
@@ -15,6 +16,9 @@ public class Game1 : Core
     private double elapsedTime = 0;    
     private int regionsToDraw = 0;     
 
+    private AnimatedSprite _bulbasaurFront;
+    private AnimatedSprite _ivysaurFront;
+    private AnimatedSprite _venusaurFront;
 
     public Game1() : base("PokemonRedAndBlue", 1280, 720, false)
     {
@@ -28,9 +32,6 @@ public class Game1 : Core
 
     protected override void LoadContent()
     {
-        // Load the atlas texture using the content manager from the XML configuration file
-        _PokemonBackAtlas = TextureAtlas.FromFile(Content, "Pokemon_BACK.xml");
-        _PokemonFrontAtlas = TextureAtlas.FromFile(Content, "Pokemon_FRONT.xml");
         base.LoadContent();
     }
 
@@ -52,27 +53,20 @@ public class Game1 : Core
         SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
         int i = 0;
-        int j = 0;
         foreach (var region in _PokemonBackAtlas._regions)
         {
             if (i >= regionsToDraw)
                 break;
 
-            region.Value.Draw(SpriteBatch, new Vector2(608, 328), Color.White, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0f);
+            region.Value.Draw(SpriteBatch, new Vector2(308, 328), Color.White, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0f);
             i++;
         }
-
-        // foreach (var region in _PokemonFrontAtlas._regions)
-        // {
-        //     if (j >= regionsToDraw)
-        //         break;
-
-        //     region.Value.Draw(SpriteBatch, new Vector2(200, 328), Color.White, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0f);
-        //     j++;
-        // }
+            // Draw Bulbasaur Evolution Animated Sprites
+            _bulbasaurFront.Draw(SpriteBatch, new Vector2(825, 456), Color.White, 0f, Vector2.Zero, 3f, SpriteEffects.None, 0f);
+            _ivysaurFront.Draw(SpriteBatch, new Vector2(950, 456), Color.White, 0f, Vector2.Zero, 3f, SpriteEffects.None, 0f);
+            _venusaurFront.Draw(SpriteBatch, new Vector2(1100, 456), Color.White, 0f, Vector2.Zero, 3f, SpriteEffects.None, 0f);
 
         SpriteBatch.End();
-
         base.Draw(gameTime);
     }
 }

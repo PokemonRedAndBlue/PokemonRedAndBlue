@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<<<<<<< HEAD
+  <SourceFile>C:/Users/jenin/OneDrive/Documents/GitHub/PokemonRedAndBlue/Enter/Content/images/Pokemon_BACK.png</SourceFile>
+  <SourceTime>2025-09-17T15:35:20.5756364-04:00</SourceTime>
+  <DestFile>C:/Users/jenin/OneDrive/Documents/GitHub/PokemonRedAndBlue/Enter/Content/bin/DesktopGL/Content/images/Pokemon_BACK.xnb</DestFile>
+  <DestTime>2025-09-18T15:23:07.4037426-04:00</DestTime>
+  <Importer>TextureImporter</Importer>
+  <ImporterTime>2025-06-27T15:05:04-04:00</ImporterTime>
+  <Processor>TextureProcessor</Processor>
+  <ProcessorTime>2025-06-27T15:05:04-04:00</ProcessorTime>
+=======
   <SourceFile>/Users/klee/Desktop/CSE3902/PokemonRedAndBlue/Enter/Content/images/Pokemon_BACK.png</SourceFile>
   <SourceTime>2025-09-18T23:37:39.3575103-04:00</SourceTime>
   <DestFile>/Users/klee/Desktop/CSE3902/PokemonRedAndBlue/Enter/Content/bin/DesktopGL/Content/images/Pokemon_BACK.xnb</DestFile>
@@ -8,6 +18,7 @@
   <ImporterTime>2025-06-02T06:31:02-04:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
   <ProcessorTime>2025-06-02T06:31:02-04:00</ProcessorTime>
+>>>>>>> main
   <Parameters>
     <Key>ColorKeyColor</Key>
     <Value>255,0,255,255</Value>
