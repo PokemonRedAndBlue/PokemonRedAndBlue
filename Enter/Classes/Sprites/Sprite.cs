@@ -106,7 +106,7 @@ public class Sprite
     {
         Region.Draw(spriteBatch, position, Color, Rotation, Origin, Scale, Effects, LayerDepth);
     }
-    
+
     /// <summary>
     /// Submit this sprite for drawing to the current batch.
     /// </summary>
