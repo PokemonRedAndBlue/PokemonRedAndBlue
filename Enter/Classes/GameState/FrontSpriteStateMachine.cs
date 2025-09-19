@@ -6,8 +6,8 @@ namespace MonoGameLibrary.Graphics;
 
 public class FrontSpriteStateMachine
 {
-    private FrontSpriteState _currentFrontState = FrontSpriteState.Idle;
-    private enum FrontSpriteState
+    public FrontSpriteState _currentFrontState = FrontSpriteState.Idle;
+    public enum FrontSpriteState
     {
         Idle,
         Attack,

@@ -6,7 +6,8 @@ namespace MonoGameLibrary.Graphics;
 
 public class BackSpriteStateMachine
 {
-    private enum BackSpriteState
+    public BackSpriteState _currentBackState = BackSpriteState.Idle;
+    public enum BackSpriteState
     {
         Idle,
         Attack,
@@ -37,7 +38,7 @@ public class BackSpriteStateMachine
 
     public static void ChangeState(BackSpriteState currentState, String keyboardInput)
     {
-        switch(keyboardInput)
+        switch (keyboardInput)
         {
             case "I":
                 currentState = BackSpriteState.Idle;
