@@ -14,9 +14,16 @@ public class AttackAnimation : AnimatedSprite
         SpriteBatch spriteBatch = new SpriteBatch(GraphicsDevice);
 
         spriteBatch.Begin();
-        sprite.Draw(spriteBatch, new Vector2(sprite.Origin.X + 30, sprite.Origin.Y));
-        sprite.Draw(spriteBatch, new Vector2(sprite.Origin.X - 30, sprite.Origin.Y));
-        sprite.Draw(spriteBatch, new Vector2(sprite.Origin.X + 30, sprite.Origin.Y));
+
+        for (int i = 0; i < 30; i++)
+        {
+            sprite.Draw(spriteBatch, new Vector2(sprite.Origin.X + i, sprite.Origin.Y));
+        }
+
+        for (int i = 30; i > 0; i--)
+        {
+            sprite.Draw(spriteBatch, new Vector2(sprite.Origin.X + i, sprite.Origin.Y));
+        }
 
         spriteBatch.End();
     }
@@ -27,9 +34,15 @@ public class AttackAnimation : AnimatedSprite
 
         spriteBatch.Begin();
 
-        sprite.Draw(spriteBatch, new Vector2(sprite.Origin.X, sprite.Origin.Y));
-        sprite.Draw(spriteBatch, new Vector2(sprite.Origin.X - 30, sprite.Origin.Y));
-        sprite.Draw(spriteBatch, new Vector2(sprite.Origin.X, sprite.Origin.Y));
+        for (int i = 30; i > 0; i--)
+        {
+            sprite.Draw(spriteBatch, new Vector2(sprite.Origin.X + i, sprite.Origin.Y));
+        }
+
+        for (int i = 0; i < 30; i++)
+        {
+            sprite.Draw(spriteBatch, new Vector2(sprite.Origin.X + i, sprite.Origin.Y));
+        }
 
         spriteBatch.End();
     }
