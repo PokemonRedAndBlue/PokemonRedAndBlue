@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qia+K843uWw=",
+  "dgSpecHash": "QVy924X0/7k=",
   "success": true,
-  "projectFilePath": "C:\\VS_CODE\\PokemonRedAndBlue\\Enter\\Enter.csproj",
+  "projectFilePath": "C:\\Users\\jenin\\OneDrive\\Documents\\GitHub\\PokemonRedAndBlue\\Enter\\Enter.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jenin\\.nuget\\packages\\monogame.content.builder.task\\3.8.4\\monogame.content.builder.task.3.8.4.nupkg.sha512",
     "C:\\Users\\jenin\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.4\\monogame.framework.desktopgl.3.8.4.nupkg.sha512",
@@ -12,12 +12,5 @@
     "C:\\Users\\jenin\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
     "C:\\Users\\jenin\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\VS_CODE\\PokemonRedAndBlue\\Enter\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  "logs": []
 }

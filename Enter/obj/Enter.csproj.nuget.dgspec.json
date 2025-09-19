@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\VS_CODE\\PokemonRedAndBlue\\Enter\\Enter.csproj": {}
+    "C:\\Users\\jenin\\OneDrive\\Documents\\GitHub\\PokemonRedAndBlue\\Enter\\Enter.csproj": {}
   },
   "projects": {
-    "C:\\VS_CODE\\PokemonRedAndBlue\\Enter\\Enter.csproj": {
+    "C:\\Users\\jenin\\OneDrive\\Documents\\GitHub\\PokemonRedAndBlue\\Enter\\Enter.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\VS_CODE\\PokemonRedAndBlue\\Enter\\Enter.csproj",
+        "projectUniqueName": "C:\\Users\\jenin\\OneDrive\\Documents\\GitHub\\PokemonRedAndBlue\\Enter\\Enter.csproj",
         "projectName": "Enter",
-        "projectPath": "C:\\VS_CODE\\PokemonRedAndBlue\\Enter\\Enter.csproj",
+        "projectPath": "C:\\Users\\jenin\\OneDrive\\Documents\\GitHub\\PokemonRedAndBlue\\Enter\\Enter.csproj",
         "packagesPath": "C:\\Users\\jenin\\.nuget\\packages\\",
-        "outputPath": "C:\\VS_CODE\\PokemonRedAndBlue\\Enter\\obj\\",
+        "outputPath": "C:\\Users\\jenin\\OneDrive\\Documents\\GitHub\\PokemonRedAndBlue\\Enter\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jenin\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -68,7 +68,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.413/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.414/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
