@@ -15,28 +15,7 @@ public class BackSpriteStateMachine
         Death
     }
 
-    public static void UpdateBackState(GameTime gameTime, BackSpriteState currentBackState)
-    {
-        switch (currentBackState)
-        {
-            case BackSpriteState.Idle:
-                // Handle Idle state logic
-                break;
-            case BackSpriteState.Attack:
-                // Handle Attack state logic
-                break;
-            case BackSpriteState.Hurt:
-                // Handle Hurt state logic
-                break;
-            case BackSpriteState.Death:
-                // Handle Death state logic
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
-    }
-
-    public static void ChangeState(BackSpriteState currentState, String keyboardInput)
+    public static void ChangeBackState(BackSpriteState currentState, String keyboardInput)
     {
         switch (keyboardInput)
         {

@@ -14,31 +14,10 @@ public class FrontSpriteStateMachine
         Hurt,
         Death
     }
-
-    public static void UpdateFrontState(GameTime gameTime, FrontSpriteState currentFrontState)
+    
+    public static void ChangeFrontState(FrontSpriteState currentState, String keyboardInput)
     {
-        switch (currentFrontState)
-        {
-            case FrontSpriteState.Idle:
-                // Handle Idle state logic
-                break;
-            case FrontSpriteState.Attack:
-                // Handle Attack state logic
-                break;
-            case FrontSpriteState.Hurt:
-                // Handle Hurt state logic
-                break;
-            case FrontSpriteState.Death:
-                // Handle Death state logic
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
-    }
-
-    public static void ChangeState(FrontSpriteState currentState, String keyboardInput)
-    {
-        switch(keyboardInput)
+        switch (keyboardInput)
         {
             case "I":
                 currentState = FrontSpriteState.Idle;
