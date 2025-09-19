@@ -4,11 +4,11 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace MonoGameLibrary.Graphics;
+namespace Behavior.Time;
 
 public class Time : GameTime
 {
-    public void Delay(int seconds)
+    public void Delay(double seconds)
     {
         double start = TotalGameTime.TotalSeconds;
         while (TotalGameTime.TotalSeconds - start < seconds)
