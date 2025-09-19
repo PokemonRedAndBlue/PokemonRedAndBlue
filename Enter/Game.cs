@@ -20,14 +20,6 @@ public class Game1 : Core
     private AnimatedSprite _ivysaurFront;
     private AnimatedSprite _venusaurFront;
 
-    private enum _FrontPokemonState
-    {
-        Idle,
-        Attack
-    }
-
-    private _FrontPokemonState currentFrontState = _FrontPokemonState.Attack;
-
     public Game1() : base("PokemonRedAndBlue", 1280, 720, false)
     {
 
@@ -51,14 +43,6 @@ public class Game1 : Core
         {
             regionsToDraw++;
             elapsedTime = 0; // reset timer
-
-            // update idle front sprites if in attack state
-            if (currentFrontState == _FrontPokemonState.Attack)
-            {
-                _bulbasaurFront.Update(gameTime);
-                _ivysaurFront.Update(gameTime);
-                _venusaurFront.Update(gameTime);
-            }
         }
     }
 
