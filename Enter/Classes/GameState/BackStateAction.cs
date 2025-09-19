@@ -5,15 +5,15 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MonoGameLibrary.Graphics;
 
-public class BackStateAction : StateActions
+public class BackStateAction : PokemonStateActions
 {
-    public void IdleBackAction()
+    public void IdleBackAction(Sprite sprite)
     {
         // Implement idle back action logic here
         // do nothing
     }
 
-    public void AttackBackAction()
+    public void AttackBackAction(Sprite sprite)
     {
         // Implement attack back action logic here
         // Make sprite move forward and back quickly

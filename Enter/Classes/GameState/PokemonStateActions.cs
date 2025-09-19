@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MonoGameLibrary.Graphics;
 
-public class StateActions
+public class PokemonStateActions
 {
     public void HurtAction()
     {
@@ -14,7 +14,7 @@ public class StateActions
         // TODO: add damage draw animation
     }
 
-    public void DeatAction()
+    public void DeathAction()
     {
         // Implement death action logic here
         // TODO: add fainting animation

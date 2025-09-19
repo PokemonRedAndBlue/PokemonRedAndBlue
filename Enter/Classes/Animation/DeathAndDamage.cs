@@ -7,13 +7,24 @@ namespace MonoGameLibrary.Graphics;
 
 public class DeathAndDamage
 {
-    public void HurtAnimation()
+    public void HurtAnimation(Sprite sprite)
     {
         // Implement hurt animation logic here
         // Draw sprite with red tint and make it flash
     }
 
-    public void DeathAnimation()
+    public void HurtAnimation(AnimatedSprite sprite)
+    {
+        // Implement hurt animation logic here
+        // Draw sprite with red tint and make it flash
+    }
+
+    public void DeathAnimation(Sprite sprite)
+    {
+        // Implement death animation logic here 
+    }
+
+    public void DeathAnimation(AnimatedSprite sprite)
     {
         // Implement death animation logic here 
     }
