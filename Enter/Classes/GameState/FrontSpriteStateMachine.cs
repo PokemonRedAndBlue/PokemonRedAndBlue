@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace MonoGameLibrary.Graphics;
 
@@ -15,20 +16,20 @@ public class FrontSpriteStateMachine
         Death
     }
     
-    public static void ChangeFrontState(FrontSpriteState currentState, String keyboardInput)
+    public static void ChangeFrontState(FrontSpriteState currentState, KeyboardState keyboardInput)
     {
         switch (keyboardInput)
         {
-            case "I":
+            case var _ when keyboardInput.IsKeyDown(Keys.D0):
                 currentState = FrontSpriteState.Idle;
                 break;
-            case "A":
+            case var _ when keyboardInput.IsKeyDown(Keys.D1):
                 currentState = FrontSpriteState.Attack;
                 break;
-            case "H":
+            case var _ when keyboardInput.IsKeyDown(Keys.D2):
                 currentState = FrontSpriteState.Hurt;
                 break;
-            case "D":
+            case var _ when keyboardInput.IsKeyDown(Keys.D3):
                 currentState = FrontSpriteState.Death;
                 break;
             default:
