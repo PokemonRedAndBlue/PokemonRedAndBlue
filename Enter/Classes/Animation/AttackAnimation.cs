@@ -9,7 +9,7 @@ namespace MonoGameLibrary.Graphics;
 public class AttackAnimation : AnimatedSprite
 {
     GraphicsDevice GraphicsDevice = new GraphicsDevice(GraphicsAdapter.DefaultAdapter, GraphicsProfile.HiDef, new PresentationParameters());
-    public void FrontAttackAnimation(Sprite sprite, GameTime gameTime)
+    public void BackAttackAnimation(Sprite sprite, GameTime gameTime)
     {
         SpriteBatch spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -28,7 +28,7 @@ public class AttackAnimation : AnimatedSprite
         spriteBatch.End();
     }
 
-    public void BackAttackAnimation(AnimatedSprite sprite, GameTime gameTime)
+    public void FrontAttackAnimation(AnimatedSprite sprite, GameTime gameTime)
     {
         SpriteBatch spriteBatch = new SpriteBatch(GraphicsDevice);
 
