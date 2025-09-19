@@ -4,10 +4,12 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/jenin/OneDrive/Documents/GitHub/PokemonRedAndBlue/Enter/Content/images/Pokemon_BACK.png</File>
-    <File>C:/Users/jenin/OneDrive/Documents/GitHub/PokemonRedAndBlue/Enter/Content/images/Pokemon_FRONT.png</File>
+    <File>/Users/klee/Desktop/CSE3902/PokemonRedAndBlue/Enter/Content/images/Pokeball.png</File>
+    <File>/Users/klee/Desktop/CSE3902/PokemonRedAndBlue/Enter/Content/images/Pokemon_BACK.png</File>
+    <File>/Users/klee/Desktop/CSE3902/PokemonRedAndBlue/Enter/Content/images/Pokemon_FRONT.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>
