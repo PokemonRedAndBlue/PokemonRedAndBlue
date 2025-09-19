@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MonoGameLibrary.Graphics;
 
-public class AttackAnimation
+public class AttackAnimation : AnimatedSprite
 {
     public void FrontAttackAnimation(Sprite sprite)
     {

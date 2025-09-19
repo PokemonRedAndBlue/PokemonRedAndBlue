@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MonoGameLibrary.Graphics;
 
-public class DeathAndDamage
+public class DeathAndDamage : AnimatedSprite
 {
     public void HurtAnimation(Sprite sprite)
     {
