@@ -6,54 +6,43 @@ using MonoGameLibrary.Graphics;
 using System;
 using System.Data;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using MonoGameLibrary.Storage;
+using Behavior.Time;
 
 namespace GameFile;
 
 public class Game1 : Core
-{  
+{
+    // Needed class vars
+    private Sprite _bulbasaur;
+
     public Game1() : base("PokemonRedAndBlue", 1280, 720, false)
     {
 
     }
 
-    private PlayerData _playerData = new();
-    private string _savePath = string.Empty;
-    private KeyboardState _previousKeyboardState;
-
     protected override void Initialize()
     {
         base.Initialize();
-
-        // load or create default save
-        _savePath = SaveManager.GetDefaultSavePath();
-        _playerData = SaveManager.Load(_savePath) ?? new PlayerData();
     }
 
     protected override void LoadContent()
     {
+        PokemonFrontFactory.Instance.LoadAllTextures(Content);
+        PokemonBackFactory.Instance.LoadAllTextures(Content);
+
+        _bulbasaur = PokemonBackFactory.Instance.CreateStaticSprite("bulbasaur-back");
         base.LoadContent();
     }
 
     protected override void Update(GameTime gameTime)
     {
-        var keyboard = Keyboard.GetState();
+        var keyboardState = Keyboard.GetState();
+        if (keyboardState.IsKeyDown(Keys.Escape))
+            Exit();
 
-        // Save on F5 (edge-triggered)
-        if (keyboard.IsKeyDown(Keys.F5) && !_previousKeyboardState.IsKeyDown(Keys.F5))
-        {
-            try
-            {
-                SaveManager.SaveAsync(_playerData, _savePath).GetAwaiter().GetResult();
-                Console.WriteLine($"Saved player data to {_savePath}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Failed to save: {ex.Message}");
-            }
-        }
-
-        _previousKeyboardState = keyboard;
+        base.Update(gameTime);
     }
 
     protected override void Draw(GameTime gameTime)
@@ -62,7 +51,19 @@ public class Game1 : Core
 
         SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
+        // all testing code goes here
+        _bulbasaur.Draw(SpriteBatch, new Vector2(100, 100), Color.White, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0.5f);
+        var keyboardState = Keyboard.GetState();
+        Time timer = new Time();
+        if (keyboardState.IsKeyDown(Keys.W))
+        {
+            AttackAnimation attackAnimation = new AttackAnimation();
+            attackAnimation.BackAttackAnimation(_bulbasaur, SpriteBatch, timer);
+        }
+        // end testing code
+
         SpriteBatch.End();
+
         base.Draw(gameTime);
     }
 }
