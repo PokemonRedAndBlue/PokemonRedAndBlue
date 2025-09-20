@@ -8,21 +8,24 @@ namespace MonoGameLibrary.Graphics;
 
 public class AttackAnimation : AnimatedSprite
 {
-    GraphicsDevice GraphicsDevice = new GraphicsDevice(GraphicsAdapter.DefaultAdapter, GraphicsProfile.HiDef, new PresentationParameters());
+    // Use the engine's shared SpriteBatch instead of creating a new GraphicsDevice
     public void BackAttackAnimation(Sprite sprite, GameTime gameTime)
     {
-        SpriteBatch spriteBatch = new SpriteBatch(GraphicsDevice);
+        var spriteBatch = MonoGameLibrary.Core.SpriteBatch;
+        if (spriteBatch == null) return;
 
         spriteBatch.Begin();
 
         for (int i = 0; i < 30; i++)
         {
-            sprite.Draw(spriteBatch, new Vector2(sprite.Origin.X + i, sprite.Origin.Y));
+            var pos = new Vector2(sprite.Origin.X + i, sprite.Origin.Y);
+            sprite.Draw(spriteBatch, pos, sprite.Color, sprite.Rotation, sprite.Origin, sprite.Scale.X, SpriteEffects.None, sprite.LayerDepth);
         }
 
         for (int i = 30; i > 0; i--)
         {
-            sprite.Draw(spriteBatch, new Vector2(sprite.Origin.X + i, sprite.Origin.Y));
+            var pos = new Vector2(sprite.Origin.X + i, sprite.Origin.Y);
+            sprite.Draw(spriteBatch, pos, sprite.Color, sprite.Rotation, sprite.Origin, sprite.Scale.X, SpriteEffects.None, sprite.LayerDepth);
         }
 
         spriteBatch.End();
@@ -30,18 +33,21 @@ public class AttackAnimation : AnimatedSprite
 
     public void FrontAttackAnimation(AnimatedSprite sprite, GameTime gameTime)
     {
-        SpriteBatch spriteBatch = new SpriteBatch(GraphicsDevice);
+        var spriteBatch = MonoGameLibrary.Core.SpriteBatch;
+        if (spriteBatch == null) return;
 
         spriteBatch.Begin();
 
         for (int i = 30; i > 0; i--)
         {
-            sprite.Draw(spriteBatch, new Vector2(sprite.Origin.X + i, sprite.Origin.Y));
+            var pos = new Vector2(sprite.Origin.X + i, sprite.Origin.Y);
+            sprite.Draw(spriteBatch, pos, sprite.Color, sprite.Rotation, sprite.Origin, sprite.Scale.X, SpriteEffects.None, sprite.LayerDepth);
         }
 
         for (int i = 0; i < 30; i++)
         {
-            sprite.Draw(spriteBatch, new Vector2(sprite.Origin.X + i, sprite.Origin.Y));
+            var pos = new Vector2(sprite.Origin.X + i, sprite.Origin.Y);
+            sprite.Draw(spriteBatch, pos, sprite.Color, sprite.Rotation, sprite.Origin, sprite.Scale.X, SpriteEffects.None, sprite.LayerDepth);
         }
 
         spriteBatch.End();

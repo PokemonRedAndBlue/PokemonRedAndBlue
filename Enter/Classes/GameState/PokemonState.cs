@@ -7,8 +7,8 @@ namespace MonoGameLibrary.Graphics;
 
 public class PokemonState
 {
-    public SpriteState _currentFrontState = SpriteState.Idle;
-    public SpriteState _currentBackState = SpriteState.Idle;
+    public SpriteState _currentFrontState;
+    public SpriteState _currentBackState;
     public enum SpriteState
     {
         Idle,
@@ -21,16 +21,16 @@ public class PokemonState
     {
         switch (keyboardInput)
         {
-            case var _ when keyboardInput.IsKeyDown(Keys.D0):
+            case var _ when keyboardInput.IsKeyDown(Keys.Q):
                 currentState = SpriteState.Idle;
                 break;
-            case var _ when keyboardInput.IsKeyDown(Keys.D1):
+            case var _ when keyboardInput.IsKeyDown(Keys.W):
                 currentState = SpriteState.Attack;
                 break;
-            case var _ when keyboardInput.IsKeyDown(Keys.D2):
+            case var _ when keyboardInput.IsKeyDown(Keys.E):
                 currentState = SpriteState.Hurt;
                 break;
-            case var _ when keyboardInput.IsKeyDown(Keys.D3):
+            case var _ when keyboardInput.IsKeyDown(Keys.R):
                 currentState = SpriteState.Death;
                 break;
             default:
@@ -42,16 +42,16 @@ public class PokemonState
     {
         switch (keyboardInput)
         {
-            case var _ when keyboardInput.IsKeyDown(Keys.D0):
+            case var _ when keyboardInput.IsKeyDown(Keys.Q):
                 currentState = SpriteState.Idle;
                 break;
-            case var _ when keyboardInput.IsKeyDown(Keys.D1):
+            case var _ when keyboardInput.IsKeyDown(Keys.W):
                 currentState = SpriteState.Attack;
                 break;
-            case var _ when keyboardInput.IsKeyDown(Keys.D2):
+            case var _ when keyboardInput.IsKeyDown(Keys.E):
                 currentState = SpriteState.Hurt;
                 break;
-            case var _ when keyboardInput.IsKeyDown(Keys.D3):
+            case var _ when keyboardInput.IsKeyDown(Keys.R):
                 currentState = SpriteState.Death;
                 break;
             default:
