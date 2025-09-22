@@ -4,9 +4,9 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>/Users/klee/Desktop/CSE3902/PokemonRedAndBlue/Enter/Content/images/Pokeball.png</File>
-    <File>/Users/klee/Desktop/CSE3902/PokemonRedAndBlue/Enter/Content/images/Pokemon_BACK.png</File>
-    <File>/Users/klee/Desktop/CSE3902/PokemonRedAndBlue/Enter/Content/images/Pokemon_FRONT.png</File>
+    <File>C:/VS_CODE/PokemonRedAndBlue/Enter/Content/images/Pokeball.png</File>
+    <File>C:/VS_CODE/PokemonRedAndBlue/Enter/Content/images/Pokemon_BACK.png</File>
+    <File>C:/VS_CODE/PokemonRedAndBlue/Enter/Content/images/Pokemon_FRONT.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

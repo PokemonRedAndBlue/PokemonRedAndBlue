@@ -140,100 +140,6 @@
         "Icon.png",
         "build/MonoGame.Content.Builder.Task.props",
         "build/MonoGame.Content.Builder.Task.targets",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/.nupkg.metadata",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/.signature.p7s",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/Icon.png",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/dotnet-mgcb.3.8.4.nupkg",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/dotnet-mgcb.3.8.4.nupkg.sha512",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/dotnet-mgcb.nupkg",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/dotnet-mgcb.nuspec",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/AssimpNetter.dll",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/BCnEncoder.dll",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/CppNet.dll",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/DotnetToolSettings.xml",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/KtxSharp.dll",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/Microsoft.Toolkit.HighPerformance.dll",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/MonoGame.Framework.Content.Pipeline.dll",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/MonoGame.Framework.Content.Pipeline.pdb",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/MonoGame.Framework.Content.Pipeline.xml",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/MonoGame.Framework.dll",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/MonoGame.Framework.pdb",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/MonoGame.Framework.xml",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/MonoGame.Tool.Basisu.dll",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/MonoGame.Tool.Crunch.dll",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/MonoGame.Tool.FFmpeg.dll",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/MonoGame.Tool.FFprobe.dll",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/SharpDX.D3DCompiler.dll",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/SharpDX.dll",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/libmojoshader_64.dll",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/linux-x64/basisu",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/linux-x64/crunch",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/linux-x64/ffmpeg",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/linux-x64/ffprobe",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/mgcb.deps.json",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/mgcb.dll",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/mgcb.pdb",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/mgcb.runtimeconfig.json",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/mgfxc",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/mgfxc.deps.json",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/mgfxc.dll",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/mgfxc.runtimeconfig.json",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/osx/basisu",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/osx/crunch",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/osx/ffmpeg",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/osx/ffprobe",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/runtimes/linux-arm64/native/libassimp.so",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/runtimes/linux-x64/native/libassimp.so",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/runtimes/linux-x64/native/libfreeimage.so",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/runtimes/linux-x64/native/libfreetype.so",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/runtimes/osx-arm64/native/libassimp.dylib",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/runtimes/osx-x64/native/libassimp.dylib",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/runtimes/osx/native/libfreeimage.dylib",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/runtimes/osx/native/libfreetype.dylib",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/runtimes/win-x64/native/FreeImage.dll",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/runtimes/win-x64/native/assimp.dll",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/runtimes/win-x64/native/freetype.dll",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/runtimes/win-x86/native/assimp.dll",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/windows-x64/basisu.exe",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/windows-x64/crunch.exe",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/windows-x64/ffmpeg.exe",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/dotnet-mgcb/3.8.4/tools/net8.0/any/windows-x64/ffprobe.exe",
-        "build/dotnet-tools/.store/.stage/g4zw4ycy.kdk/project.assets.json",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/dotnet-mgcb.3.8.4.nupkg",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/dotnet-mgcb.3.8.4.nupkg.sha512",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/dotnet-mgcb.nuspec",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/AssimpNetter.dll",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/BCnEncoder.dll",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/CppNet.dll",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/DotnetToolSettings.xml",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/KtxSharp.dll",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/Microsoft.Toolkit.HighPerformance.dll",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/MonoGame.Framework.Content.Pipeline.dll",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/MonoGame.Framework.Content.Pipeline.pdb",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/MonoGame.Framework.Content.Pipeline.xml",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/MonoGame.Framework.dll",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/MonoGame.Framework.pdb",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/MonoGame.Framework.xml",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/MonoGame.Tool.Basisu.dll",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/MonoGame.Tool.Crunch.dll",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/MonoGame.Tool.FFmpeg.dll",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/MonoGame.Tool.FFprobe.dll",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/SharpDX.D3DCompiler.dll",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/SharpDX.dll",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/libmojoshader_64.dll",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/linux-x64/basisu",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/linux-x64/crunch",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/linux-x64/ffmpeg",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/linux-x64/ffprobe",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/mgcb.deps.json",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/mgcb.dll",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/mgcb.pdb",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/mgcb.runtimeconfig.json",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/mgfxc",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/mgfxc.deps.json",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/mgfxc.dll",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/mgfxc.runtimeconfig.json",
-        "build/dotnet-tools/.store/.stage/sfe51iv1.gzr/dotnet-mgcb/3.8.4/tools/net8.0/any/osx/ffprobe",
         "build/dotnet-tools/.store/dotnet-mgcb/3.8.4/dotnet-mgcb/3.8.4/.nupkg.metadata",
         "build/dotnet-tools/.store/dotnet-mgcb/3.8.4/dotnet-mgcb/3.8.4/.signature.p7s",
         "build/dotnet-tools/.store/dotnet-mgcb/3.8.4/dotnet-mgcb/3.8.4/Icon.png",
@@ -444,19 +350,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/klee/.nuget/packages/": {}
+    "C:\\Users\\jenin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/klee/Desktop/CSE3902/PokemonRedAndBlue/Enter/Enter.csproj",
+      "projectUniqueName": "C:\\VS_CODE\\PokemonRedAndBlue\\Enter\\Enter.csproj",
       "projectName": "Enter",
-      "projectPath": "/Users/klee/Desktop/CSE3902/PokemonRedAndBlue/Enter/Enter.csproj",
-      "packagesPath": "/Users/klee/.nuget/packages/",
-      "outputPath": "/Users/klee/Desktop/CSE3902/PokemonRedAndBlue/Enter/obj/",
+      "projectPath": "C:\\VS_CODE\\PokemonRedAndBlue\\Enter\\Enter.csproj",
+      "packagesPath": "C:\\Users\\jenin\\.nuget\\packages\\",
+      "outputPath": "C:\\VS_CODE\\PokemonRedAndBlue\\Enter\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/klee/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\jenin\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -479,8 +385,7 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "9.0.300"
+      }
     },
     "frameworks": {
       "net8.0": {
@@ -506,26 +411,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[8.0.19, 8.0.19]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Host.osx-arm64",
-            "version": "[8.0.19, 8.0.19]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[8.0.19, 8.0.19]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.304/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.413/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

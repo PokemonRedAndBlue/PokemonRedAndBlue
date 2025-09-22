@@ -4,17 +4,18 @@ using Microsoft.Xna.Framework.Input;
 using MonoGameLibrary;
 using MonoGameLibrary.Graphics;
 using System;
+using System.Data;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using MonoGameLibrary.Storage;
+using Behavior.Time;
 
 namespace GameFile;
 
 public class Game1 : Core
 {
-    private TextureAtlas _PokemonBackAtlas;
-    private TextureAtlas _PokemonFrontAtlas;
-    private double elapsedTime = 0;    
-    private int regionsToDraw = 0;     
-
+    // Needed class vars
+    private Sprite _bulbasaur;
 
     public Game1() : base("PokemonRedAndBlue", 1280, 720, false)
     {
@@ -28,21 +29,20 @@ public class Game1 : Core
 
     protected override void LoadContent()
     {
-        // Load the atlas texture using the content manager from the XML configuration file
-        _PokemonBackAtlas = TextureAtlas.FromFile(Content, "Pokemon_BACK.xml");
-        _PokemonFrontAtlas = TextureAtlas.FromFile(Content, "Pokemon_FRONT.xml");
+        PokemonFrontFactory.Instance.LoadAllTextures(Content);
+        PokemonBackFactory.Instance.LoadAllTextures(Content);
+
+        _bulbasaur = PokemonBackFactory.Instance.CreateStaticSprite("bulbasaur-back");
         base.LoadContent();
     }
 
     protected override void Update(GameTime gameTime)
     {
-        elapsedTime += gameTime.ElapsedGameTime.TotalSeconds;
+        var keyboardState = Keyboard.GetState();
+        if (keyboardState.IsKeyDown(Keys.Escape))
+            Exit();
 
-        if (elapsedTime >= 0.2 && regionsToDraw < _PokemonBackAtlas._regions.Count)
-        {
-            regionsToDraw++;
-            elapsedTime = 0; // reset timer
-        }
+        base.Update(gameTime);
     }
 
     protected override void Draw(GameTime gameTime)
@@ -51,25 +51,16 @@ public class Game1 : Core
 
         SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
-        int i = 0;
-        int j = 0;
-        foreach (var region in _PokemonBackAtlas._regions)
+        // all testing code goes here
+        _bulbasaur.Draw(SpriteBatch, new Vector2(100, 100), Color.White, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0.5f);
+        var keyboardState = Keyboard.GetState();
+        Time timer = new Time();
+        if (keyboardState.IsKeyDown(Keys.W))
         {
-            if (i >= regionsToDraw)
-                break;
-
-            region.Value.Draw(SpriteBatch, new Vector2(608, 328), Color.White, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0f);
-            i++;
+            AttackAnimation attackAnimation = new AttackAnimation();
+            attackAnimation.BackAttackAnimation(_bulbasaur, SpriteBatch, timer);
         }
-
-        // foreach (var region in _PokemonFrontAtlas._regions)
-        // {
-        //     if (j >= regionsToDraw)
-        //         break;
-
-        //     region.Value.Draw(SpriteBatch, new Vector2(200, 328), Color.White, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0f);
-        //     j++;
-        // }
+        // end testing code
 
         SpriteBatch.End();
 

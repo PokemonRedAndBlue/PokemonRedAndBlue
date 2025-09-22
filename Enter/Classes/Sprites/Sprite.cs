@@ -5,7 +5,7 @@ namespace MonoGameLibrary.Graphics;
 
 public class Sprite
 {
-    
+
     /// <summary>
     /// Gets or Sets the source texture region represented by this sprite.
     /// </summary>
@@ -102,8 +102,18 @@ public class Sprite
     /// </summary>
     /// <param name="spriteBatch">The SpriteBatch instance used for batching draw calls.</param>
     /// <param name="position">The xy-coordinate position to render this sprite at.</param>
-    public void Draw(SpriteBatch spriteBatch, Vector2 position)
+    public void Draw(SpriteBatch spriteBatch, Color color, Vector2 position, float scale)
     {
-        Region.Draw(spriteBatch, position, Color, Rotation, Origin, Scale, Effects, LayerDepth);
+        Region.Draw(spriteBatch, position, color, Rotation, Origin, Scale, Effects, LayerDepth);
+    }
+
+    /// <summary>
+    /// Submit this sprite for drawing to the current batch.
+    /// </summary>
+    /// <param name="spriteBatch">The SpriteBatch instance used for batching draw calls.</param>
+    /// <param name="position">The xy-coordinate position to render this sprite at.</param>
+    public void Draw(SpriteBatch spriteBatch, Vector2 position, Color color, float rotation, Vector2 origin, float scale, SpriteEffects effects, float layerDepth)
+    {
+        Region.Draw(spriteBatch, position, color, rotation, origin, scale, effects, layerDepth);
     }
 }
