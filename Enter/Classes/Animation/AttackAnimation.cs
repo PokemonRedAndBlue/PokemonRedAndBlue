@@ -26,7 +26,7 @@ public class AttackAnimation : AnimatedSprite
         }
     }
 
-    public void FrontAttackAnimation(AnimatedSprite sprite, GameTime gameTime, SpriteBatch spriteBatch, GameTime gameTime)
+    public void FrontAttackAnimation(AnimatedSprite sprite, GameTime gameTime, SpriteBatch spriteBatch)
     {
         for (int i = 30; i > 0; i--)
         {
