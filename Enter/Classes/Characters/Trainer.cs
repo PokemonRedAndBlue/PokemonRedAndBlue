@@ -7,15 +7,15 @@ public class Trainer
 {
 
     public Vector2 Position { get; set; }
-    private float _visionRange = 3f;
-    private const float InteractRange = 1.5f;
+    private readonly float _visionRange = 3f;
+    private const float InteractionRange = 1.5f;
 
     public Trainer(Vector2 Pos)
     {
         Position = Pos;
     }
 
-    public Trainer(Vector2 Pos, int visionRange)
+    public Trainer(Vector2 Pos, float visionRange)
     {
         Position = Pos;
         _visionRange = visionRange;
@@ -30,13 +30,16 @@ public class Trainer
     private void GoToPlayer(Player player)
     {
         Vector2 diff = player.Position - Position;
-        while (Vector2.Distance(Position, player.Position) > InteractRange)
+        while (Vector2.Distance(Position, player.Position) > InteractionRange)
         {
+            // made into one if statement for frequent position check
             if (diff.X > 0) ; // TODO: MoveRight()
-            else; // TODO: MoveLeft()
+            else if (diff.X < 0) ; // TODO: MoveLeft()
 
-            if (diff.Y > 0) ; // TODO: MoveUp()
-            else; // TODO: MoveDown()
+            else if (diff.Y > 0) ; // TODO: MoveUp()
+            else ; // TODO: MoveDown()
+
+            // Wait, if time is not specified for commands
         }
     }
 
@@ -46,10 +49,12 @@ public class Trainer
     {
         if (IsVisible(player))
         {
-            // TODO: Deactivate Player commands
+            player.Stop();
             GoToPlayer(player);
         }
         else Idle();
+
+        // Trigger battle scene (Sprint 3)
     }
 
 }
