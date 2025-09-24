@@ -12,7 +12,7 @@ namespace MonoGameLibrary.Graphics
 
         public Vector2 CurrentPosition { get; protected set; }
 
-        // Start the attack animation
+        // Start the animation
         public void StartAnimation(Vector2 startPosition)
         {
             if (!stateIsTrue)
