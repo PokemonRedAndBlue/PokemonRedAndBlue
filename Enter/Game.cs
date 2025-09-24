@@ -16,6 +16,11 @@ public class Game1 : Core
 {
     // Needed class vars
     private Sprite _bulbasaur;
+    private Vector2 postion = new Vector2(100, 100);
+
+    private PokemonState.SpriteState spriteState = PokemonState.SpriteState.Idle;
+
+    AttackAnimation attackAnimation = new AttackAnimation();
 
     public Game1() : base("PokemonRedAndBlue", 1280, 720, false)
     {
@@ -51,16 +56,25 @@ public class Game1 : Core
 
         SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
-        // all testing code goes here
-        _bulbasaur.Draw(SpriteBatch, new Vector2(100, 100), Color.White, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0.5f);
         var keyboardState = Keyboard.GetState();
-        Time timer = new Time();
+
         if (keyboardState.IsKeyDown(Keys.W))
         {
-            AttackAnimation attackAnimation = new AttackAnimation();
-            attackAnimation.BackAttackAnimation(_bulbasaur, SpriteBatch, timer);
+            attackAnimation.StartAttack(postion);
+            spriteState = PokemonState.SpriteState.Attack;
         }
-        // end testing code
+
+        switch (spriteState)
+        {
+            case PokemonState.SpriteState.Idle:
+                _bulbasaur.Draw(SpriteBatch, postion, Color.White, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0.5f);
+                break;
+            case PokemonState.SpriteState.Attack:
+                spriteState = attackAnimation.UpdateAttackAnimation(postion, _bulbasaur, SpriteBatch);
+                break;
+            default:
+                break;
+        }
 
         SpriteBatch.End();
 

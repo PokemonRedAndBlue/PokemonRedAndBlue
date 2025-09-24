@@ -1,43 +1,76 @@
 using System;
-using System.Collections.Generic;
-using System.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;    
-using Behavior.Time;
 
-namespace MonoGameLibrary.Graphics;
-
-public class AttackAnimation : AnimatedSprite
+namespace MonoGameLibrary.Graphics
 {
-    // Use the engine's shared SpriteBatch instead of creating a new GraphicsDevice
-    public void BackAttackAnimation(Sprite sprite, SpriteBatch spriteBatch, GameTime gameTime)
+    public class AttackAnimation : AnimatedSprite
     {
-        for (int i = 0; i < 30; i++)
+        private bool isAttacking = false;
+        private int attackAnimationTime = 0;
+        private const int AttackDuration = 20;
+
+        public Vector2 CurrentPosition { get; private set; }
+
+        public bool IsAttacking => isAttacking;
+
+        // Start the attack animation
+        public void StartAttack(Vector2 startPosition)
         {
-            var pos = new Vector2(sprite.Origin.X + i, sprite.Origin.Y);
-            sprite.Draw(spriteBatch, pos, sprite.Color, sprite.Rotation, sprite.Origin, 4f, SpriteEffects.None, sprite.LayerDepth);
+            if (!isAttacking)
+            {
+                isAttacking = true;
+                attackAnimationTime = 0;
+                CurrentPosition = startPosition;
+            }
         }
 
-        for (int i = 30; i > 0; i--)
+        // Update the animation state; returns the current sprite state
+        public PokemonState.SpriteState UpdateAttackAnimation(Vector2 startPosition, Sprite sprite, SpriteBatch spriteBatch)
         {
-            var pos = new Vector2(sprite.Origin.X + i, sprite.Origin.Y);
-            sprite.Draw(spriteBatch, pos, sprite.Color, sprite.Rotation, sprite.Origin, 4f, SpriteEffects.None, sprite.LayerDepth);
-        }
-    }
+            if (!isAttacking)
+                return PokemonState.SpriteState.Idle;
 
-    public void FrontAttackAnimation(AnimatedSprite sprite, GameTime gameTime, SpriteBatch spriteBatch)
-    {
-        for (int i = 30; i > 0; i--)
-        {
-            var pos = new Vector2(sprite.Origin.X + i, sprite.Origin.Y);
-            sprite.Draw(spriteBatch, pos, sprite.Color, sprite.Rotation, sprite.Origin, 4f, SpriteEffects.None, sprite.LayerDepth);
+            // Forward for first 8 frames, then back
+            if (attackAnimationTime <= 8)
+                CurrentPosition = startPosition + new Vector2(10, 0);
+            else
+                CurrentPosition = startPosition - new Vector2(10, 0);
+
+                // clamp to x >= 100 at all times
+                if (CurrentPosition.X < 100)
+                {
+                    CurrentPosition = new Vector2(100, CurrentPosition.Y);
+                }
+
+            attackAnimationTime++;
+
+            // End animation if duration exceeded
+            if (attackAnimationTime >= AttackDuration)
+            {
+                EndAttack();
+                return PokemonState.SpriteState.Idle;
+            }
+
+            Draw(sprite, spriteBatch);
+            return PokemonState.SpriteState.Attack;
         }
 
-        for (int i = 0; i < 30; i++)
+        // Draw the sprite at its current position
+        public void Draw(Sprite sprite, SpriteBatch spriteBatch)
         {
-            var pos = new Vector2(sprite.Origin.X + i, sprite.Origin.Y);
-            sprite.Draw(spriteBatch, pos, sprite.Color, sprite.Rotation, sprite.Origin, 4f, SpriteEffects.None, sprite.LayerDepth);
+            if (isAttacking)
+            {
+                sprite.Draw(spriteBatch, CurrentPosition, sprite.Color, sprite.Rotation,
+                            sprite.Origin, 4f, SpriteEffects.None, sprite.LayerDepth);
+            }
+        }
+
+        // Reset the animation
+        private void EndAttack()
+        {
+            isAttacking = false;
+            attackAnimationTime = 0;
         }
     }
 }
