@@ -10,10 +10,6 @@ namespace MonoGameLibrary.Graphics
         private int hurtAnimationTime = 0;
         private const int HurtDuration = 20;
 
-        public Vector2 CurrentPosition { get; private set; }
-
-        public bool IsHurt => isHurt;
-
         // Update the animation state; returns the current sprite state
         public PokemonState.SpriteState UpdateHurtAnimation(Vector2 startPosition, Sprite sprite, SpriteBatch spriteBatch)
         {

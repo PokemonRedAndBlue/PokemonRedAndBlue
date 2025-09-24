@@ -10,8 +10,6 @@ namespace MonoGameLibrary.Graphics
         private int deathAnimationTime = 0;
         private const int DeathDuration = 20;
 
-        public Vector2 CurrentPosition { get; private set; }
-
         // Update the animation state; returns the current sprite state
         public PokemonState.SpriteState UpdateDeathAnimation(Vector2 startPosition, Sprite sprite, SpriteBatch spriteBatch)
         {

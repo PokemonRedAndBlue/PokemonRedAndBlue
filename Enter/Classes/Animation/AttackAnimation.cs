@@ -10,8 +10,6 @@ namespace MonoGameLibrary.Graphics
         private int attackAnimationTime = 0;
         private const int AttackDuration = 20;
 
-        public Vector2 CurrentPosition { get; private set; }
-
         // Update the animation state; returns the current sprite state
         public PokemonState.SpriteState UpdateAttackAnimation(Vector2 startPosition, Sprite sprite, SpriteBatch spriteBatch)
         {

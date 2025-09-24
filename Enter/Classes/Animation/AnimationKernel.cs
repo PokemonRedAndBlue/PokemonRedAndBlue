@@ -10,7 +10,7 @@ namespace MonoGameLibrary.Graphics
         public int AnimationTime = 0;
         public const int AnimationDuration = 20;
 
-        public Vector2 CurrentPosition { get; private set; }
+        public Vector2 CurrentPosition { get; protected set; }
 
         // Start the attack animation
         public void StartAnimation(Vector2 startPosition)
