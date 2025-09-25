@@ -9,7 +9,7 @@ namespace IPlayer
 {
     public interface IPlayer
     {
-        void Update(GameTime gameTime);
+        void Update(GameTime gameTime, int axisX, int axisY);
     }
     
 }
