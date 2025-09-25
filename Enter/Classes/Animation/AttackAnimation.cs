@@ -28,7 +28,7 @@ namespace MonoGameLibrary.Graphics
                 return PokemonState.SpriteState.Idle;
             }
 
-            Draw(sprite, spriteBatch, Color.White);
+            Draw(sprite, spriteBatch, Color.White, 4f);
             return PokemonState.SpriteState.Attack;
         }
     }

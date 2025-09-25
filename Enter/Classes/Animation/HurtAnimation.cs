@@ -33,7 +33,7 @@ namespace MonoGameLibrary.Graphics
                 return PokemonState.SpriteState.Idle;
             }
 
-            Draw(sprite, spriteBatch, color);
+            Draw(sprite, spriteBatch, color, 4f);
             return PokemonState.SpriteState.Hurt;
         }
     }

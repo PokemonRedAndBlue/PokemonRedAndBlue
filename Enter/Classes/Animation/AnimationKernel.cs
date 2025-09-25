@@ -30,12 +30,12 @@ namespace MonoGameLibrary.Graphics
         }
 
         // Draw the sprite at its current position
-        public void Draw(Sprite sprite, SpriteBatch spriteBatch, Color color)
+        public void Draw(Sprite sprite, SpriteBatch spriteBatch, Color color, float scale)
         {
             if (stateIsTrue)
             {
                 sprite.Draw(spriteBatch, CurrentPosition, color, sprite.Rotation,
-                            sprite.Origin, 4f, SpriteEffects.None, sprite.LayerDepth);
+                            sprite.Origin, scale, SpriteEffects.None, sprite.LayerDepth);
             }
         }
     }
