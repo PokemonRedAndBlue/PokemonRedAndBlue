@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using MonoGameLibrary.Storage;
 using Behavior.Time;
+using Enter.Classes.Characters;
 
 namespace GameFile;
 
@@ -16,6 +17,9 @@ public class Game1 : Core
 {
     // Needed class vars
     private Sprite _bulbasaur;
+    private Texture2D character;
+    private Player player;
+    private KeyboardController.KeyboardController controller;
 
     public Game1() : base("PokemonRedAndBlue", 1280, 720, false)
     {
@@ -33,6 +37,9 @@ public class Game1 : Core
         PokemonBackFactory.Instance.LoadAllTextures(Content);
 
         _bulbasaur = PokemonBackFactory.Instance.CreateStaticSprite("bulbasaur-back");
+        character = Content.Load<Texture2D>("images/Pokemon_Characters");
+        player = new Player(character, Window);
+        controller = new KeyboardController.KeyboardController();
         base.LoadContent();
     }
 
@@ -42,6 +49,18 @@ public class Game1 : Core
         if (keyboardState.IsKeyDown(Keys.Escape))
             Exit();
 
+        controller.Update(this);
+        int ax = 0, ay = 0;
+        switch (controller.moveDirection)
+        {
+            case KeyboardController.Direction.Left:  ax = -1; break;
+            case KeyboardController.Direction.Right: ax =  1; break;
+            case KeyboardController.Direction.Up:    ay = -1; break;
+            case KeyboardController.Direction.Down:  ay =  1; break;
+            default:                                  ax =  0; ay = 0; break;
+        }
+
+        player.Update(gameTime, ax, ay);
         base.Update(gameTime);
     }
 
@@ -61,6 +80,8 @@ public class Game1 : Core
             attackAnimation.BackAttackAnimation(_bulbasaur, SpriteBatch, timer);
         }
         // end testing code
+
+        player.Draw(SpriteBatch, 4f);
 
         SpriteBatch.End();
 
