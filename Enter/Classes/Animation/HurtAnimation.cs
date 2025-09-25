@@ -1,31 +1,23 @@
-using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace MonoGameLibrary.Graphics
 {
     public class HurtAnimation : AnimationKernel
     {
-        private bool isHurt = false;
-        private int hurtAnimationTime = AnimationDuration;
-        private const int HurtDuration = 20;
+        private Color color = Color.White;
 
-        private Color color;
-
-        // Update the animation state; returns the current sprite state
         public PokemonState.SpriteState UpdateHurtAnimation(Vector2 startPosition, Sprite sprite, SpriteBatch spriteBatch)
         {
-            if (!isHurt)
+            if (!stateIsTrue)
                 return PokemonState.SpriteState.Idle;
 
-            Console.Write(hurtAnimationTime);
-
-            // Hurt Animation goes here
-            if (CurrentPosition.X % 2 == 0)
+            // Flicker red/white
+            if (AnimationTime % 2 == 0)
             {
                 color = Color.Red;
                 CurrentPosition = startPosition + new Vector2(2, 0);
-                Console.Write("we made it");
             }
             else
             {
@@ -33,17 +25,16 @@ namespace MonoGameLibrary.Graphics
                 CurrentPosition = startPosition - new Vector2(2, 0);
             }
 
-            hurtAnimationTime++;
+            AnimationTime++;
 
-            // End animation if duration exceeded
-            if (hurtAnimationTime >= HurtDuration)
+            if (AnimationTime >= AnimationDuration)
             {
                 EndAnimation();
-                return PokemonState.SpriteState.Hurt;
+                return PokemonState.SpriteState.Idle;
             }
 
             Draw(sprite, spriteBatch, color);
-            return PokemonState.SpriteState.Attack;
+            return PokemonState.SpriteState.Hurt;
         }
     }
 }

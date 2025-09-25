@@ -1,4 +1,3 @@
-using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -6,28 +5,34 @@ namespace MonoGameLibrary.Graphics
 {
     public class DeathAnimation : AnimationKernel
     {
-        private bool isDying = false;
-        private int deathAnimationTime = AnimationDuration;
-        private const int DeathDuration = 20;
+        public const int DeathDuration = 30; // ~half second at 60fps
 
-        // Update the animation state; returns the current sprite state
         public PokemonState.SpriteState UpdateDeathAnimation(Vector2 startPosition, Sprite sprite, SpriteBatch spriteBatch)
         {
-            if (!isDying)
+            if (!stateIsTrue)
                 return PokemonState.SpriteState.Idle;
 
-            // Death Animation Code Here
+            // How far we are (0 → 1)
+            float progress = (float)AnimationTime / DeathDuration;
 
-            deathAnimationTime++;
+            // Shrink vertically
+            float scaleY = MathHelper.Lerp(4f, 0f, progress);
 
-            // End animation if duration exceeded
-            if (deathAnimationTime >= DeathDuration)
+            // Optional: slide down a little as it faints
+            CurrentPosition = startPosition + new Vector2(0, progress * 10f);
+
+            sprite.Draw(spriteBatch, CurrentPosition, Color.White, sprite.Rotation,
+                        sprite.Origin, scaleY,
+                        SpriteEffects.None, sprite.LayerDepth);
+
+            AnimationTime++;
+
+            if (AnimationTime >= DeathDuration)
             {
                 EndAnimation();
-                return PokemonState.SpriteState.Idle;
+                return PokemonState.SpriteState.Death;
             }
 
-            Draw(sprite, spriteBatch, Color.White);
             return PokemonState.SpriteState.Death;
         }
     }
