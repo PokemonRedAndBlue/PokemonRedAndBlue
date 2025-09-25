@@ -9,6 +9,7 @@ public class Trainer
     public Vector2 Position { get; set; }
     private readonly float _visionRange = 3f;
     private const float InteractionRange = 1.5f;
+    private const float FrameDuration = 0.12f;
 
     public Trainer(Vector2 Pos)
     {
