@@ -7,7 +7,7 @@ namespace MonoGameLibrary.Graphics
     public class AttackAnimation : AnimationKernel
     {
         private bool isAttacking = false;
-        private int attackAnimationTime = 0;
+        private int attackAnimationTime = AnimationDuration;
         private const int AttackDuration = 20;
 
         // Update the animation state; returns the current sprite state

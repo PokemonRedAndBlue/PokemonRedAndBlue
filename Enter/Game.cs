@@ -3,12 +3,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGameLibrary;
 using MonoGameLibrary.Graphics;
-using System;
-using System.Data;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using MonoGameLibrary.Storage;
-using Behavior.Time;
 
 namespace GameFile;
 
@@ -16,11 +10,16 @@ public class Game1 : Core
 {
     // Needed class vars
     private Sprite _bulbasaur;
+
     private Vector2 postion = new Vector2(100, 100);
 
     private PokemonState.SpriteState spriteState = PokemonState.SpriteState.Idle;
 
-    AttackAnimation attackAnimation = new AttackAnimation();
+    AnimationKernel kernel = new AnimationKernel();
+
+    AttackAnimation attack = new AttackAnimation();
+
+    HurtAnimation hurt = new HurtAnimation();
 
     public Game1() : base("PokemonRedAndBlue", 1280, 720, false)
     {
@@ -44,8 +43,15 @@ public class Game1 : Core
     protected override void Update(GameTime gameTime)
     {
         var keyboardState = Keyboard.GetState();
+
         if (keyboardState.IsKeyDown(Keys.Escape))
             Exit();
+
+        if (keyboardState.IsKeyDown(Keys.W))
+        {
+            kernel.StartAnimation(postion);
+            spriteState = PokemonState.SpriteState.Hurt;
+        }
 
         base.Update(gameTime);
     }
@@ -56,13 +62,7 @@ public class Game1 : Core
 
         SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
-        var keyboardState = Keyboard.GetState();
-
-        if (keyboardState.IsKeyDown(Keys.W))
-        {
-            attackAnimation.StartAttack(postion);
-            spriteState = PokemonState.SpriteState.Attack;
-        }
+        Update(gameTime);
 
         switch (spriteState)
         {
@@ -70,7 +70,10 @@ public class Game1 : Core
                 _bulbasaur.Draw(SpriteBatch, postion, Color.White, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0.5f);
                 break;
             case PokemonState.SpriteState.Attack:
-                spriteState = attackAnimation.UpdateAttackAnimation(postion, _bulbasaur, SpriteBatch);
+                spriteState = attack.UpdateAttackAnimation(postion, _bulbasaur, SpriteBatch);
+                break;
+            case PokemonState.SpriteState.Hurt:
+                spriteState = hurt.UpdateHurtAnimation(postion, _bulbasaur, SpriteBatch);
                 break;
             default:
                 break;
