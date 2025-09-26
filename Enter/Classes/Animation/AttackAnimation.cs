@@ -12,9 +12,9 @@ namespace MonoGameLibrary.Graphics
 
             // Forward for first 8 frames, then back
             if (AnimationTime <= 8)
-                CurrentPosition = startPosition + new Vector2(10, 0);
+                CurrentPosition = startPosition + new Vector2(15, 0);
             else
-                CurrentPosition = startPosition - new Vector2(10, 0);
+                CurrentPosition = startPosition - new Vector2(15, 0);
 
             // clamp to x >= 100
             if (CurrentPosition.X < 100)
