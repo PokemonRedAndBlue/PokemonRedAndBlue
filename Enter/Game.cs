@@ -21,20 +21,21 @@ public class Game1 : Core
     private Player player;
     private KeyboardController.KeyboardController controller;
 
-    public Game1() : base("PokemonRedAndBlue", 1280, 720, false)
-    {
+        private Vector2 postion = new Vector2(100, 100);
 
-    }
+        private PokemonState.SpriteState spriteState = PokemonState.SpriteState.Idle;
 
-    protected override void Initialize()
-    {
-        base.Initialize();
-    }
+        private HurtAnimation hurt = new HurtAnimation();
+        private AttackAnimation attack = new AttackAnimation();
 
-    protected override void LoadContent()
-    {
-        PokemonFrontFactory.Instance.LoadAllTextures(Content);
-        PokemonBackFactory.Instance.LoadAllTextures(Content);
+        private DeathAnimation death = new DeathAnimation();
+
+        public Game1() : base("PokemonRedAndBlue", 1280, 720, false) { }
+
+        protected override void LoadContent()
+        {
+            PokemonFrontFactory.Instance.LoadAllTextures(Content);
+            PokemonBackFactory.Instance.LoadAllTextures(Content);
 
         _bulbasaur = PokemonBackFactory.Instance.CreateStaticSprite("bulbasaur-back");
         character = Content.Load<Texture2D>("images/Pokemon_Characters");
@@ -43,11 +44,12 @@ public class Game1 : Core
         base.LoadContent();
     }
 
-    protected override void Update(GameTime gameTime)
-    {
-        var keyboardState = Keyboard.GetState();
-        if (keyboardState.IsKeyDown(Keys.Escape))
-            Exit();
+        protected override void Update(GameTime gameTime)
+        {
+            var keyboardState = Keyboard.GetState();
+
+            if (keyboardState.IsKeyDown(Keys.Escape))
+                Exit();
 
         controller.Update(this);
         int ax = 0, ay = 0;
@@ -64,11 +66,11 @@ public class Game1 : Core
         base.Update(gameTime);
     }
 
-    protected override void Draw(GameTime gameTime)
-    {
-        GraphicsDevice.Clear(Color.CornflowerBlue);
+        protected override void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.CornflowerBlue);
 
-        SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
+            SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
         // all testing code goes here
         _bulbasaur.Draw(SpriteBatch, new Vector2(100, 100), Color.White, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0.5f);
@@ -83,8 +85,9 @@ public class Game1 : Core
 
         player.Draw(SpriteBatch, 4f);
 
-        SpriteBatch.End();
+            SpriteBatch.End();
 
-        base.Draw(gameTime);
+            base.Draw(gameTime);
+        }
     }
 }
