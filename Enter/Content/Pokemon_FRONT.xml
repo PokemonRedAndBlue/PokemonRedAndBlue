@@ -8,6 +8,7 @@
         <Region name="ivysaur-front-attack" x="188" y="38" width="48" height="48"/>
         <Region name="venusaur-front-idle" x="237" y="30" width="56" height="56"/>
         <Region name="venusaur-front-attack" x="294" y="30" width="56" height="56"/>
+        <Region name="Charmander-front-idle" x="359" y="46" width="40" height="40"/>
     </Regions>
     <Animations>
         <Animation name="bulbasaur-front" frameCount="3" frameDuration="2" scale="4">
