@@ -73,14 +73,6 @@ public class Game1 : Core
             SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
         // all testing code goes here
-        _bulbasaur.Draw(SpriteBatch, new Vector2(100, 100), Color.White, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0.5f);
-        var keyboardState = Keyboard.GetState();
-        Time timer = new Time();
-        if (keyboardState.IsKeyDown(Keys.W))
-        {
-            AttackAnimation attackAnimation = new AttackAnimation();
-            attackAnimation.BackAttackAnimation(_bulbasaur, SpriteBatch, timer);
-        }
         // end testing code
 
         player.Draw(SpriteBatch, 4f);
@@ -90,4 +82,3 @@ public class Game1 : Core
             base.Draw(gameTime);
         }
     }
-}
