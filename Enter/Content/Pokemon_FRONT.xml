@@ -9,6 +9,9 @@
         <Region name="venusaur-front-idle" x="237" y="30" width="56" height="56"/>
         <Region name="venusaur-front-attack" x="294" y="30" width="56" height="56"/>
         <Region name="Charmander-front-idle" x="359" y="46" width="40" height="40"/>
+        <Region name="Charmander-front-attack" x="416" y="46" width="40" height="40"/>
+        <Region name="Charmeleon-front-idle" x="472" y="37" width="48" height="48"/>
+        <Region name="Charmeleon-front-attack" x="529" y="37" width="48" height="48"/>
     </Regions>
     <Animations>
         <Animation name="bulbasaur-front" frameCount="3" frameDuration="2" scale="4">
