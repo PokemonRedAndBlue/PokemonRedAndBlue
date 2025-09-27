@@ -304,9 +304,6 @@
         <Region name="Mewtwo-front-attack" x="" y="" width="" height=""/>
         <Region name="Mew-front-idle" x="" y="" width="" height=""/>
         <Region name="Mew-front-attack" x="" y="" width="" height=""/>
-        <Region name="MissingNo-front-idle" x="" y="" width="" height=""/>
-        <Region name="MissingNo-front-attack" x="" y="" width="" height=""/>
-
     </Regions>
     <Animations>
         <Animation name="bulbasaur-front" frameCount="3" frameDuration="2" scale="4">
@@ -1063,11 +1060,6 @@
             <Frame region="mew-front-idle" />
             <Frame region="mew-front-attack" />
             <Frame region="mew-front-idle" />
-        </Animation>
-        <Animation name="missingno-front" frameCount="3" frameDuration="2" scale="4">
-            <Frame region="missingno-front-idle" />
-            <Frame region="missingno-front-attack" />
-            <Frame region="missingno-front-idle" />
         </Animation>
     </Animations>
 </TextureAtlas>
