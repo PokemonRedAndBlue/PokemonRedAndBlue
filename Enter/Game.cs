@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using MonoGameLibrary.Storage;
 using Behavior.Time;
 using Enter.Classes.Characters;
+using Enter.Classes.Animation;
 
 namespace GameFile;
 
@@ -22,6 +23,8 @@ public class Game1 : Core
     private KeyboardController.KeyboardController controller;
 
         private Vector2 postion = new Vector2(100, 100);
+        private PokeballthrowAnimation _pokeballthrow;
+        private PokeballCaptureAnimation _pokeballCapture;
 
         private PokemonState.SpriteState spriteState = PokemonState.SpriteState.Idle;
 
@@ -41,6 +44,13 @@ public class Game1 : Core
         character = Content.Load<Texture2D>("images/Pokemon_Characters");
         player = new Player(character, Window);
         controller = new KeyboardController.KeyboardController();
+
+        _pokeballthrow = new PokeballthrowAnimation(640,360);
+        _pokeballthrow.LoadContent(Content);
+
+        _pokeballCapture = new PokeballCaptureAnimation(300, 360);
+        _pokeballCapture.LoadContent(Content);
+
         base.LoadContent();
     }
 
@@ -61,6 +71,9 @@ public class Game1 : Core
             case KeyboardController.Direction.Down:  ay =  1; break;
             default:                                  ax =  0; ay = 0; break;
         }
+        _pokeballthrow.Update(gameTime);  
+        _pokeballCapture.Update(gameTime);  
+
 
         player.Update(gameTime, ax, ay);
         base.Update(gameTime);
@@ -73,6 +86,8 @@ public class Game1 : Core
             SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
         // all testing code goes here
+        _pokeballthrow.Draw(SpriteBatch);
+        _pokeballCapture.Draw(SpriteBatch);
         // end testing code
 
         player.Draw(SpriteBatch, 4f);
