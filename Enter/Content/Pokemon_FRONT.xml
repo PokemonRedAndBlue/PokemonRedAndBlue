@@ -2,12 +2,12 @@
 <TextureAtlas>
     <Texture>images/Pokemon_FRONT</Texture>
     <Regions>
-        <Region name="bulbasaur-front-idle" x="17" y="46" width="40" height="40"/>
-        <Region name="bulbasaur-front-attack" x="74" y="46" width="40" height="40"/>
-        <Region name="ivysaur-front-idle" x="131" y="38" width="48" height="48"/>
-        <Region name="ivysaur-front-attack" x="188" y="38" width="48" height="48"/>
-        <Region name="venusaur-front-idle" x="237" y="30" width="56" height="56"/>
-        <Region name="venusaur-front-attack" x="294" y="30" width="56" height="56"/>
+        <Region name="Bulbasaur-front-idle" x="17" y="46" width="40" height="40"/>
+        <Region name="Bulbasaur-front-attack" x="74" y="46" width="40" height="40"/>
+        <Region name="Ivysaur-front-idle" x="131" y="38" width="48" height="48"/>
+        <Region name="Ivysaur-front-attack" x="188" y="38" width="48" height="48"/>
+        <Region name="Venusaur-front-idle" x="237" y="30" width="56" height="56"/>
+        <Region name="Venusaur-front-attack" x="294" y="30" width="56" height="56"/>
         <Region name="Charmander-front-idle" x="359" y="46" width="40" height="40"/>
         <Region name="Charmander-front-attack" x="416" y="46" width="40" height="40"/>
         <Region name="Charmeleon-front-idle" x="473" y="38" width="48" height="48"/>
@@ -24,7 +24,7 @@
         <Region name="Caterpie-front-attack" x="1099" y="46" width="40" height="40"/>
         <Region name="Metapod-front-idle" x="1156" y="46" width="40" height="40"/>
         <Region name="Metapod-front-attack" x="1213" y="46" width="40" height="40"/>
-        <Region name="Butterfree-front-idle" x="" y="" width="" height=""/>
+        <Region name="Butterfree-front-idle" x=" " y=" " width=" " height=" "/>
         <Region name="Butterfree-front-attack" x="" y="" width="" height=""/>
         <Region name="Weedle-front-idle" x="" y="" width="" height=""/>
         <Region name="Weedle-front-attack" x="" y="" width="" height=""/>
