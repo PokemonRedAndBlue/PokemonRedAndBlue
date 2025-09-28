@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+    <Texture>images/Game Boy _ GBC - Pokemon Red _ Blue - Backgrounds (Routes) - Route 01</Texture>
+    <Regions>
+    <Region id="1" name="grass-route1" x="40" y="23" width="16" height="16"/>
+    <Region id="2" name="cylinder-route1" x="56" y="23" width="16" height="16"/>
+    <Region id="3" name="tree-route1" x="56" y="119" width="16" height="16"/>
+    <Region id="4" name="path-route1" x="168" y="23" width="16" height="16"/>
+    <Region id="5" name="wild-grass-route1" x="168" y="583" width="16" height="16"/>
+
+    </Regions>
+</TextureAtlas>
