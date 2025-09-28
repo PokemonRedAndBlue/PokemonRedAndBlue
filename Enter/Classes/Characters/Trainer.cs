@@ -1,3 +1,5 @@
+using System;
+using System.ComponentModel;
 using Microsoft.Xna.Framework;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 
@@ -6,56 +8,75 @@ namespace Enter.Classes.Characters;
 public class Trainer
 {
 
-    public Vector2 Position { get; set; }
-    private readonly float _visionRange = 3f;
-    private const float InteractionRange = 1.5f;
+    // Might use a scale for tile lengths later
+    private const float SpeedPxPerSec = 80f;
     private const float FrameDuration = 0.12f;
+    private const float InteractionRange = 1f;
+    private readonly float _visionRange = 4f;
+    public enum Facing { Down, Up, Left, Right }
+    private Facing _face = Facing.Down; // Facing direction
+    public Vector2 Position { get; set; }
+    private readonly bool _moving = false;  // Whether the trainer will hang around
+    private bool _visible = false;  // Whether the trainer sees a player now
 
-    public Trainer(Vector2 Pos)
+    public Trainer(Vector2 Pos, Facing face) : this(Pos, face, false, 4f) { }
+    public Trainer(Vector2 Pos, Facing face, bool moving) : this(Pos, face, moving, 4f) { }
+    public Trainer(Vector2 Pos, Facing face, float visionRange) : this(Pos, face, false, visionRange) { }
+    public Trainer(Vector2 Pos, Facing face, bool moving, float visionRange)
     {
         Position = Pos;
+        _face = face;
+        _moving = moving;
+        _visionRange = visionRange;
     }
 
-    public Trainer(Vector2 Pos, float visionRange)
+    public void Update(GameTime gametime, Player player)    // TODO: Sprites
     {
-        Position = Pos;
-        _visionRange = visionRange;
+        if (!_visible && IsVisible(player)) _visible = true;    // decrease number of condition checks
+        if (_visible)
+        {
+            player.Stop();
+            GoToPlayer(player, gametime);
+        }
+        else Idle(gametime);
     }
 
     private bool IsVisible(Player player)
     {
-        // Might add vision blocking mechanisms later
-        return Vector2.Distance(Position, player.Position) <= _visionRange;
-    }
-
-    private void GoToPlayer(Player player)
-    {
+        // Add vision blocking & position overlay mechanisms later
         Vector2 diff = player.Position - Position;
-        while (Vector2.Distance(Position, player.Position) > InteractionRange)
+        bool xAligned = 0 == diff.X,
+             yAligned = 0 == diff.Y,
+             inVision = Math.Abs(Vector2.Distance(player.Position, Position)) < _visionRange;
+        return _face switch
         {
-            // made into one if statement for frequent position check
-            if (diff.X > 0) ; // TODO: MoveRight()
-            else if (diff.X < 0) ; // TODO: MoveLeft()
-
-            else if (diff.Y > 0) ; // TODO: MoveUp()
-            else ; // TODO: MoveDown()
-
-            // Wait, if time is not specified for commands
-        }
+            Facing.Up => xAligned && inVision && diff.Y < 0,
+            Facing.Down => xAligned && inVision && diff.Y > 0,
+            Facing.Left => yAligned && inVision && diff.X < 0,
+            Facing.Right => yAligned && inVision && diff.X > 0,
+            _ => throw new NotImplementedException(),
+        };
     }
 
-    private void Idle() { }
-
-    public void StopPlayer(Player player)
+    private void GoToPlayer(Player player, GameTime gametime)
     {
-        if (IsVisible(player))
+        if (Vector2.DistanceSquared(player.Position, Position) <= InteractionRange)
         {
-            player.Stop();
-            GoToPlayer(player);
+            _visible = false;
+            // * Trigger Battle Scene *
+            return; // Stop moving if in close range
         }
-        else Idle();
+        Vector2 norm = Vector2.Normalize(player.Position - Position);   // X or Y already aligned
+        float dt = (float)gametime.ElapsedGameTime.TotalSeconds;
+        Position += norm * SpeedPxPerSec * dt;
+    }
 
-        // Trigger battle scene (Sprint 3)
+    private void Idle(GameTime gametime)
+    {
+        if (_moving)
+        {
+            // TODO: random moving
+        }
     }
 
 }
