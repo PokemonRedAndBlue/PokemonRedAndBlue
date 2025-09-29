@@ -2,12 +2,308 @@
 <TextureAtlas>
     <Texture>images/Pokemon_FRONT</Texture>
     <Regions>
-        <Region name="bulbasaur-front-idle" x="17" y="46" width="40" height="40"/>
-        <Region name="bulbasaur-front-attack" x="74" y="46" width="40" height="40"/>
-        <Region name="ivysaur-front-idle" x="131" y="38" width="48" height="48"/>
-        <Region name="ivysaur-front-attack" x="188" y="38" width="48" height="48"/>
-        <Region name="venusaur-front-idle" x="237" y="30" width="56" height="56"/>
-        <Region name="venusaur-front-attack" x="294" y="30" width="56" height="56"/>
+        <Region name="Bulbasaur-front-idle" x="17" y="46" width="40" height="40"/>
+        <Region name="Bulbasaur-front-attack" x="74" y="46" width="40" height="40"/>
+        <Region name="Ivysaur-front-idle" x="131" y="38" width="48" height="48"/>
+        <Region name="Ivysaur-front-attack" x="188" y="38" width="48" height="48"/>
+        <Region name="Venusaur-front-idle" x="237" y="30" width="56" height="56"/>
+        <Region name="Venusaur-front-attack" x="294" y="30" width="56" height="56"/>
+        <Region name="Charmander-front-idle" x="359" y="46" width="40" height="40"/>
+        <Region name="Charmander-front-attack" x="416" y="46" width="40" height="40"/>
+        <Region name="Charmeleon-front-idle" x="473" y="38" width="48" height="48"/>
+        <Region name="Charmeleon-front-attack" x="529" y="38" width="48" height="48"/>
+        <Region name="Charizard-front-idle" x="579" y="30" width="56" height="56"/>
+        <Region name="Charizard-front-attack" x="636" y="30" width="56" height="56"/>
+        <Region name="Squirtle-front-idle" x="700" y="46" width="40" height="40"/>
+        <Region name="Squirtle-front-attack" x="757" y="46" width="40" height="40"/>
+        <Region name="Wartortle-front-idle" x="814" y="38" width="48" height="48"/>
+        <Region name="Wartortle-front-attack" x="871" y="38" width="48" height="48"/>
+        <Region name="Blastoise-front-idle" x="920" y="30" width="56" height="56"/>
+        <Region name="Blastoise-front-attack" x="977" y="30" width="56" height="56"/>
+        <Region name="Caterpie-front-idle" x="1042" y="46" width="40" height="40"/>
+        <Region name="Caterpie-front-attack" x="1099" y="46" width="40" height="40"/>
+        <Region name="Metapod-front-idle" x="1156" y="46" width="40" height="40"/>
+        <Region name="Metapod-front-attack" x="1213" y="46" width="40" height="40"/>
+        <Region name="Butterfree-front-idle" x="1262" y="30 " width="56" height="56"/>
+        <Region name="Butterfree-front-attack" x="1319" y="30" width="56" height="56"/>
+        <Region name="Weedle-front-idle" x="1384" y="46" width="40" height="40"/>
+        <Region name="Weedle-front-attack" x="1442" y="46" width="40" height="40"/>
+        <Region name="Kakuna-front-idle" x="1499" y="46" width="40" height="40"/>
+        <Region name="Kakuna-front-attack" x="1555" y="46" width="40" height="40"/>
+        <Region name="Beedrill-front-idle" x="1605" y="30" width="56" height="56"/>
+        <Region name="Beedrill-front-attack" x="1661" y="30" width="56" height="56"/>
+        <Region name="Pidgey-front-idle" x="17" y="124" width="40" height="40"/>
+        <Region name="Pidgey-front-attack" x="74" y="124" width="40" height="40"/>
+        <Region name="Pidgeotto-front-idle" x="131" y="116" width="48" height="48"/>
+        <Region name="Pidgeotto-front-attack" x="188" y="116" width="48" height="48"/>
+        <Region name="Pidgeot-front-idle" x="237" y="108" width="56" height="56"/>
+        <Region name="Pidgeot-front-attack" x="294" y="108" width="56" height="56"/>
+        <Region name="Rattata-front-idle" x="359" y="124" width="40" height="40"/>
+        <Region name="Rattata-front-attack" x="416" y="124" width="40" height="40"/>
+        <Region name="Raticate-front-idle" x="473" y="116" width="48" height="48"/>
+        <Region name="Raticate-front-attack" x="529" y="116" width="48" height="48"/>
+        <Region name="Spearow-front-idle" x="587" y="124" width="40" height="40"/>
+        <Region name="Spearow-front-attack" x="644" y="124" width="40" height="40"/>
+        <Region name="Fearow-front-idle" x="693" y="108" width="56" height="56"/>
+        <Region name="Fearow-front-attack" x="750" y="108" width="56" height="56"/>
+        <Region name="Ekans-front-idle" x="814" y="124" width="40" height="40"/>
+        <Region name="Ekans-front-attack" x="871" y="124" width="40" height="40"/>
+        <Region name="Arbok-front-idle" x="920" y="108" width="56" height="56"/>
+        <Region name="Arbok-front-attack" x="977" y="108" width="56" height="56"/>
+        <Region name="Pikachu-front-idle" x="1042" y="124" width="40" height="40"/>
+        <Region name="Pikachu-front-attack" x="1099" y="124" width="40" height="40"/>
+        <Region name="Raichu-front-idle" x="1149" y="108" width="56" height="56"/>
+        <Region name="Raichu-front-attack" x="1206" y="108" width="56" height="56"/>
+        <Region name="Sandshrew-front-idle" x="1271" y="124" width="40" height="40"/>
+        <Region name="Sandshrew-front-attack" x="1328" y="124" width="40" height="40"/>
+        <Region name="Sandslash-front-idle" x="1385" y="116" width="48" height="48"/>
+        <Region name="Sandslash-front-attack" x="1442" y="116" width="48" height="48"/>
+        <Region name="Nidoran♀-front-idle" x="1499" y="124" width="40" height="40"/>
+        <Region name="Nidoran♀-front-attack" x="1555" y="124" width="40" height="40"/>
+        <Region name="Nidorina-front-idle" x="1612" y="116" width="48" height="48"/>
+        <Region name="Nidorina-front-attack" x="1670" y="116" width="48" height="48"/>
+        <Region name="Nidoqueen-front-idle" x="9" y="186" width="56" height="56"/>
+        <Region name="Nidoqueen-front-attack" x="66" y="186" width="56" height="56"/>
+        <Region name="Nidoran♂-front-idle" x="131" y="202" width="40" height="40"/>
+        <Region name="Nidoran♂-front-attack" x="188" y="202" width="40" height="40"/>
+        <Region name="Nidorino-front-idle" x="245" y="194" width="48" height="48"/>
+        <Region name="Nidorino-front-attack" x="302" y="194" width="48" height="48"/>
+        <Region name="Nidoking-front-idle" x="351" y="186" width="56" height="56"/>
+        <Region name="Nidoking-front-attack" x="408" y="186" width="56" height="56"/>
+        <Region name="Clefairy-front-idle" x="473" y="202" width="40" height="40"/>
+        <Region name="Clefairy-front-attack" x="530" y="202" width="40" height="40"/>
+        <Region name="Clefable-front-idle" x="587" y="194" width="48" height="48"/>
+        <Region name="Clefable-front-attack" x="644" y="194" width="48" height="48"/>
+        <Region name="Vulpix-front-idle" x="701" y="194" width="48" height="48"/>
+        <Region name="Vulpix-front-attack" x="758" y="194" width="48" height="48"/>
+        <Region name="Ninetales-front-idle" x="807" y="186" width="56" height="56"/>
+        <Region name="Ninetales-front-attack" x="864" y="186" width="56" height="56"/>
+        <Region name="Jigglypuff-front-idle" x="929" y="202" width="40" height="40"/>
+        <Region name="Jigglypuff-front-attack" x="986" y="202" width="40" height="40"/>
+        <Region name="Wigglytuff-front-idle" x="1042" y="194" width="48" height="48"/>
+        <Region name="Wigglytuff-front-attack" x="1099" y="194" width="48" height="48"/>
+        <Region name="Zubat-front-idle" x="1157" y="202" width="40" height="40"/>
+        <Region name="Zubat-front-attack" x="1214" y="202" width="40" height="40"/>
+        <Region name="Golbat-front-idle" x="1263" y="186" width="56" height="56"/>
+        <Region name="Golbat-front-attack" x="1320" y="186" width="56" height="56"/>
+        <Region name="Oddish-front-idle" x="1385" y="202" width="40" height="40"/>
+        <Region name="Oddish-front-attack" x="1442" y="202" width="40" height="40"/>
+        <Region name="Gloom-front-idle" x="1499" y="194" width="48" height="48"/>
+        <Region name="Gloom-front-attack" x="1555" y="194" width="48" height="48"/>
+        <Region name="Vileplume-front-idle" x="1605" y="186" width="56" height="56"/>
+        <Region name="Vileplume-front-attack" x="1662" y="186" width="56" height="56"/>
+        <Region name="Paras-front-idle" x="" y="280" width="40" height="40"/>
+        <Region name="Paras-front-attack" x="" y="280" width="40" height="40"/>
+        <Region name="Parasect-front-idle" x="" y="264" width="56" height="56"/>
+        <Region name="Parasect-front-attack" x="" y="264" width="56" height="56"/>
+        <Region name="Venonat-front-idle" x="" y="280" width="40" height="40"/>
+        <Region name="Venonat-front-attack" x="" y="280" width="40" height="40"/>
+        <Region name="Venomoth-front-idle" x="" y="264" width="56" height="56"/>
+        <Region name="Venomoth-front-attack" x="" y="264" width="56" height="56"/>
+        <Region name="Diglett-front-idle" x="" y="280" width="40" height="40"/>
+        <Region name="Diglett-front-attack" x="" y="280" width="40" height="40"/>
+        <Region name="Dugtrio-front-idle" x="" y="273" width="48" height="48"/>
+        <Region name="Dugtrio-front-attack" x="" y="273" width="48" height="48"/>
+        <Region name="Meowth-front-idle" x="" y="280" width="40" height="40"/>
+        <Region name="Meowth-front-attack" x="" y="280" width="40" height="40"/>
+        <Region name="Persian-front-idle" x="" y="264" width="56" height="56"/>
+        <Region name="Persian-front-attack" x="" y="264" width="56" height="56"/>
+        <Region name="Psyduck-front-idle" x="" y="280" width="40" height="40"/>
+        <Region name="Psyduck-front-attack" x="" y="280" width="40" height="40"/>
+        <Region name="Golduck-front-idle" x="" y="264" width="56" height="56"/>
+        <Region name="Golduck-front-attack" x="" y="264" width="56" height="56"/>
+        <Region name="Mankey-front-idle" x="" y="280" width="40" height="40"/>
+        <Region name="Mankey-front-attack" x="" y="280" width="40" height="40"/>
+        <Region name="Primeape-front-idle" x="" y="264" width="56" height="56"/>
+        <Region name="Primeape-front-attack" x="" y="264" width="56" height="56"/>
+        <Region name="Growlithe-front-idle" x="" y="280" width="40" height="40"/>
+        <Region name="Growlithe-front-attack" x="" y="280" width="40" height="40"/>
+        <Region name="Arcanine-front-idle" x="" y="264" width="56" height="56"/>
+        <Region name="Arcanine-front-attack" x="" y="264" width="56" height="56"/>
+        <Region name="Poliwag-front-idle" x="" y="280" width="40" height="40"/>
+        <Region name="Poliwag-front-attack" x="" y="280" width="40" height="40"/>
+        <Region name="Poliwhirl-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Poliwhirl-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Poliwrath-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Poliwrath-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Abra-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Abra-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Kadabra-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Kadabra-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Alakazam-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Alakazam-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Machop-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Machop-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Machoke-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Machoke-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Machamp-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Machamp-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Bellsprout-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Bellsprout-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Weepinbell-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Weepinbell-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Victreebel-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Victreebel-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Tentacool-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Tentacool-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Tentacruel-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Tentacruel-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Geodude-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Geodude-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Graveler-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Graveler-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Golem-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Golem-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Ponyta-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Ponyta-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Rapidash-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Rapidash-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Slowpoke-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Slowpoke-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Slowbro-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Slowbro-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Magnemite-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Magnemite-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Magneton-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Magneton-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Farfetch'd-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Farfetch'd-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Doduo-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Doduo-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Dodrio-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Dodrio-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Seel-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Seel-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Dewgong-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Dewgong-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Grimer-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Grimer-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Muk-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Muk-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Shellder-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Shellder-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Cloyster-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Cloyster-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Gastly-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Gastly-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Haunter-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Haunter-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Gengar-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Gengar-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Onix-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Onix-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Drowzee-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Drowzee-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Hypno-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Hypno-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Krabby-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Krabby-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Kingler-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Kingler-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Voltorb-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Voltorb-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Electrode-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Electrode-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Exeggcute-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Exeggcute-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Exeggutor-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Exeggutor-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Cubone-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Cubone-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Marowak-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Marowak-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Hitmonlee-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Hitmonlee-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Hitmonchan-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Hitmonchan-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Lickitung-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Lickitung-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Koffing-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Koffing-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Weezing-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Weezing-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Rhyhorn-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Rhyhorn-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Rhydon-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Rhydon-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Chansey-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Chansey-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Tangela-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Tangela-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Kangaskhan-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Kangaskhan-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Horsea-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Horsea-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Seadra-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Seadra-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Goldeen-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Goldeen-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Seaking-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Seaking-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Staryu-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Staryu-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Starmie-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Starmie-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Mr. Mime-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Mr. Mime-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Scyther-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Scyther-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Jynx-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Jynx-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Electabuzz-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Electabuzz-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Magmar-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Magmar-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Pinsir-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Pinsir-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Tauros-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Tauros-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Magikarp-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Magikarp-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Gyarados-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Gyarados-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Lapras-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Lapras-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Ditto-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Ditto-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Eevee-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Eevee-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Vaporeon-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Vaporeon-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Jolteon-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Jolteon-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Flareon-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Flareon-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Porygon-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Porygon-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Omanyte-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Omanyte-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Omastar-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Omastar-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Kabuto-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Kabuto-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Kabutops-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Kabutops-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Aerodactyl-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Aerodactyl-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Snorlax-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Snorlax-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Articuno-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Articuno-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Zapdos-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Zapdos-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Moltres-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Moltres-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Dratini-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Dratini-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Dragonair-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Dragonair-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Dragonite-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Dragonite-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Mewtwo-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Mewtwo-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Mew-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Mew-front-attack" x="" y="" width="40" height="40"/>
     </Regions>
     <Animations>
         <Animation name="bulbasaur-front" frameCount="3" frameDuration="2" scale="4">
@@ -24,6 +320,746 @@
             <Frame region="venusaur-front-idle" />
             <Frame region="venusaur-front-attack" />
             <Frame region="venusaur-front-idle" />
+        </Animation>
+        <Animation name="charmander-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="charmander-front-idle" />
+            <Frame region="charmander-front-attack" />
+            <Frame region="charmander-front-idle" />
+        </Animation>
+        <Animation name="charmeleon-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="charmeleon-front-idle" />
+            <Frame region="charmeleon-front-attack" />
+            <Frame region="charmeleon-front-idle" />
+        </Animation>
+        <Animation name="charizard-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="charizard-front-idle" />
+            <Frame region="charizard-front-attack" />
+            <Frame region="charizard-front-idle" />
+        </Animation>
+        <Animation name="squirtle-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="squirtle-front-idle" />
+            <Frame region="squirtle-front-attack" />
+            <Frame region="squirtle-front-idle" />
+        </Animation>
+        <Animation name="wartortle-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="wartortle-front-idle" />
+            <Frame region="wartortle-front-attack" />
+            <Frame region="wartortle-front-idle" />
+        </Animation>
+        <Animation name="blastoise-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="blastoise-front-idle" />
+            <Frame region="blastoise-front-attack" />
+            <Frame region="blastoise-front-idle" />
+        </Animation>
+        <Animation name="caterpie-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="caterpie-front-idle" />
+            <Frame region="caterpie-front-attack" />
+            <Frame region="caterpie-front-idle" />
+        </Animation>
+        <Animation name="metapod-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="metapod-front-idle" />
+            <Frame region="metapod-front-attack" />
+            <Frame region="metapod-front-idle" />
+        </Animation>
+        <Animation name="butterfree-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="butterfree-front-idle" />
+            <Frame region="butterfree-front-attack" />
+            <Frame region="butterfree-front-idle" />
+        </Animation>
+        <Animation name="weedle-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="weedle-front-idle" />
+            <Frame region="weedle-front-attack" />
+            <Frame region="weedle-front-idle" />
+        </Animation>
+        <Animation name="kakuna-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="kakuna-front-idle" />
+            <Frame region="kakuna-front-attack" />
+            <Frame region="kakuna-front-idle" />
+        </Animation>
+        <Animation name="beedrill-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="beedrill-front-idle" />
+            <Frame region="beedrill-front-attack" />
+            <Frame region="beedrill-front-idle" />
+        </Animation>
+        <Animation name="pidgey-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="pidgey-front-idle" />
+            <Frame region="pidgey-front-attack" />
+            <Frame region="pidgey-front-idle" />
+        </Animation>
+        <Animation name="pidgeotto-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="pidgeotto-front-idle" />
+            <Frame region="pidgeotto-front-attack" />
+            <Frame region="pidgeotto-front-idle" />
+        </Animation>
+        <Animation name="pidgeot-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="pidgeot-front-idle" />
+            <Frame region="pidgeot-front-attack" />
+            <Frame region="pidgeot-front-idle" />
+        </Animation>
+        <Animation name="rattata-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="rattata-front-idle" />
+            <Frame region="rattata-front-attack" />
+            <Frame region="rattata-front-idle" />
+        </Animation>
+        <Animation name="raticate-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="raticate-front-idle" />
+            <Frame region="raticate-front-attack" />
+            <Frame region="raticate-front-idle" />
+        </Animation>
+        <Animation name="spearow-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="spearow-front-idle" />
+            <Frame region="spearow-front-attack" />
+            <Frame region="spearow-front-idle" />
+        </Animation>
+        <Animation name="fearow-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="fearow-front-idle" />
+            <Frame region="fearow-front-attack" />
+            <Frame region="fearow-front-idle" />
+        </Animation>
+        <Animation name="ekans-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="ekans-front-idle" />
+            <Frame region="ekans-front-attack" />
+            <Frame region="ekans-front-idle" />
+        </Animation>
+        <Animation name="arbok-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="arbok-front-idle" />
+            <Frame region="arbok-front-attack" />
+            <Frame region="arbok-front-idle" />
+        </Animation>
+        <Animation name="pikachu-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="pikachu-front-idle" />
+            <Frame region="pikachu-front-attack" />
+            <Frame region="pikachu-front-idle" />
+        </Animation>
+        <Animation name="raichu-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="raichu-front-idle" />
+            <Frame region="raichu-front-attack" />
+            <Frame region="raichu-front-idle" />
+        </Animation>
+        <Animation name="sandshrew-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="sandshrew-front-idle" />
+            <Frame region="sandshrew-front-attack" />
+            <Frame region="sandshrew-front-idle" />
+        </Animation>
+        <Animation name="sandslash-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="sandslash-front-idle" />
+            <Frame region="sandslash-front-attack" />
+            <Frame region="sandslash-front-idle" />
+        </Animation>
+        <Animation name="nidoran♀-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="nidoran♀-front-idle" />
+            <Frame region="nidoran♀-front-attack" />
+            <Frame region="nidoran♀-front-idle" />
+        </Animation>
+        <Animation name="nidorina-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="nidorina-front-idle" />
+            <Frame region="nidorina-front-attack" />
+            <Frame region="nidorina-front-idle" />
+        </Animation>
+        <Animation name="nidoqueen-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="nidoqueen-front-idle" />
+            <Frame region="nidoqueen-front-attack" />
+            <Frame region="nidoqueen-front-idle" />
+        </Animation>
+        <Animation name="nidoran♂-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="nidoran♂-front-idle" />
+            <Frame region="nidoran♂-front-attack" />
+            <Frame region="nidoran♂-front-idle" />
+        </Animation>
+        <Animation name="nidorino-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="nidorino-front-idle" />
+            <Frame region="nidorino-front-attack" />
+            <Frame region="nidorino-front-idle" />
+        </Animation>
+        <Animation name="nidoking-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="nidoking-front-idle" />
+            <Frame region="nidoking-front-attack" />
+            <Frame region="nidoking-front-idle" />
+        </Animation>
+        <Animation name="clefairy-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="clefairy-front-idle" />
+            <Frame region="clefairy-front-attack" />
+            <Frame region="clefairy-front-idle" />
+        </Animation>
+        <Animation name="clefable-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="clefable-front-idle" />
+            <Frame region="clefable-front-attack" />
+            <Frame region="clefable-front-idle" />
+        </Animation>
+        <Animation name="vulpix-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="vulpix-front-idle" />
+            <Frame region="vulpix-front-attack" />
+            <Frame region="vulpix-front-idle" />
+        </Animation>
+        <Animation name="ninetales-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="ninetales-front-idle" />
+            <Frame region="ninetales-front-attack" />
+            <Frame region="ninetales-front-idle" />
+        </Animation>
+        <Animation name="jigglypuff-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="jigglypuff-front-idle" />
+            <Frame region="jigglypuff-front-attack" />
+            <Frame region="jigglypuff-front-idle" />
+        </Animation>
+        <Animation name="wigglytuff-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="wigglytuff-front-idle" />
+            <Frame region="wigglytuff-front-attack" />
+            <Frame region="wigglytuff-front-idle" />
+        </Animation>
+        <Animation name="zubat-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="zubat-front-idle" />
+            <Frame region="zubat-front-attack" />
+            <Frame region="zubat-front-idle" />
+        </Animation>
+        <Animation name="golbat-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="golbat-front-idle" />
+            <Frame region="golbat-front-attack" />
+            <Frame region="golbat-front-idle" />
+        </Animation>
+        <Animation name="oddish-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="oddish-front-idle" />
+            <Frame region="oddish-front-attack" />
+            <Frame region="oddish-front-idle" />
+        </Animation>
+        <Animation name="gloom-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="gloom-front-idle" />
+            <Frame region="gloom-front-attack" />
+            <Frame region="gloom-front-idle" />
+        </Animation>
+        <Animation name="vileplume-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="vileplume-front-idle" />
+            <Frame region="vileplume-front-attack" />
+            <Frame region="vileplume-front-idle" />
+        </Animation>
+        <Animation name="paras-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="paras-front-idle" />
+            <Frame region="paras-front-attack" />
+            <Frame region="paras-front-idle" />
+        </Animation>
+        <Animation name="parasect-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="parasect-front-idle" />
+            <Frame region="parasect-front-attack" />
+            <Frame region="parasect-front-idle" />
+        </Animation>
+        <Animation name="venonat-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="venonat-front-idle" />
+            <Frame region="venonat-front-attack" />
+            <Frame region="venonat-front-idle" />
+        </Animation>
+        <Animation name="venomoth-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="venomoth-front-idle" />
+            <Frame region="venomoth-front-attack" />
+            <Frame region="venomoth-front-idle" />
+        </Animation>
+        <Animation name="diglett-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="diglett-front-idle" />
+            <Frame region="diglett-front-attack" />
+            <Frame region="diglett-front-idle" />
+        </Animation>
+        <Animation name="dugtrio-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="dugtrio-front-idle" />
+            <Frame region="dugtrio-front-attack" />
+            <Frame region="dugtrio-front-idle" />
+        </Animation>
+        <Animation name="meowth-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="meowth-front-idle" />
+            <Frame region="meowth-front-attack" />
+            <Frame region="meowth-front-idle" />
+        </Animation>
+        <Animation name="persian-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="persian-front-idle" />
+            <Frame region="persian-front-attack" />
+            <Frame region="persian-front-idle" />
+        </Animation>
+        <Animation name="psyduck-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="psyduck-front-idle" />
+            <Frame region="psyduck-front-attack" />
+            <Frame region="psyduck-front-idle" />
+        </Animation>
+        <Animation name="golduck-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="golduck-front-idle" />
+            <Frame region="golduck-front-attack" />
+            <Frame region="golduck-front-idle" />
+        </Animation>
+        <Animation name="mankey-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="mankey-front-idle" />
+            <Frame region="mankey-front-attack" />
+            <Frame region="mankey-front-idle" />
+        </Animation>
+        <Animation name="primeape-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="primeape-front-idle" />
+            <Frame region="primeape-front-attack" />
+            <Frame region="primeape-front-idle" />
+        </Animation>
+        <Animation name="growlithe-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="growlithe-front-idle" />
+            <Frame region="growlithe-front-attack" />
+            <Frame region="growlithe-front-idle" />
+        </Animation>
+        <Animation name="arcanine-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="arcanine-front-idle" />
+            <Frame region="arcanine-front-attack" />
+            <Frame region="arcanine-front-idle" />
+        </Animation>
+        <Animation name="poliwag-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="poliwag-front-idle" />
+            <Frame region="poliwag-front-attack" />
+            <Frame region="poliwag-front-idle" />
+        </Animation>
+        <Animation name="poliwhirl-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="poliwhirl-front-idle" />
+            <Frame region="poliwhirl-front-attack" />
+            <Frame region="poliwhirl-front-idle" />
+        </Animation>
+        <Animation name="poliwrath-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="poliwrath-front-idle" />
+            <Frame region="poliwrath-front-attack" />
+            <Frame region="poliwrath-front-idle" />
+        </Animation>
+        <Animation name="abra-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="abra-front-idle" />
+            <Frame region="abra-front-attack" />
+            <Frame region="abra-front-idle" />
+        </Animation>
+        <Animation name="kadabra-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="kadabra-front-idle" />
+            <Frame region="kadabra-front-attack" />
+            <Frame region="kadabra-front-idle" />
+        </Animation>
+        <Animation name="alakazam-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="alakazam-front-idle" />
+            <Frame region="alakazam-front-attack" />
+            <Frame region="alakazam-front-idle" />
+        </Animation>
+        <Animation name="machop-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="machop-front-idle" />
+            <Frame region="machop-front-attack" />
+            <Frame region="machop-front-idle" />
+        </Animation>
+        <Animation name="machoke-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="machoke-front-idle" />
+            <Frame region="machoke-front-attack" />
+            <Frame region="machoke-front-idle" />
+        </Animation>
+        <Animation name="machamp-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="machamp-front-idle" />
+            <Frame region="machamp-front-attack" />
+            <Frame region="machamp-front-idle" />
+        </Animation>
+        <Animation name="bellsprout-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="bellsprout-front-idle" />
+            <Frame region="bellsprout-front-attack" />
+            <Frame region="bellsprout-front-idle" />
+        </Animation>
+        <Animation name="weepinbell-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="weepinbell-front-idle" />
+            <Frame region="weepinbell-front-attack" />
+            <Frame region="weepinbell-front-idle" />
+        </Animation>
+        <Animation name="victreebel-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="victreebel-front-idle" />
+            <Frame region="victreebel-front-attack" />
+            <Frame region="victreebel-front-idle" />
+        </Animation>
+        <Animation name="tentacool-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="tentacool-front-idle" />
+            <Frame region="tentacool-front-attack" />
+            <Frame region="tentacool-front-idle" />
+        </Animation>
+        <Animation name="tentacruel-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="tentacruel-front-idle" />
+            <Frame region="tentacruel-front-attack" />
+            <Frame region="tentacruel-front-idle" />
+        </Animation>
+        <Animation name="geodude-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="geodude-front-idle" />
+            <Frame region="geodude-front-attack" />
+            <Frame region="geodude-front-idle" />
+        </Animation>
+        <Animation name="graveler-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="graveler-front-idle" />
+            <Frame region="graveler-front-attack" />
+            <Frame region="graveler-front-idle" />
+        </Animation>
+        <Animation name="golem-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="golem-front-idle" />
+            <Frame region="golem-front-attack" />
+            <Frame region="golem-front-idle" />
+        </Animation>
+        <Animation name="ponyta-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="ponyta-front-idle" />
+            <Frame region="ponyta-front-attack" />
+            <Frame region="ponyta-front-idle" />
+        </Animation>
+        <Animation name="rapidash-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="rapidash-front-idle" />
+            <Frame region="rapidash-front-attack" />
+            <Frame region="rapidash-front-idle" />
+        </Animation>
+        <Animation name="slowpoke-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="slowpoke-front-idle" />
+            <Frame region="slowpoke-front-attack" />
+            <Frame region="slowpoke-front-idle" />
+        </Animation>
+        <Animation name="slowbro-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="slowbro-front-idle" />
+            <Frame region="slowbro-front-attack" />
+            <Frame region="slowbro-front-idle" />
+        </Animation>
+        <Animation name="magnemite-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="magnemite-front-idle" />
+            <Frame region="magnemite-front-attack" />
+            <Frame region="magnemite-front-idle" />
+        </Animation>
+        <Animation name="magneton-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="magneton-front-idle" />
+            <Frame region="magneton-front-attack" />
+            <Frame region="magneton-front-idle" />
+        </Animation>
+        <Animation name="farfetch'd-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="farfetch'd-front-idle" />
+            <Frame region="farfetch'd-front-attack" />
+            <Frame region="farfetch'd-front-idle" />
+        </Animation>
+        <Animation name="doduo-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="doduo-front-idle" />
+            <Frame region="doduo-front-attack" />
+            <Frame region="doduo-front-idle" />
+        </Animation>
+        <Animation name="dodrio-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="dodrio-front-idle" />
+            <Frame region="dodrio-front-attack" />
+            <Frame region="dodrio-front-idle" />
+        </Animation>
+        <Animation name="seel-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="seel-front-idle" />
+            <Frame region="seel-front-attack" />
+            <Frame region="seel-front-idle" />
+        </Animation>
+        <Animation name="dewgong-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="dewgong-front-idle" />
+            <Frame region="dewgong-front-attack" />
+            <Frame region="dewgong-front-idle" />
+        </Animation>
+        <Animation name="grimer-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="grimer-front-idle" />
+            <Frame region="grimer-front-attack" />
+            <Frame region="grimer-front-idle" />
+        </Animation>
+        <Animation name="muk-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="muk-front-idle" />
+            <Frame region="muk-front-attack" />
+            <Frame region="muk-front-idle" />
+        </Animation>
+        <Animation name="shellder-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="shellder-front-idle" />
+            <Frame region="shellder-front-attack" />
+            <Frame region="shellder-front-idle" />
+        </Animation>
+        <Animation name="cloyster-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="cloyster-front-idle" />
+            <Frame region="cloyster-front-attack" />
+            <Frame region="cloyster-front-idle" />
+        </Animation>
+        <Animation name="gastly-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="gastly-front-idle" />
+            <Frame region="gastly-front-attack" />
+            <Frame region="gastly-front-idle" />
+        </Animation>
+        <Animation name="haunter-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="haunter-front-idle" />
+            <Frame region="haunter-front-attack" />
+            <Frame region="haunter-front-idle" />
+        </Animation>
+        <Animation name="gengar-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="gengar-front-idle" />
+            <Frame region="gengar-front-attack" />
+            <Frame region="gengar-front-idle" />
+        </Animation>
+        <Animation name="onix-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="onix-front-idle" />
+            <Frame region="onix-front-attack" />
+            <Frame region="onix-front-idle" />
+        </Animation>
+        <Animation name="drowzee-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="drowzee-front-idle" />
+            <Frame region="drowzee-front-attack" />
+            <Frame region="drowzee-front-idle" />
+        </Animation>
+        <Animation name="hypno-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="hypno-front-idle" />
+            <Frame region="hypno-front-attack" />
+            <Frame region="hypno-front-idle" />
+        </Animation>
+        <Animation name="krabby-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="krabby-front-idle" />
+            <Frame region="krabby-front-attack" />
+            <Frame region="krabby-front-idle" />
+        </Animation>
+        <Animation name="kingler-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="kingler-front-idle" />
+            <Frame region="kingler-front-attack" />
+            <Frame region="kingler-front-idle" />
+        </Animation>
+        <Animation name="voltorb-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="voltorb-front-idle" />
+            <Frame region="voltorb-front-attack" />
+            <Frame region="voltorb-front-idle" />
+        </Animation>
+        <Animation name="electrode-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="electrode-front-idle" />
+            <Frame region="electrode-front-attack" />
+            <Frame region="electrode-front-idle" />
+        </Animation>
+        <Animation name="exeggcute-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="exeggcute-front-idle" />
+            <Frame region="exeggcute-front-attack" />
+            <Frame region="exeggcute-front-idle" />
+        </Animation>
+        <Animation name="exeggutor-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="exeggutor-front-idle" />
+            <Frame region="exeggutor-front-attack" />
+            <Frame region="exeggutor-front-idle" />
+        </Animation>
+        <Animation name="cubone-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="cubone-front-idle" />
+            <Frame region="cubone-front-attack" />
+            <Frame region="cubone-front-idle" />
+        </Animation>
+        <Animation name="marowak-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="marowak-front-idle" />
+            <Frame region="marowak-front-attack" />
+            <Frame region="marowak-front-idle" />
+        </Animation>
+        <Animation name="hitmonlee-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="hitmonlee-front-idle" />
+            <Frame region="hitmonlee-front-attack" />
+            <Frame region="hitmonlee-front-idle" />
+        </Animation>
+        <Animation name="hitmonchan-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="hitmonchan-front-idle" />
+            <Frame region="hitmonchan-front-attack" />
+            <Frame region="hitmonchan-front-idle" />
+        </Animation>
+        <Animation name="lickitung-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="lickitung-front-idle" />
+            <Frame region="lickitung-front-attack" />
+            <Frame region="lickitung-front-idle" />
+        </Animation>
+        <Animation name="koffing-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="koffing-front-idle" />
+            <Frame region="koffing-front-attack" />
+            <Frame region="koffing-front-idle" />
+        </Animation>
+        <Animation name="weezing-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="weezing-front-idle" />
+            <Frame region="weezing-front-attack" />
+            <Frame region="weezing-front-idle" />
+        </Animation>
+        <Animation name="rhyhorn-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="rhyhorn-front-idle" />
+            <Frame region="rhyhorn-front-attack" />
+            <Frame region="rhyhorn-front-idle" />
+        </Animation>
+        <Animation name="rhydon-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="rhydon-front-idle" />
+            <Frame region="rhydon-front-attack" />
+            <Frame region="rhydon-front-idle" />
+        </Animation>
+        <Animation name="chansey-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="chansey-front-idle" />
+            <Frame region="chansey-front-attack" />
+            <Frame region="chansey-front-idle" />
+        </Animation>
+        <Animation name="tangela-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="tangela-front-idle" />
+            <Frame region="tangela-front-attack" />
+            <Frame region="tangela-front-idle" />
+        </Animation>
+        <Animation name="kangaskhan-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="kangaskhan-front-idle" />
+            <Frame region="kangaskhan-front-attack" />
+            <Frame region="kangaskhan-front-idle" />
+        </Animation>
+        <Animation name="horsea-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="horsea-front-idle" />
+            <Frame region="horsea-front-attack" />
+            <Frame region="horsea-front-idle" />
+        </Animation>
+        <Animation name="seadra-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="seadra-front-idle" />
+            <Frame region="seadra-front-attack" />
+            <Frame region="seadra-front-idle" />
+        </Animation>
+        <Animation name="goldeen-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="goldeen-front-idle" />
+            <Frame region="goldeen-front-attack" />
+            <Frame region="goldeen-front-idle" />
+        </Animation>
+        <Animation name="seaking-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="seaking-front-idle" />
+            <Frame region="seaking-front-attack" />
+            <Frame region="seaking-front-idle" />
+        </Animation>
+        <Animation name="staryu-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="staryu-front-idle" />
+            <Frame region="staryu-front-attack" />
+            <Frame region="staryu-front-idle" />
+        </Animation>
+        <Animation name="starmie-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="starmie-front-idle" />
+            <Frame region="starmie-front-attack" />
+            <Frame region="starmie-front-idle" />
+        </Animation>
+        <Animation name="mr. mime-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="mr. mime-front-idle" />
+            <Frame region="mr. mime-front-attack" />
+            <Frame region="mr. mime-front-idle" />
+        </Animation>
+        <Animation name="scyther-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="scyther-front-idle" />
+            <Frame region="scyther-front-attack" />
+            <Frame region="scyther-front-idle" />
+        </Animation>
+        <Animation name="jynx-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="jynx-front-idle" />
+            <Frame region="jynx-front-attack" />
+            <Frame region="jynx-front-idle" />
+        </Animation>
+        <Animation name="electabuzz-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="electabuzz-front-idle" />
+            <Frame region="electabuzz-front-attack" />
+            <Frame region="electabuzz-front-idle" />
+        </Animation>
+        <Animation name="magmar-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="magmar-front-idle" />
+            <Frame region="magmar-front-attack" />
+            <Frame region="magmar-front-idle" />
+        </Animation>
+        <Animation name="pinsir-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="pinsir-front-idle" />
+            <Frame region="pinsir-front-attack" />
+            <Frame region="pinsir-front-idle" />
+        </Animation>
+        <Animation name="tauros-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="tauros-front-idle" />
+            <Frame region="tauros-front-attack" />
+            <Frame region="tauros-front-idle" />
+        </Animation>
+        <Animation name="magikarp-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="magikarp-front-idle" />
+            <Frame region="magikarp-front-attack" />
+            <Frame region="magikarp-front-idle" />
+        </Animation>
+        <Animation name="gyarados-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="gyarados-front-idle" />
+            <Frame region="gyarados-front-attack" />
+            <Frame region="gyarados-front-idle" />
+        </Animation>
+        <Animation name="lapras-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="lapras-front-idle" />
+            <Frame region="lapras-front-attack" />
+            <Frame region="lapras-front-idle" />
+        </Animation>
+        <Animation name="ditto-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="ditto-front-idle" />
+            <Frame region="ditto-front-attack" />
+            <Frame region="ditto-front-idle" />
+        </Animation>
+        <Animation name="eevee-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="eevee-front-idle" />
+            <Frame region="eevee-front-attack" />
+            <Frame region="eevee-front-idle" />
+        </Animation>
+        <Animation name="vaporeon-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="vaporeon-front-idle" />
+            <Frame region="vaporeon-front-attack" />
+            <Frame region="vaporeon-front-idle" />
+        </Animation>
+        <Animation name="jolteon-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="jolteon-front-idle" />
+            <Frame region="jolteon-front-attack" />
+            <Frame region="jolteon-front-idle" />
+        </Animation>
+        <Animation name="flareon-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="flareon-front-idle" />
+            <Frame region="flareon-front-attack" />
+            <Frame region="flareon-front-idle" />
+        </Animation>
+        <Animation name="porygon-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="porygon-front-idle" />
+            <Frame region="porygon-front-attack" />
+            <Frame region="porygon-front-idle" />
+        </Animation>
+        <Animation name="omanyte-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="omanyte-front-idle" />
+            <Frame region="omanyte-front-attack" />
+            <Frame region="omanyte-front-idle" />
+        </Animation>
+        <Animation name="omastar-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="omastar-front-idle" />
+            <Frame region="omastar-front-attack" />
+            <Frame region="omastar-front-idle" />
+        </Animation>
+        <Animation name="kabuto-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="kabuto-front-idle" />
+            <Frame region="kabuto-front-attack" />
+            <Frame region="kabuto-front-idle" />
+        </Animation>
+        <Animation name="kabutops-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="kabutops-front-idle" />
+            <Frame region="kabutops-front-attack" />
+            <Frame region="kabutops-front-idle" />
+        </Animation>
+        <Animation name="aerodactyl-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="aerodactyl-front-idle" />
+            <Frame region="aerodactyl-front-attack" />
+            <Frame region="aerodactyl-front-idle" />
+        </Animation>
+        <Animation name="snorlax-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="snorlax-front-idle" />
+            <Frame region="snorlax-front-attack" />
+            <Frame region="snorlax-front-idle" />
+        </Animation>
+        <Animation name="articuno-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="articuno-front-idle" />
+            <Frame region="articuno-front-attack" />
+            <Frame region="articuno-front-idle" />
+        </Animation>
+        <Animation name="zapdos-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="zapdos-front-idle" />
+            <Frame region="zapdos-front-attack" />
+            <Frame region="zapdos-front-idle" />
+        </Animation>
+        <Animation name="moltres-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="moltres-front-idle" />
+            <Frame region="moltres-front-attack" />
+            <Frame region="moltres-front-idle" />
+        </Animation>
+        <Animation name="dratini-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="dratini-front-idle" />
+            <Frame region="dratini-front-attack" />
+            <Frame region="dratini-front-idle" />
+        </Animation>
+        <Animation name="dragonair-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="dragonair-front-idle" />
+            <Frame region="dragonair-front-attack" />
+            <Frame region="dragonair-front-idle" />
+        </Animation>
+        <Animation name="dragonite-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="dragonite-front-idle" />
+            <Frame region="dragonite-front-attack" />
+            <Frame region="dragonite-front-idle" />
+        </Animation>
+        <Animation name="mewtwo-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="mewtwo-front-idle" />
+            <Frame region="mewtwo-front-attack" />
+            <Frame region="mewtwo-front-idle" />
+        </Animation>
+        <Animation name="mew-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="mew-front-idle" />
+            <Frame region="mew-front-attack" />
+            <Frame region="mew-front-idle" />
         </Animation>
     </Animations>
 </TextureAtlas>
