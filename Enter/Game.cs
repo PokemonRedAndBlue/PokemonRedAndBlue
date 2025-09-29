@@ -20,29 +20,35 @@ public class Game1 : Core
     private Sprite _bulbasaur;
     private Texture2D character;
     private Player player;
+    private Trainer trainer;
     private KeyboardController.KeyboardController controller;
 
-        private Vector2 postion = new Vector2(100, 100);
-        private PokeballthrowAnimation _pokeballthrow;
-        private PokeballCaptureAnimation _pokeballCapture;
+    private Vector2 postion = new Vector2(100, 100);
+    private PokeballthrowAnimation _pokeballthrow;
+    private PokeballCaptureAnimation _pokeballCapture;
 
-        private PokemonState.SpriteState spriteState = PokemonState.SpriteState.Idle;
+    private PokemonState.SpriteState spriteState = PokemonState.SpriteState.Idle;
 
-        private HurtAnimation hurt = new HurtAnimation();
-        private AttackAnimation attack = new AttackAnimation();
+    private HurtAnimation hurt = new HurtAnimation();
+    private AttackAnimation attack = new AttackAnimation();
 
-        private DeathAnimation death = new DeathAnimation();
+    private DeathAnimation death = new DeathAnimation();
 
-        public Game1() : base("PokemonRedAndBlue", 1280, 720, false) { }
+    public Game1() : base("PokemonRedAndBlue", 1280, 720, false) { }
 
-        protected override void LoadContent()
-        {
-            PokemonFrontFactory.Instance.LoadAllTextures(Content);
-            PokemonBackFactory.Instance.LoadAllTextures(Content);
+    protected override void LoadContent()
+    {
+        PokemonFrontFactory.Instance.LoadAllTextures(Content);
+        PokemonBackFactory.Instance.LoadAllTextures(Content);
 
         _bulbasaur = PokemonBackFactory.Instance.CreateStaticSprite("bulbasaur-back");
         character = Content.Load<Texture2D>("images/Pokemon_Characters");
         player = new Player(character, Window);
+        trainer = new Trainer(
+            character,
+            new Vector2(Window.ClientBounds.Height, Window.ClientBounds.Width) * 0.25f,
+            Trainer.Facing.Right
+        );
         controller = new KeyboardController.KeyboardController();
 
         _pokeballthrow = new PokeballthrowAnimation(640,360);
@@ -54,12 +60,12 @@ public class Game1 : Core
         base.LoadContent();
     }
 
-        protected override void Update(GameTime gameTime)
-        {
-            var keyboardState = Keyboard.GetState();
+    protected override void Update(GameTime gameTime)
+    {
+        var keyboardState = Keyboard.GetState();
 
-            if (keyboardState.IsKeyDown(Keys.Escape))
-                Exit();
+        if (keyboardState.IsKeyDown(Keys.Escape))
+            Exit();
 
         controller.Update(this);
         int ax = 0, ay = 0;
@@ -72,18 +78,18 @@ public class Game1 : Core
             default:                                  ax =  0; ay = 0; break;
         }
         _pokeballthrow.Update(gameTime);  
-        _pokeballCapture.Update(gameTime);  
-
+        _pokeballCapture.Update(gameTime);
 
         player.Update(gameTime, ax, ay);
+        trainer.Update(gameTime, player);
         base.Update(gameTime);
     }
 
-        protected override void Draw(GameTime gameTime)
-        {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+    protected override void Draw(GameTime gameTime)
+    {
+        GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
+        SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
         // all testing code goes here
         _pokeballthrow.Draw(SpriteBatch);
@@ -91,9 +97,10 @@ public class Game1 : Core
         // end testing code
 
         player.Draw(SpriteBatch, 4f);
+        trainer.Draw(SpriteBatch, 4f);
 
-            SpriteBatch.End();
+        SpriteBatch.End();
 
-            base.Draw(gameTime);
-        }
+        base.Draw(gameTime);
     }
+}

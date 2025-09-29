@@ -33,10 +33,6 @@ public class Player
     private readonly float _speedPxPerSec = 80f; // movement speed
     private readonly float _frameDuration = 0.12f;
 
-    public Player(GameWindow Window) : this(null, Window) { }
-
-    public Player(Vector2 position) : this(null, position) { }
-
     public Player(Texture2D texture2, GameWindow Window)
     {
         Position = new Vector2(Window.ClientBounds.X, Window.ClientBounds.Y) * 0.5f;
