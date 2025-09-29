@@ -43,7 +43,7 @@
         <Region name="Raticate-front-idle" x="473" y="116" width="48" height="48"/>
         <Region name="Raticate-front-attack" x="529" y="116" width="48" height="48"/>
         <Region name="Spearow-front-idle" x="587" y="124" width="40" height="40"/>
-        <Region name="Spearow-front-attack" x="664" y="124" width="40" height="40"/>
+        <Region name="Spearow-front-attack" x="644" y="124" width="40" height="40"/>
         <Region name="Fearow-front-idle" x="693" y="108" width="56" height="56"/>
         <Region name="Fearow-front-attack" x="750" y="108" width="56" height="56"/>
         <Region name="Ekans-front-idle" x="814" y="124" width="40" height="40"/>
@@ -70,28 +70,28 @@
         <Region name="Nidorino-front-attack" x="302" y="194" width="48" height="48"/>
         <Region name="Nidoking-front-idle" x="351" y="186" width="56" height="56"/>
         <Region name="Nidoking-front-attack" x="408" y="186" width="56" height="56"/>
-        <Region name="Clefairy-front-idle" x="" y="202" width="40" height="40"/>
-        <Region name="Clefairy-front-attack" x="" y="202" width="40" height="40"/>
-        <Region name="Clefable-front-idle" x="" y="194" width="48" height="48"/>
-        <Region name="Clefable-front-attack" x="" y="194" width="48" height="48"/>
-        <Region name="Vulpix-front-idle" x="" y="194" width="48" height="48"/>
-        <Region name="Vulpix-front-attack" x="" y="194" width="48" height="48"/>
-        <Region name="Ninetales-front-idle" x="" y="186" width="56" height="56"/>
-        <Region name="Ninetales-front-attack" x="" y="186" width="56" height="56"/>
-        <Region name="Jigglypuff-front-idle" x="" y="202" width="40" height="40"/>
-        <Region name="Jigglypuff-front-attack" x="" y="202" width="40" height="40"/>
-        <Region name="Wigglytuff-front-idle" x="" y="194" width="48" height="48"/>
-        <Region name="Wigglytuff-front-attack" x="" y="194" width="48" height="48"/>
-        <Region name="Zubat-front-idle" x="" y="202" width="40" height="40"/>
-        <Region name="Zubat-front-attack" x="" y="202" width="40" height="40"/>
-        <Region name="Golbat-front-idle" x="" y="186" width="56" height="56"/>
-        <Region name="Golbat-front-attack" x="" y="186" width="56" height="56"/>
-        <Region name="Oddish-front-idle" x="" y="202" width="40" height="40"/>
-        <Region name="Oddish-front-attack" x="" y="202" width="40" height="40"/>
-        <Region name="Gloom-front-idle" x="" y="194" width="48" height="48"/>
-        <Region name="Gloom-front-attack" x="" y="194" width="48" height="48"/>
-        <Region name="Vileplume-front-idle" x="" y="186" width="56" height="56"/>
-        <Region name="Vileplume-front-attack" x="" y="186" width="56" height="56"/>
+        <Region name="Clefairy-front-idle" x="473" y="202" width="40" height="40"/>
+        <Region name="Clefairy-front-attack" x="530" y="202" width="40" height="40"/>
+        <Region name="Clefable-front-idle" x="587" y="194" width="48" height="48"/>
+        <Region name="Clefable-front-attack" x="644" y="194" width="48" height="48"/>
+        <Region name="Vulpix-front-idle" x="701" y="194" width="48" height="48"/>
+        <Region name="Vulpix-front-attack" x="758" y="194" width="48" height="48"/>
+        <Region name="Ninetales-front-idle" x="807" y="186" width="56" height="56"/>
+        <Region name="Ninetales-front-attack" x="864" y="186" width="56" height="56"/>
+        <Region name="Jigglypuff-front-idle" x="929" y="202" width="40" height="40"/>
+        <Region name="Jigglypuff-front-attack" x="986" y="202" width="40" height="40"/>
+        <Region name="Wigglytuff-front-idle" x="1042" y="194" width="48" height="48"/>
+        <Region name="Wigglytuff-front-attack" x="1099" y="194" width="48" height="48"/>
+        <Region name="Zubat-front-idle" x="1157" y="202" width="40" height="40"/>
+        <Region name="Zubat-front-attack" x="1214" y="202" width="40" height="40"/>
+        <Region name="Golbat-front-idle" x="1263" y="186" width="56" height="56"/>
+        <Region name="Golbat-front-attack" x="1320" y="186" width="56" height="56"/>
+        <Region name="Oddish-front-idle" x="1385" y="202" width="40" height="40"/>
+        <Region name="Oddish-front-attack" x="1442" y="202" width="40" height="40"/>
+        <Region name="Gloom-front-idle" x="1499" y="194" width="48" height="48"/>
+        <Region name="Gloom-front-attack" x="1555" y="194" width="48" height="48"/>
+        <Region name="Vileplume-front-idle" x="1605" y="186" width="56" height="56"/>
+        <Region name="Vileplume-front-attack" x="1662" y="186" width="56" height="56"/>
         <Region name="Paras-front-idle" x="" y="" width="" height=""/>
         <Region name="Paras-front-attack" x="" y="" width="" height=""/>
         <Region name="Parasect-front-idle" x="" y="" width="" height=""/>
