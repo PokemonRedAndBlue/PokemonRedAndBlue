@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+    <Texture>images/Game Boy _ GBC - Pokemon Red _ Blue - Backgrounds (Routes) - Route 01</Texture>
+    <Regions>
+    <Region id="1" name="grass-route1" x="40" y="23" width="16" height="16"/>
+    <Region id="2" name="cylinder-route1" x="56" y="23" width="16" height="16"/>
+    <Region id="3" name="tree-route1" x="56" y="119" width="16" height="16"/>
+    <Region id="4" name="path1-route1" x="168" y="23" width="16" height="16"/>
+    <Region id="5" name="wild-grass-route1" x="168" y="583" width="16" height="16"/>
+    <Region id="6" name="path2-route1" x="200" y="215" width="16" height="16"/>
+    <Region id="7" name="path3-route1" x="216" y="215" width="16" height="16"/>
+    <Region id="8" name="grass-fence-right-route1" x="72" y="327" width="16" height="16"/>
+    <Region id="9" name="grass-gate-route1" x="88" y="327" width="16" height="16"/>
+    <Region id="10" name="path-fence-left-route1" x="104" y="327" width="16" height="16"/>
+    <Region id="11" name="path-fence-route1" x="120" y="327" width="16" height="16"/>
+    <Region id="12" name="grass-fence-route1" x="168" y="327" width="16" height="16"/>
+    <Region id="13" name="grass-bubble-bottom-route1" x="152" y="407" width="16" height="16"/>
+    <Region id="14" name="grass-bubble-top-route1" x="152" y="423" width="16" height="16"/>
+    <Region id="15" name="path-signpost-route1" x="152" y="455" width="16" height="16"/>
+    </Regions>
+</TextureAtlas>
