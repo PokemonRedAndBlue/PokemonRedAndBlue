@@ -32,16 +32,16 @@
         <Region name="Kakuna-front-attack" x="1555" y="46" width="40" height="40"/>
         <Region name="Beedrill-front-idle" x="" y="30" width="56" height="56"/>
         <Region name="Beedrill-front-attack" x="" y="30" width="56" height="56"/>
-        <Region name="Pidgey-front-idle" x="" y="" width="" height=""/>
-        <Region name="Pidgey-front-attack" x="" y="" width="" height=""/>
-        <Region name="Pidgeotto-front-idle" x="" y="" width="" height=""/>
-        <Region name="Pidgeotto-front-attack" x="" y="" width="" height=""/>
-        <Region name="Pidgeot-front-idle" x="" y="" width="" height=""/>
-        <Region name="Pidgeot-front-attack" x="" y="" width="" height=""/>
-        <Region name="Rattata-front-idle" x="" y="" width="" height=""/>
-        <Region name="Rattata-front-attack" x="" y="" width="" height=""/>
-        <Region name="Raticate-front-idle" x="" y="" width="56" height="56"/>
-        <Region name="Raticate-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Pidgey-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Pidgey-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Pidgeotto-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Pidgeotto-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Pidgeot-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Pidgeot-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Rattata-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Rattata-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Raticate-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Raticate-front-attack" x="" y="" width="48" height="48"/>
         <Region name="Spearow-front-idle" x="" y="" width="40" height="40"/>
         <Region name="Spearow-front-attack" x="" y="" width="40" height="40"/>
         <Region name="Fearow-front-idle" x="" y="" width="56" height="56"/>
@@ -61,15 +61,15 @@
         <Region name="Nidoran♀-front-idle" x="" y="" width="40" height="40"/>
         <Region name="Nidoran♀-front-attack" x="" y="" width="40" height="40"/>
         <Region name="Nidorina-front-idle" x="" y="" width="48" height="48"/>
-        <Region name="Nidorina-front-attack" x="" y="" width="" height=""/>
-        <Region name="Nidoqueen-front-idle" x="" y="" width="" height=""/>
-        <Region name="Nidoqueen-front-attack" x="" y="" width="" height=""/>
-        <Region name="Nidoran♂-front-idle" x="" y="" width="" height=""/>
-        <Region name="Nidoran♂-front-attack" x="" y="" width="" height=""/>
-        <Region name="Nidorino-front-idle" x="" y="" width="" height=""/>
-        <Region name="Nidorino-front-attack" x="" y="" width="" height=""/>
-        <Region name="Nidoking-front-idle" x="" y="" width="" height=""/>
-        <Region name="Nidoking-front-attack" x="" y="" width="" height=""/>
+        <Region name="Nidorina-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Nidoqueen-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Nidoqueen-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Nidoran♂-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Nidoran♂-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Nidorino-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Nidorino-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Nidoking-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Nidoking-front-attack" x="" y="" width="56" height="56"/>
         <Region name="Clefairy-front-idle" x="" y="" width="40" height="40"/>
         <Region name="Clefairy-front-attack" x="" y="" width="40" height="40"/>
         <Region name="Clefable-front-idle" x="" y="" width="48" height="48"/>
