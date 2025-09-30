@@ -16,12 +16,10 @@ namespace MonoGameLibrary.Graphics
             // Flicker red/white
             if (AnimationTime % 2 == 0)
             {
-                color = Color.Red;
                 CurrentPosition = startPosition + new Vector2(2, 0);
             }
             else
             {
-                color = Color.White;
                 CurrentPosition = startPosition - new Vector2(2, 0);
             }
 
