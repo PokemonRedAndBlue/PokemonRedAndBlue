@@ -124,6 +124,7 @@ public class TextureAtlas
                     foreach (var region in regions)
                     {
                         string name = region.Attribute("name")?.Value;
+                        name = name.ToLower();
                         int x = int.Parse(region.Attribute("x")?.Value ?? "0");
                         int y = int.Parse(region.Attribute("y")?.Value ?? "0");
                         int width = int.Parse(region.Attribute("width")?.Value ?? "0");
@@ -168,7 +169,7 @@ public class TextureAtlas
                             foreach (var frameElement in frameElements)
                             {
                                 string regionName = frameElement.Attribute("region").Value;
-                                TextureRegion region = atlas.GetRegion(regionName);
+                                TextureRegion region = atlas.GetRegion(regionName.ToLower());
                                 frames.Add(region);
                             }
                         }

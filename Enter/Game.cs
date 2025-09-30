@@ -17,12 +17,11 @@ namespace GameFile;
 public class Game1 : Core
 {
     // Needed class vars
-    private Sprite _bulbasaur;
+    private AnimatedSprite _sprite;
     private Texture2D character;
     private Player player;
     private Trainer trainer;
     private KeyboardController.KeyboardController controller;
-
     private Vector2 postion = new Vector2(100, 100);
     private PokeballthrowAnimation _pokeballthrow;
     private PokeballCaptureAnimation _pokeballCapture;
@@ -41,7 +40,6 @@ public class Game1 : Core
         PokemonFrontFactory.Instance.LoadAllTextures(Content);
         PokemonBackFactory.Instance.LoadAllTextures(Content);
 
-        _bulbasaur = PokemonBackFactory.Instance.CreateStaticSprite("bulbasaur-back");
         character = Content.Load<Texture2D>("images/Pokemon_Characters");
         player = new Player(character, Window);
         trainer = new Trainer(
@@ -56,6 +54,8 @@ public class Game1 : Core
 
         _pokeballCapture = new PokeballCaptureAnimation(300, 360);
         _pokeballCapture.LoadContent(Content);
+
+
 
         base.LoadContent();
     }
@@ -82,22 +82,36 @@ public class Game1 : Core
 
         player.Update(gameTime, ax, ay);
         trainer.Update(gameTime, player);
+
         base.Update(gameTime);
     }
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.CornflowerBlue);
+        GraphicsDevice.Clear(Color.White);
 
         SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
-        // all testing code goes here
         _pokeballthrow.Draw(SpriteBatch);
         _pokeballCapture.Draw(SpriteBatch);
-        // end testing code
 
         player.Draw(SpriteBatch, 4f);
         trainer.Draw(SpriteBatch, 4f);
+
+        var frontAtlas = PokemonFrontFactory.Instance.Atlas;
+        
+        // Hardcode the three Pokémon animation names
+        string[] pokemons = { "bulbasaur-front", "charmander-front", "squirtle-front" };
+
+        for (int i = 0; i < pokemons.Length; i++)
+        {
+            string name = pokemons[i];
+
+            _sprite = frontAtlas.CreateAnimatedSprite(name);
+
+            // ADD SPRITE DRAWING HERE
+
+        }
 
         SpriteBatch.End();
 

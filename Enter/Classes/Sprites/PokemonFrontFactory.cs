@@ -10,6 +10,8 @@ public class PokemonFrontFactory
     private static PokemonFrontFactory _instance;
     private ContentManager _content;
     private TextureAtlas _PokemonFrontAtlas;
+    public TextureAtlas Atlas => _PokemonFrontAtlas;
+
 
     // Singleton Instance
     public static PokemonFrontFactory Instance

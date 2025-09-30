@@ -2,29 +2,29 @@
 <TextureAtlas>
     <Texture>images/Pokemon_FRONT</Texture>
     <Regions>
-        <Region name="Bulbasaur-front-idle" x="17" y="46" width="40" height="40"/>
-        <Region name="Bulbasaur-front-attack" x="74" y="46" width="40" height="40"/>
-        <Region name="Ivysaur-front-idle" x="131" y="38" width="48" height="48"/>
-        <Region name="Ivysaur-front-attack" x="188" y="38" width="48" height="48"/>
-        <Region name="Venusaur-front-idle" x="237" y="30" width="56" height="56"/>
-        <Region name="Venusaur-front-attack" x="294" y="30" width="56" height="56"/>
-        <Region name="Charmander-front-idle" x="359" y="46" width="40" height="40"/>
-        <Region name="Charmander-front-attack" x="416" y="46" width="40" height="40"/>
-        <Region name="Charmeleon-front-idle" x="473" y="38" width="48" height="48"/>
-        <Region name="Charmeleon-front-attack" x="529" y="38" width="48" height="48"/>
-        <Region name="Charizard-front-idle" x="579" y="30" width="56" height="56"/>
-        <Region name="Charizard-front-attack" x="636" y="30" width="56" height="56"/>
-        <Region name="Squirtle-front-idle" x="700" y="46" width="40" height="40"/>
-        <Region name="Squirtle-front-attack" x="757" y="46" width="40" height="40"/>
-        <Region name="Wartortle-front-idle" x="814" y="38" width="48" height="48"/>
-        <Region name="Wartortle-front-attack" x="871" y="38" width="48" height="48"/>
-        <Region name="Blastoise-front-idle" x="920" y="30" width="56" height="56"/>
-        <Region name="Blastoise-front-attack" x="977" y="30" width="56" height="56"/>
-        <Region name="Caterpie-front-idle" x="1042" y="46" width="40" height="40"/>
+        <Region name="bulbasaur-front-idle" x="17" y="46" width="40" height="40"/>
+        <Region name="bulbasaur-front-attack" x="74" y="46" width="40" height="40"/>
+        <Region name="ivysaur-front-idle" x="131" y="38" width="48" height="48"/>
+        <Region name="ivysaur-front-attack" x="188" y="38" width="48" height="48"/>
+        <Region name="venusaur-front-idle" x="237" y="30" width="56" height="56"/>
+        <Region name="venusaur-front-attack" x="294" y="30" width="56" height="56"/>
+        <Region name="charmander-front-idle" x="359" y="46" width="40" height="40"/>
+        <Region name="charmander-front-attack" x="416" y="46" width="40" height="40"/>
+        <Region name="charmeleon-front-idle" x="473" y="38" width="48" height="48"/>
+        <Region name="charmeleon-front-attack" x="529" y="38" width="48" height="48"/>
+        <Region name="charizard-front-idle" x="579" y="30" width="56" height="56"/>
+        <Region name="charizard-front-attack" x="636" y="30" width="56" height="56"/>
+        <Region name="squirtle-front-idle" x="700" y="46" width="40" height="40"/>
+        <Region name="squirtle-front-attack" x="757" y="46" width="40" height="40"/>
+        <Region name="wartortle-front-idle" x="814" y="38" width="48" height="48"/>
+        <Region name="wartortle-front-attack" x="871" y="38" width="48" height="48"/>
+        <Region name="blastoise-front-idle" x="920" y="30" width="56" height="56"/>
+        <Region name="blastoise-front-attack" x="977" y="30" width="56" height="56"/>
+        <!-- <Region name="Caterpie-front-idle" x="1042" y="46" width="40" height="40"/>
         <Region name="Caterpie-front-attack" x="1099" y="46" width="40" height="40"/>
         <Region name="Metapod-front-idle" x="1156" y="46" width="40" height="40"/>
         <Region name="Metapod-front-attack" x="1213" y="46" width="40" height="40"/>
-        <Region name="Butterfree-front-idle" x="1262" y="30 " width="56" height="56"/>
+        <Region name="Butterfree-front-idle" x="1262" y="30" width="56" height="56"/>
         <Region name="Butterfree-front-attack" x="1319" y="30" width="56" height="56"/>
         <Region name="Weedle-front-idle" x="1384" y="46" width="40" height="40"/>
         <Region name="Weedle-front-attack" x="1442" y="46" width="40" height="40"/>
@@ -91,8 +91,8 @@
         <Region name="Gloom-front-idle" x="1499" y="194" width="48" height="48"/>
         <Region name="Gloom-front-attack" x="1555" y="194" width="48" height="48"/>
         <Region name="Vileplume-front-idle" x="1605" y="186" width="56" height="56"/>
-        <Region name="Vileplume-front-attack" x="1662" y="186" width="56" height="56"/>
-        <Region name="Paras-front-idle" x="" y="280" width="40" height="40"/>
+        <Region name="Vileplume-front-attack" x="1662" y="186" width="56" height="56"/> -->
+        <!-- <Region name="Paras-front-idle" x="" y="280" width="40" height="40"/>
         <Region name="Paras-front-attack" x="" y="280" width="40" height="40"/>
         <Region name="Parasect-front-idle" x="" y="264" width="56" height="56"/>
         <Region name="Parasect-front-attack" x="" y="264" width="56" height="56"/>
@@ -303,7 +303,7 @@
         <Region name="Mewtwo-front-idle" x="" y="" width="56" height="56"/>
         <Region name="Mewtwo-front-attack" x="" y="" width="56" height="56"/>
         <Region name="Mew-front-idle" x="" y="" width="40" height="40"/>
-        <Region name="Mew-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Mew-front-attack" x="" y="" width="40" height="40"/> -->
     </Regions>
     <Animations>
         <Animation name="bulbasaur-front" frameCount="3" frameDuration="2" scale="4">
@@ -351,7 +351,7 @@
             <Frame region="blastoise-front-attack" />
             <Frame region="blastoise-front-idle" />
         </Animation>
-        <Animation name="caterpie-front" frameCount="3" frameDuration="2" scale="4">
+        <!-- <Animation name="caterpie-front" frameCount="3" frameDuration="2" scale="4">
             <Frame region="caterpie-front-idle" />
             <Frame region="caterpie-front-attack" />
             <Frame region="caterpie-front-idle" />
@@ -530,8 +530,8 @@
             <Frame region="vileplume-front-idle" />
             <Frame region="vileplume-front-attack" />
             <Frame region="vileplume-front-idle" />
-        </Animation>
-        <Animation name="paras-front" frameCount="3" frameDuration="2" scale="4">
+        </Animation> -->
+        <!-- <Animation name="paras-front" frameCount="3" frameDuration="2" scale="4">
             <Frame region="paras-front-idle" />
             <Frame region="paras-front-attack" />
             <Frame region="paras-front-idle" />
@@ -1060,6 +1060,6 @@
             <Frame region="mew-front-idle" />
             <Frame region="mew-front-attack" />
             <Frame region="mew-front-idle" />
-        </Animation>
+        </Animation> -->
     </Animations>
 </TextureAtlas>
