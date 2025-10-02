@@ -24,6 +24,7 @@ public class Player
 
     public Vector2 Position { get; set; } = Vector2.Zero;
     private bool seenByTrainer = false;
+    // private bool isMoving = false;
     private readonly Texture2D texture;
     private enum Facing { Down, Up, Left, Right }
     private Facing facing = Facing.Down;
@@ -47,7 +48,7 @@ public class Player
     public void Update(GameTime gameTime, int axisX, int axisY)
     {
         // Determine if moving, and which way we face
-        bool isMoving = (!seenByTrainer) && axisX != 0 || axisY != 0;
+        bool isMoving = (!seenByTrainer) && (axisX != 0 || axisY != 0);
 
         // If both non-zero ever slip through, pick a priority (down/up over left/right)
         if (axisX != 0 && axisY != 0)
