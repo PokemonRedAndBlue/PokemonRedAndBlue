@@ -10,7 +10,7 @@ public class TrainerSprite
 {
 
     private const float FrameDuration = 0.12f;
-    readonly List<Rectangle> sprites =
+    private readonly List<Rectangle> sprites =
     [
         new(9, 85, 16, 16),   // 0 - Down 1
         new(26, 85, 16, 16),  // 1 - Down 2
@@ -26,14 +26,14 @@ public class TrainerSprite
     private int _currentFrameIndex = 0;
     private float _animTimer = 0f;
 
-    public void UpdateMovAnim(Facing face)
+    public void UpdateMovAnim(Facing facing)
     {
         // Cycle through the frames for the current facing
         if (_animTimer >= FrameDuration)
         {
             _animTimer -= FrameDuration;
 
-            var (start, count) = AnimRangeFor(face);
+            var (start, count) = AnimRangeFor(facing);
             // Advance within that sub-range
             if (_currentFrameIndex < start || _currentFrameIndex >= start + count)
                 _currentFrameIndex = start;
@@ -45,9 +45,9 @@ public class TrainerSprite
         }
     }
 
-    private static (int start, int count) AnimRangeFor(Facing face)
+    private static (int start, int count) AnimRangeFor(Facing facing)
     {
-        return face switch
+        return facing switch
         {
             Facing.Down => (0, 3),  // 0..2
             Facing.Up => (3, 3),  // 3..5
@@ -57,16 +57,16 @@ public class TrainerSprite
         };
     }
 
-    public void IdleReset(Facing face)
+    public void IdleReset(Facing facing)
     {
-        _currentFrameIndex = IdleFrameFor(face);
+        _currentFrameIndex = IdleFrameFor(facing);
         _animTimer = 0f;
     }
 
     // Also add nonmoving trainer sprites later
-    private static int IdleFrameFor(Facing face)
+    private static int IdleFrameFor(Facing facing)
     {
-        return face switch
+        return facing switch
         {
             Facing.Down => 0,
             Facing.Up => 3,
