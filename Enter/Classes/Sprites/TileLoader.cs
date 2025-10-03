@@ -11,7 +11,8 @@ namespace Enter.Classes.Sprites
 {
     public static class TileLoader
     {
-        // xmlPath default expects "Content/Tiles.xml"
+        
+       // When the method is called without parameters, xmlPath defaults to "Content/Tiles.xml" 
         public static List<Tile> LoadTiles(string xmlPath = "Content/Tiles.xml")
         {
             var tiles = new List<Tile>();
@@ -34,8 +35,8 @@ namespace Enter.Classes.Sprites
                     Texture2D _texture = null;
                     if (!string.IsNullOrEmpty(textureAsset))
                     {
-                        // Try to load the asset name exactly as given in the XML.
-                        // Make sure the value in XML matches the Content pipeline asset name.
+                        /* Try to load the asset name exactly as given in the XML.
+                         Make sure the value in XML matches the Content pipeline asset name. */
                         try
                         {
                             _texture = Core.Content.Load<Texture2D>(textureAsset);
@@ -46,7 +47,6 @@ namespace Enter.Classes.Sprites
                         }
                     }
 
-                    // Regions can be under <Regions><Region .../></Regions>
                     var regionsParent = root.Element("Regions");
                     IEnumerable<XElement> regionElements = null;
 
@@ -56,7 +56,7 @@ namespace Enter.Classes.Sprites
                     }
                     else
                     {
-                        // fallback: look for <tile> or <Region> directly under root
+                        // In case regionsParent is null, look for <tile> or <Region> directly under root
                         regionElements = root.Elements("Region");
                         if (regionElements == null)
                             regionElements = root.Elements("tile");
@@ -72,8 +72,8 @@ namespace Enter.Classes.Sprites
                         int width = int.Parse((string)el.Attribute("width"));
                         int height = int.Parse((string)el.Attribute("height"));
 
-                        /* If the XML lists a different texture per region, 
-                        could add code to read a 'texture' attribute per region.
+                        /* If the XML lists a different texture per region 
+                        if needed, could add code to read a 'texture' attribute per region.
                         */
                         if (_texture == null)
                         {
