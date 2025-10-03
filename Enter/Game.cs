@@ -79,11 +79,22 @@ public class Game1 : Core
         int ax = 0, ay = 0;
         switch (controller.moveDirection)
         {
-            case KeyboardController.Direction.Left:  ax = -1; break;
-            case KeyboardController.Direction.Right: ax =  1; break;
-            case KeyboardController.Direction.Up:    ay = -1; break;
-            case KeyboardController.Direction.Down:  ay =  1; break;
-            default:                                  ax =  0; ay = 0; break;
+            case KeyboardController.Direction.Left:
+                ax = -1;
+                break;
+            case KeyboardController.Direction.Right:
+                ax =  1;
+                break;
+            case KeyboardController.Direction.Up:
+                ay = -1;
+                break;
+            case KeyboardController.Direction.Down:
+                ay =  1;
+                break;
+            default:
+                ax =  0;
+                ay = 0;
+                break;
         }
         _pokeballthrow.Update(gameTime);  
         _pokeballCapture.Update(gameTime);
