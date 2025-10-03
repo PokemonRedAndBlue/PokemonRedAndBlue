@@ -91,6 +91,14 @@ public class Game1 : Core
             Exit();
 
         controller.Update(this, trainer);
+
+        // Check for reset key
+        if (controller.ResetRequested)
+        {
+            Reset();
+            return; 
+        }
+
         int ax = 0, ay = 0;
         switch (controller.moveDirection)
         {
@@ -132,6 +140,52 @@ public class Game1 : Core
         _charizard.Update(gameTime);
 
         base.Update(gameTime);
+    }
+
+    private void Reset()
+    {
+        // Reset player to initial position
+        player = new Player(character, Window);
+        
+        // Reset trainer to initial position
+        trainer = new Trainer(
+            character,
+            new Vector2(Window.ClientBounds.Height, Window.ClientBounds.Width) * 0.25f,
+            Trainer.Facing.Right
+        );
+        
+        // Reset controller state
+        controller = new KeyboardController.KeyboardController();
+        
+        // Reset animations
+        _pokeballthrow = new PokeballthrowAnimation(640, 360);
+        _pokeballthrow.LoadContent(Content);
+        
+        _pokeballCapture = new PokeballCaptureAnimation(300, 360);
+        _pokeballCapture.LoadContent(Content);
+        
+        // Reset tile cycler to first tile
+        if (TileCycler != null)
+        {
+            TileCycler.Reset();
+        }
+        
+        // Reset all Pokémon animations
+        _bulbasuar = PokemonFrontFactory.Instance.CreateAnimatedSprite("bulbasaur-front");
+        _ivysaur = PokemonFrontFactory.Instance.CreateAnimatedSprite("ivysaur-front");
+        _venusaur = PokemonFrontFactory.Instance.CreateAnimatedSprite("venusaur-front");
+        _squirtle = PokemonFrontFactory.Instance.CreateAnimatedSprite("squirtle-front");
+        _wartortle = PokemonFrontFactory.Instance.CreateAnimatedSprite("wartortle-front");
+        _blastoise = PokemonFrontFactory.Instance.CreateAnimatedSprite("blastoise-front");
+        _charmander = PokemonFrontFactory.Instance.CreateAnimatedSprite("charmander-front");
+        _charmeleon = PokemonFrontFactory.Instance.CreateAnimatedSprite("charmeleon-front");
+        _charizard = PokemonFrontFactory.Instance.CreateAnimatedSprite("charizard-front");
+        
+        // Reset other state variables
+        postion = new Vector2(100, 100);
+        hurt = new HurtAnimation();
+        attack = new AttackAnimation();
+        death = new DeathAnimation();
     }
 
     protected override void Draw(GameTime gameTime)

@@ -33,5 +33,12 @@ namespace ISprite
             if (_tiles == null || _currentIndex < 0 || _currentIndex >= _tiles.Count) return null;
             return _tiles[_currentIndex];
         }
+
+        // Reset to the first tile
+        public void Reset()
+        {
+            _currentIndex = (_tiles.Count > 0) ? 0 : -1;
+        }
+        
     }
 }
