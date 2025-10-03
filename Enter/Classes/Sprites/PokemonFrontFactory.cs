@@ -35,7 +35,7 @@ public class PokemonFrontFactory
         // Example: Load your textures here
         _PokemonFrontAtlas = TextureAtlas.FromFile(_content, "Pokemon_FRONT.xml");
     }
-    public Sprite CreateAnimatedSprite(String spriteName)
+    public AnimatedSprite CreateAnimatedSprite(String spriteName)
     {
         return _PokemonFrontAtlas.CreateAnimatedSprite(spriteName);
     }
