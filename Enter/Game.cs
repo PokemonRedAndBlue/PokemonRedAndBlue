@@ -11,6 +11,8 @@ using MonoGameLibrary.Storage;
 using Behavior.Time;
 using Enter.Classes.Characters;
 using Enter.Classes.Animation;
+using ISprite;
+using Enter.Classes.Sprites;
 
 namespace GameFile;
 
@@ -33,6 +35,9 @@ public class Game1 : Core
 
     private DeathAnimation death = new DeathAnimation();
 
+    private List<Tile> _tiles = new List<Tile>();
+    public ISprite.TileCycler TileCycler { get; private set; }
+
     public Game1() : base("PokemonRedAndBlue", 1280, 720, false) { }
 
     protected override void LoadContent()
@@ -54,6 +59,9 @@ public class Game1 : Core
 
         _pokeballCapture = new PokeballCaptureAnimation(300, 360);
         _pokeballCapture.LoadContent(Content);
+
+        _tiles = TileLoader.LoadTiles("Content/Tiles.xml");
+        TileCycler = new ISprite.TileCycler(_tiles);
 
 
 
@@ -80,6 +88,9 @@ public class Game1 : Core
         _pokeballthrow.Update(gameTime);  
         _pokeballCapture.Update(gameTime);
 
+        var currentTileForUpdate = TileCycler?.GetCurrent();
+        currentTileForUpdate?.Update();
+
         player.Update(gameTime, ax, ay);
         trainer.Update(gameTime, player);
 
@@ -102,6 +113,9 @@ public class Game1 : Core
         
         // Hardcode the three Pokémon animation names
         string[] pokemons = { "bulbasaur-front", "charmander-front", "squirtle-front" };
+
+        var currentTile = TileCycler?.GetCurrent();
+        currentTile.Draw(120, 120, 4f, SpriteEffects.None);
 
         for (int i = 0; i < pokemons.Length; i++)
         {

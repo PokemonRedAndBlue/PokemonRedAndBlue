@@ -13,6 +13,30 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin images/Game Boy _ GBC - Pokemon Red _ Blue - Backgrounds (Places) - Cerulean City.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/Game Boy _ GBC - Pokemon Red _ Blue - Backgrounds (Places) - Cerulean City.png
+
+#begin images/Game Boy _ GBC - Pokemon Red _ Blue - Backgrounds (Routes) - Route 01.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/Game Boy _ GBC - Pokemon Red _ Blue - Backgrounds (Routes) - Route 01.png
+
 #begin images/Pokeball.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -66,4 +90,7 @@
 
 #begin Pokemon_FRONT.xml
 /copy:Pokemon_FRONT.xml
+
+#begin Tiles.xml
+/copy:Tiles.xml
 

@@ -36,6 +36,24 @@ namespace KeyboardController
             Direction chosenDirection = ChooseDirection(keyboardState, keyIsUp, keyIsDown, keyIsLeft, keyIsRight);
             moveDirection = chosenDirection;
 
+            // Y => next tile
+            if (IsNewlyDown(keyboardState, Keys.Y))
+            {
+                if (game?.TileCycler != null)
+                {
+                    game.TileCycler.Next();
+                }
+            }
+
+            // T => previous tile
+            if (IsNewlyDown(keyboardState, Keys.T))
+            {
+                if (game?.TileCycler != null)
+                {
+                    game.TileCycler.Prev();
+                }
+            }
+
             prevDirection = chosenDirection;
             prevState = keyboardState;
 
