@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace KeyboardController
 {
+
     public enum Direction {None, Up, Down, Left, Right};
 
     public class KeyboardController
@@ -16,7 +17,6 @@ namespace KeyboardController
         private KeyboardState prevState;
         private bool isInitialized = false;
         private Direction prevDirection = Direction.None;
-        
         public void Update(Game1 game)
         {
             // Get the current state of keyboard input.
@@ -36,8 +36,6 @@ namespace KeyboardController
             Direction chosenDirection = ChooseDirection(keyboardState, keyIsUp, keyIsDown, keyIsLeft, keyIsRight);
             moveDirection = chosenDirection;
 
-            prevDirection = chosenDirection;
-
             // Y => next tile
             if (IsNewlyDown(keyboardState, Keys.Y))
             {
@@ -55,7 +53,8 @@ namespace KeyboardController
                     game.TileCycler.Prev();
                 }
             }
-            
+
+            prevDirection = chosenDirection;
             prevState = keyboardState;
         }
 
