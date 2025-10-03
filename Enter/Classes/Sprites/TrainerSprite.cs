@@ -10,21 +10,15 @@ public class TrainerSprite
 {
 
     private const float FrameDuration = 0.12f;
-    private readonly List<Rectangle> sprites =
-    [
-        new(9, 85, 16, 16),   // 0 - Down 1
-        new(26, 85, 16, 16),  // 1 - Down 2
-        new(43, 85, 16, 16),  // 2 - Down 3
-        new(60, 85, 16, 16),  // 3 - Up 1
-        new(77, 85, 16, 16),  // 4 - Up 2
-        new(94, 85, 16, 16),  // 5 - Up 3
-        new(111, 85, 16, 16), // 6 - Left 1
-        new(128, 85, 16, 16), // 7 - Left 2
-        new(145, 85, 16, 16), // 8 - Right 1
-        new(162, 85, 16, 16), // 9 - Right 2
-    ];
+    private readonly List<Rectangle> _sprites;
     private int _currentFrameIndex = 0;
     private float _animTimer = 0f;
+
+    public TrainerSprite() : this(0) { }
+    public TrainerSprite(int spriteIndex)
+    {
+        _sprites = new TrainerSpriteFactory(spriteIndex).Sprites;
+    }
 
     public void UpdateMovAnim(Facing facing)
     {
@@ -80,7 +74,7 @@ public class TrainerSprite
     {
         if (texture == null) return; // no texture yet
 
-        Rectangle src = sprites[_currentFrameIndex];
+        Rectangle src = _sprites[_currentFrameIndex];
 
         // Center the drawn sprite on Position (optional; adjust to your layout)
         var origin = Vector2.Zero;

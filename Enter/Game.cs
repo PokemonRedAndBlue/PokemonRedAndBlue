@@ -75,7 +75,7 @@ public class Game1 : Core
         if (keyboardState.IsKeyDown(Keys.Escape))
             Exit();
 
-        controller.Update(this);
+        controller.Update(this, trainer);
         int ax = 0, ay = 0;
         switch (controller.moveDirection)
         {

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Enter.Classes.Characters;
 using GameFile;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -17,7 +18,7 @@ namespace KeyboardController
         private KeyboardState prevState;
         private bool isInitialized = false;
         private Direction prevDirection = Direction.None;
-        public void Update(Game1 game)
+        public void Update(Game1 game, Trainer trainer)
         {
             // Get the current state of keyboard input.
             KeyboardState keyboardState = Keyboard.GetState();
@@ -39,20 +40,20 @@ namespace KeyboardController
             // Y => next tile
             if (IsNewlyDown(keyboardState, Keys.Y))
             {
-                if (game?.TileCycler != null)
-                {
-                    game.TileCycler.Next();
-                }
+                if (game?.TileCycler != null) game.TileCycler.Next();
             }
 
             // T => previous tile
             if (IsNewlyDown(keyboardState, Keys.T))
             {
-                if (game?.TileCycler != null)
-                {
-                    game.TileCycler.Prev();
-                }
+                if (game?.TileCycler != null) game.TileCycler.Prev();
             }
+
+            // O => previous trainer sprite
+            if (IsNewlyDown(keyboardState, Keys.O)) trainer.PrevSprite();
+
+            // P => next trainer sprite
+            if (IsNewlyDown(keyboardState, Keys.P)) trainer.NextSprite();
 
             prevDirection = chosenDirection;
             prevState = keyboardState;

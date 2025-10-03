@@ -12,23 +12,29 @@ public class Trainer
     // Might use a scale for tile lengths later
     public enum Facing { Down, Up, Left, Right }
     public Vector2 Position { get; set; }
-    private const float SpeedPxPerSec = 80f;
-    private const float InteractionRange = 64f; // might change based on scale?
-    private const float DefaultVisionRange = 256f;
-    private const float AlignMOE = 4f;  // Margin of Error for aligning checks
+
+    private const float SpeedPxPerSec = 80f,
+        InteractionRange = 64f, // might change based on scale?
+        DefaultVisionRange = 256f,
+        AlignMOE = 4f;  // Margin of Error for aligning checks
     private readonly float _visionRange = DefaultVisionRange;
     private readonly bool _moving = false;  // Whether the trainer will hang around when idling
     private readonly Texture2D _texture;
-    private readonly TrainerSprite _sprite = new();
+    private TrainerSprite _sprite;
+    private int _spriteIndex;
     private Facing _facing = Facing.Down; // Facing direction
     private bool _visible = false;  // Whether the trainer sees a player now
 
     public Trainer(Texture2D texture, Vector2 Pos, Facing facing) : this(texture, Pos, facing, false) { }
-    public Trainer(Texture2D texture, Vector2 Pos, Facing facing, bool moving) : this(texture, Pos, facing, moving, DefaultVisionRange) { }
-    public Trainer(Texture2D texture, Vector2 Pos, Facing facing, float visionRange) : this(texture, Pos, facing, false, visionRange) { }
-    public Trainer(Texture2D texture, Vector2 Pos, Facing facing, bool moving, float visionRange)
+    public Trainer(Texture2D texture, Vector2 Pos, Facing facing, bool moving) : this(texture, 0, Pos, facing, moving) { }
+    public Trainer(Texture2D texture, int spriteIndex, Vector2 Pos, Facing facing, bool moving) : this(texture, spriteIndex, Pos, facing, moving, DefaultVisionRange) { }
+    public Trainer(Texture2D texture, Vector2 Pos, Facing facing, float visionRange) : this(texture, 0, Pos, facing, visionRange) { }
+    public Trainer(Texture2D texture, int spriteIndex, Vector2 Pos, Facing facing, float visionRange) : this(texture, spriteIndex, Pos, facing, false, visionRange) { }
+    public Trainer(Texture2D texture, int spriteIndex, Vector2 Pos, Facing facing, bool moving, float visionRange)
     {
         _texture = texture;
+        _spriteIndex = spriteIndex;
+        _sprite = new(_spriteIndex);
         Position = Pos;
         _facing = facing;
         _moving = moving;
@@ -94,6 +100,17 @@ public class Trainer
     public void Draw(SpriteBatch spriteBatch, float scale)
     {
         _sprite.Draw(spriteBatch, _texture, scale, Position);
+    }
+
+    // Temporary methods for Sprint 2, not cyclic
+    public void NextSprite()
+    {
+        _sprite = new(++_spriteIndex > TrainerSpriteFactory.MaxIndexOfSprites ? --_spriteIndex : _spriteIndex);
+    }
+
+    public void PrevSprite()
+    {
+        _sprite = new(--_spriteIndex < 0 ? ++_spriteIndex : _spriteIndex);
     }
 
 }
