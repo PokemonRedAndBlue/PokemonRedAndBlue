@@ -100,7 +100,7 @@ public class Game1 : Core
         }
 
         int ax = 0, ay = 0;
-        switch (controller.moveDirection)
+        switch (controller.MoveDirection)
         {
             case KeyboardController.Direction.Left:
                 ax = -1;

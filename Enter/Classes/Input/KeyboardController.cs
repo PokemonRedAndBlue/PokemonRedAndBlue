@@ -14,7 +14,7 @@ namespace KeyboardController
 
     public class KeyboardController
     {
-        public Direction moveDirection { get; set; } = Direction.None;
+        public Direction MoveDirection { get; set; } = Direction.None;
         public bool ResetRequested { get; private set; } = false;//added to reset 
         private KeyboardState prevState;
         private bool isInitialized = false;
@@ -27,7 +27,7 @@ namespace KeyboardController
             {
                 prevState = keyboardState;
                 isInitialized = true;
-                moveDirection = Direction.None;
+                MoveDirection = Direction.None;
             }
 
             // Check for reset key
@@ -39,7 +39,7 @@ namespace KeyboardController
             bool keyIsRight = keyboardState.IsKeyDown(Keys.Right);
 
             Direction chosenDirection = ChooseDirection(keyboardState, keyIsUp, keyIsDown, keyIsLeft, keyIsRight);
-            moveDirection = chosenDirection;
+            MoveDirection = chosenDirection;
 
             // Y => next tile
             if (IsNewlyDown(keyboardState, Keys.Y))
