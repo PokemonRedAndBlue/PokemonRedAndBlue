@@ -10,7 +10,6 @@ public class Trainer
 {
 
     // Might use a scale for tile lengths later
-    public enum Facing { Down, Up, Left, Right }
     public Vector2 Position { get; set; }
 
     private const float SpeedPxPerSec = 80f,

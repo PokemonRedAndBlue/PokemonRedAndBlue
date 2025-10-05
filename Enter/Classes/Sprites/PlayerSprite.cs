@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
-using Facing = Enter.Classes.Characters.Player.Facing;
+using Facing = Enter.Classes.Characters.Facing;
 
 namespace Enter.Classes.Sprites;
 

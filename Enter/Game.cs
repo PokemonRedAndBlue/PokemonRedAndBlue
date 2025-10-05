@@ -3,11 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGameLibrary;
 using MonoGameLibrary.Graphics;
-using System;
-using System.Data;
-using System.Threading.Tasks;
 using System.Collections.Generic;
-using MonoGameLibrary.Storage;
 using Behavior.Time;
 using Enter.Classes.Characters;
 using Enter.Classes.Animation;
@@ -56,7 +52,7 @@ public class Game1 : Core
         trainer = new Trainer(
             character,
             new Vector2(Window.ClientBounds.Height, Window.ClientBounds.Width) * 0.25f,
-            Trainer.Facing.Right
+            Facing.Right
         );
         controller = new KeyboardController.KeyboardController();
 
@@ -151,7 +147,7 @@ public class Game1 : Core
         trainer = new Trainer(
             character,
             new Vector2(Window.ClientBounds.Height, Window.ClientBounds.Width) * 0.25f,
-            Trainer.Facing.Right
+            Facing.Right
         );
         
         // Reset controller state

@@ -5,10 +5,10 @@ using Vector2 = Microsoft.Xna.Framework.Vector2;
 
 namespace Enter.Classes.Characters;
 
+public enum Facing { Down, Up, Left, Right }
 public class Player
 {
 
-    public enum Facing { Down, Up, Left, Right }
     public Vector2 Position { get; set; } = Vector2.Zero;
     private const float SpeedPxPerSec = 80f; // movement speed
     private readonly Texture2D _texture;
