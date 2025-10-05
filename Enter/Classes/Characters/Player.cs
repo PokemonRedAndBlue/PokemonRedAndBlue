@@ -38,11 +38,7 @@ public class Player
             // Choose one; here we prefer vertical
             axisX = 0;
         }
-
-        if (axisY < 0) _facing = Facing.Up;
-        else if (axisY > 0) _facing = Facing.Down;
-        else if (axisX < 0) _facing = Facing.Left;
-        else if (axisX > 0) _facing = Facing.Right;
+        UpdateFacing(axisX, axisY);
 
         if (isMoving)
         {
@@ -60,6 +56,14 @@ public class Player
             // Idle frame for the facing direction
             _sprite.IdleReset(_facing);
         }
+    }
+
+    private void UpdateFacing(int axisX, int axisY)
+    {
+        if (axisY < 0) _facing = Facing.Up;
+        else if (axisY > 0) _facing = Facing.Down;
+        else if (axisX < 0) _facing = Facing.Left;
+        else if (axisX > 0) _facing = Facing.Right;
     }
 
     public void Draw(SpriteBatch spriteBatch, float scale)

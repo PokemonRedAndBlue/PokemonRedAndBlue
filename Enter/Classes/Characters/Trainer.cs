@@ -64,14 +64,21 @@ public class Trainer
         bool xAligned = Math.Abs(diff.X) < AlignMOE,
              yAligned = Math.Abs(diff.Y) < AlignMOE,
              inVision = Math.Abs(Vector2.Distance(player.Position, Position)) < _visionRange;
+        if (inVision) return InVisionRange(xAligned, yAligned, diff);
+        return false;
+    }
+
+    private bool InVisionRange(bool xAligned, bool yAligned, Vector2 diff)
+    {
         return _facing switch
         {
-            Facing.Up => xAligned && inVision && diff.Y < 0,
-            Facing.Down => xAligned && inVision && diff.Y > 0,
-            Facing.Left => yAligned && inVision && diff.X < 0,
-            Facing.Right => yAligned && inVision && diff.X > 0,
-            _ => throw new NotImplementedException(),
+            Facing.Up => xAligned && diff.Y < 0,
+            Facing.Down => xAligned && diff.Y > 0,
+            Facing.Left => yAligned && diff.X < 0,
+            Facing.Right => yAligned && diff.X > 0,
+            _ => throw new Exception("Error reading facing direction"),
         };
+        
     }
 
     private void GoToPlayer(Player player, GameTime gametime)
