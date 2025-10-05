@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace MonoGameLibrary.Graphics;
+namespace Enter.Classes.Textures;
 
 /// <summary>
 /// Represents a rectangular region within a texture.
@@ -109,4 +109,3 @@ public class TextureRegion
         );
     }
 }
-

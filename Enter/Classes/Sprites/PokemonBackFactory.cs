@@ -1,9 +1,8 @@
 using System;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Enter.Classes.Textures;
 
-
-namespace MonoGameLibrary.Graphics;
+namespace Enter.Classes.Sprites;
 
 public class PokemonBackFactory
 {

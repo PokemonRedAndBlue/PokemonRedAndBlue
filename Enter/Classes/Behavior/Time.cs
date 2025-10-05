@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
-namespace Behavior.Time;
+namespace Enter.Classes.Behavior;
 
 public class Time : GameTime
 {

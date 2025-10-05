@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
+using Enter.Classes.Animations;
 
-namespace MonoGameLibrary.Graphics;
+namespace Enter.Classes.GameState;
 
-public class FrontStateAction: PokemonStateActions
+public class FrontStateAction : PokemonStateActions
 {
     public void IdleFrontAction(AnimatedSprite sprite)
     {

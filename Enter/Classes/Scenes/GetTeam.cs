@@ -1,10 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Data;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-
-namespace MonoGameLibrary.Graphics;
+namespace Enter.Classes.Scenes;
 
 public class GetTeam
 {

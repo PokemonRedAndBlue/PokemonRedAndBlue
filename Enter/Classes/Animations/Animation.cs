@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Enter.Classes.Textures;
 
-namespace MonoGameLibrary.Graphics;
+namespace Enter.Classes.Animations;
 
 public class Animation
 {

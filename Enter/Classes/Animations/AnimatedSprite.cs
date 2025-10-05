@@ -1,10 +1,9 @@
 using System;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
-namespace MonoGameLibrary.Graphics;
+namespace Enter.Classes.Animations;
 
-public class AnimatedSprite : Sprite
+public class AnimatedSprite : Sprites.Sprite
 {
     private int _currentFrame;
     private TimeSpan _elapsed;

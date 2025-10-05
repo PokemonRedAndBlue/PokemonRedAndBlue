@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GameFile;
-using KeyboardController;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
+﻿namespace Enter.Interfaces;
 
-namespace IController
+public interface IController
 {
-    public interface IController
-    {
-        void Update(Game1 game);
-        int inputValue(int userInput);
-    }
+    void Update(Game1 game);
+    int InputValue(int userInput);
 }

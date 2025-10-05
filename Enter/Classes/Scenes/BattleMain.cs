@@ -1,10 +1,10 @@
-using System;
 using System.Collections.Generic;
-using System.Data;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
+using Enter.Classes.Animations;
+using Enter.Classes.GameState;
+using Enter.Classes.Sprites;
 
-namespace MonoGameLibrary.Graphics;
+namespace Enter.Classes.Scenes;
 
 public class BattleMain
 {
@@ -26,9 +26,9 @@ public class BattleMain
         Vector2 pokemonFrontPosition = new Vector2(600, 300);
         Vector2 pokemonBackPosition = new Vector2(300, 600);
 
-    // load sprites using GetTeam helper
-    var teamLoader = new GetTeam();
-    //_pokemonFrontTeam = teamLoader.getFrontTeam();
-    //_pokemonBackTeam = teamLoader.getBackTeam();
+        // load sprites using GetTeam helper
+        var teamLoader = new GetTeam();
+        //_pokemonFrontTeam = teamLoader.getFrontTeam();
+        //_pokemonBackTeam = teamLoader.getBackTeam();
     }
 }

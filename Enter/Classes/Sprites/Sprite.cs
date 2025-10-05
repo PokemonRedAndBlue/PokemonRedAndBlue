@@ -1,7 +1,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Enter.Classes.Textures;
 
-namespace MonoGameLibrary.Graphics;
+namespace Enter.Classes.Sprites;
 
 public class Sprite
 {

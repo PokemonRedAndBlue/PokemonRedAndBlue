@@ -4,65 +4,64 @@ using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace MonoGameLibrary.Storage
+namespace Enter.Classes.Data;
+
+public record PokemonData
 {
-    public record PokemonData
+    public int Id { get; init; }
+    public int Level { get; init; }
+    public int Hp { get; init; }
+    public int MaxHp { get; init; }
+    public List<int> Moves { get; init; } = new();
+}
+
+public record PlayerData
+{
+    public int Version { get; init; } = 1;
+    public string Name { get; init; } = "Player";
+    public int Level { get; init; } = 1;
+    public int Gold { get; init; }
+    public List<PokemonData> Team { get; init; } = new();
+}
+
+public static class SaveManager
+{
+    private static readonly JsonSerializerOptions JsonOptions = new()
     {
-        public int Id { get; init; }
-        public int Level { get; init; }
-        public int Hp { get; init; }
-        public int MaxHp { get; init; }
-        public List<int> Moves { get; init; } = new();
+        WriteIndented = true
+    };
+
+    public static string GetDefaultSavePath(string fileName = "save_v1.json")
+    {
+        var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        var dir = Path.Combine(appData, "PokemonRedAndBlue");
+        Directory.CreateDirectory(dir);
+        return Path.Combine(dir, fileName);
     }
 
-    public record PlayerData
+    public static async Task SaveAsync(PlayerData data, string path)
     {
-        public int Version { get; init; } = 1;
-        public string Name { get; init; } = "Player";
-        public int Level { get; init; } = 1;
-        public int Gold { get; init; }
-        public List<PokemonData> Team { get; init; } = new();
+        var temp = path + ".tmp";
+        var json = JsonSerializer.Serialize(data, JsonOptions);
+
+        // atomic-ish write
+        await File.WriteAllTextAsync(temp, json);
+        File.Replace(temp, path, null); // overwrite atomically when possible
     }
 
-    public static class SaveManager
+    public static PlayerData? Load(string path)
     {
-        private static readonly JsonSerializerOptions JsonOptions = new()
+        if (!File.Exists(path)) return null;
+        var json = File.ReadAllText(path);
+        try
         {
-            WriteIndented = true
-        };
-
-        public static string GetDefaultSavePath(string fileName = "save_v1.json")
-        {
-            var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            var dir = Path.Combine(appData, "PokemonRedAndBlue");
-            Directory.CreateDirectory(dir);
-            return Path.Combine(dir, fileName);
+            var data = JsonSerializer.Deserialize<PlayerData>(json, JsonOptions);
+            return data;
         }
-
-        public static async Task SaveAsync(PlayerData data, string path)
+        catch (JsonException)
         {
-            var temp = path + ".tmp";
-            var json = JsonSerializer.Serialize(data, JsonOptions);
-
-            // atomic-ish write
-            await File.WriteAllTextAsync(temp, json);
-            File.Replace(temp, path, null); // overwrite atomically when possible
-        }
-
-        public static PlayerData? Load(string path)
-        {
-            if (!File.Exists(path)) return null;
-            var json = File.ReadAllText(path);
-            try
-            {
-                var data = JsonSerializer.Deserialize<PlayerData>(json, JsonOptions);
-                return data;
-            }
-            catch (JsonException)
-            {
-                // corrupt save — return null or implement recovery
-                return null;
-            }
+            // corrupt save — return null or implement recovery
+            return null;
         }
     }
 }

@@ -1,33 +1,28 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using MonoGameLibrary;
-using MonoGameLibrary.Graphics;
 using System.Collections.Generic;
-using Behavior.Time;
+using Enter.Classes.Animations;
+using Enter.Classes.Behavior;
 using Enter.Classes.Characters;
-using Enter.Classes.Animation;
-using ISprite;
+using Enter.Classes.Data;
+using Enter.Classes.GameState;
+using Enter.Classes.Input;
+using Enter.Classes.Scenes;
 using Enter.Classes.Sprites;
+using Enter.Classes.Textures;
 
-namespace GameFile;
+namespace Enter;
 
 public class Game1 : Core
 {
     // Needed class vars
-    private AnimatedSprite _bulbasuar;
-    private AnimatedSprite _ivysaur;
-    private AnimatedSprite _venusaur;
-    private AnimatedSprite _squirtle;
-    private AnimatedSprite _wartortle;
-    private AnimatedSprite _blastoise;
-    private AnimatedSprite _charmander;
-    private AnimatedSprite _charmeleon;
-    private AnimatedSprite _charizard;
+    private AnimatedSprite _bulbasuar, _ivysaur, _venusaur, _squirtle,
+        _wartortle, _blastoise, _charmander, _charmeleon, _charizard;
     private Texture2D character;
     private Player player;
     private Trainer trainer;
-    private KeyboardController.KeyboardController controller;
+    private KeyboardController controller;
     private Vector2 postion = new Vector2(100, 100);
     private PokeballthrowAnimation _pokeballthrow;
     private PokeballCaptureAnimation _pokeballCapture;
@@ -38,7 +33,7 @@ public class Game1 : Core
     private DeathAnimation death = new DeathAnimation();
 
     private List<Tile> _tiles = new List<Tile>();
-    public ISprite.TileCycler TileCycler { get; private set; }
+    public TileCycler TileCycler { get; private set; }
 
     public Game1() : base("PokemonRedAndBlue", 1280, 720, false) { }
 
@@ -54,7 +49,7 @@ public class Game1 : Core
             new Vector2(Window.ClientBounds.Height, Window.ClientBounds.Width) * 0.25f,
             Facing.Right
         );
-        controller = new KeyboardController.KeyboardController();
+        controller = new KeyboardController();
 
         _pokeballthrow = new PokeballthrowAnimation(640,360);
         _pokeballthrow.LoadContent(Content);
@@ -63,7 +58,7 @@ public class Game1 : Core
         _pokeballCapture.LoadContent(Content);
 
         _tiles = TileLoader.LoadTiles("Content/Tiles.xml");
-        TileCycler = new ISprite.TileCycler(_tiles);
+        TileCycler = new TileCycler(_tiles);
 
         // Hardcode the nine Pokémon animations
         _bulbasuar = PokemonFrontFactory.Instance.CreateAnimatedSprite("bulbasaur-front");
@@ -98,16 +93,16 @@ public class Game1 : Core
         int ax = 0, ay = 0;
         switch (controller.MoveDirection)
         {
-            case KeyboardController.Direction.Left:
+            case Direction.Left:
                 ax = -1;
                 break;
-            case KeyboardController.Direction.Right:
+            case Direction.Right:
                 ax =  1;
                 break;
-            case KeyboardController.Direction.Up:
+            case Direction.Up:
                 ay = -1;
                 break;
-            case KeyboardController.Direction.Down:
+            case Direction.Down:
                 ay =  1;
                 break;
             default:
@@ -151,7 +146,7 @@ public class Game1 : Core
         );
         
         // Reset controller state
-        controller = new KeyboardController.KeyboardController();
+        controller = new KeyboardController();
         
         // Reset animations
         _pokeballthrow = new PokeballthrowAnimation(640, 360);
