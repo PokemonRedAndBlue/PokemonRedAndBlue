@@ -1,7 +1,8 @@
-using Enter.Classes.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
+using Enter.Classes.Input;
+using Enter.Classes.Sprites;
 
 namespace Enter.Classes.Characters;
 
@@ -27,8 +28,9 @@ public class Player
         _texture = texture2;
     }
 
-    public void Update(GameTime gameTime, int axisX, int axisY)
+    public void Update(GameTime gameTime, KeyboardController keyboard)
     {
+        var (axisX, axisY) = UpdateDirection(keyboard);
         // Determine if moving, and which way we face
         bool isMoving = (!_seenByTrainer) && (axisX != 0 || axisY != 0);
 
@@ -56,6 +58,29 @@ public class Player
             // Idle frame for the facing direction
             _sprite.IdleReset(_facing);
         }
+    }
+
+    private static (int axisX, int axisY) UpdateDirection(KeyboardController keyboard)
+    {
+        int ax = 0, ay = 0;
+        switch (keyboard.MoveDirection)
+        {
+            case Direction.Left:
+                ax = -1;
+                break;
+            case Direction.Right:
+                ax = 1;
+                break;
+            case Direction.Up:
+                ay = -1;
+                break;
+            case Direction.Down:
+                ay = 1;
+                break;
+            default:
+                break;
+        }
+        return (ax, ay);
     }
 
     private void UpdateFacing(int axisX, int axisY)

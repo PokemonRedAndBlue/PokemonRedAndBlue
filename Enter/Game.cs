@@ -90,33 +90,13 @@ public class Game1 : Core
             return; 
         }
 
-        int ax = 0, ay = 0;
-        switch (controller.MoveDirection)
-        {
-            case Direction.Left:
-                ax = -1;
-                break;
-            case Direction.Right:
-                ax =  1;
-                break;
-            case Direction.Up:
-                ay = -1;
-                break;
-            case Direction.Down:
-                ay =  1;
-                break;
-            default:
-                ax =  0;
-                ay = 0;
-                break;
-        }
         _pokeballthrow.Update(gameTime);  
         _pokeballCapture.Update(gameTime);
 
         var currentTileForUpdate = TileCycler?.GetCurrent();
         currentTileForUpdate?.Update();
 
-        player.Update(gameTime, ax, ay);
+        player.Update(gameTime, controller);
         trainer.Update(gameTime, player);
 
         // update all pokemon animations
