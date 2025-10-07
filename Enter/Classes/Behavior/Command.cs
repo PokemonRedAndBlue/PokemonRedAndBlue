@@ -16,7 +16,7 @@ public static class Command
             game.Exit();
 
         // R => reset the game
-        game.ResetRequested = keyboard.IsNewlyDown(Keys.R); // R key for reset
+        game.ResetRequested = keyboard.IsNewlyDown(Keys.R);
 
         // Y => next tile
         if (keyboard.IsNewlyDown(Keys.Y))

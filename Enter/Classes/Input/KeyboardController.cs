@@ -10,7 +10,6 @@ public enum Direction {None, Up, Down, Left, Right};
 public class KeyboardController
 {
     public Direction MoveDirection { get; set; } = Direction.None;
-    public bool ResetRequested { get; private set; } = false;//added to reset 
     private KeyboardState prevState, currState;
     private bool isInitialized = false;
     private Direction prevDirection = Direction.None;

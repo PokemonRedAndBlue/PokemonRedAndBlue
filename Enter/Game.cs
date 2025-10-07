@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Enter.Classes.Animations;
@@ -9,7 +10,6 @@ using Enter.Classes.Input;
 using Enter.Classes.Scenes;
 using Enter.Classes.Sprites;
 using Enter.Classes.Textures;
-using System;
 
 namespace Enter;
 
