@@ -5,9 +5,7 @@ using System.Collections.Generic;
 using Enter.Classes.Animations;
 using Enter.Classes.Behavior;
 using Enter.Classes.Characters;
-using Enter.Classes.GameState;
 using Enter.Classes.Input;
-using Enter.Classes.Scenes;
 using Enter.Classes.Sprites;
 using Enter.Classes.Textures;
 
@@ -26,11 +24,6 @@ public class Game1 : Core
     private Vector2 postion = new Vector2(100, 100);
     private PokeballthrowAnimation _pokeballthrow;
     private PokeballCaptureAnimation _pokeballCapture;
-
-    private HurtAnimation hurt = new HurtAnimation();
-    private AttackAnimation attack = new AttackAnimation();
-
-    private DeathAnimation death = new DeathAnimation();
 
     private List<Tile> _tiles = new List<Tile>();
     public TileCycler TileCycler { get; private set; }
