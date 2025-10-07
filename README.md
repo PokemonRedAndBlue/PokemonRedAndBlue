@@ -57,6 +57,7 @@
 - Heavy reliance on magic numbers and static logic
 - Missing proper state management — a state machine would improve structure
 - AI and battle systems are minimal and unrefined
+- SO SO SO many variables declared in game
 
 ## Planned Improvements
 ### Short-Term Goals

@@ -14,12 +14,12 @@
         <Region name="charmeleon-front-attack" x="529" y="38" width="48" height="48"/>
         <Region name="charizard-front-idle" x="579" y="30" width="56" height="56"/>
         <Region name="charizard-front-attack" x="636" y="30" width="56" height="56"/>
-        <Region name="squirtle-front-idle" x="700" y="46" width="40" height="40"/>
-        <Region name="squirtle-front-attack" x="757" y="46" width="40" height="40"/>
-        <Region name="wartortle-front-idle" x="814" y="38" width="48" height="48"/>
-        <Region name="wartortle-front-attack" x="871" y="38" width="48" height="48"/>
-        <Region name="blastoise-front-idle" x="920" y="30" width="56" height="56"/>
-        <Region name="blastoise-front-attack" x="977" y="30" width="56" height="56"/>
+        <Region name="squirtle-front-idle" x="701" y="46" width="40" height="40"/>
+        <Region name="squirtle-front-attack" x="758" y="46" width="40" height="40"/>
+        <Region name="wartortle-front-idle" x="815" y="38" width="48" height="48"/>
+        <Region name="wartortle-front-attack" x="872" y="38" width="48" height="48"/>
+        <Region name="blastoise-front-idle" x="921" y="30" width="56" height="56"/>
+        <Region name="blastoise-front-attack" x="978" y="30" width="56" height="56"/>
         <!-- <Region name="Caterpie-front-idle" x="1042" y="46" width="40" height="40"/>
         <Region name="Caterpie-front-attack" x="1099" y="46" width="40" height="40"/>
         <Region name="Metapod-front-idle" x="1156" y="46" width="40" height="40"/>
@@ -306,47 +306,47 @@
         <Region name="Mew-front-attack" x="" y="" width="40" height="40"/> -->
     </Regions>
     <Animations>
-        <Animation name="bulbasaur-front" frameCount="3" frameDuration="2" scale="4">
+        <Animation name="bulbasaur-front" frameCount="3" frameDuration="200" scale="4">
             <Frame region="bulbasaur-front-idle" />
             <Frame region="bulbasaur-front-attack" />
             <Frame region="bulbasaur-front-idle" />
         </Animation>
-        <Animation name="ivysaur-front" frameCount="3" frameDuration="2" scale="4">
+        <Animation name="ivysaur-front" frameCount="3" frameDuration="200" scale="4">
             <Frame region="ivysaur-front-idle" />
             <Frame region="ivysaur-front-attack" />
             <Frame region="ivysaur-front-idle" />
         </Animation>
-        <Animation name="venusaur-front" frameCount="3" frameDuration="2" scale="4">
+        <Animation name="venusaur-front" frameCount="3" frameDuration="200" scale="4">
             <Frame region="venusaur-front-idle" />
             <Frame region="venusaur-front-attack" />
             <Frame region="venusaur-front-idle" />
         </Animation>
-        <Animation name="charmander-front" frameCount="3" frameDuration="2" scale="4">
+        <Animation name="charmander-front" frameCount="3" frameDuration="200" scale="4">
             <Frame region="charmander-front-idle" />
             <Frame region="charmander-front-attack" />
             <Frame region="charmander-front-idle" />
         </Animation>
-        <Animation name="charmeleon-front" frameCount="3" frameDuration="2" scale="4">
+        <Animation name="charmeleon-front" frameCount="3" frameDuration="200" scale="4">
             <Frame region="charmeleon-front-idle" />
             <Frame region="charmeleon-front-attack" />
             <Frame region="charmeleon-front-idle" />
         </Animation>
-        <Animation name="charizard-front" frameCount="3" frameDuration="2" scale="4">
+        <Animation name="charizard-front" frameCount="3" frameDuration="200" scale="4">
             <Frame region="charizard-front-idle" />
             <Frame region="charizard-front-attack" />
             <Frame region="charizard-front-idle" />
         </Animation>
-        <Animation name="squirtle-front" frameCount="3" frameDuration="2" scale="4">
+        <Animation name="squirtle-front" frameCount="3" frameDuration="200" scale="4">
             <Frame region="squirtle-front-idle" />
             <Frame region="squirtle-front-attack" />
             <Frame region="squirtle-front-idle" />
         </Animation>
-        <Animation name="wartortle-front" frameCount="3" frameDuration="2" scale="4">
+        <Animation name="wartortle-front" frameCount="3" frameDuration="200" scale="4">
             <Frame region="wartortle-front-idle" />
             <Frame region="wartortle-front-attack" />
             <Frame region="wartortle-front-idle" />
         </Animation>
-        <Animation name="blastoise-front" frameCount="3" frameDuration="2" scale="4">
+        <Animation name="blastoise-front" frameCount="3" frameDuration="200" scale="4">
             <Frame region="blastoise-front-idle" />
             <Frame region="blastoise-front-attack" />
             <Frame region="blastoise-front-idle" />

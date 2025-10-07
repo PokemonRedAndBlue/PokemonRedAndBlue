@@ -21,6 +21,7 @@ public class Game1 : Core
     private Player player;
     private Trainer trainer;
     private KeyboardController controller;
+    private TextureAtlas _PokemonBackAtlas;
     private Vector2 frontPokemonPosition = new Vector2(720, 150);
     private Vector2 postion = new Vector2(100, 100);
     private PokeballthrowAnimation _pokeballthrow;
@@ -34,6 +35,8 @@ public class Game1 : Core
     private List<Tile> _tiles = new List<Tile>();
     public TileCycler TileCycler { get; private set; }
     public bool ResetRequested { get; set; } = false;   // added to reset 
+    private double elapsedTime = 0;    
+    private int regionsToDraw = 0; 
 
     public Game1() : base("PokemonRedAndBlue", 1280, 720, false) { }
 
@@ -41,6 +44,8 @@ public class Game1 : Core
     {
         PokemonFrontFactory.Instance.LoadAllTextures(Content);
         PokemonBackFactory.Instance.LoadAllTextures(Content);
+
+        _PokemonBackAtlas = TextureAtlas.FromFile(Content, "Pokemon_BACK.xml");
 
         character = Content.Load<Texture2D>("images/Pokemon_Characters");
         player = new Player(character, Window);
@@ -86,12 +91,20 @@ public class Game1 : Core
     protected override void Update(GameTime gameTime)
     {
         controller.Update(this, gameTime, player, trainer);
+        
+        // logic for cycling back pokemon
+        elapsedTime += gameTime.ElapsedGameTime.TotalSeconds;
+        if (elapsedTime >= 0.5 && regionsToDraw < _PokemonBackAtlas._regions.Count)
+        {
+            regionsToDraw++;
+            elapsedTime = 0; // reset timer
+        }
 
         // Check for reset key
         if (ResetRequested)
         {
             Reset();
-            return; 
+            return;
         }
 
         _pokeballthrow.Update(gameTime);  
@@ -172,6 +185,18 @@ public class Game1 : Core
                 frontPokemonPosition.X = 720;
             }
         }
+
+        // Draw all of the back sprites cycling
+        int i = 0;
+        foreach (var region in _PokemonBackAtlas._regions)
+        {
+            if (i >= regionsToDraw)
+                break;
+
+            region.Value.Draw(SpriteBatch, new Vector2(100, 500), Color.White, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0f);
+            i++;
+        }
+
 
         var currentTile = TileCycler?.GetCurrent();
         currentTile.Draw(120, 120, 4f, SpriteEffects.None);
