@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
@@ -12,6 +13,13 @@ public class Player
 
     public Vector2 Position { get; set; } = Vector2.Zero;
     private const float SpeedPxPerSec = 80f; // movement speed
+    protected static readonly Dictionary<Facing, Vector2> _directions = new()
+    {
+        { Facing.Up,    new Vector2(0, -1) },
+        { Facing.Down,  new Vector2(0, 1) },
+        { Facing.Left,  new Vector2(-1, 0) },
+        { Facing.Right, new Vector2(1, 0) },
+    };
     private readonly Texture2D _texture;
     private readonly PlayerSprite _sprite = new();
     private bool _seenByTrainer = false;
@@ -30,27 +38,13 @@ public class Player
 
     public void Update(GameTime gameTime, KeyboardController keyboard)
     {
-        var (axisX, axisY) = UpdateDirection(keyboard);
         // Determine if moving, and which way we face
-        bool isMoving = (!_seenByTrainer) && (axisX != 0 || axisY != 0);
-
-        // If both non-zero ever slip through, pick a priority (down/up over left/right)
-        if (axisX != 0 && axisY != 0)
-        {
-            // Choose one; here we prefer vertical
-            axisX = 0;
-        }
-        UpdateFacing(axisX, axisY);
+        bool isMoving = (!_seenByTrainer) && UpdateDirection(keyboard);
 
         if (isMoving)
         {
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            // Movement
-            // Normalize axis (already unit in each axis), move in pixels/sec
-            Position += new Vector2(axisX, axisY) * SpeedPxPerSec * dt;
-
-            // Animation
+            UpdatePosition(dt);
             _sprite.UpdateMovAnim(_facing, dt);
         }
         else
@@ -60,35 +54,37 @@ public class Player
         }
     }
 
-    private static (int axisX, int axisY) UpdateDirection(KeyboardController keyboard)
+    /// <summary>
+    /// Update player's facing, return whether player is moving. 
+    /// </summary>
+    /// <param name="keyboard"></param>
+    /// <returns></returns>
+    private bool UpdateDirection(KeyboardController keyboard)
     {
-        int ax = 0, ay = 0;
         switch (keyboard.MoveDirection)
         {
             case Direction.Left:
-                ax = -1;
+                _facing = Facing.Left;
                 break;
             case Direction.Right:
-                ax = 1;
+                _facing = Facing.Right;
                 break;
             case Direction.Up:
-                ay = -1;
+                _facing = Facing.Up;
                 break;
             case Direction.Down:
-                ay = 1;
+                _facing = Facing.Down;
                 break;
             default:
-                break;
+                return false;
         }
-        return (ax, ay);
+        return true;
     }
 
-    private void UpdateFacing(int axisX, int axisY)
+    private void UpdatePosition(float dt)
     {
-        if (axisY < 0) _facing = Facing.Up;
-        else if (axisY > 0) _facing = Facing.Down;
-        else if (axisX < 0) _facing = Facing.Left;
-        else if (axisX > 0) _facing = Facing.Right;
+        // Normalize axis (already unit in each axis), move in pixels/sec
+        Position += _directions[_facing] * SpeedPxPerSec * dt;
     }
 
     public void Draw(SpriteBatch spriteBatch, float scale)

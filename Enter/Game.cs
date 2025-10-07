@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using Enter.Classes.Animations;
 using Enter.Classes.Behavior;
@@ -34,6 +33,7 @@ public class Game1 : Core
 
     private List<Tile> _tiles = new List<Tile>();
     public TileCycler TileCycler { get; private set; }
+    public bool ResetRequested { get; set; } = false;   // added to reset 
 
     public Game1() : base("PokemonRedAndBlue", 1280, 720, false) { }
 
@@ -76,15 +76,10 @@ public class Game1 : Core
 
     protected override void Update(GameTime gameTime)
     {
-        var keyboardState = Keyboard.GetState();
-
-        if (keyboardState.IsKeyDown(Keys.Escape))
-            Exit();
-
-        controller.Update(this, trainer);
+        controller.Update(this, gameTime, player, trainer);
 
         // Check for reset key
-        if (controller.ResetRequested)
+        if (ResetRequested)
         {
             Reset();
             return; 
@@ -95,9 +90,6 @@ public class Game1 : Core
 
         var currentTileForUpdate = TileCycler?.GetCurrent();
         currentTileForUpdate?.Update();
-
-        player.Update(gameTime, controller);
-        trainer.Update(gameTime, player);
 
         // update all pokemon animations
         _bulbasuar.Update(gameTime);
