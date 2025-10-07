@@ -4,24 +4,24 @@ using System.Collections.Generic;
 using Enter.Classes.Animations;
 using Enter.Classes.Behavior;
 using Enter.Classes.Characters;
-using Enter.Classes.Data;
 using Enter.Classes.GameState;
 using Enter.Classes.Input;
 using Enter.Classes.Scenes;
 using Enter.Classes.Sprites;
 using Enter.Classes.Textures;
+using System;
 
 namespace Enter;
 
 public class Game1 : Core
 {
     // Needed class vars
-    private AnimatedSprite _bulbasuar, _ivysaur, _venusaur, _squirtle,
-        _wartortle, _blastoise, _charmander, _charmeleon, _charizard;
+    Dictionary<String, AnimatedSprite> FrontPokemon = new Dictionary<string, AnimatedSprite>();
     private Texture2D character;
     private Player player;
     private Trainer trainer;
     private KeyboardController controller;
+    private Vector2 frontPokemonPosition = new Vector2(720, 150);
     private Vector2 postion = new Vector2(100, 100);
     private PokeballthrowAnimation _pokeballthrow;
     private PokeballCaptureAnimation _pokeballCapture;
@@ -60,16 +60,25 @@ public class Game1 : Core
         _tiles = TileLoader.LoadTiles("Content/Tiles.xml");
         TileCycler = new TileCycler(_tiles);
 
-        // Hardcode the nine Pokémon animations
-        _bulbasuar = PokemonFrontFactory.Instance.CreateAnimatedSprite("bulbasaur-front");
-        _ivysaur = PokemonFrontFactory.Instance.CreateAnimatedSprite("ivysaur-front");
-        _venusaur = PokemonFrontFactory.Instance.CreateAnimatedSprite("venusaur-front");
-        _squirtle = PokemonFrontFactory.Instance.CreateAnimatedSprite("squirtle-front");
-        _wartortle = PokemonFrontFactory.Instance.CreateAnimatedSprite("wartortle-front");
-        _blastoise = PokemonFrontFactory.Instance.CreateAnimatedSprite("blastoise-front");
-        _charmander = PokemonFrontFactory.Instance.CreateAnimatedSprite("charmander-front");
-        _charmeleon = PokemonFrontFactory.Instance.CreateAnimatedSprite("charmeleon-front");
-        _charizard = PokemonFrontFactory.Instance.CreateAnimatedSprite("charizard-front");
+        // Create the nine starter Pokémon animations
+        String[] FrontPokemonAnimations = {
+                            "bulbasaur-front",
+                            "ivysaur-front",
+                            "venusaur-front",
+                            "squirtle-front",
+                            "wartortle-front",
+                            "blastoise-front",
+                            "charmander-front",
+                            "charmeleon-front",
+                            "charizard-front"
+                            };
+
+        // create all animated front sprites and add to dictionary
+        foreach (var currentPokemon in FrontPokemonAnimations)
+        {
+            String PokemonString = currentPokemon.Substring(0, currentPokemon.IndexOf('-'));
+            FrontPokemon.Add(PokemonString, PokemonFrontFactory.Instance.CreateAnimatedSprite(currentPokemon));
+        }
 
         base.LoadContent();
     }
@@ -92,15 +101,10 @@ public class Game1 : Core
         currentTileForUpdate?.Update();
 
         // update all pokemon animations
-        _bulbasuar.Update(gameTime);
-        _ivysaur.Update(gameTime);
-        _venusaur.Update(gameTime);
-        _squirtle.Update(gameTime);
-        _wartortle.Update(gameTime);
-        _blastoise.Update(gameTime);
-        _charmander.Update(gameTime);
-        _charmeleon.Update(gameTime);
-        _charizard.Update(gameTime);
+        foreach (AnimatedSprite frontPokemon in FrontPokemon.Values)
+        {
+            frontPokemon.Update(gameTime);
+        }
 
         base.Update(gameTime);
     }
@@ -109,46 +113,33 @@ public class Game1 : Core
     {
         // Reset player to initial position
         player = new Player(character, Window);
-        
+
         // Reset trainer to initial position
         trainer = new Trainer(
             character,
             new Vector2(Window.ClientBounds.Height, Window.ClientBounds.Width) * 0.25f,
             Facing.Right
         );
-        
+
         // Reset controller state
         controller = new KeyboardController();
-        
+
         // Reset animations
         _pokeballthrow = new PokeballthrowAnimation(640, 360);
         _pokeballthrow.LoadContent(Content);
-        
+
         _pokeballCapture = new PokeballCaptureAnimation(300, 360);
         _pokeballCapture.LoadContent(Content);
-        
+
         // Reset tile cycler to first tile
         if (TileCycler != null)
         {
             TileCycler.Reset();
         }
-        
-        // Reset all Pokémon animations
-        _bulbasuar = PokemonFrontFactory.Instance.CreateAnimatedSprite("bulbasaur-front");
-        _ivysaur = PokemonFrontFactory.Instance.CreateAnimatedSprite("ivysaur-front");
-        _venusaur = PokemonFrontFactory.Instance.CreateAnimatedSprite("venusaur-front");
-        _squirtle = PokemonFrontFactory.Instance.CreateAnimatedSprite("squirtle-front");
-        _wartortle = PokemonFrontFactory.Instance.CreateAnimatedSprite("wartortle-front");
-        _blastoise = PokemonFrontFactory.Instance.CreateAnimatedSprite("blastoise-front");
-        _charmander = PokemonFrontFactory.Instance.CreateAnimatedSprite("charmander-front");
-        _charmeleon = PokemonFrontFactory.Instance.CreateAnimatedSprite("charmeleon-front");
-        _charizard = PokemonFrontFactory.Instance.CreateAnimatedSprite("charizard-front");
-        
+
         // Reset other state variables
         postion = new Vector2(100, 100);
-        hurt = new HurtAnimation();
-        attack = new AttackAnimation();
-        death = new DeathAnimation();
+        frontPokemonPosition = new Vector2(720, 150);
     }
 
     protected override void Draw(GameTime gameTime)
@@ -164,18 +155,23 @@ public class Game1 : Core
         trainer.Draw(SpriteBatch, 4f);
 
         // Draw all Pokémon on the right half of the screen (x >= 640)
-        _bulbasuar.Draw(SpriteBatch, Color.White, new Vector2(720, 150), 4f);
-        _ivysaur.Draw(SpriteBatch, Color.White, new Vector2(960, 150), 4f);
-        _venusaur.Draw(SpriteBatch, Color.White, new Vector2(1200, 150), 4f);
+        frontPokemonPosition = new Vector2(720, 150);
+        foreach (AnimatedSprite frontPokemon in FrontPokemon.Values)
+        {
+            frontPokemon.Draw(SpriteBatch, Color.White, frontPokemonPosition, 4f);
 
-        _squirtle.Draw(SpriteBatch, Color.White, new Vector2(720, 360), 4f);
-        _wartortle.Draw(SpriteBatch, Color.White, new Vector2(960, 360), 4f);
-        _blastoise.Draw(SpriteBatch, Color.White, new Vector2(1200, 360), 4f);
-
-        _charmander.Draw(SpriteBatch, Color.White, new Vector2(720, 570), 4f);
-        _charmeleon.Draw(SpriteBatch, Color.White, new Vector2(960, 570), 4f);
-        _charizard.Draw(SpriteBatch, Color.White, new Vector2(1200, 570), 4f);
-
+            // if we are not on final collumn keep adding
+            if (frontPokemonPosition.X < 1200)
+            {
+                frontPokemonPosition.X += 240;
+            }
+            // if we are past the final row reset x and go to next row
+            else
+            {
+                frontPokemonPosition.Y += 210;
+                frontPokemonPosition.X = 720;
+            }
+        }
 
         var currentTile = TileCycler?.GetCurrent();
         currentTile.Draw(120, 120, 4f, SpriteEffects.None);
