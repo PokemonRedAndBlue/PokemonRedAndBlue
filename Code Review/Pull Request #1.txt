@@ -1,0 +1,30 @@
+READABILITY REVIEW, CODE QUALITY, FUNCTIONALITY TEMPLATE
+
+Author of Code Review:
+(Your full name)
+
+Date of Code Review:
+(MM/DD/YYYY)
+
+Sprint Number:
+(e.g., Sprint 2)
+
+Name of .cs File(s) Being Reviewed:
+(e.g., Trainer.cs)
+
+Author of the .cs File(s) Being Reviewed:
+(e.g., John Doe)
+
+Number of Minutes Taken to Complete Review:
+(e.g., 25 minutes)
+
+Comments on Readability:
+(Provide detailed feedback — for example:)
+
+Variable and method names are descriptive and follow consistent naming conventions.
+
+Comments are sparse; consider adding short summaries for complex logic.
+
+Indentation and spacing are consistent.
+
+The use of nested loops in Update() could reduce clarity; consider breaking into helper methods.
