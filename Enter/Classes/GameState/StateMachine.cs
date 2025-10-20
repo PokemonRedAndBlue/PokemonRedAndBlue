@@ -4,14 +4,6 @@ using Microsoft.Xna.Framework;
 
 namespace PokemonGame.Engine
 {
-    /// An interface defining the methods a state must implement.
-    public interface IState
-    {
-        void Enter(object owner, params object[] args);
-        void Update(GameTime gameTime);
-        void Exit();
-    }
-
     /// A generic, reusable Finite State Machine (FSM) for C#.
     public class StateMachine
     {
