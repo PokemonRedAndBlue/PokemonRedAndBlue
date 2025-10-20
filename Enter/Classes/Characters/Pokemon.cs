@@ -1,6 +1,8 @@
 using System;
 using Microsoft.Xna.Framework;
 using PokemonGame.Engine;
+using Enter.Classes.Animations;
+using Enter.Classes.Sprites;
 
 namespace PokemonGame
 {
@@ -13,13 +15,18 @@ namespace PokemonGame
         public int MaxHp { get; }
         public PokemonView View { get; }
         public StateMachine StateMachine { get; }
+        public Sprite Sprite { get; private set; } 
+        public AnimatedSprite AnimatedSprite { get; private set; }
+        public Vector2 Position { get; set; }
 
-        public Pokemon(string name, int level, PokemonView view)
+        public Pokemon(string name, int level, PokemonView view, Sprite sprite, Vector2 position)
         {
             Name = name;
             MaxHp = 100; // Simplified for example
             Hp = MaxHp;
             View = view;
+            Sprite = sprite;
+            Position = position;
             
             // Setup the State Machine
             StateMachine = new StateMachine(this);
@@ -29,6 +36,30 @@ namespace PokemonGame
             StateMachine.AddState("dead", new DeadState());
             StateMachine.AddState("dying", new DyingState());
             StateMachine.AddState("deploying", new DeployingState());
+            StateMachine.AddState("retreating", new RetreatingState());
+            
+            StateMachine.TransitionTo("idle");
+        }
+
+        public Pokemon(string name, int level, PokemonView view, AnimatedSprite animatedSprite)
+        {
+            Name = name;
+            MaxHp = 100; // Simplified for example
+            Hp = MaxHp;
+            View = view;
+            AnimatedSprite = animatedSprite;
+        }
+
+            
+            // Setup the State Machine
+            StateMachine = new StateMachine(this);
+            StateMachine.AddState("idle", new IdleState());
+            StateMachine.AddState("attacking", new AttackingState());
+            StateMachine.AddState("hurt", new HurtState());
+            StateMachine.AddState("dead", new DeadState());
+            StateMachine.AddState("dying", new DyingState());
+            StateMachine.AddState("deploying", new DeployingState());
+            StateMachine.AddState("retreating", new RetreatingState());
             
             StateMachine.TransitionTo("idle");
         }
@@ -44,7 +75,36 @@ namespace PokemonGame
         {
             string animationKey = $"{animationName}_{View.ToString().ToLower()}";
             Console.WriteLine($"[Animation] {Name} is playing: {animationKey}");
+
             // call animation here
+            switch (animationName)
+            {
+                case "idle":
+                    // Play idle animation
+                    break;
+                case "attack":
+                    // Play attack animation
+                    UpdateAttackAnimation(_pokemon.Position);
+                    break;
+                case "hurt":
+                    // Play hurt animation
+                    UpdateHurtAnimation(_pokemon.Position);
+                    break;
+                case "dying":
+                    // Play dying animation
+                    UpdateDeathAnimation(_pokemon.Position);
+                    break;
+                case "dead":
+                    // Play dead animation
+                    break;
+                case "deploying":
+                    // Play deploying animation
+                    break;
+                case "retreating":
+                    // Play retreating animation
+                    break;
+                default:
+            }
         }
         
         // Other methods like ShowSprite(), HideSprite() will go here
@@ -78,6 +138,7 @@ namespace PokemonGame
             Pokemon target = (Pokemon)args[1];
 
             Console.WriteLine($"{_pokemon.Name} is using {move.Name} on {target.Name}!");
+            this.StartAnimation(_pokemon.Position);
             _pokemon.PlayAnimation("attack");
             
             int damage = 15; // Placeholder
