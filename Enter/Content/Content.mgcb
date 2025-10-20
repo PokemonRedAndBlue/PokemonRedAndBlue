@@ -91,6 +91,9 @@
 #begin Pokemon_FRONT.xml
 /copy:Pokemon_FRONT.xml
 
+#begin Route1Map.xml
+/copy:Route1Map.xml
+
 #begin Tiles.xml
 /copy:Tiles.xml
 
