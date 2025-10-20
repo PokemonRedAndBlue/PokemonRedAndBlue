@@ -7,6 +7,19 @@ using Enter.Classes.Sprites;
 namespace PokemonGame
 {
     public enum PokemonView { Front, Back }
+    private readonly Dictionary<string, Action<Vector2>> _animationActions = new Dictionary<string, Action<Vector2>>
+    {
+        // Key: "animationName", Value: the method to call
+        { "attack",     (pos) => UpdateAttackAnimation(pos) },
+        { "hurt",       (pos) => UpdateHurtAnimation(pos) },
+        { "dying",      (pos) => UpdateDeathAnimation(pos) },
+        
+        // For animations with no action, you can point to an empty action
+        { "idle",       (pos) => { /* Do nothing or handle looping idle anim */ } },
+        { "dead",       (pos) => { /* Static state, do nothing */ } },
+        { "deploying",  (pos) => { /* Call deploying animation method */ } },
+        { "retreating", (pos) => { /* Call retreating animation method */ } }
+    };
 
     public class Pokemon
     {
@@ -77,33 +90,9 @@ namespace PokemonGame
             Console.WriteLine($"[Animation] {Name} is playing: {animationKey}");
 
             // call animation here
-            switch (animationName)
+            if (_animationActions.ContainsKey(animationName))
             {
-                case "idle":
-                    // Play idle animation
-                    break;
-                case "attack":
-                    // Play attack animation
-                    UpdateAttackAnimation(_pokemon.Position);
-                    break;
-                case "hurt":
-                    // Play hurt animation
-                    UpdateHurtAnimation(_pokemon.Position);
-                    break;
-                case "dying":
-                    // Play dying animation
-                    UpdateDeathAnimation(_pokemon.Position);
-                    break;
-                case "dead":
-                    // Play dead animation
-                    break;
-                case "deploying":
-                    // Play deploying animation
-                    break;
-                case "retreating":
-                    // Play retreating animation
-                    break;
-                default:
+                _animationActions[animationName](Position);
             }
         }
         
