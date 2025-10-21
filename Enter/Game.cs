@@ -36,6 +36,7 @@ public class Game1 : Core
 
     private List<Tile> _tiles = new List<Tile>();
     public TileCycler TileCycler { get; private set; }
+    private Tilemap _currentMap;
     public bool ResetRequested { get; set; } = false;   // added to reset 
     private double elapsedTime = 0;    
     private int regionsToDraw = 0; 
@@ -68,6 +69,8 @@ public class Game1 : Core
 
         _tiles = TileLoader.LoadTiles("Content/Tiles.xml");
         TileCycler = new TileCycler(_tiles);
+
+        _currentMap = TilemapLoader.LoadTilemap("Content/Route1Map.xml");
 
         // Create the nine starter Pokémon animations
         String[] FrontPokemonAnimations = {
@@ -164,6 +167,8 @@ public class Game1 : Core
         GraphicsDevice.Clear(Color.Black);  // Black for background color
 
         SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
+
+        _currentMap?.Draw(scale: 4f, offset: new Vector2(0, 0));
 
         _pokeballthrow.Draw(SpriteBatch);
         _pokeballCapture.Draw(SpriteBatch);
