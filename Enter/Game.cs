@@ -98,6 +98,7 @@ public class Game1 : Core
     protected override void Update(GameTime gameTime)
     {
         controller.Update(this, gameTime, Cam, player, trainer);
+        Cam.Update();
         
         // logic for cycling back pokemon
         elapsedTime += gameTime.ElapsedGameTime.TotalSeconds;
@@ -166,15 +167,18 @@ public class Game1 : Core
     {
         GraphicsDevice.Clear(Color.Black);  // Black for background color
 
-        SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
+        // map & world entities affected by camera movement
+        SpriteBatch.Begin(transformMatrix: Cam.GetViewMatrix(), samplerState: SamplerState.PointClamp);
+        _currentMap?.DrawCropped(Cam.VisibleWorldRect, scale: 4f);
+        player.Draw(SpriteBatch, 4f);
+        trainer.Draw(SpriteBatch, 4f);
+        SpriteBatch.End();
 
-        _currentMap?.Draw(scale: 4f, offset: new Vector2(0, 0));
+        // elements not affected by camera movement
+        SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
         _pokeballthrow.Draw(SpriteBatch);
         _pokeballCapture.Draw(SpriteBatch);
-
-        player.Draw(SpriteBatch, 4f);
-        trainer.Draw(SpriteBatch, 4f);
 
         // Draw all Pokémon on the right half of the screen (x >= 640)
         frontPokemonPosition = new Vector2(720, 150);
