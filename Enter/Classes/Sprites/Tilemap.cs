@@ -25,23 +25,29 @@ public class Tilemap
     }
 
     /// Draw all layers of the tilemap
-    public void Draw(float scale = 1.0f, Vector2? offset = null)
+    public void Draw(float scale = 1.0f)
     {
-        Vector2 drawOffset = offset ?? Vector2.Zero;
-        
         foreach (var layer in Layers.Values)
         {
-            layer.Draw(this, scale, drawOffset);
+            layer.Draw(this, scale);
+        }
+    }
+
+    /// Draw all layers of the tilemap, but only tiles that intersect the given world-space view rectangle
+    public void DrawCropped(Rectangle viewRect, float scale = 1.0f)
+    {
+        foreach (var layer in Layers.Values)
+        {
+            layer.DrawCropped(this, viewRect, scale);
         }
     }
 
     /// Draw a specific layer
-    public void DrawLayer(string layerName, float scale = 1.0f, Vector2? offset = null)
+    public void DrawLayer(string layerName, float scale = 1.0f)
     {
         if (Layers.TryGetValue(layerName, out var layer))
         {
-            Vector2 drawOffset = offset ?? Vector2.Zero;
-            layer.Draw(this, scale, drawOffset);
+            layer.Draw(this, scale);
         }
     }
 
@@ -95,7 +101,7 @@ public class TilemapLayer
         }
     }
 
-    public void Draw(Tilemap tilemap, float scale, Vector2 offset)
+    public void Draw(Tilemap tilemap, float scale)
     {
         if (!Visible) return;
 
@@ -113,9 +119,41 @@ public class TilemapLayer
 
                 if (tilemap.TileSet.TryGetValue(tileId, out var tile))
                 {
-                    int drawX = (int)(x * tilemap.TileWidth * scale + offset.X);
-                    int drawY = (int)(y * tilemap.TileHeight * scale + offset.Y);
-                    
+                    int drawX = (int)(x * tilemap.TileWidth * scale);
+                    int drawY = (int)(y * tilemap.TileHeight * scale);
+                    tile.Draw(drawX, drawY, scale, SpriteEffects.None);
+                }
+            }
+        }
+    }
+
+    public void DrawCropped(Tilemap tilemap, Rectangle viewRect, float scale)
+    {
+        if (!Visible) return;
+
+        // Work in scaled pixel units so spacing matches tile render size
+        int tileW = (int)(tilemap.TileWidth * scale);
+        int tileH = (int)(tilemap.TileHeight * scale);
+
+        int cols = Data.GetLength(1);
+        int rows = Data.GetLength(0);
+
+        int x0 = Math.Max(0, viewRect.Left / tileW);
+        int y0 = Math.Max(0, viewRect.Top / tileH);
+        int x1 = Math.Min(cols - 1, (viewRect.Right - 1) / tileW);
+        int y1 = Math.Min(rows - 1, (viewRect.Bottom - 1) / tileH);
+
+        for (int y = y0; y <= y1; y++)
+        {
+            for (int x = x0; x <= x1; x++)
+            {
+                int tileId = Data[y, x];
+                if (tileId == 0) continue;
+
+                if (tilemap.TileSet.TryGetValue(tileId, out var tile))
+                {
+                    int drawX = x * tileW;
+                    int drawY = y * tileH;
                     tile.Draw(drawX, drawY, scale, SpriteEffects.None);
                 }
             }
