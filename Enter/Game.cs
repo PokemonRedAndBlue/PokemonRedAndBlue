@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Enter.Classes.Animations;
 using Enter.Classes.Behavior;
+using Enter.Classes.Cameras;
 using Enter.Classes.Characters;
 using Enter.Classes.GameState;
 using Enter.Classes.Input;
@@ -20,6 +21,7 @@ public class Game1 : Core
     private Texture2D character;
     private Player player;
     private Trainer trainer;
+    private Camera Cam;
     private KeyboardController controller;
     private TextureAtlas _PokemonBackAtlas;
     private Vector2 frontPokemonPosition = new Vector2(720, 150);
@@ -47,8 +49,10 @@ public class Game1 : Core
 
         _PokemonBackAtlas = TextureAtlas.FromFile(Content, "Pokemon_BACK.xml");
 
+        Cam = new(Window);
         character = Content.Load<Texture2D>("images/Pokemon_Characters");
         player = new Player(character, Window);
+        Cam.CenterOn(player.Position);
         trainer = new Trainer(
             character,
             new Vector2(Window.ClientBounds.Height, Window.ClientBounds.Width) * 0.25f,
@@ -90,7 +94,7 @@ public class Game1 : Core
 
     protected override void Update(GameTime gameTime)
     {
-        controller.Update(this, gameTime, player, trainer);
+        controller.Update(this, gameTime, Cam, player, trainer);
         
         // logic for cycling back pokemon
         elapsedTime += gameTime.ElapsedGameTime.TotalSeconds;
@@ -157,7 +161,7 @@ public class Game1 : Core
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.White);
+        GraphicsDevice.Clear(Color.Black);  // Black for background color
 
         SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
