@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework.Input;
 using Enter.Classes.Characters;
 using Enter.Classes.Behavior;
 using Microsoft.Xna.Framework;
+using Enter.Classes.Cameras;
 
 namespace Enter.Classes.Input;
 
@@ -13,7 +14,7 @@ public class KeyboardController
     private KeyboardState prevState, currState;
     private bool isInitialized = false;
     private Direction prevDirection = Direction.None;
-    public void Update(Game1 game, GameTime gameTime, Player player, Trainer trainer)
+    public void Update(Game1 game, GameTime gameTime, Camera Cam, Player player, Trainer trainer)
     {
         // Get the current state of keyboard input.
         currState = Keyboard.GetState();
@@ -32,7 +33,7 @@ public class KeyboardController
         Direction chosenDirection = ChooseDirection(keyIsUp, keyIsDown, keyIsLeft, keyIsRight);
         MoveDirection = chosenDirection;
 
-        Command.UpdateCommands(game, gameTime, this, player, trainer);
+        Command.UpdateCommands(game, gameTime, this, Cam, player, trainer);
 
         prevDirection = chosenDirection;
         prevState = currState;

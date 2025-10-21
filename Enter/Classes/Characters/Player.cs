@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
+using Enter.Classes.Cameras;
 using Enter.Classes.Input;
 using Enter.Classes.Sprites;
 
@@ -36,7 +37,7 @@ public class Player
         _texture = texture2;
     }
 
-    public void Update(GameTime gameTime, KeyboardController keyboard)
+    public void Update(GameTime gameTime, KeyboardController keyboard, Camera Cam)
     {
         // Determine if moving, and which way we face
         bool isMoving = (!_seenByTrainer) && UpdateDirection(keyboard);
@@ -44,7 +45,7 @@ public class Player
         if (isMoving)
         {
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            UpdatePosition(dt);
+            UpdatePosition(dt, Cam);
             _sprite.UpdateMovAnim(_facing, dt);
         }
         else
@@ -81,10 +82,12 @@ public class Player
         return true;
     }
 
-    private void UpdatePosition(float dt)
+    private void UpdatePosition(float dt, Camera Cam)
     {
         // Normalize axis (already unit in each axis), move in pixels/sec
-        Position += _directions[_facing] * SpeedPxPerSec * dt;
+        Vector2 temp = _directions[_facing] * SpeedPxPerSec * dt;
+        Cam.DiffPos = temp;
+        Position += temp;
     }
 
     public void Draw(SpriteBatch spriteBatch, float scale)
