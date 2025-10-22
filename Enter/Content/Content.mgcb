@@ -91,6 +91,11 @@
 #begin Pokemon_FRONT.xml
 /copy:Pokemon_FRONT.xml
 
+#begin pokemon_stats.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:pokemon_stats.xml
+
 #begin Route1Map.xml
 /copy:Route1Map.xml
 
