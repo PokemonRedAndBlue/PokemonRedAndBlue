@@ -140,13 +140,10 @@ namespace PokemonGame
         public void Enter(object owner, params object[] args)
         {
             _pokemon = (Pokemon)owner;
-            if (args.Length >= 2 && args[0] is Move move && args[1] is Pokemon target)
-            {
-                Console.WriteLine($"{_pokemon.Name} is using {move.Name} on {target.Name}!");
-                _pokemon.PlayAnimation("attack");
-                int damage = 15; // Placeholder
-                target.TakeDamage(damage);
-            }
+            _pokemon.PlayAnimation("attack");
+            //int damage = 15; // Placeholder
+            //target.TakeDamage(damage);
+            
 
             // transition back to idle (replace with animation-complete logic later)
             _pokemon.StateMachine.TransitionTo("idle");
