@@ -23,13 +23,15 @@ namespace PokemonGame
         public AnimatedSprite AnimatedSprite { get; private set; }
         public Vector2 Position { get; set; }
 
-        public Pokemon(string name, int level, PokemonView view, Sprite sprite, Vector2 position)
+        public Sprite _sprite;
+
+        public Pokemon(string name, int level, PokemonView view, AnimatedSprite animatedSprite, Vector2 position)
         {
             Name = name;
             MaxHp = 100;
             Hp = MaxHp;
             View = view;
-            Sprite = sprite;
+            AnimatedSprite = animatedSprite;
             Position = position;
 
             StateMachine = new StateMachine(this);
@@ -54,13 +56,14 @@ namespace PokemonGame
             };
         }
 
-        public Pokemon(string name, int level, PokemonView view, AnimatedSprite animatedSprite)
+        public Pokemon(string name, int level, PokemonView view, Sprite sprite, Vector2 position)
         {
             Name = name;
             MaxHp = 100;
             Hp = MaxHp;
             View = view;
-            AnimatedSprite = animatedSprite;
+            _sprite = sprite;
+            Position = position;
 
             StateMachine = new StateMachine(this);
             StateMachine.AddState("idle", new IdleState());

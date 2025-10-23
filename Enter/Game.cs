@@ -29,7 +29,7 @@ public class Game1 : Core
     protected override void LoadContent()
     {
         // Initialize Scene Manager and Dependencies
-        _sceneManager = new SceneManager(Content);
+        _sceneManager = new SceneManager(Content, SpriteBatch);
         _sceneManager.AddScene("overworld", new OverworldScene(_sceneManager, this, _controller));
         _sceneManager.AddScene("trainer", new TrainerBattleScene(_sceneManager, this, "TRAINER_TESTER")); 
         _currentMap = TilemapLoader.LoadTilemap("Content/Route1Map.xml");
