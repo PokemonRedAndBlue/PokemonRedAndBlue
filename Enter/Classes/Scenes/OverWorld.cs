@@ -30,15 +30,16 @@ namespace PokemonGame.Scenes
         private Camera Cam;
         private Texture2D character;
         private Trainer trainer;
-        private KeyboardController controller;
+        private KeyboardController _controller;
         private Player player;
         private Game1 _game;
         private Tilemap _currentMap;
         // We must pass in the SceneManager so this scene can request transitions
-        public OverworldScene(SceneManager sceneManager, Game1 game1)
+        public OverworldScene(SceneManager sceneManager, Game1 game1, KeyboardController controller)
         {
             _sceneManager = sceneManager;
             _game = game1;
+            _controller = controller;
         }
 
         public void LoadContent(ContentManager content)
@@ -53,14 +54,13 @@ namespace PokemonGame.Scenes
                 new Vector2(Window.ClientBounds.Height, Window.ClientBounds.Width) * 0.25f,
                 Facing.Right
             );
-            controller = new KeyboardController();
             _currentMap = TilemapLoader.LoadTilemap("Content/Route1Map.xml");
         }
 
         public void Update(GameTime gameTime)
         {
-            // --- Update Objects ---
-            controller.Update(_game, gameTime, Cam, player, trainer);
+            // Update Objects
+            _controller.Update(_game, gameTime, Cam, player, trainer);
             Cam.Update();
 
             // --- Example: Force a battle with trainer interaction ---
