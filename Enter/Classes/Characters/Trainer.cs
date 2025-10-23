@@ -22,7 +22,7 @@ public class Trainer
     private TrainerSprite _sprite;
     private int _spriteIndex;
     private Facing _facing = Facing.Down; // Facing direction
-    private bool _visible = false;  // Whether the trainer sees a player now
+    public bool visible = false;  // Whether the trainer sees a player now
 
     public Trainer(Texture2D texture, Vector2 Pos, Facing facing) : this(texture, Pos, facing, false) { }
     public Trainer(Texture2D texture, Vector2 Pos, Facing facing, bool moving) : this(texture, 0, Pos, facing, moving) { }
@@ -42,8 +42,8 @@ public class Trainer
 
     public void Update(GameTime gametime, Player player)    // TODO: Sprites
     {
-        if (!_visible && IsVisible(player)) _visible = true;    // decrease number of condition checks
-        if (_visible)
+        if (!visible && IsVisible(player)) visible = true;    // decrease number of condition checks
+        if (visible)
         {
             player.Stop();
             GoToPlayer(player, gametime);
@@ -85,8 +85,7 @@ public class Trainer
         // Stop moving if it is nonmoving trainer, or in close range
         if (Math.Abs(Vector2.Distance(player.Position, Position)) <= InteractionRange)
         {
-            _visible = false;
-            // BattleMain.LoadScene();
+            visible = false;
             player.StopEnd();
             return;
         }

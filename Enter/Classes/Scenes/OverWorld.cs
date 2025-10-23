@@ -34,6 +34,7 @@ namespace PokemonGame.Scenes
         private Player player;
         private Game1 _game;
         private Tilemap _currentMap;
+
         // We must pass in the SceneManager so this scene can request transitions
         public OverworldScene(SceneManager sceneManager, Game1 game1, KeyboardController controller)
         {
@@ -63,10 +64,10 @@ namespace PokemonGame.Scenes
             _controller.Update(_game, gameTime, Cam, player, trainer);
             Cam.Update();
 
-            // --- Example: Force a battle with trainer interaction ---
-            if (false){ // Replace with actual interaction check
+            // Force a battle with trainer interaction
+            if (trainer.visible){
                 // Example of starting a specific trainer battle
-                _sceneManager.TransitionTo("trainerBattle_Brock");
+                _sceneManager.TransitionTo("trainerBattle_TESTER");
             }
             // no need for base.Update here
         }
