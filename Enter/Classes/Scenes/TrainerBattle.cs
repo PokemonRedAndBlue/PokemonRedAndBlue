@@ -16,18 +16,19 @@ namespace PokemonGame.Scenes
     {
         private SceneManager _sceneManager;
         private string _trainerID;
-        private Trainer _trainer;
         private Pokemon _playerPokemon;
         private Pokemon _enemyPokemon;
         private Vector2 _playerPokemonPosition = new Vector2(800, 400);
         private Vector2 _enemyPokemonPosition = new Vector2(400, 200);
+        private Game _game;
 
         private TextSprite trainerText;
         private SpriteFont _font;
-        public TrainerBattleScene(SceneManager sceneManager, string trainerID)
+        public TrainerBattleScene(SceneManager sceneManager, Game game1, string trainerID)
         {
             _sceneManager = sceneManager;
             _trainerID = trainerID; // e.g., "TRAINER_BROCK"
+            _game = game1;
         }
 
         public void LoadContent(ContentManager content)
@@ -70,7 +71,7 @@ namespace PokemonGame.Scenes
             
             // Draw Pokemon, health bars, menus
             _enemyPokemon.AnimatedSprite.Draw(spriteBatch, Color.White,_enemyPokemonPosition, 4f);
-            _playerPokemon.AnimatedSprite.Draw(spriteBatch, Color.White,_playerPokemonPosition, 4f);
+            _playerPokemon.Sprite.Draw(spriteBatch, Color.White,_playerPokemonPosition, 4f);
 
             // Draw UI elements
             trainerText.Draw(spriteBatch, Color.White, new Vector2(100, 100), 4f);

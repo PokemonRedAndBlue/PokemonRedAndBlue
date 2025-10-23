@@ -92,7 +92,9 @@
 /copy:Pokemon_FRONT.xml
 
 #begin PokemonFont.spritefont
-/copy:PokemonFont.spritefont
+/importer:
+/processor:
+/build:PokemonFont.spritefont
 
 #begin PokemonFont.xml
 /copy:PokemonFont.xml
