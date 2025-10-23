@@ -19,16 +19,10 @@ public class Game1 : Core
 {
     // Needed class vars
     Dictionary<String, AnimatedSprite> FrontPokemon = new Dictionary<string, AnimatedSprite>();
-    private Texture2D character;
-    private Player player;
-    private Trainer trainer;
-    private Camera Cam;
     private KeyboardController _controller = new KeyboardController();
     private Vector2 postion = new Vector2(100, 100);
     private Tilemap _currentMap;
-    public bool ResetRequested { get; set; } = false;   // added to reset 
-    private double elapsedTime = 0;
-    private int regionsToDraw = 0;
+    public bool ResetRequested { get; set; } = false;   // added to reset game
     private SceneManager _sceneManager;
     public Game1() : base("PokemonRedAndBlue", 1280, 720, false) { }
 
