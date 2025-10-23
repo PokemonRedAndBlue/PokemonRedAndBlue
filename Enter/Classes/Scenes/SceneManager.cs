@@ -40,10 +40,7 @@ namespace PokemonGame.Scenes
 
             _isTransitioning = true;
             
-            // 1. Unload the old scene (if it exists)
-            _currentScene?.UnloadContent();
-
-            // 2. Load and set the new scene
+            // Load and set the new scene
             _currentScene = _scenes[sceneName];
             _currentScene.LoadContent(_content);
 
