@@ -16,9 +16,12 @@ namespace PokemonGame.Scenes
         private readonly ContentManager _content;
         private bool _isTransitioning = false;
 
-        public SceneManager(ContentManager content)
+        private SpriteBatch _spriteBatch;
+
+        public SceneManager(ContentManager content, SpriteBatch spriteBatch)
         {
             _content = content;
+            _spriteBatch = spriteBatch;
         }
 
         /// <summary>
