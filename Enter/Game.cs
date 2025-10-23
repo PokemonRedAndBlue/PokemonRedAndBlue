@@ -27,12 +27,6 @@ public class Game1 : Core
     private Vector2 postion = new Vector2(100, 100);
     private PokeballthrowAnimation _pokeballthrow;
     private PokeballCaptureAnimation _pokeballCapture;
-
-    private HurtAnimation hurt = new HurtAnimation();
-    private AttackAnimation attack = new AttackAnimation();
-
-    private DeathAnimation death = new DeathAnimation();
-
     private List<Tile> _tiles = new List<Tile>();
     public TileCycler TileCycler { get; private set; }
     private Tilemap _currentMap;
