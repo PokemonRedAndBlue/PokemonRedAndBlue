@@ -8,7 +8,6 @@ using Enter.Classes.Cameras;
 using Enter.Classes.Characters;
 using Enter.Classes.GameState;
 using Enter.Classes.Input;
-using Enter.Classes.Scenes;
 using Enter.Classes.Sprites;
 using Enter.Classes.Textures;
 
