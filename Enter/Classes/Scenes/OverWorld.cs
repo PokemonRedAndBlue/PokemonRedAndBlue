@@ -65,9 +65,9 @@ namespace PokemonGame.Scenes
             Cam.Update();
 
             // Force a battle with trainer interaction
-            if (trainer.visible){
+            if (trainer.colided){
                 // Example of starting a specific trainer battle
-                _sceneManager.TransitionTo("trainerBattle_TESTER");
+                _sceneManager.TransitionTo("trainer");
             }
             // no need for base.Update here
         }
