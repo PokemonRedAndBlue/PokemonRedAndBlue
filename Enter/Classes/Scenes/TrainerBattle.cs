@@ -42,7 +42,7 @@ namespace PokemonGame.Scenes
             _playerPokemon = new Pokemon("charmander", 1, PokemonView.Back, playerSprite, _playerPokemonPosition);
 
             // Load UI
-            _font = content.Load<SpriteFont>("fonts/PokemonFont");
+            _font = content.Load<SpriteFont>("PokemonFont");
             trainerText = new TextSprite($"TRAINER BATTLE: {_trainerID}", _font, Color.Black);
         }
 

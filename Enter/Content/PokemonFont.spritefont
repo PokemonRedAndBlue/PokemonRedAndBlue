@@ -6,7 +6,7 @@
       This is the important part.
       It points to your .ttf file's path, relative to the Content folder.
     -->
-    <FontName>fonts/PokemonFont.ttf</FontName>
+    <FontName>PokemonFont.ttf</FontName>
     
     <Size>12</Size>
     <Spacing>0</Spacing>
