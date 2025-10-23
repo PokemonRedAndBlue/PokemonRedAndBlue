@@ -24,15 +24,7 @@ namespace PokemonGame.Scenes
 
         public void LoadContent(ContentManager content)
         {
-            // Load your tilemap, player sprites, NPCs, etc.
-            // _font = content.Load<SpriteFont>("fonts/DebugFont");
-            // _player = new Player(content.Load<Texture2D>("sprites/player"));
-            // _tilemap = new Tilemap(content.Load<Texture2D>("tiles/overworld_tiles"));
-        }
-
-        public void UnloadContent()
-        {
-            // Unload scene-specific content if necessary.
+            // Load tilemap, player sprites, NPCs, etc.
         }
 
         public void Update(GameTime gameTime)
@@ -70,8 +62,6 @@ namespace PokemonGame.Scenes
             // Draw order matters: tilemap first, then player/NPCs
             // _tilemap.Draw(spriteBatch);
             // _player.Draw(spriteBatch);
-            
-            // _font.DrawString(spriteBatch, "OVERWORLD", ...);
         }
     }
 }

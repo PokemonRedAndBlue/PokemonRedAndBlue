@@ -31,15 +31,10 @@ namespace PokemonGame.Scenes
             // _battleUI = new BattleUI(content);
         }
 
-        public void UnloadContent() 
-        {
-            // Unload scene-specific content if necessary
-        }
-
         public void Update(GameTime gameTime)
         {
             // --- Battle Logic ---
-            // This is where your battle state machine would live.
+            // This is where battle state machine would live.
             // e.g., PlayerChooseMove -> PlayerAttack -> EnemyAttack -> EndTurn
             // _playerPokemon.StateMachine.Update(gameTime);
             // _enemyPokemon.StateMachine.Update(gameTime);
@@ -57,12 +52,10 @@ namespace PokemonGame.Scenes
         {
             spriteBatch.GraphicsDevice.Clear(Color.DarkSlateGray); // Battle color
             
-            // Draw your Pokemon, health bars, menus
+            // Draw Pokemon, health bars, menus
             // _enemyPokemon.Draw(spriteBatch);
             // _playerPokemon.Draw(spriteBatch);
             // _battleUI.Draw(spriteBatch);
-            
-            // _font.DrawString(spriteBatch, "WILD BATTLE!", ...);
         }
     }
 }
