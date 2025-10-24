@@ -13,7 +13,7 @@ public class Player
 {
 
     public Vector2 Position { get; set; } = Vector2.Zero;
-    private const float SpeedPxPerSec = 80f; // movement speed
+    private const float SpeedPxPerSec = 100f; // movement speed
     protected static readonly Dictionary<Facing, Vector2> _directions = new()
     {
         { Facing.Up,    new Vector2(0, -1) },
