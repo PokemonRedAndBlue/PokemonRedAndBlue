@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace PokemonGame.Scenes
+namespace Enter.Interfaces
 {
     /// <summary>
     /// The interface all game scenes (Overworld, Battle, Menu) must implement.

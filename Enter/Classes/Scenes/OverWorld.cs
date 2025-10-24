@@ -2,19 +2,13 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input; // For example input
-using System;
-using System.Collections.Generic;
-using Enter.Classes.Animations;
-using Enter.Classes.Behavior;
 using Enter.Classes.Cameras;
 using Enter.Classes.Characters;
-using Enter.Classes.GameState;
 using Enter.Classes.Input;
 using Enter.Classes.Sprites;
-using Enter.Classes.Textures;
-using Enter;
+using Enter.Interfaces;
 
-namespace PokemonGame.Scenes
+namespace Enter.Classes.Scenes
 {
     /// <summary>
     /// The scene for when the player is walking around in the world.
@@ -22,15 +16,14 @@ namespace PokemonGame.Scenes
     /// </summary>
     public class OverworldScene : IGameScene
     {
+        private const float ZoomLevel = 4f;
         private SceneManager _sceneManager;
         private SpriteFont _font; // Placeholder for UI/debug text
-        private Player _player;
         private Tilemap _tilemap;
-        private GameWindow Window = Game1.Instance.Window;
         private Camera Cam;
+        private KeyboardController _controller;
         private Texture2D character;
         private Trainer trainer;
-        private KeyboardController _controller;
         private Player player;
         private Game1 _game;
         private Tilemap _currentMap;
@@ -46,13 +39,14 @@ namespace PokemonGame.Scenes
         public void LoadContent(ContentManager content)
         {
             // Load tilemap, player sprites, NPCs, etc.
-            Cam = new(Window);
+            Cam = new(((Game)_game).GraphicsDevice.Viewport);
             character = content.Load<Texture2D>("images/Pokemon_Characters");
-            player = new Player(character, Window);
-            Cam.CenterOn(player.Position);
+            player = new Player(character, _game.Window);
+            Cam.Update(player);
+            Cam.Zoom = ZoomLevel;
             trainer = new Trainer(
                 character,
-                new Vector2(Window.ClientBounds.Height, Window.ClientBounds.Width) * 0.25f,
+                new Vector2(_game.Window.ClientBounds.Height, _game.Window.ClientBounds.Width) * 0.25f,
                 Facing.Right
             );
             _currentMap = TilemapLoader.LoadTilemap("Content/Route1Map.xml");
@@ -62,7 +56,7 @@ namespace PokemonGame.Scenes
         {
             // Update Objects
             _controller.Update(_game, gameTime, Cam, player, trainer);
-            Cam.Update();
+            Cam.Update(player);
 
             // Force a battle with trainer interaction
             if (trainer.colided){
@@ -78,9 +72,9 @@ namespace PokemonGame.Scenes
 
             // map & world entities affected by camera movement
             spriteBatch.Begin(transformMatrix: Cam.GetViewMatrix(), samplerState: SamplerState.PointClamp);
-            _currentMap?.DrawCropped(Cam.VisibleWorldRect, scale: 4f);
-            player.Draw(spriteBatch, 4f);
-            trainer.Draw(spriteBatch, 4f);
+            _currentMap?.DrawCropped(Cam.VisibleWorldRect, scale: ZoomLevel);
+            player.Draw(spriteBatch, ZoomLevel);
+            trainer.Draw(spriteBatch, ZoomLevel);
             spriteBatch.End();
 
             // no need for base.Draw here

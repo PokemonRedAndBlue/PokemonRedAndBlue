@@ -2,8 +2,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input; // For example input
+using Enter.Interfaces;
 
-namespace PokemonGame.Scenes
+namespace Enter.Classes.Scenes
 {
     /// <summary>
     /// The scene for a wild Pokemon battle.

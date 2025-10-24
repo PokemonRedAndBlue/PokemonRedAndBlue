@@ -15,7 +15,7 @@ public class Trainer
     private const float SpeedPxPerSec = 80f,
         InteractionRange = 64f, // might change based on scale?
         DefaultVisionRange = 256f,
-        AlignMOE = 4f;  // Margin of Error for aligning checks
+        AlignMOE = 1f;  // Margin of Error for aligning checks, will be changed to tile based later
     private readonly float _visionRange = DefaultVisionRange;
     private readonly bool _moving = false;  // Whether the trainer will hang around when idling
     private readonly Texture2D _texture;
