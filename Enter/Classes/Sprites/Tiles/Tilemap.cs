@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Enter.Classes.Sprites;
 
-/// Represents a complete tilemap with multiple layers
+/// Represents a tilemap with multiple layers
 public class Tilemap
 {
     public int TileWidth { get; set; }
@@ -24,7 +24,7 @@ public class Tilemap
         TileSet = new Dictionary<int, Tile>();
     }
 
-    /// Draw all layers of the tilemap
+    /// Draw all layers of tilemap
     public void Draw(float scale = 1.0f)
     {
         foreach (var layer in Layers.Values)
