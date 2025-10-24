@@ -60,10 +60,7 @@ public class TilemapLayer
         }
     }
 
-    /// <summary>
-    /// Draw only tiles that intersect the given world-space view rectangle.
-    /// This optimizes rendering by skipping tiles outside the camera view.
-    /// </summary>
+    /// Draw only tiles that intersect the given world-space view rectangle
     public void DrawCropped(Tilemap tilemap, Rectangle viewRect, float scale)
     {
         if (!Visible) return;
