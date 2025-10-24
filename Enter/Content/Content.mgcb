@@ -92,12 +92,11 @@
 /copy:Pokemon_FRONT.xml
 
 #begin PokemonFont.spritefont
-/importer:
-/processor:
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
 /build:PokemonFont.spritefont
-
-#begin PokemonFont.xml
-/copy:PokemonFont.xml
 
 #begin Route1Map.xml
 /copy:Route1Map.xml

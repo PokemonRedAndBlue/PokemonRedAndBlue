@@ -85,9 +85,9 @@ public class Player
     private void UpdatePosition(float dt, Camera Cam)
     {
         // Normalize axis (already unit in each axis), move in pixels/sec
-        Vector2 temp = _directions[_facing] * SpeedPxPerSec * dt;
-        Cam.DiffPos = temp;
-        Position += temp;
+        Vector2 diffPos = _directions[_facing] * SpeedPxPerSec * dt;
+        Cam.DiffPos = diffPos;
+        Position += diffPos;
     }
 
     public void Draw(SpriteBatch spriteBatch, float scale)

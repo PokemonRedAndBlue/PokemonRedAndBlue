@@ -1,53 +1,62 @@
 using Microsoft.Xna.Framework;
 using Enter.Classes.Characters;
+using Enter.Classes.Sprites;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Enter.Classes.Cameras;
 
 public class Camera
 {
 
-    public Vector2 DiffPos
-    {
-        get => _difPos;
-        set => _difPos = value;
-    }
+    public Vector2 DiffPos { get; set; } = new(0, 0);
+    public float Zoom { get; set; } = 1.0f;
     // The visible world rectangle covered by the current camera view
     public Rectangle VisibleWorldRect => new(
         (int)_viewOrigin.X,
         (int)_viewOrigin.Y,
-        _window.ClientBounds.Width,
-        _window.ClientBounds.Height
+        _viewport.Width,
+        _viewport.Height
     );
-    private readonly GameWindow _window;
-    private Vector2 _difPos = new(0, 0);
+
+    private readonly Viewport _viewport;
     private Vector2 _viewOrigin = new(0, 0);
 
-    public Camera(GameWindow Window)
+    public Camera(Viewport viewport)
     {
-        _window = Window;
+        _viewport = viewport;
     }
 
+    /// <summary>
+    /// For general purpose of moving the camera
+    /// </summary>
     public void Update()
     {
         _viewOrigin += DiffPos;
         DiffPos = Vector2.Zero;
     }
     
-    // if called with a player, just recenter
+    /// <summary>
+    /// Recenter on the center of player's sprite instead of the upper left corner.
+    /// </summary>
+    /// <param name="player">The player object</param>
     public void Update(Player player)
     {
-        CenterOn(player.Position);
+        CenterOn(player.Position + 0.5f * Zoom * new Vector2(PlayerSprite.SpriteSize));
     }
 
+    /// <summary>
+    /// Center on a given position
+    /// </summary>
+    /// <param name="Pos">the position to center on</param>
     public void CenterOn(Vector2 Pos)
     {
-        Vector2 viewport = new(_window.ClientBounds.Width, _window.ClientBounds.Height);
-        _viewOrigin = Pos - 0.5f * viewport;
+        _viewOrigin = Pos - 0.5f * new Vector2(_viewport.Width, _viewport.Height);
     }
 
     // Matrix used by SpriteBatch to convert world -> screen, as camera offset
     public Matrix GetViewMatrix()
     {
+        // moves the world opposite of the camera, zoom, and recenter after scaling
         return Matrix.CreateTranslation(new Vector3(-_viewOrigin, 0f));
     }
 

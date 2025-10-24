@@ -9,19 +9,20 @@ namespace Enter.Classes.Sprites;
 public class PlayerSprite
 {
 
+    public const int SpriteSize = 16;
     private const float FrameDuration = 0.12f;
     private readonly List<Rectangle> sprites =
     [
-        new(9, 34, 16, 16),   // 0 - Down 1
-        new(26, 34, 16, 16),  // 1 - Down 2
-        new(43, 34, 16, 16),  // 2 - Down 3
-        new(60, 34, 16, 16),  // 3 - Up 1
-        new(77, 34, 16, 16),  // 4 - Up 2
-        new(94, 34, 16, 16),  // 5 - Up 3
-        new(111, 34, 16, 16), // 6 - Left 1
-        new(128, 34, 16, 16), // 7 - Left 2
-        new(145, 34, 16, 16), // 8 - Right 1
-        new(162, 34, 16, 16), // 9 - Right 2
+        new(9,   34, SpriteSize, SpriteSize), // 0 - Down 1
+        new(26,  34, SpriteSize, SpriteSize), // 1 - Down 2
+        new(43,  34, SpriteSize, SpriteSize), // 2 - Down 3
+        new(60,  34, SpriteSize, SpriteSize), // 3 - Up 1
+        new(77,  34, SpriteSize, SpriteSize), // 4 - Up 2
+        new(94,  34, SpriteSize, SpriteSize), // 5 - Up 3
+        new(111, 34, SpriteSize, SpriteSize), // 6 - Left 1
+        new(128, 34, SpriteSize, SpriteSize), // 7 - Left 2
+        new(145, 34, SpriteSize, SpriteSize), // 8 - Right 1
+        new(162, 34, SpriteSize, SpriteSize), // 9 - Right 2
     ];
     private int currentFrameIndex = 0;
     private float animTimer = 0f; // animationTimer
