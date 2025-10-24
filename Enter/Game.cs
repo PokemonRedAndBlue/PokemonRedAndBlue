@@ -3,27 +3,23 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Enter.Classes.Animations;
-using Enter.Classes.Behavior;
-using Enter.Classes.Cameras;
-using Enter.Classes.Characters;
-using Enter.Classes.GameState;
 using Enter.Classes.Input;
+using Enter.Classes.Scenes;
 using Enter.Classes.Sprites;
-using Enter.Classes.Textures;
-using PokemonGame.Engine;
-using PokemonGame.Scenes;
+using Enter.Classes.Cameras;
 
 namespace Enter;
 
 public class Game1 : Core
 {
     // Needed class vars
+    public bool ResetRequested { get; set; } = false;   // added to reset game
     Dictionary<String, AnimatedSprite> FrontPokemon = new Dictionary<string, AnimatedSprite>();
     private KeyboardController _controller = new KeyboardController();
     private Vector2 postion = new Vector2(100, 100);
     private Tilemap _currentMap;
-    public bool ResetRequested { get; set; } = false;   // added to reset game
     private SceneManager _sceneManager;
+    private GraphicsDevice _graphicsDevice;
     public Game1() : base("PokemonRedAndBlue", 1280, 720, false) { }
 
     protected override void LoadContent()
@@ -43,11 +39,7 @@ public class Game1 : Core
         _sceneManager.Update(gameTime);
 
         // Check for reset key
-        if (ResetRequested)
-        {
-            Reset();
-            return;
-        }
+        if (ResetRequested) { Reset(); return; }
 
         base.Update(gameTime);
     }
