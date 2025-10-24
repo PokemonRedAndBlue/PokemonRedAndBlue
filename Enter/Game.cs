@@ -19,7 +19,6 @@ public class Game1 : Core
     private Vector2 postion = new Vector2(100, 100);
     private Tilemap _currentMap;
     private SceneManager _sceneManager;
-    private GraphicsDevice _graphicsDevice;
     public Game1() : base("PokemonRedAndBlue", 1280, 720, false) { }
 
     protected override void LoadContent()
@@ -27,7 +26,7 @@ public class Game1 : Core
         // Initialize Scene Manager and Dependencies
         _sceneManager = new SceneManager(Content, SpriteBatch);
         _sceneManager.AddScene("overworld", new OverworldScene(_sceneManager, this, _controller));
-        _sceneManager.AddScene("trainer", new TrainerBattleScene(_sceneManager, this, "TRAINER_TESTER")); 
+        _sceneManager.AddScene("trainer", new TrainerBattleScene(_sceneManager, this, "TRAINER_TESTER"));
         _currentMap = TilemapLoader.LoadTilemap("Content/Route1Map.xml");
         _sceneManager.TransitionTo("overworld"); // <-- Set the starting scene
         base.LoadContent();
