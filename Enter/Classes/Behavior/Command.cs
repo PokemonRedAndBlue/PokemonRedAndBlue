@@ -19,13 +19,13 @@ public static class Command
         // R => reset the game
         game.ResetRequested = keyboard.IsNewlyDown(Keys.R);
 
-        // Y => next tile
-        if (keyboard.IsNewlyDown(Keys.Y))
-            if (game?.TileCycler != null) game.TileCycler.Next();
+        // // Y => next tile
+        // if (keyboard.IsNewlyDown(Keys.Y))
+        //     if (game?.TileCycler != null) game.TileCycler.Next();
 
-        // T => previous tile
-        if (keyboard.IsNewlyDown(Keys.T))
-            if (game?.TileCycler != null) game.TileCycler.Prev();
+        // // T => previous tile
+        // if (keyboard.IsNewlyDown(Keys.T))
+        //     if (game?.TileCycler != null) game.TileCycler.Prev();
 
         // O => previous trainer sprite
         if (keyboard.IsNewlyDown(Keys.O)) trainer.PrevSprite();
