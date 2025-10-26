@@ -1,4 +1,3 @@
-// Enter/Classes/Physics/Collision.cs
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Enter.Classes.Sprites;
@@ -7,7 +6,7 @@ namespace Enter.Classes.Physics
 {
     public static class Collision
     {
-        // Build a solid-tile index set
+        // Build a solid-tile index set (Check TileCollisionProfile.cs to set solid tiles)
         public static HashSet<Point> BuildSolidIndexSet(Tilemap map, string layerName, System.Func<int, bool> isSolid)
         {
             var set = new HashSet<Point>();
