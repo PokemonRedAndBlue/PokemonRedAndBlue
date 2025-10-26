@@ -34,7 +34,7 @@ public class Player
 
     public Player(Texture2D texture2, GameWindow Window)
     {
-        Position = new Vector2(Window.ClientBounds.X, Window.ClientBounds.Y) * 1.3f;
+        Position = new Vector2(Window.ClientBounds.X, Window.ClientBounds.Y) * 0.5f;
         _texture = texture2;
     }
     public Player(Texture2D texture2, Vector2 position)
