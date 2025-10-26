@@ -7,6 +7,7 @@ using Enter.Classes.Input;
 using Enter.Classes.Scenes;
 using Enter.Classes.Sprites;
 using Enter.Classes.Cameras;
+using Microsoft.Xna.Framework.Input;
 
 namespace Enter;
 
@@ -27,6 +28,7 @@ public class Game1 : Core
         _sceneManager = new SceneManager(Content, SpriteBatch);
         _sceneManager.AddScene("overworld", new OverworldScene(_sceneManager, this, _controller));
         _sceneManager.AddScene("trainer", new TrainerBattleScene(_sceneManager, this, "TRAINER_TESTER"));
+        _sceneManager.AddScene("wild", new WildEncounter(_sceneManager, this));
         _currentMap = TilemapLoader.LoadTilemap("Content/Route1Map.xml");
         _sceneManager.TransitionTo("overworld"); // <-- Set the starting scene
         base.LoadContent();
@@ -39,6 +41,12 @@ public class Game1 : Core
 
         // Check for reset key
         if (ResetRequested) { Reset(); return; }
+
+        // check for wild encounter key
+        if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.W))
+        {
+            _sceneManager.TransitionTo("wild");
+        }
 
         base.Update(gameTime);
     }

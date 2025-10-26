@@ -3,6 +3,7 @@ using Enter.Classes.Characters;
 using Enter.Classes.Input;
 using Microsoft.Xna.Framework;
 using Enter.Classes.Cameras;
+using Enter.Classes.Scenes;
 
 namespace Enter.Classes.Behavior;
 
@@ -19,20 +20,11 @@ public static class Command
         // R => reset the game
         game.ResetRequested = keyboard.IsNewlyDown(Keys.R);
 
-        // // Y => next tile
-        // if (keyboard.IsNewlyDown(Keys.Y))
-        //     if (game?.TileCycler != null) game.TileCycler.Next();
-
-        // // T => previous tile
-        // if (keyboard.IsNewlyDown(Keys.T))
-        //     if (game?.TileCycler != null) game.TileCycler.Prev();
-
         // O => previous trainer sprite
         if (keyboard.IsNewlyDown(Keys.O)) trainer.PrevSprite();
 
         // P => next trainer sprite
         if (keyboard.IsNewlyDown(Keys.P)) trainer.NextSprite();
-
 
         /*** General updates ***/
         // characters
