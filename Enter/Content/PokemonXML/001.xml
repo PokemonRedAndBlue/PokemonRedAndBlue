@@ -1,0 +1,37 @@
+<Pokemon>
+    <Name>Bulbasaur</Name>
+    <Dex>001</Dex>
+    <Type1>Grass</Type1>
+    <Type2>Poison</Type2>
+    <BaseStats>
+        <HP>45</HP>
+        <Attack>49</Attack>
+        <Defense>49</Defense>
+        <SpAttack>65</SpAttack>
+        <SpDefense>65</SpDefense>
+        <Speed>45</Speed>
+    </BaseStats>
+    <BaseExperience>64</BaseExperience>
+    <CatchRate>45</CatchRate>
+    <GenderRatio>
+      <Male>87.5</Male>
+      <Female>12.5</Female>
+    </GenderRatio>
+    <Moves>
+        <Move level="1">Tackle</Move>
+        <Move level="3">Growl</Move>
+        <Move level="7">Vine Whip</Move>
+        <Move level="9">Growth</Move>
+        <Move level="13">Leech Seed</Move>
+        <Move level="15">Razor Leaf</Move>
+        <Move level="19">Poison Powder</Move>
+        <Move level="21">Sleep Powder</Move>
+        <Move level="25">Seed Bomb</Move>
+        <Move level="27">Take Down</Move>
+        <Move level="31">Sweet Scent</Move>
+        <Move level="33">Synthesis</Move>
+        <Move level="37">Worry Seed</Move>
+        <Move level="39">Double-Edge</Move>
+        <Move level="43">Solar Beam</Move>
+    </Moves>
+</Pokemon>

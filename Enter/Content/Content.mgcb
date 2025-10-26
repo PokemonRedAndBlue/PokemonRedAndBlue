@@ -85,6 +85,11 @@
 /processorParam:TextureFormat=Color
 /build:images/Pokemon_FRONT.png
 
+#begin Moves.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Moves.xml
+
 #begin Pokemon_BACK.xml
 /copy:Pokemon_BACK.xml
 
@@ -100,6 +105,21 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:PokemonFont.spritefont
+
+#begin PokemonXML/001.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:PokemonXML/001.xml
+
+#begin PokemonXML/002.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:PokemonXML/002.xml
+
+#begin PokemonXML/003.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:PokemonXML/003.xml
 
 #begin Route1Map.xml
 /copy:Route1Map.xml
