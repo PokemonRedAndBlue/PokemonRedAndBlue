@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Enter.Classes.Physics
 {
-    public static class TileCollision
+    public static class SolidTileCollision
     {
         public static readonly HashSet<int> SolidIds = new()
         {
