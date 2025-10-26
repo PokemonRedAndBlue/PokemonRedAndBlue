@@ -52,14 +52,14 @@ namespace Enter.Classes.Scenes
 
         public void Update(GameTime gameTime)
         {
-            // --- Battle Logic ---
-            // Similar to wild battle, but with different rules:
-            // - Cannot run
-            // - Cannot catch Pokemon
+            // --- Wild Encounter Logic ---
+            // Similar to trainer battle, but with different rules:
+            // - Can run
+            // - Can catch Pokemon
             // - Trainer may switch Pokemon
             
             // --- Transition Logic ---
-            // if (PlayerWon || TrainerWon)
+            // if (PlayerWon || Fainted)
             // {
                  if (Keyboard.GetState().IsKeyDown(Keys.Tab)) // Placeholder for battle end condition
                  {
