@@ -42,6 +42,12 @@ public class Game1 : Core
         // Check for reset key
         if (ResetRequested) { Reset(); return; }
 
+        // check for wild encounter key
+        if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.W))
+        {
+            _sceneManager.TransitionTo("wild");
+        }
+
         base.Update(gameTime);
     }
 

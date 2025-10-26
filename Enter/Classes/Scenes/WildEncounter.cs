@@ -42,7 +42,7 @@ namespace Enter.Classes.Scenes
             _PokemonFrontAtlas = TextureAtlas.FromFile(content, "Pokemon_FRONT.xml");
 
             // Load Trainer and their Pokemon
-            _enemyPokemon = PokemonFrontFactory.Instance.CreateAnimatedSprite("bulbasaur-front");
+            _enemyPokemon = PokemonFrontFactory.Instance.CreateAnimatedSprite(_wildPokemonID);
             _playerPokemon = PokemonBackFactory.Instance.CreateStaticSprite("squirtle-back");
 
             // Load UI

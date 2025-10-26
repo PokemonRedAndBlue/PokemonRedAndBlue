@@ -10,7 +10,7 @@ namespace Enter.Classes.Behavior;
 public static class Command
 {
 
-    public static void UpdateCommands(Game1 game, GameTime gameTime, KeyboardController keyboard, Camera Cam, Player player, Trainer trainer, SceneManager _sceneManager)
+    public static void UpdateCommands(Game1 game, GameTime gameTime, KeyboardController keyboard, Camera Cam, Player player, Trainer trainer)
     {
         /*** Special checks ***/
         // Escape => exit game
@@ -25,12 +25,6 @@ public static class Command
 
         // P => next trainer sprite
         if (keyboard.IsNewlyDown(Keys.P)) trainer.NextSprite();
-
-        // check for wild encounter key
-        if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.W))
-        {
-            _sceneManager.TransitionTo("wild");
-        }
 
         /*** General updates ***/
         // characters
