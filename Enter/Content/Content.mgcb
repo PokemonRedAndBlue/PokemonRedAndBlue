@@ -91,6 +91,9 @@
 #begin Pokemon_FRONT.xml
 /copy:Pokemon_FRONT.xml
 
+#begin pokemon_stats.xml
+/copy:pokemon_stats.xml
+
 #begin PokemonFont.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
