@@ -15,8 +15,8 @@ public class Player
     //For collision
     public Tilemap Map { get; set; }
     public HashSet<Point> SolidTiles { get; set; }
-    private const int PlayerWidth = 16;
-    private const int PlayerHeight = 16;
+    private const int PlayerWidth = PlayerSprite.SpriteSize;
+    private const int PlayerHeight = PlayerSprite.SpriteSize;
 
     public Vector2 Position { get; set; } = Vector2.Zero;
     private const float SpeedPxPerSec = 80f; // movement speed
@@ -59,6 +59,11 @@ public class Player
         }
     }
 
+    /// <summary>
+    /// Update player's facing, return whether player is moving. 
+    /// </summary>
+    /// <param name="keyboard"></param>
+    /// <returns></returns>
     private bool UpdateDirection(KeyboardController keyboard)
     {
         switch (keyboard.MoveDirection)
@@ -86,14 +91,6 @@ public class Player
         Vector2 diffPos = _directions[_facing] * SpeedPxPerSec * dt;
         Cam.DiffPos = diffPos;
         Position += diffPos;
-
-
-        //Collision get player position
-        if (Map == null || SolidTiles == null)
-        {
-            Position += diffPos;
-            return;
-        }
 
         int dx = (int)System.MathF.Round(diffPos.X);
         int dy = (int)System.MathF.Round(diffPos.Y);
