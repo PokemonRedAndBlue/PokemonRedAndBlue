@@ -6,6 +6,7 @@ using Enter.Classes.Cameras;
 using Enter.Classes.Characters;
 using Enter.Classes.Input;
 using Enter.Classes.Sprites;
+using Enter.Classes.Physics;
 using Enter.Interfaces;
 
 namespace Enter.Classes.Scenes
@@ -16,7 +17,7 @@ namespace Enter.Classes.Scenes
     /// </summary>
     public class OverworldScene : IGameScene
     {
-        private const float ZoomLevel = 4f;
+        private const float ZoomLevel = 1f; 
         private SceneManager _sceneManager;
         private SpriteFont _font; // Placeholder for UI/debug text
         private Tilemap _tilemap;
@@ -43,13 +44,24 @@ namespace Enter.Classes.Scenes
             character = content.Load<Texture2D>("images/Pokemon_Characters");
             player = new Player(character, _game.Window);
             Cam.Update(player);
-            Cam.Zoom = ZoomLevel;
+            Cam.Zoom = 4f; //Zoom leve of world
             trainer = new Trainer(
                 character,
                 new Vector2(_game.Window.ClientBounds.Height, _game.Window.ClientBounds.Width) * 0.25f,
                 Facing.Right
             );
             _currentMap = TilemapLoader.LoadTilemap("Content/Route1Map.xml");
+
+            // Collision wiring (minimal)
+            player = new Player(character, _game.Window);
+            player.Map = _currentMap;
+
+            // Build the solid tile index set from the "Ground" layer
+            player.SolidTiles = Physics.Collision.BuildSolidIndexSet(
+                _currentMap,
+                "Ground",
+                Physics.SolidTileCollision.IsSolid
+            );
         }
 
         public void Update(GameTime gameTime)

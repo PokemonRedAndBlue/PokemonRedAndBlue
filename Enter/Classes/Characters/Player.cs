@@ -5,15 +5,21 @@ using Vector2 = Microsoft.Xna.Framework.Vector2;
 using Enter.Classes.Cameras;
 using Enter.Classes.Input;
 using Enter.Classes.Sprites;
+using Enter.Classes.Physics;
 
 namespace Enter.Classes.Characters;
 
 public enum Facing { Down, Up, Left, Right }
 public class Player
 {
+    //For collision
+    public Tilemap Map { get; set; }
+    public HashSet<Point> SolidTiles { get; set; }
+    private const int PlayerWidth = PlayerSprite.SpriteSize;
+    private const int PlayerHeight = PlayerSprite.SpriteSize;
 
     public Vector2 Position { get; set; } = Vector2.Zero;
-    private const float SpeedPxPerSec = 120f; // movement speed
+    private const float SpeedPxPerSec = 80f; // movement speed
     protected static readonly Dictionary<Facing, Vector2> _directions = new()
     {
         { Facing.Up,    new Vector2(0, -1) },
@@ -39,7 +45,6 @@ public class Player
 
     public void Update(GameTime gameTime, KeyboardController keyboard, Camera Cam)
     {
-        // Determine if moving, and which way we face
         bool isMoving = (!_seenByTrainer) && UpdateDirection(keyboard);
 
         if (isMoving)
@@ -50,7 +55,6 @@ public class Player
         }
         else
         {
-            // Idle frame for the facing direction
             _sprite.IdleReset(_facing);
         }
     }
@@ -84,10 +88,26 @@ public class Player
 
     private void UpdatePosition(float dt, Camera Cam)
     {
-        // Normalize axis (already unit in each axis), move in pixels/sec
         Vector2 diffPos = _directions[_facing] * SpeedPxPerSec * dt;
         Cam.DiffPos = diffPos;
         Position += diffPos;
+
+        int dx = (int)System.MathF.Round(diffPos.X);
+        int dy = (int)System.MathF.Round(diffPos.Y);
+        int tileSize = Map.TileWidth;
+
+        // Player rect
+        Rectangle rect = new((int)Position.X, (int)Position.Y, PlayerWidth, PlayerHeight);
+
+        // For axis-separated movement
+        TileCollision.MoveHorizontal(ref rect, dx, SolidTiles, tileSize);
+        TileCollision.MoveVertical(ref rect, dy, SolidTiles, tileSize);
+        TileCollision.ClampToWorld(ref rect, Map);
+
+        Position = new Vector2(rect.X, rect.Y);
+
+        // keep camera offset the same
+        Cam.DiffPos = new Vector2(dx, dy);
     }
 
     public void Draw(SpriteBatch spriteBatch, float scale)
