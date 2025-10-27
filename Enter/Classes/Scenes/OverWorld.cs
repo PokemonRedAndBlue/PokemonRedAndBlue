@@ -17,7 +17,7 @@ namespace Enter.Classes.Scenes
     /// </summary>
     public class OverworldScene : IGameScene
     {
-        private const float ZoomLevel = 1f; 
+        private const float ZoomLevel = 4f; 
         private SceneManager _sceneManager;
         private SpriteFont _font; // Placeholder for UI/debug text
         private Tilemap _tilemap;
@@ -44,7 +44,7 @@ namespace Enter.Classes.Scenes
             character = content.Load<Texture2D>("images/Pokemon_Characters");
             player = new Player(character, _game.Window);
             Cam.Update(player);
-            Cam.Zoom = 4f; //Zoom leve of world
+            Cam.Zoom = ZoomLevel; //Zoom leve of world
             trainer = new Trainer(
                 character,
                 new Vector2(_game.Window.ClientBounds.Height, _game.Window.ClientBounds.Width) * 0.25f,
@@ -84,9 +84,9 @@ namespace Enter.Classes.Scenes
 
             // map & world entities affected by camera movement
             spriteBatch.Begin(transformMatrix: Cam.GetViewMatrix(), samplerState: SamplerState.PointClamp);
-            _currentMap?.DrawCropped(Cam.VisibleWorldRect, scale: ZoomLevel);
-            player.Draw(spriteBatch, ZoomLevel);
-            trainer.Draw(spriteBatch, ZoomLevel);
+            _currentMap?.DrawCropped(Cam.VisibleWorldRect);
+            player.Draw(spriteBatch);
+            trainer.Draw(spriteBatch);
             spriteBatch.End();
 
             // no need for base.Draw here

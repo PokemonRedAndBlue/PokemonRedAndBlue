@@ -105,7 +105,7 @@ public class Trainer
         }
     }
 
-    public void Draw(SpriteBatch spriteBatch, float scale)
+    public void Draw(SpriteBatch spriteBatch, float scale = 1f)
     {
         _sprite.Draw(spriteBatch, _texture, scale, Position);
     }
