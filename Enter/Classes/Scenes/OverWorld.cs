@@ -44,7 +44,7 @@ namespace Enter.Classes.Scenes
             character = content.Load<Texture2D>("images/Pokemon_Characters");
             player = new Player(character, _game.Window);
             Cam.Update(player);
-            Cam.Zoom = 4f;
+            Cam.Zoom = 4f; //Zoom leve of world
             trainer = new Trainer(
                 character,
                 new Vector2(_game.Window.ClientBounds.Height, _game.Window.ClientBounds.Width) * 0.25f,
