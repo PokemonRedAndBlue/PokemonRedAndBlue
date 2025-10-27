@@ -41,7 +41,7 @@ public class Camera
     /// <param name="player">The player object</param>
     public void Update(Player player)
     {
-        CenterOn(player.Position + 0.5f * Zoom * new Vector2(PlayerSprite.SpriteSize));
+        CenterOn(player.Position + 0.5f * new Vector2(PlayerSprite.SpriteSize));
     }
 
     /// <summary>
@@ -50,7 +50,7 @@ public class Camera
     /// <param name="Pos">the position to center on</param>
     public void CenterOn(Vector2 Pos)
     {
-        _viewOrigin = Pos - 0.5f * new Vector2(_viewport.Width/Zoom, _viewport.Height/Zoom); //use viewport size expressed in WORLD units
+        _viewOrigin = Pos - 0.5f * new Vector2(_viewport.Width, _viewport.Height) / Zoom; //use viewport size expressed in WORLD units
     }
 
     // Matrix used by SpriteBatch to convert world -> screen, as camera offset
