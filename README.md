@@ -67,6 +67,9 @@
 ## Planned Improvements
 - Add clear separation between walkable, solid, and interactive tiles within TileCollisionProfile.cs
 - Overall get game functioning
+- Be far more thorough and consistant with our code reviews
+  - We have a good structure in place but some merges occured without review/insufficent review was provided
+  - Or the review that was given did not follow our template
 
 ### Short-Term Goals
 - Add clear separation between walkable, solid, and interactive tiles within TileCollisionProfile.cs
