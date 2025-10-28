@@ -52,33 +52,33 @@
 - Pseudo route walkable by player and trainer approachable with triggerable battle
 
 ## Controls
-### Action	Key(s)
-- Move player:	Arrow Keys
-- Exit game:	Escape
+### Action  Key(s)
+- Move player:  Arrow Keys
+- Exit game:  Escape
 - Exit the battle scene with trainer: Tab
 - Enter Wild Encounter Scene - 'w' key press
-- Enter Trainer Battle - approach trainer from side
+- Enter Trainer Battle - approach the trainer from the side
 
 ## Known Bugs & Limitations
 - Collision tiles are manually defined, requiring updates to TileCollisionProfile.cs whenever new tiles are added
-- Data handling for pokemon and trainers is spread out over pokmemon.cs and external classes
-  - Needs to be more centralized and consistant
+- Data handling for Pokémon and trainers is spread out over pokmemon.cs and external classes
+  - Needs to be more centralized and consistent
 
 ## Planned Improvements
 - Add clear separation between walkable, solid, and interactive tiles within TileCollisionProfile.cs
-- Overall get game functioning
-- Be far more thorough and consistant with our code reviews
-  - We have a good structure in place but some merges occured without review/insufficent review was provided
+- Overall, get the game functioning
+- Be far more thorough and consistent with our code reviews
+  - We have a good structure in place, but some merges occurred without review/insufficient review was provided
   - Or the review that was given did not follow our template
 
 ### Short-Term Goals
 - Add clear separation between walkable, solid, and interactive tiles within TileCollisionProfile.cs
 - Preserve player position when entering a battle scene
-- Use pokemon generator to make wild pokemon truly random (including stats etc)
+- Use the Pokémon generator to make wild Pokémon truly random (including stats, etc).
 
 ### Long-Term Goals
 - Integrate interaction zones (e.g., door triggers, tall grass, signposts) into the collision framework
-- Add dialouge for trainers and battle scenes
-- Integrate full animations for battle sequence
+- Add dialogue for trainers and battle scenes
+- Integrate full animations for the battle sequence
 - Add sound
-- Have pokemon appear after poke ball is thrown
+- Have Pokémon appear after the Poké Ball is thrown
