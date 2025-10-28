@@ -50,7 +50,7 @@
 ### Action	Key(s)
 - Move player:	Arrow Keys
 - Exit game:	Escape
-- Exit the battle scene with trainer: Tap
+- Exit the battle scene with trainer: Tab
 
 ## Known Bugs & Limitations
 - Collision tiles are manually defined, requiring updates to TileCollisionProfile.cs whenever new tiles are added
