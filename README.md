@@ -14,6 +14,9 @@
       - Deeper we have directorys for different sub classes:
         -Animations
         -Behavior
+        -Cameras
+        -Physics
+        -Scenes
         -Sprites
         -Input
         -Content
@@ -40,15 +43,24 @@
    dotnet run --project Enter/Enter.csproj
 
 ## Key Features
+- Tile-based collision system that prevents the player from walking through solid objects
+- Accurate map boundary detection that keeps the player within the playable world
 
 ## Controls
 ### Action	Key(s)
 - Move player:	Arrow Keys
 - Exit game:	Escape
+- Exit the battle scene with trainer: Tap
 
 ## Known Bugs & Limitations
+- Collision tiles are manually defined, requiring updates to TileCollisionProfile.cs whenever new tiles are added
 
 ## Planned Improvements
+- Add clear separation between walkable, solid, and interactive tiles within TileCollisionProfile.cs
+
 ### Short-Term Goals
+- Add clear separation between walkable, solid, and interactive tiles within TileCollisionProfile.cs
 
 ### Long-Term Goals
+- Integrate interaction zones (e.g., door triggers, tall grass, signposts) into the collision framework
+
