@@ -4,7 +4,7 @@
   This project is a simplified Pokémon-style game built with MonoGame. Players will explore a route leading to a town featuring a Pokémon Center and a Gym, where they can battle a gym trainer and leader. The game includes around 15–20 Pokémon, each with up to four learnable attacks, simplified stats (no IVs, EVs, or natures), and basic trainer AI that selects moves randomly. To streamline development, moves with similar effects and animations are reused, and complex battle mechanics like accuracy variations, priority moves, and status effects are omitted for a smoother early-game experience.
 
 ## Key Update To Docummentation
-  -Most of our doccumentation and planning has been moved to a Jira board which has been made public and is available at the following link:
+  -Most of our documentation and planning has been moved to a Jira board which has been made public and is available at the following link:
   https://cse3902group6.atlassian.net/jira/software/projects/SCRUM/boards/1?atlOrigin=eyJpIjoiNzllMGE4ZjUxYTMxNDM2ODliZmQ4NGQ2NzdlMjEzNzgiLCJwIjoiaiJ9
   -Pull requests were all done via github
   -Backlog still remain IN THIS ZIP FILE as backlog.md
@@ -13,7 +13,7 @@
 - We have 2 main folders within our root directory: Enter and Code Review
   - Within our Enter Directory we have a few key folders as well:
     - Classes which contains ALL classes
-      - Deeper we have directorys for different sub classes:
+      - Deeper we have directories for different sub classes:
         - Animations
         - Behavior
         - Cameras
@@ -61,7 +61,7 @@
 
 ## Known Bugs & Limitations
 - Collision tiles are manually defined, requiring updates to TileCollisionProfile.cs whenever new tiles are added
-- Data handling for Pokémon and trainers is spread out over pokmemon.cs and external classes
+- Data handling for Pokémon and trainers is spread out over pokemon.cs and external classes
   - Needs to be more centralized and consistent
 
 ## Planned Improvements
