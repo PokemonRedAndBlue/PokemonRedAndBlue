@@ -13,14 +13,14 @@
   - Within our Enter Directory we have a few key folders as well:
     - Classes which contains ALL classes
       - Deeper we have directorys for different sub classes:
-        -Animations
-        -Behavior
-        -Cameras
-        -Physics
-        -Scenes
-        -Sprites
-        -Input
-        -Content
+        - Animations
+        - Behavior
+        - Cameras
+        - Physics
+        - Scenes
+        - Sprites
+        - Input
+        - Content
     - Interfaces which contains our few interfaces as of now
       - ISprite
       - IController
@@ -60,6 +60,8 @@
 
 ## Known Bugs & Limitations
 - Collision tiles are manually defined, requiring updates to TileCollisionProfile.cs whenever new tiles are added
+- Data handling for pokemon and trainers is spread out over pokmemon.cs and external classes
+  - Needs to be more centralized and consistant
 
 ## Planned Improvements
 - Add clear separation between walkable, solid, and interactive tiles within TileCollisionProfile.cs
