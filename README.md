@@ -7,6 +7,7 @@
   -Most of our doccumentation and planning has been moved to a Jira board which has been made public and is available at the following link:
   https://cse3902group6.atlassian.net/jira/software/projects/SCRUM/boards/1?atlOrigin=eyJpIjoiNzllMGE4ZjUxYTMxNDM2ODliZmQ4NGQ2NzdlMjEzNzgiLCJwIjoiaiJ9
   -Pull requests were all done via github
+  -Backlog still remain IN THIS ZIP FILE as backlog.md
 
 ## Project structure (key folders)
 - We have 2 main folders within our root directory: Enter and Code Review
