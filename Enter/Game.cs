@@ -20,6 +20,11 @@ public class Game1 : Core
     private Vector2 postion = new Vector2(100, 100);
     private Tilemap _currentMap;
     private SceneManager _sceneManager;
+    // Persisted player position between scene transitions. Set by scenes before switching away
+    public Microsoft.Xna.Framework.Vector2? SavedPlayerPosition { get; set; } = null;
+    // When true, the overworld should ignore the first trainer-collision check to avoid
+    // immediately re-entering a trainer battle after returning from one.
+    public bool SuppressTrainerEncounter { get; set; } = false;
     public Game1() : base("PokemonRedAndBlue", 1280, 720, false) { }
 
     protected override void LoadContent()

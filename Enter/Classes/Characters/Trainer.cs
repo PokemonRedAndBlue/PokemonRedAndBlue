@@ -24,6 +24,8 @@ public class Trainer
     private Facing _facing = Facing.Down; // Facing direction
     private bool _visible = false;  // Whether the trainer sees a player now
     public bool colided = false;  // Whether the trainer has collided with the player
+    public bool HasBeenDefeated { get; set; } = false;  // Whether this trainer has been defeated in battle
+    public bool IsApproachingPlayer { get; private set; } = false;  // Whether trainer is currently walking to player
 
     public Trainer(Texture2D texture, Vector2 Pos, Facing facing) : this(texture, Pos, facing, false) { }
     public Trainer(Texture2D texture, Vector2 Pos, Facing facing, bool moving) : this(texture, 0, Pos, facing, moving) { }

@@ -19,8 +19,7 @@ namespace Enter.Classes.Scenes
     {
         private const float ZoomLevel = 4f; 
         private SceneManager _sceneManager;
-        private SpriteFont _font; // Placeholder for UI/debug text
-        private Tilemap _tilemap;
+        private Vector2 _playerPosition;
         private Camera Cam;
         private KeyboardController _controller;
         private Texture2D character;
@@ -42,9 +41,17 @@ namespace Enter.Classes.Scenes
             // Load tilemap, player sprites, NPCs, etc.
             Cam = new(((Game)_game).GraphicsDevice.Viewport);
             character = content.Load<Texture2D>("images/Pokemon_Characters");
+
+            // Create the player once for this scene. If Game1 has a saved position from a
+            // previous visit, restore it so the player doesn't snap back to the default spawn.
             player = new Player(character, _game.Window);
+            if ((_game as Game1)?.SavedPlayerPosition is Microsoft.Xna.Framework.Vector2 savedPos)
+            {
+                player.Position = savedPos;
+            }
+
             Cam.Update(player);
-            Cam.Zoom = ZoomLevel; //Zoom leve of world
+            Cam.Zoom = ZoomLevel; //Zoom level of world
             trainer = new Trainer(
                 character,
                 new Vector2(_game.Window.ClientBounds.Height, _game.Window.ClientBounds.Width) * 0.25f,
@@ -53,7 +60,7 @@ namespace Enter.Classes.Scenes
             _currentMap = TilemapLoader.LoadTilemap("Content/Route1Map.xml");
 
             // Collision wiring (minimal)
-            player = new Player(character, _game.Window);
+            // (don't recreate player here) Wire up map and collision data
             player.Map = _currentMap;
 
             // Build the solid tile index set from the "Ground" layer
@@ -71,9 +78,28 @@ namespace Enter.Classes.Scenes
             Cam.Update(player);
 
             // Force a battle with trainer interaction
-            if (trainer.colided){
-                // Example of starting a specific trainer battle
-                _sceneManager.TransitionTo("trainer");
+            if (trainer.colided)
+            {
+                // If a recent scene transition requested the overworld to ignore the first
+                // trainer collision, consume that flag and skip re-entering the battle.
+                if ((_game as Game1)?.SuppressTrainerEncounter == true)
+                {
+                    ((_game as Game1).SuppressTrainerEncounter) = false;
+                }
+                else
+                {
+                    // save player position before leaving the overworld so it can be restored
+                    if ((_game as Game1) != null)
+                        ((_game as Game1).SavedPlayerPosition) = player.Position;
+
+                    // Set a suppression flag so when we later return to the overworld we don't
+                    // immediately re-trigger the same trainer battle.
+                    if ((_game as Game1) != null)
+                        ((_game as Game1).SuppressTrainerEncounter) = true;
+
+                    // Example of starting a specific trainer battle
+                    _sceneManager.TransitionTo("trainer");
+                }
             }
             // no need for base.Update here
         }

@@ -19,7 +19,6 @@ public class Player
     public HashSet<Point> SolidTiles { get; set; }
     private const int PlayerWidth = PlayerSprite.SpriteSize;
     private const int PlayerHeight = PlayerSprite.SpriteSize;
-
     public Vector2 Position { get; set; } = Vector2.Zero;
     private const float SpeedPxPerSec = 80f; // movement speed
     protected static readonly Dictionary<Facing, Vector2> _directions = new()
