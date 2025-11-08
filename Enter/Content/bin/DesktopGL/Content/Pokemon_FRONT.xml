@@ -92,36 +92,36 @@
         <Region name="gloom-front-attack" x="1555" y="194" width="48" height="48"/>
         <Region name="vileplume-front-idle" x="1605" y="186" width="56" height="56"/>
         <Region name="vileplume-front-attack" x="1662" y="186" width="56" height="56"/>
-        <Region name="paras-front-idle" x="" y="280" width="40" height="40"/>
-        <Region name="paras-front-attack" x="" y="280" width="40" height="40"/>
-        <Region name="parasect-front-idle" x="" y="264" width="56" height="56"/>
-        <Region name="parasect-front-attack" x="" y="264" width="56" height="56"/>
-        <Region name="venonat-front-idle" x="" y="280" width="40" height="40"/>
-        <Region name="venonat-front-attack" x="" y="280" width="40" height="40"/>
-        <Region name="venomoth-front-idle" x="" y="264" width="56" height="56"/>
-        <Region name="venomoth-front-attack" x="" y="264" width="56" height="56"/>
-        <Region name="diglett-front-idle" x="" y="280" width="40" height="40"/>
-        <Region name="diglett-front-attack" x="" y="280" width="40" height="40"/>
-        <Region name="dugtrio-front-idle" x="" y="273" width="48" height="48"/>
-        <Region name="dugtrio-front-attack" x="" y="273" width="48" height="48"/>
-        <Region name="meowth-front-idle" x="" y="280" width="40" height="40"/>
-        <Region name="meowth-front-attack" x="" y="280" width="40" height="40"/>
-        <Region name="persian-front-idle" x="" y="264" width="56" height="56"/>
-        <Region name="persian-front-attack" x="" y="264" width="56" height="56"/>
-        <Region name="psyduck-front-idle" x="" y="280" width="40" height="40"/>
-        <Region name="psyduck-front-attack" x="" y="280" width="40" height="40"/>
-        <Region name="golduck-front-idle" x="" y="264" width="56" height="56"/>
-        <Region name="golduck-front-attack" x="" y="264" width="56" height="56"/>
-        <Region name="mankey-front-idle" x="" y="280" width="40" height="40"/>
-        <Region name="mankey-front-attack" x="" y="280" width="40" height="40"/>
-        <Region name="primeape-front-idle" x="" y="264" width="56" height="56"/>
-        <Region name="primeape-front-attack" x="" y="264" width="56" height="56"/>
-        <Region name="growlithe-front-idle" x="" y="280" width="40" height="40"/>
-        <Region name="growlithe-front-attack" x="" y="280" width="40" height="40"/>
-        <Region name="arcanine-front-idle" x="" y="264" width="56" height="56"/>
-        <Region name="arcanine-front-attack" x="" y="264" width="56" height="56"/>
-        <Region name="poliwag-front-idle" x="" y="280" width="40" height="40"/>
-        <Region name="poliwag-front-attack" x="" y="280" width="40" height="40"/>
+        <Region name="paras-front-idle" x="17" y="280" width="40" height="40"/>
+        <Region name="paras-front-attack" x="74" y="280" width="40" height="40"/>
+        <Region name="parasect-front-idle" x="131" y="264" width="56" height="56"/>
+        <Region name="parasect-front-attack" x="188" y="264" width="56" height="56"/>
+        <Region name="venonat-front-idle" x="245" y="280" width="40" height="40"/>
+        <Region name="venonat-front-attack" x="302" y="280" width="40" height="40"/>
+        <Region name="venomoth-front-idle" x="359" y="264" width="56" height="56"/>
+        <Region name="venomoth-front-attack" x="416" y="264" width="56" height="56"/>
+        <Region name="diglett-front-idle" x="473" y="280" width="40" height="40"/>
+        <Region name="diglett-front-attack" x="529" y="280" width="40" height="40"/>
+        <Region name="dugtrio-front-idle" x="587" y="273" width="48" height="48"/>
+        <Region name="dugtrio-front-attack" x="644" y="273" width="48" height="48"/>
+        <Region name="meowth-front-idle" x="701" y="280" width="40" height="40"/>
+        <Region name="meowth-front-attack" x="758" y="280" width="40" height="40"/>
+        <Region name="persian-front-idle" x="807" y="264" width="56" height="56"/>
+        <Region name="persian-front-attack" x="864" y="264" width="56" height="56"/>
+        <Region name="psyduck-front-idle" x="929" y="280" width="40" height="40"/>
+        <Region name="psyduck-front-attack" x="986" y="280" width="40" height="40"/>
+        <Region name="golduck-front-idle" x="1042" y="264" width="56" height="56"/>
+        <Region name="golduck-front-attack" x="1099" y="264" width="56" height="56"/>
+        <Region name="mankey-front-idle" x="1156" y="280" width="40" height="40"/>
+        <Region name="mankey-front-attack" x="1213" y="280" width="40" height="40"/>
+        <Region name="primeape-front-idle" x="1262" y="264" width="56" height="56"/>
+        <Region name="primeape-front-attack" x="1319" y="264" width="56" height="56"/>
+        <Region name="growlithe-front-idle" x="1384" y="280" width="40" height="40"/>
+        <Region name="growlithe-front-attack" x="1442" y="280" width="40" height="40"/>
+        <Region name="arcanine-front-idle" x="1499" y="264" width="56" height="56"/>
+        <Region name="arcanine-front-attack" x="1555" y="264" width="56" height="56"/>
+        <Region name="poliwag-front-idle" x="17" y="280" width="40" height="40"/>
+        <Region name="poliwag-front-attack" x="74" y="280" width="40" height="40"/>
         <Region name="poliwhirl-front-idle" x="131" y="273" width="48" height="48"/>
         <Region name="poliwhirl-front-attack" x="188" y="273" width="48" height="48"/>
         <Region name="poliwrath-front-idle" x="237" y="264" width="56" height="56"/>

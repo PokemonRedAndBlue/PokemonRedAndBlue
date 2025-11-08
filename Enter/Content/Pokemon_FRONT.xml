@@ -58,8 +58,8 @@
         <Region name="sandshrew-front-attack" x="1328" y="124" width="40" height="40"/>
         <Region name="sandslash-front-idle" x="1385" y="116" width="48" height="48"/>
         <Region name="sandslash-front-attack" x="1442" y="116" width="48" height="48"/>
-        <Region name="nidoran-front-idle" x="1499" y="124" width="40" height="40"/>
-        <Region name="nidoran-front-attack" x="1555" y="124" width="40" height="40"/>
+        <Region name="nidoran?-front-idle" x="1499" y="124" width="40" height="40"/>
+        <Region name="nidoran?-front-attack" x="1555" y="124" width="40" height="40"/>
         <Region name="nidorina-front-idle" x="1612" y="116" width="48" height="48"/>
         <Region name="nidorina-front-attack" x="1670" y="116" width="48" height="48"/>
         <Region name="nidoqueen-front-idle" x="9" y="186" width="56" height="56"/>
@@ -446,10 +446,10 @@
             <Frame region="sandslash-front-attack" />
             <Frame region="sandslash-front-idle" />
         </Animation>
-        <Animation name="nidoran♀-front" frameCount="3" frameDuration="2" scale="4">
-            <Frame region="nidoran♀-front-idle" />
-            <Frame region="nidoran♀-front-attack" />
-            <Frame region="nidoran♀-front-idle" />
+        <Animation name="nidoran?-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="nidoran?-front-idle" />
+            <Frame region="nidoran?-front-attack" />
+            <Frame region="nidoran?-front-idle" />
         </Animation>
         <Animation name="nidorina-front" frameCount="3" frameDuration="2" scale="4">
             <Frame region="nidorina-front-idle" />
