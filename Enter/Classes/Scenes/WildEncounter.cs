@@ -30,7 +30,7 @@ namespace Enter.Classes.Scenes
         public WildEncounter(SceneManager sceneManager, Game game1)
         {
             _sceneManager = sceneManager;
-            _wildPokemonID = "bulbasaur-front"; // e.g., "bulbasaur-front" will be a random wild Pokémon in the future
+            _wildPokemonID = PokemonGenerator.GenerateRandom().Species.Name.ToString();
             _game = game1;
         }
 
@@ -42,7 +42,7 @@ namespace Enter.Classes.Scenes
             _PokemonFrontAtlas = TextureAtlas.FromFile(content, "Pokemon_FRONT.xml");
 
             // Load Trainer and their Pokemon
-            _enemyPokemon = PokemonFrontFactory.Instance.CreateAnimatedSprite(_wildPokemonID);
+            _enemyPokemon = PokemonFrontFactory.Instance.CreateAnimatedSprite(_wildPokemonID.ToLower() + "-front");
             _playerPokemon = PokemonBackFactory.Instance.CreateStaticSprite("squirtle-back");
 
             // Load UI

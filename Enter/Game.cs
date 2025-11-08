@@ -47,10 +47,6 @@ public class Game1 : Core
         _currentMap = TilemapLoader.LoadTilemap("Content/Route1Map.xml");
         _sceneManager.TransitionTo("overworld"); // <-- Set the starting scene
 
-        // This is just for testing to check that the stats are calculated correctly, will be a random pokemon with random IV
-        var pokemon = PokemonGenerator.GenerateRandom();
-        pokemon.PrintSummary();
-
         base.LoadContent();
     }
 
