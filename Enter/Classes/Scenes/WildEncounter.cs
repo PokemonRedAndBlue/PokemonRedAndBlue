@@ -61,10 +61,12 @@ namespace Enter.Classes.Scenes
             // --- Transition Logic ---
             // if (PlayerWon || Fainted)
             // {
-                 if (Keyboard.GetState().IsKeyDown(Keys.Tab)) // Placeholder for battle end condition
-                 {
-                     _sceneManager.TransitionTo("overworld");
-                 }
+                if (Keyboard.GetState().IsKeyDown(Keys.Tab)) // Placeholder for battle end condition
+                {
+                    // The saved position from before entering battle will be automatically
+                    // restored by OverworldScene.LoadContent using Game1.SavedPlayerPosition
+                    _sceneManager.TransitionTo("overworld");
+                }
             // }
         }
 

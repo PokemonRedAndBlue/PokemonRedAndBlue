@@ -27,6 +27,8 @@ namespace Enter.Classes.Scenes
         private Game1 _game;
         private Tilemap _currentMap;
 
+        public Vector2 GetPlayerPosition() => player.Position;
+
         // We must pass in the SceneManager so this scene can request transitions
         public OverworldScene(SceneManager sceneManager, Game1 game1, KeyboardController controller)
         {
@@ -91,6 +93,14 @@ namespace Enter.Classes.Scenes
                 }
                 // If trainer is defeated, they're just interacting without battle
                 // Could show dialogue here
+            }
+
+            // check for wild encounter key
+            if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.W))
+            {
+                // Save player position before entering wild battle
+                _game.SavedPlayerPosition = player.Position;
+                _sceneManager.TransitionTo("wild");
             }
             // no need for base.Update here
         }

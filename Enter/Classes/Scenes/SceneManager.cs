@@ -14,6 +14,7 @@ namespace Enter.Classes.Scenes
     public class SceneManager
     {
         private IGameScene _currentScene;
+        public IGameScene CurrentScene => _currentScene;
         private readonly Dictionary<string, IGameScene> _scenes = new Dictionary<string, IGameScene>();
         private readonly ContentManager _content;
         private bool _isTransitioning = false;
