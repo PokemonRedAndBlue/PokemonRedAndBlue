@@ -16,15 +16,25 @@ public class Game1 : Core
     // Needed class vars
     public bool ResetRequested { get; set; } = false;   // added to reset game
     Dictionary<String, AnimatedSprite> FrontPokemon = new Dictionary<string, AnimatedSprite>();
+    // Tracks which trainers have been defeated, keyed by trainer ID
+    private Dictionary<string, bool> _defeatedTrainers = new Dictionary<string, bool>();
     private KeyboardController _controller = new KeyboardController();
     private Vector2 postion = new Vector2(100, 100);
     private Tilemap _currentMap;
     private SceneManager _sceneManager;
-    // Persisted player position between scene transitions. Set by scenes before switching away
+    // State that persists across scene transitions
     public Microsoft.Xna.Framework.Vector2? SavedPlayerPosition { get; set; } = null;
-    // When true, the overworld should ignore the first trainer-collision check to avoid
-    // immediately re-entering a trainer battle after returning from one.
-    public bool SuppressTrainerEncounter { get; set; } = false;
+
+    // Methods to check/update trainer defeat status
+    public bool IsTrainerDefeated(string trainerId)
+    {
+        return _defeatedTrainers.TryGetValue(trainerId, out bool defeated) && defeated;
+    }
+
+    public void MarkTrainerDefeated(string trainerId)
+    {
+        _defeatedTrainers[trainerId] = true;
+    }
     public Game1() : base("PokemonRedAndBlue", 1280, 720, false) { }
 
     protected override void LoadContent()
@@ -64,6 +74,8 @@ public class Game1 : Core
     private void Reset()
     {
         // The new way to reset is to just reload the scene
+        SavedPlayerPosition = new Vector2(160, 0);
+        _defeatedTrainers.Clear();
         _sceneManager.TransitionTo("overworld");
         ResetRequested = false;
     }

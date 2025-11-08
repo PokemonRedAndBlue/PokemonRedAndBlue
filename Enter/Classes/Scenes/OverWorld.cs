@@ -19,7 +19,6 @@ namespace Enter.Classes.Scenes
     {
         private const float ZoomLevel = 4f; 
         private SceneManager _sceneManager;
-        private Vector2 _playerPosition;
         private Camera Cam;
         private KeyboardController _controller;
         private Texture2D character;
@@ -52,10 +51,14 @@ namespace Enter.Classes.Scenes
 
             Cam.Update(player);
             Cam.Zoom = ZoomLevel; //Zoom level of world
+            // Create trainer with specific ID that matches what's used in TrainerBattle
+            const string TRAINER_ID = "TRAINER_TESTER"; // This should match the ID used in Game1's AddScene
             trainer = new Trainer(
                 character,
                 new Vector2(_game.Window.ClientBounds.Height, _game.Window.ClientBounds.Width) * 0.25f,
-                Facing.Right
+                Facing.Right,
+                false,  // not moving by default
+                TRAINER_ID
             );
             _currentMap = TilemapLoader.LoadTilemap("Content/Route1Map.xml");
 
@@ -77,29 +80,17 @@ namespace Enter.Classes.Scenes
             _controller.Update(_game, gameTime, Cam, player, trainer);
             Cam.Update(player);
 
-            // Force a battle with trainer interaction
-            if (trainer.colided)
+            // Handle trainer interactions
+            if (trainer.colided && !trainer.IsApproachingPlayer)
             {
-                // If a recent scene transition requested the overworld to ignore the first
-                // trainer collision, consume that flag and skip re-entering the battle.
-                if ((_game as Game1)?.SuppressTrainerEncounter == true)
+                if (!_game.IsTrainerDefeated(trainer.TrainerID))
                 {
-                    ((_game as Game1).SuppressTrainerEncounter) = false;
-                }
-                else
-                {
-                    // save player position before leaving the overworld so it can be restored
-                    if ((_game as Game1) != null)
-                        ((_game as Game1).SavedPlayerPosition) = player.Position;
-
-                    // Set a suppression flag so when we later return to the overworld we don't
-                    // immediately re-trigger the same trainer battle.
-                    if ((_game as Game1) != null)
-                        ((_game as Game1).SuppressTrainerEncounter) = true;
-
-                    // Example of starting a specific trainer battle
+                    // Save position and transition to battle if trainer isn't defeated
+                    _game.SavedPlayerPosition = player.Position;
                     _sceneManager.TransitionTo("trainer");
                 }
+                // If trainer is defeated, they're just interacting without battle
+                // Could show dialogue here
             }
             // no need for base.Update here
         }
@@ -117,6 +108,8 @@ namespace Enter.Classes.Scenes
 
             // no need for base.Draw here
         }
+
+
     }
 }
 

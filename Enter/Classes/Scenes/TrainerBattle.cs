@@ -62,6 +62,11 @@ namespace Enter.Classes.Scenes
             // {
                  if (Keyboard.GetState().IsKeyDown(Keys.Tab)) // Placeholder for battle end condition
                  {
+                     // Mark this specific trainer as defeated using their ID
+                     if (_game is Game1 game)
+                     {
+                         game.MarkTrainerDefeated(_trainerID);
+                     }
                      _sceneManager.TransitionTo("overworld");
                  }
             // }
