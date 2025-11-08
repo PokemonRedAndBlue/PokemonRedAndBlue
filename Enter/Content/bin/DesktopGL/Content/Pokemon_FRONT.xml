@@ -446,7 +446,7 @@
             <Frame region="sandslash-front-attack" />
             <Frame region="sandslash-front-idle" />
         </Animation>
-        <Animation name="nidoran?-front" frameCount="3" frameDuration="2" scale="4">
+        <Animation name="nidoran-f-front" frameCount="3" frameDuration="2" scale="4">
             <Frame region="nidoran?-front-idle" />
             <Frame region="nidoran?-front-attack" />
             <Frame region="nidoran?-front-idle" />
