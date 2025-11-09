@@ -1,7 +1,6 @@
-using System;
-using System.Collections.Generic;
+using Enter.Classes.Sprites;
 
-namespace MonoGameLibrary.Graphics;
+namespace Enter.Classes.GameState;
 
 public class BackStateAction : PokemonStateActions
 {

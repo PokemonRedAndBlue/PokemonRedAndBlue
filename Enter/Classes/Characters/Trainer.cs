@@ -10,13 +10,12 @@ public class Trainer
 {
 
     // Might use a scale for tile lengths later
-    public enum Facing { Down, Up, Left, Right }
     public Vector2 Position { get; set; }
 
     private const float SpeedPxPerSec = 80f,
         InteractionRange = 64f, // might change based on scale?
         DefaultVisionRange = 256f,
-        AlignMOE = 4f;  // Margin of Error for aligning checks
+        AlignMOE = 1f;  // Margin of Error for aligning checks, will be changed to tile based later
     private readonly float _visionRange = DefaultVisionRange;
     private readonly bool _moving = false;  // Whether the trainer will hang around when idling
     private readonly Texture2D _texture;
@@ -24,6 +23,7 @@ public class Trainer
     private int _spriteIndex;
     private Facing _facing = Facing.Down; // Facing direction
     private bool _visible = false;  // Whether the trainer sees a player now
+    public bool colided = false;  // Whether the trainer has collided with the player
 
     public Trainer(Texture2D texture, Vector2 Pos, Facing facing) : this(texture, Pos, facing, false) { }
     public Trainer(Texture2D texture, Vector2 Pos, Facing facing, bool moving) : this(texture, 0, Pos, facing, moving) { }
@@ -39,6 +39,7 @@ public class Trainer
         _facing = facing;
         _moving = moving;
         _visionRange = visionRange;
+        colided = false;
     }
 
     public void Update(GameTime gametime, Player player)    // TODO: Sprites
@@ -64,14 +65,21 @@ public class Trainer
         bool xAligned = Math.Abs(diff.X) < AlignMOE,
              yAligned = Math.Abs(diff.Y) < AlignMOE,
              inVision = Math.Abs(Vector2.Distance(player.Position, Position)) < _visionRange;
+        if (inVision) return InVisionRange(xAligned, yAligned, diff);
+        return false;
+    }
+
+    private bool InVisionRange(bool xAligned, bool yAligned, Vector2 diff)
+    {
         return _facing switch
         {
-            Facing.Up => xAligned && inVision && diff.Y < 0,
-            Facing.Down => xAligned && inVision && diff.Y > 0,
-            Facing.Left => yAligned && inVision && diff.X < 0,
-            Facing.Right => yAligned && inVision && diff.X > 0,
-            _ => throw new NotImplementedException(),
+            Facing.Up => xAligned && diff.Y < 0,
+            Facing.Down => xAligned && diff.Y > 0,
+            Facing.Left => yAligned && diff.X < 0,
+            Facing.Right => yAligned && diff.X > 0,
+            _ => throw new Exception("Error reading facing direction"),
         };
+        
     }
 
     private void GoToPlayer(Player player, GameTime gametime)
@@ -80,8 +88,8 @@ public class Trainer
         if (Math.Abs(Vector2.Distance(player.Position, Position)) <= InteractionRange)
         {
             _visible = false;
-            // BattleMain.LoadScene();
             player.StopEnd();
+            colided = true;
             return;
         }
         Vector2 norm = Vector2.Normalize(player.Position - Position);
@@ -97,7 +105,7 @@ public class Trainer
         }
     }
 
-    public void Draw(SpriteBatch spriteBatch, float scale)
+    public void Draw(SpriteBatch spriteBatch, float scale = 1f)
     {
         _sprite.Draw(spriteBatch, _texture, scale, Position);
     }

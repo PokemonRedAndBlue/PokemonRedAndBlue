@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-
-namespace MonoGameLibrary.Graphics;
+namespace Enter.Classes.GameState;
 
 public class PokemonStateActions
 {

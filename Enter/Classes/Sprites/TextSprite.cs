@@ -1,8 +1,7 @@
-using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace MonoGameLibrary.Graphics;
+namespace Enter.Classes.Sprites;
 
 public class TextSprite : Sprite
 {

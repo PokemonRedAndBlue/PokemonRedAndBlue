@@ -1,7 +1,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Enter.Classes.Textures;
 
-namespace MonoGameLibrary.Graphics;
+namespace Enter.Classes.Sprites;
 
 public class Sprite
 {
@@ -117,3 +118,4 @@ public class Sprite
         Region.Draw(spriteBatch, position, color, rotation, origin, scale, effects, layerDepth);
     }
 }
+
