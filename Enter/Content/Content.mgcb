@@ -16,6 +16,9 @@
 #begin CerucleanCityMap.xml
 /copy:CerucleanCityMap.xml
 
+#begin GymMap.xml
+/copy:GymMap.xml
+
 #begin images/Game Boy _ GBC - Pokemon Red _ Blue - Backgrounds (Places) - Cerulean City.png
 /importer:TextureImporter
 /processor:TextureProcessor

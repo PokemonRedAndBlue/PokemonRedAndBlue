@@ -74,7 +74,7 @@
     <Region id="80" name="podium" x="704" y="503" width="16" height="16"/>
     <Region id="81" name="statue" x="704" y="487" width="16" height="16"/>
 
-    // Added missing Tiles
+    // Added missing tiles for city
     <Region id="82" name="gym-mid-left-roof" x="392" y="295" width="16" height="16"/>
     <Region id="83" name="gym-bottom-edge-roof" x="408" y="295" width="16" height="16"/>
     <Region id="84" name="gym-top-dual-window" x="408" y="311" width="16" height="16"/>
@@ -94,6 +94,9 @@
     <Region id="98" name="gym-bottom-right-roof" x="504" y="311" width="16" height="16"/>
     <Region id="99" name="gym-bottom-left-roof" x="392" y="311" width="16" height="16"/>
     <Region id="100" name="mart-sign-empty" x="232" y="422" width="16" height="16"/>
+
+    //Added Missing gym tile
+    <Region id="101" name="Elevated-water" x="688" y="391" width="16" height="16"/>
 
     </Regions>
 </TextureAtlas>

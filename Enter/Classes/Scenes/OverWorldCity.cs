@@ -15,7 +15,7 @@ namespace Enter.Classes.Scenes
     /// The scene for when the player is walking around in the world.
     /// Handles player movement, tilemap rendering, and collision.
     /// </summary>
-    public class OverworldScene : IGameScene
+    public class OverworldCityScene : IGameScene
     {
         private const float ZoomLevel = 4f; 
         private SceneManager _sceneManager;
@@ -30,7 +30,7 @@ namespace Enter.Classes.Scenes
         private Tilemap _currentMap;
 
         // We must pass in the SceneManager so this scene can request transitions
-        public OverworldScene(SceneManager sceneManager, Game1 game1, KeyboardController controller)
+        public OverworldCityScene(SceneManager sceneManager, Game1 game1, KeyboardController controller)
         {
             _sceneManager = sceneManager;
             _game = game1;
@@ -50,7 +50,7 @@ namespace Enter.Classes.Scenes
                 new Vector2(_game.Window.ClientBounds.Height, _game.Window.ClientBounds.Width) * 0.25f,
                 Facing.Right
             );
-            _currentMap = TilemapLoader.LoadTilemap("Content/Route1Map.xml");
+            _currentMap = TilemapLoader.LoadTilemap("Content/CerucleanCityMap.xml");
 
             // Collision wiring (minimal)
             player = new Player(character, _game.Window);
