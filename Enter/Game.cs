@@ -27,10 +27,11 @@ public class Game1 : Core
         // Initialize Scene Manager and Dependencies
         _sceneManager = new SceneManager(Content, SpriteBatch);
         _sceneManager.AddScene("overworld", new OverworldScene(_sceneManager, this, _controller));
+        _sceneManager.AddScene("overworld_city", new OverworldScene(_sceneManager, this, _controller));
         _sceneManager.AddScene("trainer", new TrainerBattleScene(_sceneManager, this, "TRAINER_TESTER"));
         _sceneManager.AddScene("wild", new WildEncounter(_sceneManager, this));
         _currentMap = TilemapLoader.LoadTilemap("Content/Route1Map.xml");
-        _sceneManager.TransitionTo("overworld"); // <-- Set the starting scene
+        _sceneManager.TransitionTo("overworld_city"); // <-- Set the starting scene
 
         // This is just for testing to check that the stats are calculated correctly, will be a random pokemon with random IV
         var pokemon = PokemonGenerator.GenerateRandom();

@@ -50,7 +50,7 @@ namespace Enter.Classes.Scenes
                 new Vector2(_game.Window.ClientBounds.Height, _game.Window.ClientBounds.Width) * 0.25f,
                 Facing.Right
             );
-            _currentMap = TilemapLoader.LoadTilemap("Content/Route1Map.xml");
+            _currentMap = TilemapLoader.LoadTilemap("Content/CerucleanCityMap.xml");
 
             // Collision wiring (minimal)
             player = new Player(character, _game.Window);
