@@ -43,20 +43,6 @@ namespace Enter.Classes.Scenes
             _PokemonBackAtlas = TextureAtlas.FromFile(content, "Pokemon_BACK.xml");
             _PokemonFrontAtlas = TextureAtlas.FromFile(content, "Pokemon_FRONT.xml");
 
-            // Load UI Textures
-            UIFactory.Instance.LoadAllTextures(content, "BattleInterface.xml");
-            _UIAtlas = TextureAtlas.FromFile(content, "BattleInterface.xml");
-
-            // create UI elements
-            sprites = new Sprite[_UIAtlas._regions.Count];
-            int index = 0;
-            foreach (var sprite in _UIAtlas._regions)
-            {
-                // Example: Create UI sprites as needed
-                var uiSprite = _UIAtlas.CreateSprite(sprite.Key);
-                sprites[index++] = uiSprite;
-            }
-
             // Load Trainer and their Pokemon
             _wildPokemonID = PokemonGenerator.GenerateRandom().Species.Name.ToString();
             _enemyPokemon = PokemonFrontFactory.Instance.CreateAnimatedSprite(_wildPokemonID.ToLower() + "-front");

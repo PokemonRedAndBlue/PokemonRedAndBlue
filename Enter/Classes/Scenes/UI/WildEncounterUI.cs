@@ -3,35 +3,56 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Enter.Classes.Textures;
 using Enter.Classes.Sprites;
+using System;
+using System.Data;
+using System.Collections.Generic;
 
 public class WildEncounterUI
 {
-    private Sprite[] sprites;
+    private Sprite[] UIsprites;
     private TextureAtlas _WildUIAtlas;
     private TextSprite trainerText;
     private SpriteFont _font;
+
+    private Dictionary<string, int> stateMapping = new Dictionary<string, int>
+    {
+        { "Initial", 0 },
+        { "Fight", 1 },
+        { "Bag", 2 },
+        { "Pokemon", 3 },
+        { "Run", 4 }
+    };
 
     public WildEncounterUI(TextureAtlas wildUIAtlas, ContentManager content)
     {
         _WildUIAtlas = wildUIAtlas;
         _font = content.Load<SpriteFont>("PokemonFont");
 
+        // Load UI Textures
+        UIFactory.Instance.LoadAllTextures(content, "BattleInterface.xml");
+        _WildUIAtlas = TextureAtlas.FromFile(content, "BattleInterface.xml");
+
         // create UI elements
-        sprites = new Sprite[_WildUIAtlas._regions.Count];
+        UIsprites = new Sprite[_WildUIAtlas._regions.Count];
         int index = 0;
-        foreach (var region in _WildUIAtlas._regions.Values)
+        foreach (var sprite in _WildUIAtlas._regions)
         {
-            sprites[index++] = _WildUIAtlas.CreateSprite(region.Name);
+            // Example: Create UI sprites as needed
+            var uiSprite = _WildUIAtlas.CreateSprite(sprite.Key);
+            UIsprites[index++] = uiSprite;
         }
 
         // Example text sprite
-        trainerText = new TextSprite("A wild Pokémon appeared!", PokemonFont, Color.W);
+        trainerText = new TextSprite("A wild Pokémon appeared!", _font, Color.White);
     }
 
-    public void Draw(SpriteBatch spriteBatch)
+    public void Draw(SpriteBatch spriteBatch, string currentState)
     {
+        // get index for current state
+        int stateIndex = stateMapping.ContainsKey(currentState) ? stateMapping[currentState] : 0;
+
         // Draw UI elements
         trainerText.DrawTextSprite(spriteBatch, new Vector2(100, 100));
-        sprites[0].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f); // Example UI sprite
+        UIsprites[stateIndex].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f); // Example UI sprite
     }
 }
