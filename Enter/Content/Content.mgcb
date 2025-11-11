@@ -29,7 +29,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:images/Battle Interface.png
+/build:images/BattleInterface.png
 
 #begin images/Characters (Battle).png
 /importer:TextureImporter

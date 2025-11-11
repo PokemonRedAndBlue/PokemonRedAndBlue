@@ -25,6 +25,7 @@ namespace Enter.Classes.Scenes
         private TextureAtlas _PokemonFrontAtlas;
         private TextureAtlas _UIAtlas;
         private TextSprite trainerText;
+        private Sprite[] sprites;
         private SpriteFont _font;
         private Sprite _playerPokemon;
         private AnimatedSprite _enemyPokemon;
@@ -43,11 +44,11 @@ namespace Enter.Classes.Scenes
             _PokemonFrontAtlas = TextureAtlas.FromFile(content, "Pokemon_FRONT.xml");
 
             // Load UI Textures
-            UIFactory.Instance.LoadAllTextures(content, "UI.xml");
-            _UIAtlas = UIFactory.Instance.FromFile(content);
+            UIFactory.Instance.LoadAllTextures(content, "BattleInterface.xml");
+            _UIAtlas = TextureAtlas.FromFile(content, "BattleInterface.xml");
 
             // create UI elements
-            Sprite[] sprites = new Sprite[_UIAtlas._regions.Count];
+            sprites = new Sprite[_UIAtlas._regions.Count];
             int index = 0;
             foreach (var sprite in _UIAtlas._regions)
             {
@@ -89,13 +90,15 @@ namespace Enter.Classes.Scenes
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
+            // Draw UI elements
+            trainerText.DrawTextSprite(spriteBatch, new Vector2(100, 100));
+            sprites[0].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f); // Example UI sprite
+            
             // Draw Pokemon, health bars, menus
             spriteBatch.GraphicsDevice.Clear(Color.White); // Trainer battle color
             _enemyPokemon.Draw(spriteBatch, Color.White, _enemyPokemonPosition, 4f);
             _playerPokemon.Draw(spriteBatch, Color.White, _playerPokemonPosition, 4f);
 
-            // Draw UI elements
-            trainerText.DrawTextSprite(spriteBatch, new Vector2(100, 100));
             spriteBatch.End();
         }
     }
