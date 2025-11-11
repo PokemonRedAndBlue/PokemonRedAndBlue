@@ -1,5 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent xmlns:ns="Microsoft.Xna.Framework">
-  <Asset Type="Object">
-  </Asset>
+  <Texture>images/Battle Interface/BattleInterface</Texture>
+  <Regions>
+    <Region name="battle-prompt" x="176" y="792" width="158" height="143"/>
+    <Region name="battle-menu" x="176" y="944" width="158" height="143"/>
+    <Region name="battle-attack" x="176" y="1096" width="158" height="143"/>
+    <Region name="battle-pokemon" x="176" y="1248" width="158" height="143"/>
+    <Region name="battle-item" x="176" y="1400" width="158" height="143"/>
+    <Region name="battle-run" x="176" y="1552" width="158" height="143"/>
+  </Regions>
 </XnaContent>
