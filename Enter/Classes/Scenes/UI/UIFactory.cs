@@ -9,6 +9,7 @@ public class UIFactory
     private static UIFactory _instance;
     private ContentManager _content;
     private TextureAtlas _UIAtlas;
+    private String path = "";
 
     // Singleton Instance
     public static UIFactory Instance
@@ -25,12 +26,13 @@ public class UIFactory
 
     private UIFactory() { }
 
-    public void LoadAllTextures(ContentManager Content)
+    public void LoadAllTextures(ContentManager Content, String path)
     {
         _content = Content;
+        this.path = path;
 
         // Example: Load your textures here
-        _UIAtlas = TextureAtlas.FromFile(_content, "Pokemon_BACK.xml");
+        _UIAtlas = TextureAtlas.FromFile(_content, "Content/" + path);
     }
     public Sprite CreateStaticSprite(String spriteName)
     {
