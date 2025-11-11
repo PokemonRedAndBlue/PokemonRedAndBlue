@@ -21,6 +21,8 @@ namespace Enter.Classes.Scenes
         private Vector2 _enemyPokemonPosition = new Vector2(800, 200);
         private Vector2 _playerPokemonPosition = new Vector2(400, 400);
         private Game _game;
+
+        private WildEncounterUI wildUI;
         private TextureAtlas _PokemonBackAtlas;
         private TextureAtlas _PokemonFrontAtlas;
         private TextureAtlas _UIAtlas;
@@ -40,6 +42,7 @@ namespace Enter.Classes.Scenes
             // Load UI
             _font = content.Load<SpriteFont>("PokemonFont");
             trainerText = new TextSprite($"WILD ENCOUNTER", _font, Color.Black);
+            WildEncounterUI wildUI = new WildEncounterUI(_UIAtlas, _game.Content);
         }
 
         public void Update(GameTime gameTime)
@@ -66,6 +69,7 @@ namespace Enter.Classes.Scenes
         {
             spriteBatch.Begin();
             // Draw UI elements
+            wildUI.Draw(spriteBatch);
             trainerText.DrawTextSprite(spriteBatch, new Vector2(100, 100));
             spriteBatch.End();
         }
