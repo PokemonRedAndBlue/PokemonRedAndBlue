@@ -37,17 +37,6 @@ namespace Enter.Classes.Scenes
 
         public void LoadContent(ContentManager content)
         {
-            // Load Pokemon Textures
-            PokemonFrontFactory.Instance.LoadAllTextures(content);
-            PokemonBackFactory.Instance.LoadAllTextures(content);
-            _PokemonBackAtlas = TextureAtlas.FromFile(content, "Pokemon_BACK.xml");
-            _PokemonFrontAtlas = TextureAtlas.FromFile(content, "Pokemon_FRONT.xml");
-
-            // Load Trainer and their Pokemon
-            _wildPokemonID = PokemonGenerator.GenerateRandom().Species.Name.ToString();
-            _enemyPokemon = PokemonFrontFactory.Instance.CreateAnimatedSprite(_wildPokemonID.ToLower() + "-front");
-            _playerPokemon = PokemonBackFactory.Instance.CreateStaticSprite("squirtle-back");
-
             // Load UI
             _font = content.Load<SpriteFont>("PokemonFont");
             trainerText = new TextSprite($"WILD ENCOUNTER", _font, Color.Black);
@@ -78,13 +67,6 @@ namespace Enter.Classes.Scenes
             spriteBatch.Begin();
             // Draw UI elements
             trainerText.DrawTextSprite(spriteBatch, new Vector2(100, 100));
-            sprites[0].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f); // Example UI sprite
-            
-            // Draw Pokemon, health bars, menus
-            spriteBatch.GraphicsDevice.Clear(Color.White); // Trainer battle color
-            _enemyPokemon.Draw(spriteBatch, Color.White, _enemyPokemonPosition, 4f);
-            _playerPokemon.Draw(spriteBatch, Color.White, _playerPokemonPosition, 4f);
-
             spriteBatch.End();
         }
     }
