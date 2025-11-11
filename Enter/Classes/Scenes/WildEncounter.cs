@@ -23,6 +23,7 @@ namespace Enter.Classes.Scenes
         private Game _game;
         private TextureAtlas _PokemonBackAtlas;
         private TextureAtlas _PokemonFrontAtlas;
+        private TextureAtlas _UIAtlas;
         private TextSprite trainerText;
         private SpriteFont _font;
         private Sprite _playerPokemon;
@@ -35,10 +36,25 @@ namespace Enter.Classes.Scenes
 
         public void LoadContent(ContentManager content)
         {
+            // Load Pokemon Textures
             PokemonFrontFactory.Instance.LoadAllTextures(content);
             PokemonBackFactory.Instance.LoadAllTextures(content);
             _PokemonBackAtlas = TextureAtlas.FromFile(content, "Pokemon_BACK.xml");
             _PokemonFrontAtlas = TextureAtlas.FromFile(content, "Pokemon_FRONT.xml");
+
+            // Load UI Textures
+            UIFactory.Instance.LoadAllTextures(content, "UI.xml");
+            _UIAtlas = UIFactory.Instance.FromFile(content);
+
+            // create UI elements
+            Sprite[] sprites = new Sprite[_UIAtlas._regions.Count];
+            int index = 0;
+            foreach (var sprite in _UIAtlas._regions)
+            {
+                // Example: Create UI sprites as needed
+                var uiSprite = _UIAtlas.CreateSprite(sprite.Key);
+                sprites[index++] = uiSprite;
+            }
 
             // Load Trainer and their Pokemon
             _wildPokemonID = PokemonGenerator.GenerateRandom().Species.Name.ToString();

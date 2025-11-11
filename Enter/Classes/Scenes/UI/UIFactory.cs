@@ -38,4 +38,9 @@ public class UIFactory
     {
         return _UIAtlas.CreateSprite(spriteName);
     }
+
+    public TextureAtlas FromFile(ContentManager content)
+    {
+        return TextureAtlas.FromFile(content, "Content/" + this.path);
+    }
 }
