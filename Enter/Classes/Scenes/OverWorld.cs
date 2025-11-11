@@ -43,7 +43,7 @@ namespace Enter.Classes.Scenes
             Cam = new(((Game)_game).GraphicsDevice.Viewport);
             character = content.Load<Texture2D>("images/Pokemon_Characters");
             player = new Player(character, _game.Window);
-            Cam.Update(player);
+
             Cam.Zoom = ZoomLevel; //Zoom leve of world
             trainer = new Trainer(
                 character,
@@ -53,7 +53,6 @@ namespace Enter.Classes.Scenes
             _currentMap = TilemapLoader.LoadTilemap("Content/Route1Map.xml");
 
             // Collision wiring (minimal)
-            player = new Player(character, _game.Window);
             player.Map = _currentMap;
 
             // Build the solid tile index set from the "Ground" layer
@@ -62,6 +61,10 @@ namespace Enter.Classes.Scenes
                 "Ground",
                 Physics.SolidTileCollision.IsSolid
             );
+
+            // * TEMP: Initialize player tile position (spawn at same 160px,0px => tile (10,0))
+            player.SetTilePosition(new Point(10, 0));
+            Cam.Update(player);
         }
 
         public void Update(GameTime gameTime)
