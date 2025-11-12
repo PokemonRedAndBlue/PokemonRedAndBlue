@@ -56,25 +56,23 @@ public class WildEncounterUI
 
     public void WildEncounterStateBasedDraw(Sprite[] UI_BaseSprites, SpriteBatch spriteBatch)
     {
-        // get index for current state
-        int stateIndex = stateMapping.ContainsKey(_currentState) ? stateMapping[_currentState] : 0;
 
         // draw the UI elements for wild encounter (state based)
-            switch (stateIndex)
+            switch (_currentState)
         {
-            case 0: // Initial
+            case "Initial": // Initial
                 UIsprites[0].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
                 break;
-            case 1: // Fight
+            case "Fight": // Fight
                 UIsprites[1].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
                 break;
-            case 2: // Bag
+            case "Bag": // Bag
                 UIsprites[2].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
                 break;
-            case 3: // Pokemon
+            case "Pokemon": // Pokemon
                 UIsprites[3].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
                 break;
-            case 4: // Run
+            case "Run": // Run
                 UIsprites[4].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
                 break;
             default:
