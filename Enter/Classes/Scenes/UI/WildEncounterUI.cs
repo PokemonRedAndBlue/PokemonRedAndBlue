@@ -52,6 +52,7 @@ public class WildEncounterUI
     {
         // Draw the base UI
         trainerText.DrawTextSprite(spriteBatch, new Vector2(100, 100)); // placeholder text for ID reasons
+        WildEncounterStateBasedDraw(UIsprites, spriteBatch);
     }
 
     public void WildEncounterStateBasedDraw(Sprite[] UI_BaseSprites, SpriteBatch spriteBatch)

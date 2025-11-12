@@ -72,6 +72,7 @@ namespace Enter.Classes.Scenes
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.GraphicsDevice.Clear(Color.White);
             spriteBatch.Begin();
             // Draw UI elements
             wildUI.Draw(spriteBatch);
