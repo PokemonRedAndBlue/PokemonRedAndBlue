@@ -42,7 +42,12 @@ namespace Enter.Classes.Scenes
             // Load UI
             _font = content.Load<SpriteFont>("PokemonFont");
             trainerText = new TextSprite($"WILD ENCOUNTER", _font, Color.Black);
-            WildEncounterUI wildUI = new WildEncounterUI(_UIAtlas, _game.Content);
+
+            // 1. FIX: Load the atlas first, so _UIAtlas is not null
+            _UIAtlas = TextureAtlas.FromFile(content, "BattleInterface.xml"); 
+            
+            // 2. FIX: Remove "WildEncounterUI" to assign to the class field
+            wildUI = new WildEncounterUI(_UIAtlas, content); 
         }
 
         public void Update(GameTime gameTime)
