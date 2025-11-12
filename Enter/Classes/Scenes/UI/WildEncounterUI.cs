@@ -16,6 +16,7 @@ public class WildEncounterUI
     private SpriteFont _font;
     static private float _scale = 4.0f;
     private Sprite _trainerSpriteBack;
+    private String _wildPokemonID;
     private AnimatedSprite _wildPokemonSpriteFront;
     private string _currentState = "Initial";
 
@@ -47,9 +48,10 @@ public class WildEncounterUI
         { "Run", 4 }
     };
 
-    public WildEncounterUI(TextureAtlas wildUIAtlas, ContentManager content, String _wildPokemonID)
+    public WildEncounterUI(TextureAtlas wildUIAtlas, ContentManager content)
     {
         _WildUIAtlas = wildUIAtlas;
+        _wildPokemonID = PokemonGenerator.GenerateRandom().Species.Name.ToLower(); // Example: "bulbasaur"
         _font = content.Load<SpriteFont>("PokemonFont");
 
         // Load UI Textures
