@@ -6,6 +6,7 @@ using Enter.Classes.Sprites;
 using System;
 using System.Data;
 using System.Collections.Generic;
+using Enter.Classes.Animations;
 
 public class WildEncounterUI
 {
@@ -15,6 +16,7 @@ public class WildEncounterUI
     private SpriteFont _font;
     static private float _scale = 4.0f;
     private Sprite _trainerSpriteBack;
+    private AnimatedSprite _wildPokemonSpriteFront;
     private string _currentState = "Initial";
 
     // Pre defined regions within UI ADD TO A DICT LATER
@@ -45,7 +47,7 @@ public class WildEncounterUI
         { "Run", 4 }
     };
 
-    public WildEncounterUI(TextureAtlas wildUIAtlas, ContentManager content)
+    public WildEncounterUI(TextureAtlas wildUIAtlas, ContentManager content, String _wildPokemonID)
     {
         _WildUIAtlas = wildUIAtlas;
         _font = content.Load<SpriteFont>("PokemonFont");
@@ -57,6 +59,10 @@ public class WildEncounterUI
         // load trainer sprite
         TextureAtlas trainerAtlas = TextureAtlas.FromFile(content, "BattleChars.xml");
         _trainerSpriteBack = new Sprite(trainerAtlas.GetRegion("player-back"));
+
+        // load wild pokemon sprite
+        PokemonFrontFactory.Instance.LoadAllTextures(content);
+        _wildPokemonSpriteFront = PokemonFrontFactory.Instance.CreateAnimatedSprite(_wildPokemonID + "-front"); // Example: Bulbasaur
 
         // create UI elements
         UIsprites = new Sprite[_WildUIAtlas._regions.Count];
@@ -91,6 +97,7 @@ public class WildEncounterUI
                 // draw player trainer sprite
                 _trainerSpriteBack.Draw(spriteBatch, Color.White, playerTrainerPosition, 8f);
                 // draw wild pokemon sprite
+                _wildPokemonSpriteFront.Draw(spriteBatch, Color.White, wildPokemonPosition, 4f);
                 break;
             case "Fight": // Fight
                 UIsprites[1].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);

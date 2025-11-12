@@ -32,6 +32,7 @@ namespace Enter.Classes.Scenes
         {
             _sceneManager = sceneManager;
             _game = game1;
+            _wildPokemonID = PokemonGenerator.GenerateRandom().Species.Name.ToLower(); // Example: "bulbasaur"
         }
 
         public void LoadContent(ContentManager content)
@@ -44,7 +45,7 @@ namespace Enter.Classes.Scenes
             _UIAtlas = TextureAtlas.FromFile(content, "BattleInterface.xml"); 
             
             // 2. FIX: Remove "WildEncounterUI" to assign to the class field
-            wildUI = new WildEncounterUI(_UIAtlas, content); 
+            wildUI = new WildEncounterUI(_UIAtlas, content, _wildPokemonID); 
         }
 
         public void Update(GameTime gameTime)
