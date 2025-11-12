@@ -11,8 +11,10 @@ public class WildEncounterUI
 {
     private Sprite[] UIsprites;
     private TextureAtlas _WildUIAtlas;
-    private TextSprite trainerText;
+    private TextSprite _trainerText;
     private SpriteFont _font;
+    static private float _scale = 4.0f;
+    private Sprite _trainerSpriteBack;
     private string _currentState = "Initial";
 
     // Pre defined regions within UI ADD TO A DICT LATER
@@ -22,8 +24,8 @@ public class WildEncounterUI
     static private Vector2 arrowPosition = new Vector2(uiBasePosition.X + 50, uiBasePosition.Y + 400);
     static private Vector2 enemyPokemonPosition = new Vector2(uiBasePosition.X, uiBasePosition.Y);
     static private Vector2 playerPokemonPosition = new Vector2(uiBasePosition.X + 450, uiBasePosition.Y + 200);
-    static private Vector2 playerTrainerPosition = new Vector2(uiBasePosition.X + 8, uiBasePosition.Y + 40);
-    static private Vector2 wildPokemonPosition = new Vector2(uiBasePosition.X + 96, uiBasePosition.Y);
+    static private Vector2 playerTrainerPosition = new Vector2(uiBasePosition.X + (8 * _scale) - 5, uiBasePosition.Y + (40 * _scale) - 5);
+    static private Vector2 wildPokemonPosition = new Vector2(uiBasePosition.X + (96 * _scale), uiBasePosition.Y);
 
     private Dictionary<string, Vector2> positionMapping = new Dictionary<string, Vector2>
     {
@@ -52,6 +54,10 @@ public class WildEncounterUI
         UIFactory.Instance.LoadAllTextures(content, "BattleInterface.xml");
         _WildUIAtlas = TextureAtlas.FromFile(content, "BattleInterface.xml");
 
+        // load trainer sprite
+        TextureAtlas trainerAtlas = TextureAtlas.FromFile(content, "BattleChars.xml");
+        _trainerSpriteBack = new Sprite(trainerAtlas.GetRegion("player-back"));
+
         // create UI elements
         UIsprites = new Sprite[_WildUIAtlas._regions.Count];
         int index = 0;
@@ -63,13 +69,13 @@ public class WildEncounterUI
         }
 
         // Example text sprite
-        trainerText = new TextSprite("A wild Pokémon appeared!", _font, Color.White);
+        _trainerText = new TextSprite("A wild Pokémon appeared!", _font, Color.White);
     }
 
     public void Draw(SpriteBatch spriteBatch)
     {
         // Draw the base UI
-        trainerText.DrawTextSprite(spriteBatch, new Vector2(100, 100)); // placeholder text for ID reasons
+        _trainerText.DrawTextSprite(spriteBatch, new Vector2(100, 100)); // placeholder text for ID reasons
         WildEncounterStateBasedDraw(UIsprites, spriteBatch);
     }
 
@@ -80,7 +86,11 @@ public class WildEncounterUI
             switch (_currentState)
         {
             case "Initial": // Initial
+                // draw base UI
                 UIsprites[0].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
+                // draw player trainer sprite
+                _trainerSpriteBack.Draw(spriteBatch, Color.White, playerTrainerPosition, 8f);
+                // draw wild pokemon sprite
                 break;
             case "Fight": // Fight
                 UIsprites[1].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
