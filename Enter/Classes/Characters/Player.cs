@@ -5,29 +5,39 @@ using Vector2 = Microsoft.Xna.Framework.Vector2;
 using Enter.Classes.Cameras;
 using Enter.Classes.Input;
 using Enter.Classes.Sprites;
-using Enter.Classes.Physics;
 
 namespace Enter.Classes.Characters;
 
 public enum Facing { Down, Up, Left, Right }
 public class Player
 {
-    private Vector2 tempPosition = new Vector2(160, 0); //Temp spawn point for testing
-    
     //For collision
     public Tilemap Map { get; set; }
     public HashSet<Point> SolidTiles { get; set; }
-    private const int PlayerWidth = PlayerSprite.SpriteSize;
-    private const int PlayerHeight = PlayerSprite.SpriteSize;
 
-    public Vector2 Position { get; set; } = Vector2.Zero;
-    private const float SpeedPxPerSec = 80f; // movement speed
+    // Pixel-space render position (top-left of sprite)
+    public Vector2 Position { get; private set; }
+    private const float SpeedPxPerSec = 80f; // movement speed (pixels/sec)
+
+    // Tile-space state
+    public Point TilePos { get; private set; } // current tile position
+    private Point _targetTilePos;           // target tile when stepping
+    private bool _isTileMoving = false;     // currently stepping between tiles
+    private bool _initializedTileFromPosition = false;
+
     protected static readonly Dictionary<Facing, Vector2> _directions = new()
     {
         { Facing.Up,    new Vector2(0, -1) },
         { Facing.Down,  new Vector2(0, 1) },
         { Facing.Left,  new Vector2(-1, 0) },
         { Facing.Right, new Vector2(1, 0) },
+    };
+    private static readonly Dictionary<Direction, Facing> _facings = new()
+    {
+        { Direction.Up, Facing.Up },
+        { Direction.Down, Facing.Down },
+        { Direction.Left, Facing.Left },
+        { Direction.Right, Facing.Right },
     };
     private readonly Texture2D _texture;
     private readonly PlayerSprite _sprite = new();
@@ -36,8 +46,6 @@ public class Player
 
     public Player(Texture2D texture2, GameWindow Window)
     {
-        //Position = new Vector2(Window.ClientBounds.X, Window.ClientBounds.Y) * 0.5f;
-        Position = tempPosition;
         _texture = texture2;
     }
     public Player(Texture2D texture2, Vector2 position)
@@ -45,72 +53,137 @@ public class Player
         Position = position;
         _texture = texture2;
     }
+    public Player(Texture2D texture2, Point tilePos)
+    {
+        TilePos = tilePos;
+        _texture = texture2;
+    }
 
     public void Update(GameTime gameTime, KeyboardController keyboard, Camera Cam)
     {
-        bool isMoving = (!_seenByTrainer) && UpdateDirection(keyboard);
+        EnsureTileInitialized();
 
-        if (isMoving)
+        float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+        bool hasIntent = (!_seenByTrainer) && UpdateDirection(keyboard);
+
+        if (!_isTileMoving)
         {
-            float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            UpdatePosition(dt, Cam);
-            _sprite.UpdateMovAnim(_facing, dt);
+            if (hasIntent)
+                TryBeginStepFromFacing();
+
+            // if we cannot enter next tile
+            if (!_isTileMoving)
+            {
+                _sprite.IdleReset(_facing);
+                return;
+            }
         }
-        else
+
+        PerformStep(dt, Cam);
+        HandleArrivalAtTarget();
+        _sprite.UpdateMovAnim(_facing, dt);
+    }
+
+    private void TryBeginStepFromFacing()
+    {
+        Point dir = FacingToPoint(_facing);
+        Point next = new(TilePos.X + dir.X, TilePos.Y + dir.Y);
+        if (CanEnter(next))
         {
-            _sprite.IdleReset(_facing);
+            _targetTilePos = next;
+            _isTileMoving = true;
+        }
+    }
+
+    private void PerformStep(float dt, Camera Cam)
+    {
+        Vector2 targetPx = TileToPixel(_targetTilePos);
+        Vector2 toTarget = targetPx - Position;
+
+        Vector2 stepDir = Vector2.Zero;
+        if (toTarget.X != 0) stepDir.X = System.MathF.Sign(toTarget.X);
+        if (toTarget.Y != 0) stepDir.Y = System.MathF.Sign(toTarget.Y);
+
+        Vector2 delta = stepDir * SpeedPxPerSec * dt;
+        Vector2 newPos = Position + delta;
+
+        // Clamp per-axis to avoid overshoot
+        if ((stepDir.X > 0 && newPos.X > targetPx.X) || (stepDir.X < 0 && newPos.X < targetPx.X))
+            newPos.X = targetPx.X;
+        if ((stepDir.Y > 0 && newPos.Y > targetPx.Y) || (stepDir.Y < 0 && newPos.Y < targetPx.Y))
+            newPos.Y = targetPx.Y;
+
+        Cam.DiffPos = newPos - Position;
+        Position = newPos;
+    }
+
+    private void HandleArrivalAtTarget()
+    {
+        Vector2 targetPx = TileToPixel(_targetTilePos);
+        if (Position == targetPx)
+        {
+            TilePos = _targetTilePos;
+            _isTileMoving = false;
         }
     }
 
     /// <summary>
-    /// Update player's facing, return whether player is moving. 
+    /// Update player's facing, return whether there is movement intent from input.
     /// </summary>
-    /// <param name="keyboard"></param>
-    /// <returns></returns>
     private bool UpdateDirection(KeyboardController keyboard)
     {
-        switch (keyboard.MoveDirection)
-        {
-            case Direction.Left:
-                _facing = Facing.Left;
-                break;
-            case Direction.Right:
-                _facing = Facing.Right;
-                break;
-            case Direction.Up:
-                _facing = Facing.Up;
-                break;
-            case Direction.Down:
-                _facing = Facing.Down;
-                break;
-            default:
-                return false;
-        }
+        if (keyboard.MoveDirection == Direction.None) return false;
+        _facing = _facings[keyboard.MoveDirection];
         return true;
     }
 
-    private void UpdatePosition(float dt, Camera Cam)
+    private void EnsureTileInitialized()
     {
-        Vector2 diffPos = _directions[_facing] * SpeedPxPerSec * dt;
-        Cam.DiffPos = diffPos;
-        Position += diffPos;
+        if (_initializedTileFromPosition || Map == null) return;
+        TilePos = PixelToTile(Position);
+        Position = TileToPixel(TilePos); // snap to grid
+        _targetTilePos = TilePos;
+        _initializedTileFromPosition = true;
+    }
 
-        int dx = (int)System.MathF.Round(diffPos.X);
-        int dy = (int)System.MathF.Round(diffPos.Y);
-        int tileSize = Map.TileWidth;
+    public void SetTilePosition(Point tile)
+    {
+        TilePos = tile;
+        _targetTilePos = tile;
+        if (Map != null)
+            Position = TileToPixel(tile);
+        _initializedTileFromPosition = true;
+    }
 
-        // Player rect
-        Rectangle rect = new((int)Position.X, (int)Position.Y, PlayerWidth, PlayerHeight);
+    private static Point FacingToPoint(Facing facing)
+    {
+        return new Point((int)_directions[facing].X, (int)_directions[facing].Y);
+    }
 
-        // For axis-separated movement
-        TileCollision.MoveHorizontal(ref rect, dx, SolidTiles, tileSize);
-        TileCollision.MoveVertical(ref rect, dy, SolidTiles, tileSize);
-        TileCollision.ClampToWorld(ref rect, Map);
+    private bool CanEnter(Point tile)
+    {
+        if (Map == null) return true;
+        // bounds
+        if (tile.X < 0 || tile.Y < 0 || tile.X >= Map.MapWidth || tile.Y >= Map.MapHeight)
+            return false;
+        // solids
+        if (SolidTiles != null && SolidTiles.Contains(tile))
+            return false;
+        return true;
+    }
 
-        Position = new Vector2(rect.X, rect.Y);
+    private Vector2 TileToPixel(Point tile)
+    {
+        int tileW = Map?.TileWidth ?? PlayerSprite.SpriteSize; // scale?
+        int tileH = Map?.TileHeight ?? PlayerSprite.SpriteSize;
+        return new Vector2(tile.X * tileW, tile.Y * tileH);
+    }
 
-        // keep camera offset the same
-        Cam.DiffPos = new Vector2(dx, dy);
+    private Point PixelToTile(Vector2 pos)
+    {
+        int tileW = Map?.TileWidth ?? PlayerSprite.SpriteSize; // scale?
+        int tileH = Map?.TileHeight ?? PlayerSprite.SpriteSize;
+        return new Point((int)System.MathF.Floor(pos.X / tileW), (int)System.MathF.Floor(pos.Y / tileH));
     }
 
     public void Draw(SpriteBatch spriteBatch, float scale = 1f)
