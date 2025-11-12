@@ -13,8 +13,26 @@ public class WildEncounterUI
     private TextureAtlas _WildUIAtlas;
     private TextSprite trainerText;
     private SpriteFont _font;
-
     private string _currentState = "Initial";
+
+    // Pre defined regions within UI ADD TO A DICT LATER
+    static private Vector2 uiBasePosition = new Vector2(350, 75);
+    static private Vector2 pokemonHealthBarPosition = new Vector2(uiBasePosition.X + 150, uiBasePosition.Y + 200);
+    static private Vector2 pokemonLevelPosition = new Vector2(uiBasePosition.X + 250, uiBasePosition.Y + 280);
+    static private Vector2 arrowPosition = new Vector2(uiBasePosition.X + 50, uiBasePosition.Y + 400);
+    static private Vector2 enemyPokemonPosition = new Vector2(uiBasePosition.X, uiBasePosition.Y);
+    static private Vector2 playerPokemonPosition = new Vector2(uiBasePosition.X + 450, uiBasePosition.Y + 200);
+    static private Vector2 playerTrainerPosition = new Vector2(uiBasePosition.X + 8, uiBasePosition.Y + 40);
+    static private Vector2 wildPokemonPosition = new Vector2(uiBasePosition.X + 96, uiBasePosition.Y);
+
+    private Dictionary<string, Vector2> positionMapping = new Dictionary<string, Vector2>
+    {
+        { "Enemy", enemyPokemonPosition },
+        { "Player", playerPokemonPosition },
+        { "Arrow", arrowPosition },
+        { "HealthBar", pokemonHealthBarPosition },
+        { "Level", pokemonLevelPosition }
+    };
 
     private Dictionary<string, int> stateMapping = new Dictionary<string, int>
     {

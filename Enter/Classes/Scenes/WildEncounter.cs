@@ -18,10 +18,7 @@ namespace Enter.Classes.Scenes
     {
         private SceneManager _sceneManager;
         private String _wildPokemonID;
-        private Vector2 _enemyPokemonPosition = new Vector2(800, 200);
-        private Vector2 _playerPokemonPosition = new Vector2(400, 400);
         private Game _game;
-
         private WildEncounterUI wildUI;
         private TextureAtlas _PokemonBackAtlas;
         private TextureAtlas _PokemonFrontAtlas;
