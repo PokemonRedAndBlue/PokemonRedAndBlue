@@ -11,7 +11,7 @@ using Enter.Classes.Animations;
 public class TrainerBattleUI
 {
     private Color pokemonBackgroundColor = new Color(246, 232, 248);
-    private Sprite[] UIsprites;
+    private Sprite[] UIBaseSprites;
     private TextureAtlas _TrainerUIAtlas;
     private TextSprite _trainerText;
     private SpriteFont _font;
@@ -74,13 +74,13 @@ public class TrainerBattleUI
         _enemyTrainerSpriteFront = new Sprite(trainerAtlas.GetRegion(_enemyTrainerString));
 
         // create UI elements
-        UIsprites = new Sprite[_TrainerUIAtlas._regions.Count];
+        UIBaseSprites = new Sprite[_TrainerUIAtlas._regions.Count];
         int index = 0;
         foreach (var sprite in _TrainerUIAtlas._regions)
         {
             // Example: Create UI sprites as needed
             var uiSprite = _TrainerUIAtlas.CreateSprite(sprite.Key);
-            UIsprites[index++] = uiSprite;
+            UIBaseSprites[index++] = uiSprite;
         }
 
         // Example text sprite
@@ -91,7 +91,7 @@ public class TrainerBattleUI
     {
         // Draw the base UI
         _trainerText.DrawTextSprite(spriteBatch, new Vector2(100, 100)); // placeholder text for ID reasons
-        WildEncounterStateBasedDraw(UIsprites, spriteBatch);
+        WildEncounterStateBasedDraw(UIBaseSprites, spriteBatch);
     }
 
     public void WildEncounterStateBasedDraw(Sprite[] UI_BaseSprites, SpriteBatch spriteBatch)
@@ -102,26 +102,26 @@ public class TrainerBattleUI
         {
             case "Initial": // Initial
                 // draw base UI
-                UIsprites[0].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
+                UIBaseSprites[0].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
                 // draw player trainer sprite
                 _trainerSpriteBack.Draw(spriteBatch, Color.White, playerTrainerPosition, 8f);
                 // draw enemy trainer sprite
                 _enemyTrainerSpriteFront.Draw(spriteBatch, Color.White, enemyTrainerPosition, 4f);
                 break;
             case "Fight": // Fight
-                UIsprites[1].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
+                UIBaseSprites[1].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
                 break;
             case "Bag": // Bag
-                UIsprites[2].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
+                UIBaseSprites[2].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
                 break;
             case "Pokemon": // Pokemon
-                UIsprites[3].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
+                UIBaseSprites[3].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
                 break;
             case "Run": // Run
-                UIsprites[4].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
+                UIBaseSprites[4].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
                 break;
             default:
-                UIsprites[0].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
+                UIBaseSprites[0].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
                 break;
         }
     }
