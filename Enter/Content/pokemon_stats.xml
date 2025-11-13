@@ -82,7 +82,7 @@
   <Pokemon dex="80" name="Slowbro" type1="Water" type2="Psychic" hp="95" attack="75" defense="110" sp_attack="100" sp_defense="80" speed="30" total="490"/>
   <Pokemon dex="81" name="Magnemite" type1="Electric" type2="Steel" hp="25" attack="35" defense="70" sp_attack="95" sp_defense="55" speed="45" total="325"/>
   <Pokemon dex="82" name="Magneton" type1="Electric" type2="Steel" hp="50" attack="60" defense="95" sp_attack="120" sp_defense="70" speed="70" total="465"/>
-  <Pokemon dex="83" name="Farfetch'd" type1="Normal" type2="Flying" hp="52" attack="90" defense="55" sp_attack="58" sp_defense="62" speed="60" total="377"/>
+  <Pokemon dex="83" name="Farfetchd" type1="Normal" type2="Flying" hp="52" attack="90" defense="55" sp_attack="58" sp_defense="62" speed="60" total="377"/>
   <Pokemon dex="84" name="Doduo" type1="Normal" type2="Flying" hp="35" attack="85" defense="45" sp_attack="35" sp_defense="35" speed="75" total="310"/>
   <Pokemon dex="85" name="Dodrio" type1="Normal" type2="Flying" hp="60" attack="110" defense="70" sp_attack="60" sp_defense="60" speed="110" total="470"/>
   <Pokemon dex="86" name="Seel" type1="Water" type2="" hp="65" attack="45" defense="55" sp_attack="45" sp_defense="70" speed="45" total="325"/>
