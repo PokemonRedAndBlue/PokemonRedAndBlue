@@ -7,8 +7,7 @@ public static class MusicPlayer
 
     public static void Play(SongId id, bool loop = true)
     {
-        // If same song is already playing, do nothing
-        if (_currentId == id && _isPlaying)
+        if (_currentId == id && _isPlaying && MediaPlayer.IsRepeating == loop)
             return;
 
         Song song = MusicLibrary.GetSong(id);
