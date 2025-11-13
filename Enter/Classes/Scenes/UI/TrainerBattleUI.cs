@@ -10,6 +10,7 @@ using Enter.Classes.Animations;
 
 public class TrainerBattleUI
 {
+    private Color pokemonBackgroundColor = new Color(246, 232, 248);
     private Sprite[] UIsprites;
     private TextureAtlas _TrainerUIAtlas;
     private TextSprite _trainerText;

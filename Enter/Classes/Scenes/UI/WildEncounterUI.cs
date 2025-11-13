@@ -7,9 +7,11 @@ using System;
 using System.Data;
 using System.Collections.Generic;
 using Enter.Classes.Animations;
+using System.Threading;
 
 public class WildEncounterUI
 {
+    private Color pokemonBackgroundColor = new Color(246, 232, 248);
     private Sprite[] UIsprites;
     private TextureAtlas _WildUIAtlas;
     private TextSprite _trainerText;

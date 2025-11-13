@@ -15,6 +15,7 @@ namespace Enter.Classes.Scenes
     /// </summary>
     public class TrainerBattleScene : IGameScene
     {
+        private Color pokemonBackgroundColor = new Color(246, 232, 248);
         private SceneManager _sceneManager;
         private String _trainerID;
         private Vector2 _enemyPokemonPosition = new Vector2(800, 200);
@@ -77,7 +78,7 @@ namespace Enter.Classes.Scenes
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            spriteBatch.GraphicsDevice.Clear(Color.White);
+            spriteBatch.GraphicsDevice.Clear(pokemonBackgroundColor);
             // Draw UI elements
             _trainerUI.Draw(spriteBatch);
             trainerText.DrawTextSprite(spriteBatch, new Vector2(100, 100));

@@ -16,6 +16,7 @@ namespace Enter.Classes.Scenes
     /// </summary>
     public class WildEncounter : IGameScene
     {
+        private Color pokemonBackgroundColor = new Color(246, 232, 248);
         private SceneManager _sceneManager;
         private String _wildPokemonID;
         private Game _game;
@@ -65,7 +66,7 @@ namespace Enter.Classes.Scenes
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.GraphicsDevice.Clear(Color.White);
+            spriteBatch.GraphicsDevice.Clear(pokemonBackgroundColor);
             spriteBatch.Begin();
             // Draw UI elements
             wildUI.Draw(spriteBatch);
