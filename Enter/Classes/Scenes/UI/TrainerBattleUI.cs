@@ -28,7 +28,7 @@ public class TrainerBattleUI
     static private Vector2 enemyPokemonPosition = new Vector2(uiBasePosition.X, uiBasePosition.Y);
     static private Vector2 playerPokemonPosition = new Vector2(uiBasePosition.X + 450, uiBasePosition.Y + 200);
     static private Vector2 playerTrainerPosition = new Vector2(uiBasePosition.X + (8 * _scale) - 5, uiBasePosition.Y + (40 * _scale) - 5);
-    static private Vector2 wildPokemonPosition = new Vector2(uiBasePosition.X + (96 * _scale), uiBasePosition.Y);
+    static private Vector2 enemyTrainerPosition = new Vector2(uiBasePosition.X + (96 * _scale) - 4, uiBasePosition.Y);
 
     private Dictionary<string, Vector2> positionMapping = new Dictionary<string, Vector2>
     {
@@ -98,6 +98,7 @@ public class TrainerBattleUI
                 // draw player trainer sprite
                 _trainerSpriteBack.Draw(spriteBatch, Color.White, playerTrainerPosition, 8f);
                 // draw enemy trainer sprite
+                _enemyTrainerSpriteFront.Draw(spriteBatch, Color.White, enemyTrainerPosition, 4f);
                 break;
             case "Fight": // Fight
                 UIsprites[1].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
