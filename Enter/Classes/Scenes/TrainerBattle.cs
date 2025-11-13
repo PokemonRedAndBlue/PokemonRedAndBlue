@@ -20,6 +20,7 @@ namespace Enter.Classes.Scenes
         private Vector2 _enemyPokemonPosition = new Vector2(800, 200);
         private Vector2 _playerPokemonPosition = new Vector2(400, 400);
         private Game _game;
+        private TrainerBattleUI _trainerUI;
         private TextureAtlas _PokemonBackAtlas;
         private TextureAtlas _PokemonFrontAtlas;
         private TextSprite trainerText;
@@ -47,6 +48,7 @@ namespace Enter.Classes.Scenes
             // Load UI
             _font = content.Load<SpriteFont>("PokemonFont");
             trainerText = new TextSprite($"TRAINER BATTLE", _font, Color.Black);
+            _trainerUI = new TrainerBattleUI(_PokemonBackAtlas, content, _trainerID);
         }
 
         public void Update(GameTime gameTime)
@@ -81,6 +83,7 @@ namespace Enter.Classes.Scenes
             _playerPokemon.Draw(spriteBatch, Color.White, _playerPokemonPosition, 4f);
 
             // Draw UI elements
+            _trainerUI.Draw(spriteBatch);
             trainerText.DrawTextSprite(spriteBatch, new Vector2(100, 100));
             spriteBatch.End();
         }
