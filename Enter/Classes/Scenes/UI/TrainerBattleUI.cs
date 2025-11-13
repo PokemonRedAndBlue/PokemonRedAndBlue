@@ -31,15 +31,6 @@ public class TrainerBattleUI
     static private Vector2 playerTrainerPosition = new Vector2(uiBasePosition.X + (8 * _scale) - 5, uiBasePosition.Y + (40 * _scale) - 5);
     static private Vector2 enemyTrainerPosition = new Vector2(uiBasePosition.X + (96 * _scale) - 4, uiBasePosition.Y);
 
-    private Dictionary<string, Vector2> positionMapping = new Dictionary<string, Vector2>
-    {
-        { "Enemy", enemyPokemonPosition },
-        { "Player", playerPokemonPosition },
-        { "Arrow", arrowPosition },
-        { "HealthBar", pokemonHealthBarPosition },
-        { "Level", pokemonLevelPosition }
-    };
-
     private Dictionary<string, int> stateMapping = new Dictionary<string, int>
     {
         { "Initial", 0 },
