@@ -20,14 +20,9 @@ namespace Enter.Classes.Scenes
         private String _wildPokemonID;
         private Game _game;
         private WildEncounterUI wildUI;
-        private TextureAtlas _PokemonBackAtlas;
-        private TextureAtlas _PokemonFrontAtlas;
         private TextureAtlas _UIAtlas;
         private TextSprite trainerText;
-        private Sprite[] sprites;
         private SpriteFont _font;
-        private Sprite _playerPokemon;
-        private AnimatedSprite _enemyPokemon;
         public WildEncounter(SceneManager sceneManager, Game game1)
         {
             _sceneManager = sceneManager;
