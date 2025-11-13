@@ -19,6 +19,7 @@ public class TrainerBattleUI
     static private float _scale = 4.0f;
     private Sprite _trainerSpriteBack;
     private Sprite _enemyTrainerSpriteFront;
+    private TextSprite _enemyTrainerIDSprite;
     private string _currentState = "Initial";
 
     // Pre defined regions within UI ADD TO A DICT LATER
@@ -30,7 +31,7 @@ public class TrainerBattleUI
     static private Vector2 playerPokemonPosition = new Vector2(uiBasePosition.X + 450, uiBasePosition.Y + 200);
     static private Vector2 playerTrainerPosition = new Vector2(uiBasePosition.X + (8 * _scale) - 5, uiBasePosition.Y + (40 * _scale) - 5);
     static private Vector2 enemyTrainerPosition = new Vector2(uiBasePosition.X + (96 * _scale) - 4, uiBasePosition.Y);
-
+    static private Vector2 enemyTrainerIDPosition = new Vector2(uiBasePosition.X + (8 * _scale), uiBasePosition.Y + (110 * _scale) + 1);
     private Dictionary<string, int> stateMapping = new Dictionary<string, int>
     {
         { "Initial", 0 },
@@ -75,13 +76,13 @@ public class TrainerBattleUI
         }
 
         // Example text sprite
+        _enemyTrainerIDSprite = new TextSprite(_enemyTrainerString.ToUpper(), _font, Color.Black);
         _trainerText = new TextSprite("A wild Pokémon appeared!", _font, Color.White);
     }
 
     public void Draw(SpriteBatch spriteBatch)
     {
-        // Draw the base UI
-        _trainerText.DrawTextSprite(spriteBatch, new Vector2(100, 100)); // placeholder text for ID reasons
+        // Draw the base UI elements based on current state
         WildEncounterStateBasedDraw(UIBaseSprites, spriteBatch);
     }
 
@@ -98,6 +99,11 @@ public class TrainerBattleUI
                 _trainerSpriteBack.Draw(spriteBatch, Color.White, playerTrainerPosition, 8f);
                 // draw enemy trainer sprite
                 _enemyTrainerSpriteFront.Draw(spriteBatch, Color.White, enemyTrainerPosition, 4f);
+                // draw enemy trainer name
+                _enemyTrainerIDSprite.DrawTextSpriteWithScale(spriteBatch, enemyTrainerIDPosition, 2f);
+                // draw player trainer party bar
+
+                // draw enemy trainer party bar
                 break;
             case "Fight": // Fight
                 UIBaseSprites[1].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
