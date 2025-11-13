@@ -81,7 +81,6 @@ namespace Enter.Classes.Scenes
             spriteBatch.GraphicsDevice.Clear(pokemonBackgroundColor);
             // Draw UI elements
             _trainerUI.Draw(spriteBatch);
-            trainerText.DrawTextSprite(spriteBatch, new Vector2(100, 100));
             spriteBatch.End();
         }
     }

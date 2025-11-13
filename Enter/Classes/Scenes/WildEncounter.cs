@@ -70,7 +70,6 @@ namespace Enter.Classes.Scenes
             spriteBatch.Begin();
             // Draw UI elements
             wildUI.Draw(spriteBatch);
-            trainerText.DrawTextSprite(spriteBatch, new Vector2(100, 100));
             spriteBatch.End();
         }
     }
