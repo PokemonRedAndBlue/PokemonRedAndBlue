@@ -54,7 +54,7 @@ namespace Enter.Classes.Scenes
             Cam.Update(player);
             Cam.Zoom = ZoomLevel; //Zoom level of world
             // Create trainer with specific ID that matches what's used in TrainerBattle
-            const string TRAINER_ID = "TRAINER_TESTER"; // This should match the ID used in Game1's AddScene
+            const string TRAINER_ID = "youngster"; // This should match the ID used in Game1's AddScene
             trainer = new Trainer(
                 character,
                 new Vector2(_game.Window.ClientBounds.Height, _game.Window.ClientBounds.Width) * 0.25f,

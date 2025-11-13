@@ -77,11 +77,7 @@ namespace Enter.Classes.Scenes
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            // Draw Pokemon, health bars, menus
-            spriteBatch.GraphicsDevice.Clear(Color.White); // Trainer battle color
-            _enemyPokemon.Draw(spriteBatch, Color.White, _enemyPokemonPosition, 4f);
-            _playerPokemon.Draw(spriteBatch, Color.White, _playerPokemonPosition, 4f);
-
+            spriteBatch.GraphicsDevice.Clear(Color.White);
             // Draw UI elements
             _trainerUI.Draw(spriteBatch);
             trainerText.DrawTextSprite(spriteBatch, new Vector2(100, 100));
