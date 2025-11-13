@@ -76,7 +76,7 @@ public class TrainerBattleUI
         }
 
         // Example text sprite
-        _enemyTrainerIDSprite = new TextSprite(_enemyTrainerString.ToUpper(), _font, Color.Black);
+        _enemyTrainerIDSprite = new TextSprite(formatTrainerName(_enemyTrainerString).ToUpper(), _font, Color.Black);
         _trainerText = new TextSprite("A wild Pokémon appeared!", _font, Color.White);
     }
 
@@ -90,7 +90,7 @@ public class TrainerBattleUI
     {
 
         // draw the UI elements for wild encounter (state based)
-            switch (_currentState)
+        switch (_currentState)
         {
             case "Initial": // Initial
                 // draw base UI
@@ -121,5 +121,15 @@ public class TrainerBattleUI
                 UIBaseSprites[0].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
                 break;
         }
+    }
+    
+    public string formatTrainerName(string trainerID)
+    {
+        // add .'s for any remaing characters available up to 11
+        while (trainerID.Length < 14)
+        {
+            trainerID += " .";
+        }
+        return trainerID;
     }
 }
