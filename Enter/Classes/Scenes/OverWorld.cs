@@ -8,6 +8,7 @@ using Enter.Classes.Input;
 using Enter.Classes.Sprites;
 using Enter.Classes.Physics;
 using Enter.Interfaces;
+using Enter.Classes.Textures;
 
 namespace Enter.Classes.Scenes
 {
@@ -51,6 +52,7 @@ namespace Enter.Classes.Scenes
             Cam.Update(_player);
             Cam.Zoom = ZoomLevel; //Zoom level of world
             // Create trainer with specific ID that matches what's used in TrainerBattle
+            character = content.Load<Texture2D>("images/Pokemon_Characters");
             const string TRAINER_ID = "youngster"; // This should match the ID used in Game1's AddScene
             trainer = new Trainer(
                 character,
