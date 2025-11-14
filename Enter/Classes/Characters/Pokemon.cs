@@ -21,7 +21,6 @@ namespace PokemonGame
         public Sprite Sprite { get; private set; }
         public AnimatedSprite AnimatedSprite { get; private set; }
         public Vector2 Position { get; set; }
-
         public Sprite _sprite;
 
         public Pokemon(string name, int level, PokemonView view, AnimatedSprite animatedSprite, Vector2 position)

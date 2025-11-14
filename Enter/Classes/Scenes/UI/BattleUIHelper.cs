@@ -26,7 +26,7 @@ public class BattleUIHelper
         }
     }
 
-    static public void drawPokeballSprites(Pokemon[] team, TextureAtlas battleUIAtlas, SpriteBatch spriteBatch, Boolean isPlayersTeam)
+    static public void drawPokeballSprites(Team team, TextureAtlas battleUIAtlas, SpriteBatch spriteBatch, Boolean isPlayersTeam)
     {
         if(isPlayersTeam)
         {
@@ -38,7 +38,7 @@ public class BattleUIHelper
         }
         for(int i = 0; i < 6; i++)
         {
-            Sprite pokeballSprite = GetPokeballSprite(team[i].StateMachine.CurrentStateName, battleUIAtlas);
+            Sprite pokeballSprite = GetPokeballSprite(team.GetPokemonState(i), battleUIAtlas);
             pokeballSprite.Draw(spriteBatch, Color.White, _pokeballStartPosition + new Vector2(i * 8, 0), _scale);
         }
     }
