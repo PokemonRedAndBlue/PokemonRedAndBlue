@@ -48,7 +48,7 @@ public class Game1 : Core
 
         // Initialize Scene Manager and Dependencies
         _sceneManager = new SceneManager(Content, SpriteBatch);
-        _sceneManager.AddScene("overworld", new OverworldScene(_sceneManager, this, _controller));
+        _sceneManager.AddScene("overworld", new OverworldScene(_sceneManager, this, _controller, player));
         _sceneManager.AddScene("trainer", new TrainerBattleScene(_sceneManager, this, "youngster", player));
         _sceneManager.AddScene("wild", new WildEncounter(_sceneManager, this));
         _currentMap = TilemapLoader.LoadTilemap("Content/Route1Map.xml");

@@ -30,11 +30,12 @@ namespace Enter.Classes.Scenes
         public Vector2 GetPlayerPosition() => _player.Position;
 
         // We must pass in the SceneManager so this scene can request transitions
-        public OverworldScene(SceneManager sceneManager, Game1 game1, KeyboardController controller)
+        public OverworldScene(SceneManager sceneManager, Game1 game1, KeyboardController controller, Player player)
         {
             _sceneManager = sceneManager;
             _game = game1;
             _controller = controller;
+            _player = player;
         }
 
         public void LoadContent(ContentManager content)
