@@ -121,7 +121,7 @@
   <Pokemon dex="119" name="Seaking" type1="Water" type2="" hp="80" attack="92" defense="65" sp_attack="65" sp_defense="80" speed="68" total="450"/>
   <Pokemon dex="120" name="Staryu" type1="Water" type2="" hp="30" attack="45" defense="55" sp_attack="70" sp_defense="55" speed="85" total="340"/>
   <Pokemon dex="121" name="Starmie" type1="Water" type2="Psychic" hp="60" attack="75" defense="85" sp_attack="100" sp_defense="85" speed="115" total="520"/>
-  <Pokemon dex="122" name="Mr. Mime" type1="Psychic" type2="Fairy" hp="40" attack="45" defense="65" sp_attack="100" sp_defense="120" speed="90" total="460"/>
+  <Pokemon dex="122" name="Mr-Mime" type1="Psychic" type2="Fairy" hp="40" attack="45" defense="65" sp_attack="100" sp_defense="120" speed="90" total="460"/>
   <Pokemon dex="123" name="Scyther" type1="Bug" type2="Flying" hp="70" attack="110" defense="80" sp_attack="55" sp_defense="80" speed="105" total="500"/>
   <Pokemon dex="124" name="Jynx" type1="Ice" type2="Psychic" hp="65" attack="50" defense="35" sp_attack="115" sp_defense="95" speed="95" total="455"/>
   <Pokemon dex="125" name="Electabuzz" type1="Electric" type2="" hp="65" attack="83" defense="57" sp_attack="95" sp_defense="85" speed="105" total="490"/>

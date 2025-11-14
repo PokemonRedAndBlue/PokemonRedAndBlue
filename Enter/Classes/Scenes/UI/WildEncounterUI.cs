@@ -8,13 +8,15 @@ using System.Data;
 using System.Collections.Generic;
 using Enter.Classes.Animations;
 using System.Threading;
+using System.Runtime.Intrinsics;
 
 public class WildEncounterUI
 {
     private Color pokemonBackgroundColor = new Color(246, 232, 248);
     private Sprite[] UIsprites;
     private TextureAtlas _WildUIAtlas;
-    private TextSprite _trainerText;
+    private TextSprite _wildPokemonMessage1;
+    private TextSprite _wildPokemonMessage2;
     private SpriteFont _font;
     static private float _scale = 4.0f;
     private Sprite _trainerSpriteBack;
@@ -31,15 +33,8 @@ public class WildEncounterUI
     static private Vector2 playerPokemonPosition = new Vector2(uiBasePosition.X + 450, uiBasePosition.Y + 200);
     static private Vector2 playerTrainerPosition = new Vector2(uiBasePosition.X + (8 * _scale) - 5, uiBasePosition.Y + (40 * _scale) - 5);
     static private Vector2 wildPokemonPosition = new Vector2(uiBasePosition.X + (96 * _scale), uiBasePosition.Y);
-
-    private Dictionary<string, Vector2> positionMapping = new Dictionary<string, Vector2>
-    {
-        { "Enemy", enemyPokemonPosition },
-        { "Player", playerPokemonPosition },
-        { "Arrow", arrowPosition },
-        { "HealthBar", pokemonHealthBarPosition },
-        { "Level", pokemonLevelPosition }
-    };
+    static private Vector2 _wildPokemonMessagePos1 = new Vector2(uiBasePosition.X + (8 * _scale), uiBasePosition.Y + (110 * _scale) + 1);
+    static private Vector2 _wildPokemonMessagePos2 = new Vector2(uiBasePosition.X + (8 * _scale), uiBasePosition.Y + (125 * _scale) + 1);
 
     private Dictionary<string, int> stateMapping = new Dictionary<string, int>
     {
@@ -78,15 +73,17 @@ public class WildEncounterUI
             UIsprites[index++] = uiSprite;
         }
 
-        // Example text sprite
-        _trainerText = new TextSprite("A wild Pokémon appeared!", _font, Color.White);
+        // _____ has appeared text sprite
+        _wildPokemonMessage1 = new TextSprite("Wild    " + _wildPokemonID.ToUpper(), _font, Color.Black);
+        _wildPokemonMessage2 = new TextSprite("appeared!", _font, Color.Black);
     }
 
     public void Draw(SpriteBatch spriteBatch)
     {
         // Draw the base UI
-        _trainerText.DrawTextSprite(spriteBatch, new Vector2(100, 100)); // placeholder text for ID reasons
         WildEncounterStateBasedDraw(UIsprites, spriteBatch);
+        _wildPokemonMessage1.DrawTextSpriteWithScale(spriteBatch, _wildPokemonMessagePos1, 2f);
+        _wildPokemonMessage2.DrawTextSpriteWithScale(spriteBatch, _wildPokemonMessagePos2, 2f);
     }
 
     public void WildEncounterStateBasedDraw(Sprite[] UI_BaseSprites, SpriteBatch spriteBatch)
