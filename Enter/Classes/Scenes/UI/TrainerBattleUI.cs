@@ -32,6 +32,8 @@ public class TrainerBattleUI
     static private Vector2 playerTrainerPosition = new Vector2(uiBasePosition.X + (8 * _scale) - 5, uiBasePosition.Y + (40 * _scale) - 5);
     static private Vector2 enemyTrainerPosition = new Vector2(uiBasePosition.X + (96 * _scale) - 4, uiBasePosition.Y);
     static private Vector2 enemyTrainerIDPosition = new Vector2(uiBasePosition.X + (8 * _scale), uiBasePosition.Y + (110 * _scale) + 1);
+    static private Team _playerTeam;
+    static private Team _enemyTeam;
     private Dictionary<string, int> stateMapping = new Dictionary<string, int>
     {
         { "Initial", 0 },
@@ -48,11 +50,14 @@ public class TrainerBattleUI
         new int[] {0,0}  // Top right
     };
 
-    public TrainerBattleUI(TextureAtlas trainerUIAtlas, ContentManager content, String enemyTrainerID)
+    public TrainerBattleUI(TextureAtlas trainerUIAtlas, ContentManager content, String enemyTrainerID, Team playerTeam, Team enemyTeam)
     {
+        // init class vars
         _TrainerUIAtlas = trainerUIAtlas;
         _enemyTrainerString = enemyTrainerID.ToLower();
         _font = content.Load<SpriteFont>("PokemonFont");
+        _playerTeam = playerTeam;
+        _enemyTeam = enemyTeam;
 
         // Load UI Textures
         UIFactory.Instance.LoadAllTextures(content, "BattleInterface.xml");
@@ -102,8 +107,9 @@ public class TrainerBattleUI
                 // draw enemy trainer name
                 _enemyTrainerIDSprite.DrawTextSpriteWithScale(spriteBatch, enemyTrainerIDPosition, 2f);
                 // draw player trainer party bar
-
+                BattleUIHelper.drawPokeballSprites(_playerTeam, _TrainerUIAtlas, spriteBatch, true);
                 // draw enemy trainer party bar
+                BattleUIHelper.drawPokeballSprites(_enemyTeam, _TrainerUIAtlas, spriteBatch, false);
                 break;
             case "Fight": // Fight
                 UIBaseSprites[1].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
