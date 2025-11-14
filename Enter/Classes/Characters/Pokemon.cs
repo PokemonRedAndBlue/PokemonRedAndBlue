@@ -13,7 +13,6 @@ namespace PokemonGame
     public class Pokemon
     {
         private readonly Dictionary<string, Action<Vector2>> _animationActions;
-
         public string Name { get; }
         public int Hp { get; private set; }
         public int MaxHp { get; }
