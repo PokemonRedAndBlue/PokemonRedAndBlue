@@ -16,6 +16,8 @@ public class Player
     
     //For collision
     public Tilemap Map { get; set; }
+
+    public Team thePlayersTeam = new Team();
     public HashSet<Point> SolidTiles { get; set; }
     private const int PlayerWidth = PlayerSprite.SpriteSize;
     private const int PlayerHeight = PlayerSprite.SpriteSize;

@@ -8,6 +8,8 @@ using Enter.Classes.Scenes;
 using Enter.Classes.Sprites;
 using Enter.Classes.Cameras;
 using Microsoft.Xna.Framework.Input;
+using Enter.Classes.Characters;
+using System.Reflection.PortableExecutable;
 
 namespace Enter;
 
@@ -21,6 +23,7 @@ public class Game1 : Core
     private KeyboardController _controller = new KeyboardController();
     private Vector2 postion = new Vector2(100, 100);
     private Tilemap _currentMap;
+
     private SceneManager _sceneManager;
     // State that persists across scene transitions
     public Microsoft.Xna.Framework.Vector2? SavedPlayerPosition { get; set; } = null;
@@ -39,10 +42,14 @@ public class Game1 : Core
 
     protected override void LoadContent()
     {
+        // get player object
+        Texture2D character = Content.Load<Texture2D>("images/Pokemon_Characters");
+        Player player = new Player(character, this.Window);
+
         // Initialize Scene Manager and Dependencies
         _sceneManager = new SceneManager(Content, SpriteBatch);
         _sceneManager.AddScene("overworld", new OverworldScene(_sceneManager, this, _controller));
-        _sceneManager.AddScene("trainer", new TrainerBattleScene(_sceneManager, this, "youngster"));
+        _sceneManager.AddScene("trainer", new TrainerBattleScene(_sceneManager, this, "youngster", player));
         _sceneManager.AddScene("wild", new WildEncounter(_sceneManager, this));
         _currentMap = TilemapLoader.LoadTilemap("Content/Route1Map.xml");
         _sceneManager.TransitionTo("overworld"); // <-- Set the starting scene

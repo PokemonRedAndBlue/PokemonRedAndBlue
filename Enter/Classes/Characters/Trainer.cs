@@ -3,11 +3,15 @@ using Enter.Classes.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
+using TrainerMethods;
 
 namespace Enter.Classes.Characters;
 
 public class Trainer
 {
+    // Trainer Team init
+    private Team _trainersTeam;
+
     // Unique identifier for this trainer instance
     public string TrainerID { get; private set; }
 
@@ -50,6 +54,7 @@ public class Trainer
         _visionRange = visionRange;
         TrainerID = trainerId;
         colided = false;
+        _trainersTeam = new Team();
     }
 
     public void Update(GameTime gametime, Player player)    // TODO: Sprites

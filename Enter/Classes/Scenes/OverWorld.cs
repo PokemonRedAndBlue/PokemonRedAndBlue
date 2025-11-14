@@ -23,11 +23,11 @@ namespace Enter.Classes.Scenes
         private KeyboardController _controller;
         private Texture2D character;
         private Trainer trainer;
-        private Player player;
+        private Player _player;
         private Game1 _game;
         private Tilemap _currentMap;
 
-        public Vector2 GetPlayerPosition() => player.Position;
+        public Vector2 GetPlayerPosition() => _player.Position;
 
         // We must pass in the SceneManager so this scene can request transitions
         public OverworldScene(SceneManager sceneManager, Game1 game1, KeyboardController controller)
@@ -41,17 +41,13 @@ namespace Enter.Classes.Scenes
         {
             // Load tilemap, player sprites, NPCs, etc.
             Cam = new(((Game)_game).GraphicsDevice.Viewport);
-            character = content.Load<Texture2D>("images/Pokemon_Characters");
-
-            // Create the player once for this scene. If Game1 has a saved position from a
-            // previous visit, restore it so the player doesn't snap back to the default spawn.
-            player = new Player(character, _game.Window);
+            
             if ((_game as Game1)?.SavedPlayerPosition is Microsoft.Xna.Framework.Vector2 savedPos)
             {
-                player.Position = savedPos;
+                _player.Position = savedPos;
             }
 
-            Cam.Update(player);
+            Cam.Update(_player);
             Cam.Zoom = ZoomLevel; //Zoom level of world
             // Create trainer with specific ID that matches what's used in TrainerBattle
             const string TRAINER_ID = "youngster"; // This should match the ID used in Game1's AddScene
@@ -66,10 +62,10 @@ namespace Enter.Classes.Scenes
 
             // Collision wiring (minimal)
             // (don't recreate player here) Wire up map and collision data
-            player.Map = _currentMap;
+            _player.Map = _currentMap;
 
             // Build the solid tile index set from the "Ground" layer
-            player.SolidTiles = Physics.Collision.BuildSolidIndexSet(
+            _player.SolidTiles = Physics.Collision.BuildSolidIndexSet(
                 _currentMap,
                 "Ground",
                 Physics.SolidTileCollision.IsSolid
@@ -79,8 +75,8 @@ namespace Enter.Classes.Scenes
         public void Update(GameTime gameTime)
         {
             // Update Objects
-            _controller.Update(_game, gameTime, Cam, player, trainer);
-            Cam.Update(player);
+            _controller.Update(_game, gameTime, Cam, _player, trainer);
+            Cam.Update(_player);
 
             // Handle trainer interactions
             if (trainer.colided && !trainer.IsApproachingPlayer)
@@ -88,7 +84,7 @@ namespace Enter.Classes.Scenes
                 if (!_game.IsTrainerDefeated(trainer.TrainerID))
                 {
                     // Save position and transition to battle if trainer isn't defeated
-                    _game.SavedPlayerPosition = player.Position;
+                    _game.SavedPlayerPosition = _player.Position;
                     _sceneManager.TransitionTo("trainer");
                 }
                 // If trainer is defeated, they're just interacting without battle
@@ -99,7 +95,7 @@ namespace Enter.Classes.Scenes
             if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.W))
             {
                 // Save player position before entering wild battle
-                _game.SavedPlayerPosition = player.Position;
+                _game.SavedPlayerPosition = _player.Position;
                 _sceneManager.TransitionTo("wild");
             }
             // no need for base.Update here
@@ -112,7 +108,7 @@ namespace Enter.Classes.Scenes
             // map & world entities affected by camera movement
             spriteBatch.Begin(transformMatrix: Cam.GetViewMatrix(), samplerState: SamplerState.PointClamp);
             _currentMap?.DrawCropped(Cam.VisibleWorldRect);
-            player.Draw(spriteBatch);
+            _player.Draw(spriteBatch);
             trainer.Draw(spriteBatch);
             spriteBatch.End();
 

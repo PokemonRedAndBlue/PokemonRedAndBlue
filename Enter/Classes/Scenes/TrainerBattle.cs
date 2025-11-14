@@ -7,13 +7,15 @@ using Enter.Classes.Animations;
 using Enter.Classes.Sprites;
 using Enter.Classes.Textures;
 using Enter.Interfaces;
+using Enter.Classes.Characters;
+using TrainerMethods;
 
 namespace Enter.Classes.Scenes    
 {
     /// <summary>
     /// The scene for a battle against a Trainer.
     /// </summary>
-    public class TrainerBattleScene : IGameScene
+    public class TrainerBattleScene: IGameScene
     {
         private Color pokemonBackgroundColor = new Color(246, 232, 248);
         private SceneManager _sceneManager;
@@ -21,6 +23,9 @@ namespace Enter.Classes.Scenes
         private Vector2 _enemyPokemonPosition = new Vector2(800, 200);
         private Vector2 _playerPokemonPosition = new Vector2(400, 400);
         private Game _game;
+        private Player _player;
+        private Team _playersTeam;
+        private Team _trainersTeam;
         private TrainerBattleUI _trainerUI;
         private TextureAtlas _PokemonBackAtlas;
         private TextureAtlas _PokemonFrontAtlas;
@@ -28,10 +33,11 @@ namespace Enter.Classes.Scenes
         private SpriteFont _font;
         private Sprite _playerPokemon;
         private AnimatedSprite _enemyPokemon;
-        public TrainerBattleScene(SceneManager sceneManager, Game game1, string trainerID)
+        public TrainerBattleScene(SceneManager sceneManager, Game game1, string trainerID, Player ourPlayer)
         {
             _sceneManager = sceneManager;
             _trainerID = trainerID; // e.g., "TRAINER_BROCK"
+            _player = ourPlayer;
             _game = game1;
         }
 
@@ -42,14 +48,17 @@ namespace Enter.Classes.Scenes
             _PokemonBackAtlas = TextureAtlas.FromFile(content, "Pokemon_BACK.xml");
             _PokemonFrontAtlas = TextureAtlas.FromFile(content, "Pokemon_FRONT.xml");
 
+            // load from trainer dict
+            TrainerTeam trainerTeams = new TrainerTeam();
+
             // Load Trainer and their Pokemon
-            _enemyPokemon = PokemonFrontFactory.Instance.CreateAnimatedSprite("bulbasaur-front");
-            _playerPokemon = PokemonBackFactory.Instance.CreateStaticSprite("squirtle-back");
+            _trainersTeam = trainerTeams.GetTrainerTeam(_trainerID);
+            _playersTeam = _player.thePlayersTeam;
 
             // Load UI
             _font = content.Load<SpriteFont>("PokemonFont");
             trainerText = new TextSprite($"TRAINER BATTLE", _font, Color.Black);
-            _trainerUI = new TrainerBattleUI(_PokemonBackAtlas, content, _trainerID);
+            _trainerUI = new TrainerBattleUI(_PokemonBackAtlas, content, _trainerID, _playersTeam, _trainersTeam);
         }
 
         public void Update(GameTime gameTime)

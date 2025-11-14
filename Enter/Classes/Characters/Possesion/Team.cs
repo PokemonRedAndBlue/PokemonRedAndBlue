@@ -1,22 +1,26 @@
-using Microsoft.Xna.Framework;
-using Enter.Classes.Textures;
-using Enter.Classes.Sprites;
 using PokemonGame;
-using Microsoft.Xna.Framework.Graphics;
 using System;
-using Enter.Classes.Animations;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.Xna.Framework.Input;
 
 public class Team
 {
     public Pokemon[] Pokemons { get; private set; }
 
+    public Team()
+    {
+        Pokemons = new Pokemon[6];
+    }
+
     public Team(Pokemon[] pokemons)
     {
-        if (pokemons.Length != 6)
+        if (pokemons.Length > 6)
         {
-            throw new ArgumentException("A team must consist of exactly 6 Pokemon.");
+            throw new ArgumentException("A team must consist of exactly no more than 6 Pokemon.");
+        } else if (pokemons.Length < 6)
+        {
+            for(int i = pokemons.Length; i <= 6; i++)
+            {
+                pokemons[i] = new Pokemon("I am just a placeholder", 999);
+            }
         }
         Pokemons = pokemons;
     }

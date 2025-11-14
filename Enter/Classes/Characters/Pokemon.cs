@@ -16,6 +16,7 @@ namespace PokemonGame
         public string Name { get; }
         public int Hp { get; private set; }
         public int MaxHp { get; }
+        private int _level;
         public PokemonView View { get; }
         public StateMachine StateMachine { get; }
         public Sprite Sprite { get; private set; }
@@ -23,6 +24,11 @@ namespace PokemonGame
         public Vector2 Position { get; set; }
         public Sprite _sprite;
 
+        public Pokemon(string name, int level)
+        {
+            Name = name;
+            _level = level;
+        }
         public Pokemon(string name, int level, PokemonView view, AnimatedSprite animatedSprite, Vector2 position)
         {
             Name = name;
