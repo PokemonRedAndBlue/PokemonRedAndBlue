@@ -5,6 +5,8 @@ using PokemonGame;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Enter.Classes.Animations;
+using Enter.Classes.Input;
+using System.Collections.Generic;
 
 public class BattleUIHelper
 {
@@ -18,7 +20,17 @@ public class BattleUIHelper
     static private Vector2 topRight = new Vector2(uiBasePosition.X + (120 * _scale), uiBasePosition.Y + (112 * _scale));
     static private Vector2 botLeft = new Vector2(uiBasePosition.X + (72 * _scale), uiBasePosition.Y + (138 * _scale));
     static private Vector2 botRight = new Vector2(uiBasePosition.X + (120 * _scale), uiBasePosition.Y + (138 * _scale));
+
+    static private Dictionary<(int, int), Vector2> numsToArrowLocals = new Dictionary<(int, int), Vector2>
+    {
+        // The key is just (0, 0) and the entry is { key, value }
+        { (0, 0), topLeft },
+        { (1, 0), topRight },
+        { (0, 1), botLeft },
+        { (1, 1), botRight }
+    };
     static private float _scale = 4.0f;
+    KeyboardController keyBrd = new KeyboardController();
     static private Vector2 uiBasePosition = new Vector2(350, 75);
     private static Vector2 _pokeballStartPosition;
     static private Vector2 playerPokeballStartPosition = new Vector2(uiBasePosition.X + (88 * _scale) - 4, uiBasePosition.Y + (80 * _scale) - 4);
@@ -64,7 +76,10 @@ public class BattleUIHelper
 
     public void DrawArrow()
     {
-        
+        for(int i = 0; i < 3; i++)
+        {
+            if
+        }
     }
 
     public int[][] moveArrow(int[][] currentArrow)
