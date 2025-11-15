@@ -10,20 +10,28 @@ public class Team
         Pokemons = new Pokemon[6];
     }
 
-    public Team(Pokemon[] pokemons)
+public Team(Pokemon[] pokemons)
+{
+    if (pokemons.Length > 6)
+        throw new ArgumentException("A team must consist of no more than 6 Pokemon.");
+
+    // Always create a full-size team array
+    Pokemons = new Pokemon[6];
+
+    // Add ALL elements from the parameter array
+    for (int i = 0; i < pokemons.Length; i++)
     {
-        if (pokemons.Length > 6)
-        {
-            throw new ArgumentException("A team must consist of exactly no more than 6 Pokemon.");
-        } else if (pokemons.Length < 6)
-        {
-            for(int i = pokemons.Length; i <= 6; i++)
-            {
-                pokemons[i] = new Pokemon("I am just a placeholder", 999);
-            }
-        }
-        Pokemons = pokemons;
+        Pokemons[i] = pokemons[i];
     }
+
+    // Fill remaining slots with placeholders
+    for (int i = pokemons.Length; i < 6; i++)
+    {
+        Pokemons[i] = new Pokemon("I am just a placeholder", 999);
+    }
+}
+
+
 
     public Team addPokemon(Pokemon newPokemon, int slot)
     {
