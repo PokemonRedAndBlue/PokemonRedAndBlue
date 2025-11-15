@@ -8,11 +8,11 @@ using Enter.Classes.Animations;
 
 public class BattleUIHelper
 {
-    static private float _scale = 2.0f;
+    static private float _scale = 4.0f;
     static private Vector2 uiBasePosition = new Vector2(350, 75);
     private static Vector2 _pokeballStartPosition;
-    static private Vector2 playerPokeballStartPosition = new Vector2(uiBasePosition.X + (88 * _scale), uiBasePosition.Y + (80 * _scale));
-    static private Vector2 enemyPokeballStartPosition = new Vector2(uiBasePosition.X + (24 * _scale), uiBasePosition.Y + (16 * _scale));
+    static private Vector2 playerPokeballStartPosition = new Vector2(uiBasePosition.X + (88 * _scale) - 4, uiBasePosition.Y + (80 * _scale) - 4);
+    static private Vector2 enemyPokeballStartPosition = new Vector2(uiBasePosition.X + (24 * _scale) - 4, uiBasePosition.Y + (16 * _scale) - 4);
     static public Sprite GetPokeballSprite(string status, TextureAtlas battleUIAtlas)
     {
         switch (status)
@@ -39,7 +39,7 @@ public class BattleUIHelper
         for(int i = 0; i < 6; i++)
         {
             Sprite pokeballSprite = GetPokeballSprite(team.GetPokemonState(i), battleUIAtlas);
-            pokeballSprite.Draw(spriteBatch, Color.White, _pokeballStartPosition + new Vector2(i * 8, 0), _scale);
+            pokeballSprite.Draw(spriteBatch, Color.White, _pokeballStartPosition + new Vector2(i * 8 * _scale, 0), _scale);
         }
     }
 }
