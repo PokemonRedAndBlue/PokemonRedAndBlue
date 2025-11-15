@@ -74,13 +74,28 @@ public class BattleUIHelper
         }
     }
 
-    public void DrawArrow()
-    {
-        for(int i = 0; i < 3; i++)
+    public void DrawArrow(TextureAtlas battleUIAtlas, SpriteBatch spriteBatch)
+    {   
+        Sprite arrowSprite = new Sprite(battleUIAtlas.GetRegion("horizzontal-arrow"));
+
+        for(int i = 0; i < 2; i++)
         {
-            if
+            for(int j = 0; j < 2; j++)
+            {
+                if(arrowLocation[i][j] == 1) // 1. Check if the arrow is at this grid spot
+                {
+                    // 2. Correctly call TryGetValue:
+                    //    It returns a bool (true/false) and
+                    //    populates 'drawPosition' with the Vector2 value.
+                if (numsToArrowLocals.TryGetValue((i, j), out Vector2 drawPosition))
+                {
+                    // 3. Now 'drawPosition' holds the Vector2, so we use it here:
+                    arrowSprite.Draw(spriteBatch, Color.White, drawPosition, _scale);
+                }
+            }
         }
     }
+}
 
     public int[][] moveArrow(int[][] currentArrow)
     {
