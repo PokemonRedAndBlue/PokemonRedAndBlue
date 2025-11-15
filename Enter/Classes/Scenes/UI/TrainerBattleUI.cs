@@ -44,13 +44,6 @@ public class TrainerBattleUI
         { "Run", 4 }
     };
 
-    // handle arrow locations in menu
-    private int[][] arrowLocation =
-    {
-        new int[] {1,0}, // Top left
-        new int[] {0,0}  // Top right
-    };
-
     public TrainerBattleUI(TextureAtlas trainerUIAtlas, ContentManager content, String enemyTrainerID, Team playerTeam, Team enemyTeam)
     {
         // init class vars

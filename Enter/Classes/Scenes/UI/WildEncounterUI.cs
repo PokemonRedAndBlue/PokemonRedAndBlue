@@ -24,7 +24,7 @@ public class WildEncounterUI
     private Sprite _trainerSpriteBack;
     private String _wildPokemonID;
     private AnimatedSprite _wildPokemonSpriteFront;
-    private string _currentState = "Initial";
+    private string _currentState = "Fight";
 
     // Pre defined regions within UI ADD TO A DICT LATER
     static private Vector2 uiBasePosition = new Vector2(350, 75);
@@ -110,19 +110,28 @@ public class WildEncounterUI
                 BattleUIHelper.drawPokeballSprites(_Player.thePlayersTeam, _WildUIAtlas, spriteBatch, true);
                 break;
             case "Fight": // Fight
+                // draw base UI
                 UIsprites[1].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
+                // draw player trainer sprite
+                _trainerSpriteBack.Draw(spriteBatch, Color.White, playerTrainerPosition, 8f);
+                // draw wild pokemon sprite
+                _wildPokemonSpriteFront.Draw(spriteBatch, Color.White, wildPokemonPosition, 4f);
+                // arrow handling logic
+                
                 break;
             case "Bag": // Bag
+                // draw base UI
                 UIsprites[2].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
                 break;
             case "Pokemon": // Pokemon
+                // draw base UI
                 UIsprites[3].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
                 break;
             case "Run": // Run
+                // draw base UI
                 UIsprites[4].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
                 break;
             default:
-                UIsprites[0].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
                 break;
         }
     }

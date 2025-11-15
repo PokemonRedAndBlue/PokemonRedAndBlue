@@ -8,6 +8,16 @@ using Enter.Classes.Animations;
 
 public class BattleUIHelper
 {
+    // handle arrow locations in menu
+    private int[][] arrowLocation =
+    {
+        new int[] {1,0}, // Top left
+        new int[] {0,0}  // Top right
+    };
+    static private Vector2 topLeft = new Vector2(uiBasePosition.X + (72 * _scale), uiBasePosition.Y + (112 * _scale));
+    static private Vector2 topRight = new Vector2(uiBasePosition.X + (120 * _scale), uiBasePosition.Y + (112 * _scale));
+    static private Vector2 botLeft = new Vector2(uiBasePosition.X + (72 * _scale), uiBasePosition.Y + (138 * _scale));
+    static private Vector2 botRight = new Vector2(uiBasePosition.X + (120 * _scale), uiBasePosition.Y + (138 * _scale));
     static private float _scale = 4.0f;
     static private Vector2 uiBasePosition = new Vector2(350, 75);
     private static Vector2 _pokeballStartPosition;
@@ -50,5 +60,15 @@ public class BattleUIHelper
             
             pokeballSprite.Draw(spriteBatch, Color.White, _pokeballStartPosition + new Vector2(i * 8 * _scale, 0), _scale);
         }
+    }
+
+    public void DrawArrow()
+    {
+        
+    }
+
+    public int[][] moveArrow(int[][] currentArrow)
+    {
+        return null;
     }
 }
