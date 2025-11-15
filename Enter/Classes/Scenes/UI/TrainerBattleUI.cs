@@ -90,10 +90,9 @@ public class TrainerBattleUI
         _trainerText = new TextSprite("A wild Pokémon appeared!", _font, Color.White);
     }
 
-    public void Draw(SpriteBatch spriteBatch, ContentManager content)
+    public void Draw(SpriteBatch spriteBatch)
     {
         // Draw the base UI elements based on current state
-        LoadContent(content);
         WildEncounterStateBasedDraw(UIBaseSprites, spriteBatch);
     }
 

@@ -57,6 +57,7 @@ namespace Enter.Classes.Scenes
             _font = content.Load<SpriteFont>("PokemonFont");
             trainerText = new TextSprite($"TRAINER BATTLE", _font, Color.Black);
             _trainerUI = new TrainerBattleUI(_PokemonBackAtlas, content, _trainerID, _playersTeam, _trainersTeam);
+            _trainerUI.LoadContent(content);
         }
 
         public void Update(GameTime gameTime)

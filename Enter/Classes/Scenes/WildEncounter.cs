@@ -45,6 +45,7 @@ namespace Enter.Classes.Scenes
             
             // 2. FIX: Remove "WildEncounterUI" to assign to the class field
             wildUI = new WildEncounterUI(_UIAtlas, content, _player); 
+            wildUI.LoadContent(content);
         }
 
         public void Update(GameTime gameTime)

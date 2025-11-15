@@ -85,10 +85,9 @@ public class WildEncounterUI
         _wildPokemonMessage2 = new TextSprite("appeared!", _font, Color.Black);
     }
 
-    public void Draw(SpriteBatch spriteBatch, ContentManager content)
+    public void Draw(SpriteBatch spriteBatch)
     {
         // Draw the base UI
-        LoadContent(content);
         WildEncounterStateBasedDraw(UIsprites, spriteBatch);
         _wildPokemonMessage1.DrawTextSpriteWithScale(spriteBatch, _wildPokemonMessagePos1, 2f);
         _wildPokemonMessage2.DrawTextSpriteWithScale(spriteBatch, _wildPokemonMessagePos2, 2f);
