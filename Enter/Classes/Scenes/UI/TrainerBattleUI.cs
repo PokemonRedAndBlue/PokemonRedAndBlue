@@ -60,6 +60,10 @@ public class TrainerBattleUI
         _playerTeam = playerTeam;
         _enemyTeam = enemyTeam;
 
+    }
+
+    public void LoadContent(ContentManager content)
+    {
         // Load UI Textures
         UIFactory.Instance.LoadAllTextures(content, "BattleInterface.xml");
         _TrainerUIAtlas = TextureAtlas.FromFile(content, "BattleInterface.xml");
@@ -86,9 +90,10 @@ public class TrainerBattleUI
         _trainerText = new TextSprite("A wild Pokémon appeared!", _font, Color.White);
     }
 
-    public void Draw(SpriteBatch spriteBatch)
+    public void Draw(SpriteBatch spriteBatch, ContentManager content)
     {
         // Draw the base UI elements based on current state
+        LoadContent(content);
         WildEncounterStateBasedDraw(UIBaseSprites, spriteBatch);
     }
 

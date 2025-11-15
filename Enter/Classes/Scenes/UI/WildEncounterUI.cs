@@ -54,7 +54,10 @@ public class WildEncounterUI
         _wildPokemonID = PokemonGenerator.GenerateRandom().Species.Name.ToLower(); // Example: "bulbasaur"
         _font = content.Load<SpriteFont>("PokemonFont");
         _Player = ourPlayer;
+    }
 
+    public void LoadContent(ContentManager content)
+    {
         // Load UI Textures
         UIFactory.Instance.LoadAllTextures(content, "BattleInterface.xml");
         _WildUIAtlas = TextureAtlas.FromFile(content, "BattleInterface.xml");
@@ -82,9 +85,10 @@ public class WildEncounterUI
         _wildPokemonMessage2 = new TextSprite("appeared!", _font, Color.Black);
     }
 
-    public void Draw(SpriteBatch spriteBatch)
+    public void Draw(SpriteBatch spriteBatch, ContentManager content)
     {
         // Draw the base UI
+        LoadContent(content);
         WildEncounterStateBasedDraw(UIsprites, spriteBatch);
         _wildPokemonMessage1.DrawTextSpriteWithScale(spriteBatch, _wildPokemonMessagePos1, 2f);
         _wildPokemonMessage2.DrawTextSpriteWithScale(spriteBatch, _wildPokemonMessagePos2, 2f);
