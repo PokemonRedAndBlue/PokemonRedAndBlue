@@ -13,8 +13,8 @@
     <Region name="green-health" x="360" y="792" width="109" height="3"/>
     <Region name="yellow-health" x="360" y="808" width="109" height="3"/>
     <Region name="red-health" x="360" y="824" width="109" height="3"/>
-    <Region name= "pokeball-present" x="344" y="920" width="8" height="8"/>
-    <Region name= "pokeball-missing" x="344" y="904" width="8" height="8"/>
-    <Region name= "pokeball-dead" x="344" y="888" width="8" height="8"/>
+    <Region name= "pokeball-present" x="344" y="792" width="8" height="8"/>
+    <Region name= "pokeball-missing" x="344" y="808" width="8" height="8"/>
+    <Region name= "pokeball-dead" x="344" y="824" width="8" height="8"/>
   </Regions>
 </TextureAtlas>
