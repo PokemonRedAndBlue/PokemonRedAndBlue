@@ -8,6 +8,7 @@ using Enter.Classes.Sprites;
 using Enter.Classes.Textures;
 using Enter.Interfaces;
 using System.CodeDom.Compiler;
+using Enter.Classes.Characters;
 
 namespace Enter.Classes.Scenes    
 {
@@ -24,11 +25,13 @@ namespace Enter.Classes.Scenes
         private TextureAtlas _UIAtlas;
         private TextSprite trainerText;
         private SpriteFont _font;
-        public WildEncounter(SceneManager sceneManager, Game game1)
+        private Player _player;
+        public WildEncounter(SceneManager sceneManager, Game game1, Player player)
         {
             _sceneManager = sceneManager;
             _game = game1;
             _wildPokemonID = PokemonGenerator.GenerateRandom().Species.Name.ToLower(); // Example: "bulbasaur"
+            _player = player;
         }
 
         public void LoadContent(ContentManager content)
@@ -41,7 +44,7 @@ namespace Enter.Classes.Scenes
             _UIAtlas = TextureAtlas.FromFile(content, "BattleInterface.xml"); 
             
             // 2. FIX: Remove "WildEncounterUI" to assign to the class field
-            wildUI = new WildEncounterUI(_UIAtlas, content); 
+            wildUI = new WildEncounterUI(_UIAtlas, content, _player); 
         }
 
         public void Update(GameTime gameTime)

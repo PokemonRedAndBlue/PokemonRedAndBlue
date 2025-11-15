@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using Enter.Classes.Animations;
 using System.Threading;
 using System.Runtime.Intrinsics;
+using Enter.Classes.Characters;
+using System.Net;
 
 public class WildEncounterUI
 {
@@ -35,6 +37,7 @@ public class WildEncounterUI
     static private Vector2 wildPokemonPosition = new Vector2(uiBasePosition.X + (96 * _scale), uiBasePosition.Y);
     static private Vector2 _wildPokemonMessagePos1 = new Vector2(uiBasePosition.X + (8 * _scale), uiBasePosition.Y + (110 * _scale) + 1);
     static private Vector2 _wildPokemonMessagePos2 = new Vector2(uiBasePosition.X + (8 * _scale), uiBasePosition.Y + (125 * _scale) + 1);
+    static private Player _Player;
 
     private Dictionary<string, int> stateMapping = new Dictionary<string, int>
     {
@@ -45,11 +48,12 @@ public class WildEncounterUI
         { "Run", 4 }
     };
 
-    public WildEncounterUI(TextureAtlas wildUIAtlas, ContentManager content)
+    public WildEncounterUI(TextureAtlas wildUIAtlas, ContentManager content, Player ourPlayer)
     {
         _WildUIAtlas = wildUIAtlas;
         _wildPokemonID = PokemonGenerator.GenerateRandom().Species.Name.ToLower(); // Example: "bulbasaur"
         _font = content.Load<SpriteFont>("PokemonFont");
+        _Player = ourPlayer;
 
         // Load UI Textures
         UIFactory.Instance.LoadAllTextures(content, "BattleInterface.xml");
@@ -99,6 +103,8 @@ public class WildEncounterUI
                 _trainerSpriteBack.Draw(spriteBatch, Color.White, playerTrainerPosition, 8f);
                 // draw wild pokemon sprite
                 _wildPokemonSpriteFront.Draw(spriteBatch, Color.White, wildPokemonPosition, 4f);
+                // draw player trainer party bar
+                BattleUIHelper.drawPokeballSprites(_Player.thePlayersTeam, _WildUIAtlas, spriteBatch, true);
                 break;
             case "Fight": // Fight
                 UIsprites[1].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);

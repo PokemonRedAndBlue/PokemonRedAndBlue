@@ -53,7 +53,7 @@ public class Game1 : Core
         _sceneManager = new SceneManager(Content, SpriteBatch);
         _sceneManager.AddScene("overworld", new OverworldScene(_sceneManager, this, _controller, player));
         _sceneManager.AddScene("trainer", new TrainerBattleScene(_sceneManager, this, "youngster", player));
-        _sceneManager.AddScene("wild", new WildEncounter(_sceneManager, this));
+        _sceneManager.AddScene("wild", new WildEncounter(_sceneManager, this, player));
         _currentMap = TilemapLoader.LoadTilemap("Content/Route1Map.xml");
         _sceneManager.TransitionTo("overworld"); // <-- Set the starting scene
 
