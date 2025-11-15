@@ -21,9 +21,6 @@ namespace Enter.Classes.Scenes
         private const float ZoomLevel = 4f; 
         private SceneManager _sceneManager;
         private Camera Cam;
-        private Sprite test1;
-        private Sprite test2;
-        private Sprite test3;
         private KeyboardController _controller;
         private Texture2D character;
         private Trainer trainer;
@@ -51,16 +48,6 @@ namespace Enter.Classes.Scenes
             {
                 _player.Position = savedPos;
             }
-
-            // STRICTLY FOR TESTING
-            UIFactory.Instance.LoadAllTextures(content, "BattleInterface.xml");
-            TextureAtlas battleUIAtlas = TextureAtlas.FromFile(content, "BattleInterface.xml");
-            
-            test1 = new Sprite(battleUIAtlas.GetRegion("pokeball-present"));
-           
-            test2 = new Sprite(battleUIAtlas.GetRegion("pokeball-dead"));
-           
-            test3 = new Sprite(battleUIAtlas.GetRegion("pokeball-missing"));
 
             Cam.Update(_player);
             Cam.Zoom = ZoomLevel; //Zoom level of world
@@ -126,9 +113,6 @@ namespace Enter.Classes.Scenes
             _currentMap?.DrawCropped(Cam.VisibleWorldRect);
             _player.Draw(spriteBatch);
             trainer.Draw(spriteBatch);
-            test1.Draw(spriteBatch, Color.White, new Vector2(100, 100), 4f);
-            test2.Draw(spriteBatch, Color.White, new Vector2(100, 200), 4f);
-            test3.Draw(spriteBatch, Color.White, new Vector2(100, 300), 4f);
             spriteBatch.End();
 
             // no need for base.Draw here
