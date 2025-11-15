@@ -10,6 +10,7 @@ using Enter.Classes.Cameras;
 using Microsoft.Xna.Framework.Input;
 using Enter.Classes.Characters;
 using System.Reflection.PortableExecutable;
+using PokemonGame;
 
 namespace Enter;
 
@@ -44,7 +45,9 @@ public class Game1 : Core
     {
         // get player object
         Texture2D character = Content.Load<Texture2D>("images/Pokemon_Characters");
-        Player player = new Player(character, this.Window);
+        Pokemon[] playersPokemon = {new Pokemon("charmander", 6)};
+        Team team = new Team(playersPokemon);
+        Player player = new Player(character, this.Window, team);
 
         // Initialize Scene Manager and Dependencies
         _sceneManager = new SceneManager(Content, SpriteBatch);

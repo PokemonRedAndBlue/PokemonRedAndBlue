@@ -30,9 +30,6 @@ public Team(Pokemon[] pokemons)
         Pokemons[i] = new Pokemon("I am just a placeholder", 999);
     }
 }
-
-
-
     public Team addPokemon(Pokemon newPokemon, int slot)
     {
         if (slot < 0 || slot >= 6)

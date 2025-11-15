@@ -7,6 +7,7 @@ using System;
 using System.Data;
 using System.Collections.Generic;
 using Enter.Classes.Animations;
+using PokemonGame;
 
 public class TrainerBattleUI
 {
@@ -110,6 +111,7 @@ public class TrainerBattleUI
                 BattleUIHelper.drawPokeballSprites(_playerTeam, _TrainerUIAtlas, spriteBatch, true);
                 // draw enemy trainer party bar
                 BattleUIHelper.drawPokeballSprites(_enemyTeam, _TrainerUIAtlas, spriteBatch, false);
+                Console.WriteLine(_playerTeam.Pokemons[0].StateMachine.CurrentStateName);
                 break;
             case "Fight": // Fight
                 UIBaseSprites[1].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);

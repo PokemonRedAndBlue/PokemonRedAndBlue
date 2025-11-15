@@ -28,6 +28,15 @@ namespace PokemonGame
         {
             Name = name;
             _level = level;
+             StateMachine = new StateMachine(this);
+            StateMachine.AddState("idle", new IdleState());
+            StateMachine.AddState("attacking", new AttackingState());
+            StateMachine.AddState("hurt", new HurtState());
+            StateMachine.AddState("dead", new DeadState());
+            StateMachine.AddState("dying", new DyingState());
+            StateMachine.AddState("deploying", new DeployingState());
+            StateMachine.AddState("retreating", new RetreatingState());
+            StateMachine.TransitionTo("idle");
         }
         public Pokemon(string name, int level, PokemonView view, AnimatedSprite animatedSprite, Vector2 position)
         {

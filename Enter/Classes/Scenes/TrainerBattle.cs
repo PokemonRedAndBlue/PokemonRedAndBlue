@@ -31,8 +31,6 @@ namespace Enter.Classes.Scenes
         private TextureAtlas _PokemonFrontAtlas;
         private TextSprite trainerText;
         private SpriteFont _font;
-        private Sprite _playerPokemon;
-        private AnimatedSprite _enemyPokemon;
         public TrainerBattleScene(SceneManager sceneManager, Game game1, string trainerID, Player ourPlayer)
         {
             _sceneManager = sceneManager;

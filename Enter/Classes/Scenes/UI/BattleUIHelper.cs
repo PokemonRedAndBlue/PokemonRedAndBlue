@@ -28,6 +28,7 @@ public class BattleUIHelper
 
     static public void drawPokeballSprites(Team team, TextureAtlas battleUIAtlas, SpriteBatch spriteBatch, Boolean isPlayersTeam)
     {
+        Sprite pokeballSprite;
         if(isPlayersTeam)
         {
             _pokeballStartPosition = playerPokeballStartPosition;
@@ -38,7 +39,15 @@ public class BattleUIHelper
         }
         for(int i = 0; i < 6; i++)
         {
-            Sprite pokeballSprite = GetPokeballSprite(team.GetPokemonState(i), battleUIAtlas);
+            Pokemon currentPokemon = team.Pokemons[i];
+            if (currentPokemon.Name.Equals("I am just a placeholder"))
+            {
+                pokeballSprite = GetPokeballSprite("default", battleUIAtlas);
+            } else
+            {
+                pokeballSprite = GetPokeballSprite(currentPokemon.StateMachine.CurrentStateName, battleUIAtlas);
+            }
+            
             pokeballSprite.Draw(spriteBatch, Color.White, _pokeballStartPosition + new Vector2(i * 8 * _scale, 0), _scale);
         }
     }
