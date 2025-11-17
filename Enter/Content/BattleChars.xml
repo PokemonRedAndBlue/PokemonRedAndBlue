@@ -2,7 +2,7 @@
 <TextureAtlas>
     <Texture>images/Characters (Battle)</Texture>
     <Regions>
-        <Region name="youngster" x="8" y="440" width="55" height="55"/>
+        <Region name="youngster" x="136" y="440" width="55" height="55"/>
         <Region name="bug-catcher" x="34" y="298" width="32" height="32"/>
         <Region name="lass" x="67" y="298" width="32" height="32"/>
         <Region name="sailor" x="100" y="298" width="32" height="32"/>
@@ -19,7 +19,7 @@
         <Region name="swimmer" x="199" y="331" width="32" height="32"/>
         <Region name="tamer" x="232" y="331" width="32" height="32"/>
         <Region name="bird-keeper" x="1" y="364" width="32" height="32"/>
-        <Region name="blackbelt" x="34" y="364" width="32" height="32"/>
+        <Region name="blackbelt" x="200" y="440" width="55" height="55"/>
         <Region name="guard" x="67" y="364" width="32" height="32"/>
         <Region name="prof-oak" x="100" y="364" width="32" height="32"/>
         <Region name="player-red" x="133" y="364" width="32" height="32"/>

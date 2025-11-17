@@ -134,34 +134,6 @@ namespace Enter.Classes.Scenes
             if (!trainer1.colided && !trainer2.colided)
                 _player.StopEnd();
             // no need for base.Update here
-        {
-            // Update Objects
-            trainer1.Update(gameTime, _player);
-            trainer2.Update(gameTime, _player);
-            _controller.Update(_game, gameTime, Cam, _player, trainer1); // Optionally pass both trainers to controller if needed
-            Cam.Update(_player);
-
-            // Prevent repeat battles and trigger correct battle scene
-            if (trainer1.colided && !_game.IsTrainerDefeated(trainer1.TrainerID))
-            {
-                _playerPosition = _player.Position;
-                _game.SavedPlayerPosition = _player.Position;
-                _sceneManager.TransitionTo("city_trainer1");
-            }
-            else if (trainer2.colided && !_game.IsTrainerDefeated(trainer2.TrainerID))
-            {
-                _playerPosition = _player.Position;
-                _game.SavedPlayerPosition = _player.Position;
-                _sceneManager.TransitionTo("city_trainer2");
-            }
-
-            // Mark trainers as defeated if their ID is in the defeated list (after returning from battle)
-            if (_game.IsTrainerDefeated(trainer1.TrainerID))
-                trainer1.HasBeenDefeated = true;
-            if (_game.IsTrainerDefeated(trainer2.TrainerID))
-                trainer2.HasBeenDefeated = true;
-            // no need for base.Update here
-            }
         }
 
         public void Draw(SpriteBatch spriteBatch)

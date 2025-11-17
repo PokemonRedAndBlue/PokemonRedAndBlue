@@ -70,7 +70,7 @@ public class TrainerBattleUI
         _trainerSpriteBack = new Sprite(trainerAtlas.GetRegion("player-back"));
 
         // load enemy trainer sprite
-        _enemyTrainerSpriteFront = new Sprite(trainerAtlas.GetRegion(_enemyTrainerString));
+        _enemyTrainerSpriteFront = new Sprite(trainerAtlas.GetRegion(_enemyTrainerString.ToLower()));
 
         // create UI elements
         UIBaseSprites = new Sprite[_TrainerUIAtlas._regions.Count];
