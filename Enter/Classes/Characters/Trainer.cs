@@ -19,7 +19,10 @@ public class Trainer
     public Vector2 Position { get; private set; }
     public Tilemap Map { get; set; }
 
-    private const float SpeedPxPerSec = 80f;
+    private const float SpeedPxPerSec = 80f,
+        InteractionRange = 64f, // might change based on scale?
+        DefaultVisionRange = 256f,
+        AlignMOE = 1f;  // Margin of Error for aligning checks, will be changed to tile based later
     private const int DefaultVisionRangeTiles = 4;
     private static readonly Vector2 SpriteHalfSizeVector = 0.5f * new Vector2(PlayerSprite.SpriteSize);
     private readonly int _visionRangeTiles = DefaultVisionRangeTiles;
@@ -188,5 +191,5 @@ public class Trainer
             (int)System.MathF.Floor(center.Y / tileH)
         );
     }
-
+    
 }
