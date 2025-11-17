@@ -65,6 +65,7 @@ public class TrainerBattleUI
     public void Update(GameTime gameTime)
     {
         battleUI.Update(gameTime);
+        _currentState = battleUI.getBattleState();
     }
 
     public void LoadContent(ContentManager content)
@@ -81,6 +82,11 @@ public class TrainerBattleUI
 
         // load enemy trainer sprite
         _enemyTrainerSpriteFront = new Sprite(trainerAtlas.GetRegion(_enemyTrainerString.ToLower()));
+
+        // Initialize health bar sprites
+        greenBar = new Sprite(_TrainerUIAtlas.GetRegion("green-health"));
+        yellowBar = new Sprite(_TrainerUIAtlas.GetRegion("yellow-health"));
+        redBar = new Sprite(_TrainerUIAtlas.GetRegion("red-health"));
 
         // create UI elements
         UIBaseSprites = new Sprite[_TrainerUIAtlas._regions.Count];
