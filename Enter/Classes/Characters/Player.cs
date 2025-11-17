@@ -5,6 +5,7 @@ using Vector2 = Microsoft.Xna.Framework.Vector2;
 using Enter.Classes.Cameras;
 using Enter.Classes.Input;
 using Enter.Classes.Sprites;
+using Enter.Classes.Behavior;
 
 namespace Enter.Classes.Characters;
 
@@ -13,16 +14,17 @@ public class Player
 {
     //For collision
     public Tilemap Map { get; set; }
+    public Team thePlayersTeam = new Team();
     public HashSet<Point> SolidTiles { get; set; }
 
     // Pixel-space render position (top-left of sprite)
-    public Vector2 Position { get; private set; }
+    private Vector2 _pixelPosition;
+    private static readonly Vector2 SpriteHalfSizeVector = 0.5f * new Vector2(PlayerSprite.SpriteSize);
     private const float SpeedPxPerSec = 80f; // movement speed (pixels/sec)
 
     // Tile-space state
     public Point TilePos { get; private set; } // current tile position
-    private Point _targetTilePos;           // target tile when stepping
-    private bool _isTileMoving = false;     // currently stepping between tiles
+    private TileMoveCommand _activeMoveCommand;
     private bool _initializedTileFromPosition = false;
 
     protected static readonly Dictionary<Facing, Vector2> _directions = new()
@@ -44,9 +46,11 @@ public class Player
     private bool _seenByTrainer = false;
     private Facing _facing = Facing.Down;
 
-    public Player(Texture2D texture2, GameWindow Window)
+    public Player(Texture2D texture2, GameWindow Window, Team team)
     {
         _texture = texture2;
+        _pixelPosition = Vector2.Zero;
+        thePlayersTeam = team;
     }
     public Player(Texture2D texture2, Vector2 position)
     {
@@ -57,7 +61,12 @@ public class Player
     {
         TilePos = tilePos;
         _texture = texture2;
+        _pixelPosition = TileToPixel(tilePos);
     }
+
+    public Vector2 GetWorldCenterPosition() => GetSnappedPixelPosition() + SpriteHalfSizeVector;
+
+    public Point GetTileFromWorldPosition(Vector2 worldPosition) => PixelToTile(worldPosition);
 
     public void Update(GameTime gameTime, KeyboardController keyboard, Camera Cam)
     {
@@ -66,13 +75,13 @@ public class Player
         float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
         bool hasIntent = (!_seenByTrainer) && UpdateDirection(keyboard);
 
-        if (!_isTileMoving)
+        if (_activeMoveCommand == null)
         {
             if (hasIntent)
                 TryBeginStepFromFacing();
 
             // if we cannot enter next tile
-            if (!_isTileMoving)
+            if (_activeMoveCommand == null)
             {
                 _sprite.IdleReset(_facing);
                 return;
@@ -88,43 +97,27 @@ public class Player
     {
         Point dir = FacingToPoint(_facing);
         Point next = new(TilePos.X + dir.X, TilePos.Y + dir.Y);
-        if (CanEnter(next))
-        {
-            _targetTilePos = next;
-            _isTileMoving = true;
-        }
+        if (!CanEnter(next)) return;
+
+        Vector2 targetPixel = TileToPixel(next);
+        _activeMoveCommand = new TileMoveCommand(TilePos, next, _pixelPosition, targetPixel);
     }
 
     private void PerformStep(float dt, Camera Cam)
     {
-        Vector2 targetPx = TileToPixel(_targetTilePos);
-        Vector2 toTarget = targetPx - Position;
+        if (_activeMoveCommand == null) return;
 
-        Vector2 stepDir = Vector2.Zero;
-        if (toTarget.X != 0) stepDir.X = System.MathF.Sign(toTarget.X);
-        if (toTarget.Y != 0) stepDir.Y = System.MathF.Sign(toTarget.Y);
-
-        Vector2 delta = stepDir * SpeedPxPerSec * dt;
-        Vector2 newPos = Position + delta;
-
-        // Clamp per-axis to avoid overshoot
-        if ((stepDir.X > 0 && newPos.X > targetPx.X) || (stepDir.X < 0 && newPos.X < targetPx.X))
-            newPos.X = targetPx.X;
-        if ((stepDir.Y > 0 && newPos.Y > targetPx.Y) || (stepDir.Y < 0 && newPos.Y < targetPx.Y))
-            newPos.Y = targetPx.Y;
-
-        Cam.DiffPos = newPos - Position;
-        Position = newPos;
+        Vector2 newPos = _activeMoveCommand.Advance(_pixelPosition, SpeedPxPerSec, dt);
+        Cam.DiffPos = newPos - _pixelPosition;
+        _pixelPosition = newPos;
     }
 
     private void HandleArrivalAtTarget()
     {
-        Vector2 targetPx = TileToPixel(_targetTilePos);
-        if (Position == targetPx)
-        {
-            TilePos = _targetTilePos;
-            _isTileMoving = false;
-        }
+        if (_activeMoveCommand == null || !_activeMoveCommand.HasArrived(_pixelPosition)) return;
+
+        TilePos = _activeMoveCommand.TargetTile;
+        _activeMoveCommand = null;
     }
 
     /// <summary>
@@ -140,19 +133,18 @@ public class Player
     private void EnsureTileInitialized()
     {
         if (_initializedTileFromPosition || Map == null) return;
-        TilePos = PixelToTile(Position);
-        Position = TileToPixel(TilePos); // snap to grid
-        _targetTilePos = TilePos;
+        TilePos = PixelToTile(_pixelPosition);
+        _pixelPosition = TileToPixel(TilePos); // snap to grid
+        _activeMoveCommand = null;
         _initializedTileFromPosition = true;
     }
 
     public void SetTilePosition(Point tile)
     {
         TilePos = tile;
-        _targetTilePos = tile;
-        if (Map != null)
-            Position = TileToPixel(tile);
+        _pixelPosition = TileToPixel(tile);
         _initializedTileFromPosition = true;
+        _activeMoveCommand = null;
     }
 
     private static Point FacingToPoint(Facing facing)
@@ -179,7 +171,7 @@ public class Player
         return new Vector2(tile.X * tileW, tile.Y * tileH);
     }
 
-    private Point PixelToTile(Vector2 pos)
+    public Point PixelToTile(Vector2 pos)
     {
         int tileW = Map?.TileWidth ?? PlayerSprite.SpriteSize; // scale?
         int tileH = Map?.TileHeight ?? PlayerSprite.SpriteSize;
@@ -188,7 +180,7 @@ public class Player
 
     public void Draw(SpriteBatch spriteBatch, float scale = 1f)
     {
-        _sprite.Draw(spriteBatch, _texture, scale, Position);
+        _sprite.Draw(spriteBatch, _texture, scale, GetSnappedPixelPosition());
     }
 
     /// <summary>
@@ -205,6 +197,13 @@ public class Player
     public void StopEnd()
     {
         _seenByTrainer = false;
+    }
+
+    private Vector2 GetSnappedPixelPosition()
+    {
+        float snappedX = System.MathF.Round(_pixelPosition.X);
+        float snappedY = System.MathF.Round(_pixelPosition.Y);
+        return new Vector2(snappedX, snappedY);
     }
 
 }

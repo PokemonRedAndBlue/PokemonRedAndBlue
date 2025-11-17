@@ -1103,3 +1103,6 @@
 #begin Tiles.xml
 /copy:Tiles.xml
 
+#begin Tiles2.xml
+/copy:Tiles2.xml
+

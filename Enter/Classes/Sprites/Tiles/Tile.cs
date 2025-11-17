@@ -65,4 +65,6 @@ public class Tile : ISprite
 
     public int GetWidth() => width;
     public int GetHeight() => height;
+    
+    public Texture2D GetTexture() => texture;
 }

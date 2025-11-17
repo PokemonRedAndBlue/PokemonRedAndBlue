@@ -1,6 +1,5 @@
 using Microsoft.Xna.Framework;
 using Enter.Classes.Characters;
-using Enter.Classes.Sprites;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Enter.Classes.Cameras;
@@ -41,7 +40,7 @@ public class Camera
     /// <param name="player">The player object</param>
     public void Update(Player player)
     {
-        CenterOn(player.Position + 0.5f * new Vector2(PlayerSprite.SpriteSize));
+        CenterOn(player.GetWorldCenterPosition());
     }
 
     /// <summary>
