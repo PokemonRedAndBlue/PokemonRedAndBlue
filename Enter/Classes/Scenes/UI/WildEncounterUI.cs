@@ -124,7 +124,7 @@ public class WildEncounterUI
                 // draw wild pokemon sprite
                 _wildPokemonSpriteFront.Draw(spriteBatch, Color.White, wildPokemonPosition, 4f);
                 // arrow handling logic
-                
+                BattleUIHelper.DrawArrow(_WildUIAtlas, spriteBatch);
                 break;
             case "Bag": // Bag
                 // draw base UI
