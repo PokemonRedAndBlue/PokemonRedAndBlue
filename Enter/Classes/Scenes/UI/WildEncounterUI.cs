@@ -37,7 +37,9 @@ public class WildEncounterUI
     static private Vector2 wildPokemonPosition = new Vector2(uiBasePosition.X + (96 * _scale), uiBasePosition.Y);
     static private Vector2 _wildPokemonMessagePos1 = new Vector2(uiBasePosition.X + (8 * _scale), uiBasePosition.Y + (110 * _scale) + 1);
     static private Vector2 _wildPokemonMessagePos2 = new Vector2(uiBasePosition.X + (8 * _scale), uiBasePosition.Y + (125 * _scale) + 1);
+    static private Vector2 _borderPostion = new Vector2(uiBasePosition.X - (48 * _scale), uiBasePosition.Y - (40 * _scale) + 1);
     static private Player _Player;
+    static private Sprite _border;
 
     private Dictionary<string, int> stateMapping = new Dictionary<string, int>
     {
@@ -61,6 +63,8 @@ public class WildEncounterUI
         // Load UI Textures
         UIFactory.Instance.LoadAllTextures(content, "BattleInterface.xml");
         _WildUIAtlas = TextureAtlas.FromFile(content, "BattleInterface.xml");
+        TextureAtlas borders = TextureAtlas.FromFile(content, "Borders.xml");
+        _border = new Sprite(borders.GetRegion("blue-border"));
 
         // load trainer sprite
         TextureAtlas trainerAtlas = TextureAtlas.FromFile(content, "BattleChars.xml");
@@ -95,6 +99,8 @@ public class WildEncounterUI
 
     public void WildEncounterStateBasedDraw(Sprite[] UI_BaseSprites, SpriteBatch spriteBatch)
     {
+        // always draw border
+        _border.Draw(spriteBatch, Color.White, _borderPostion, 4f);
 
         // draw the UI elements for wild encounter (state based)
             switch (_currentState)
