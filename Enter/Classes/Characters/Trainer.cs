@@ -10,13 +10,13 @@ public class Trainer
 {
 
     // Might use a scale for tile lengths later
-    public Vector2 Position { get; set; }
+    public Vector2 Position { get; private set; }
+    public Tilemap Map { get; set; }
 
-    private const float SpeedPxPerSec = 80f,
-        InteractionRange = 64f, // might change based on scale?
-        DefaultVisionRange = 256f,
-        AlignMOE = 1f;  // Margin of Error for aligning checks, will be changed to tile based later
-    private readonly float _visionRange = DefaultVisionRange;
+    private const float SpeedPxPerSec = 80f;
+    private const int DefaultVisionRangeTiles = 4;
+    private static readonly Vector2 SpriteHalfSizeVector = 0.5f * new Vector2(PlayerSprite.SpriteSize);
+    private readonly int _visionRangeTiles = DefaultVisionRangeTiles;
     private readonly bool _moving = false;  // Whether the trainer will hang around when idling
     private readonly Texture2D _texture;
     private TrainerSprite _sprite;
@@ -26,11 +26,11 @@ public class Trainer
     public bool colided = false;  // Whether the trainer has collided with the player
 
     public Trainer(Texture2D texture, Vector2 Pos, Facing facing) : this(texture, Pos, facing, false) { }
-    public Trainer(Texture2D texture, Vector2 Pos, Facing facing, bool moving) : this(texture, 0, Pos, facing, moving) { }
-    public Trainer(Texture2D texture, int spriteIndex, Vector2 Pos, Facing facing, bool moving) : this(texture, spriteIndex, Pos, facing, moving, DefaultVisionRange) { }
-    public Trainer(Texture2D texture, Vector2 Pos, Facing facing, float visionRange) : this(texture, 0, Pos, facing, visionRange) { }
-    public Trainer(Texture2D texture, int spriteIndex, Vector2 Pos, Facing facing, float visionRange) : this(texture, spriteIndex, Pos, facing, false, visionRange) { }
-    public Trainer(Texture2D texture, int spriteIndex, Vector2 Pos, Facing facing, bool moving, float visionRange)
+    public Trainer(Texture2D texture, Vector2 Pos, Facing facing, bool moving) : this(texture, 0, Pos, facing, moving, DefaultVisionRangeTiles) { }
+    public Trainer(Texture2D texture, int spriteIndex, Vector2 Pos, Facing facing, bool moving) : this(texture, spriteIndex, Pos, facing, moving, DefaultVisionRangeTiles) { }
+    public Trainer(Texture2D texture, Vector2 Pos, Facing facing, int visionRangeTiles) : this(texture, 0, Pos, facing, visionRangeTiles) { }
+    public Trainer(Texture2D texture, int spriteIndex, Vector2 Pos, Facing facing, int visionRangeTiles) : this(texture, spriteIndex, Pos, facing, false, visionRangeTiles) { }
+    public Trainer(Texture2D texture, int spriteIndex, Vector2 Pos, Facing facing, bool moving, int visionRangeTiles)
     {
         _texture = texture;
         _spriteIndex = spriteIndex;
@@ -38,7 +38,7 @@ public class Trainer
         Position = Pos;
         _facing = facing;
         _moving = moving;
-        _visionRange = visionRange;
+        _visionRangeTiles = visionRangeTiles;
         colided = false;
     }
 
@@ -53,56 +53,68 @@ public class Trainer
         }
         else
         {
-            Idle(gametime);
             _sprite.IdleReset(_facing);
         }
     }
 
     private bool IsVisible(Player player)
     {
-        // Add vision blocking & position overlay mechanisms later
-        Vector2 diff = player.Position - Position;
-        bool xAligned = Math.Abs(diff.X) < AlignMOE,
-             yAligned = Math.Abs(diff.Y) < AlignMOE,
-             inVision = Math.Abs(Vector2.Distance(player.Position, Position)) < _visionRange;
-        if (inVision) return InVisionRange(xAligned, yAligned, diff);
-        return false;
+        if (!IsWithinVisionRange(player)) return false;
+
+        Point playerTile = player.TilePos;
+        return HasLineOfSight(GetTilePosition(), playerTile);
     }
 
-    private bool InVisionRange(bool xAligned, bool yAligned, Vector2 diff)
+    private bool HasLineOfSight(Point trainerTile, Point playerTile)
     {
+        bool sameColumn = trainerTile.X == playerTile.X;
+        bool sameRow = trainerTile.Y == playerTile.Y;
+
+        if (!sameColumn && !sameRow) return false;
+
         return _facing switch
         {
-            Facing.Up => xAligned && diff.Y < 0,
-            Facing.Down => xAligned && diff.Y > 0,
-            Facing.Left => yAligned && diff.X < 0,
-            Facing.Right => yAligned && diff.X > 0,
+            Facing.Up => sameColumn && playerTile.Y < trainerTile.Y,
+            Facing.Down => sameColumn && playerTile.Y > trainerTile.Y,
+            Facing.Left => sameRow && playerTile.X < trainerTile.X,
+            Facing.Right => sameRow && playerTile.X > trainerTile.X,
             _ => throw new Exception("Error reading facing direction"),
         };
         
     }
 
+    private bool IsWithinVisionRange(Player player)
+    {
+        Point trainerTile = GetTilePosition();
+        Point playerTile = player.TilePos;
+        int dx = System.Math.Abs(trainerTile.X - playerTile.X);
+        int dy = System.Math.Abs(trainerTile.Y - playerTile.Y);
+        int maxDelta = System.Math.Max(dx, dy);
+        return maxDelta <= _visionRangeTiles;
+    }
+
+    private Vector2 GetWorldCenterPosition()
+    {
+        return Position + SpriteHalfSizeVector;
+    }
+
     private void GoToPlayer(Player player, GameTime gametime)
     {
+        Vector2 playerCenter = player.GetWorldCenterPosition();
+        Vector2 trainerCenter = GetWorldCenterPosition();
+        Point trainerTile = GetTilePosition();
+        Point playerTile = player.TilePos;
         // Stop moving if it is nonmoving trainer, or in close range
-        if (Math.Abs(Vector2.Distance(player.Position, Position)) <= InteractionRange)
+        if (IsWithinOneTile(trainerTile, playerTile))
         {
             _visible = false;
             player.StopEnd();
             colided = true;
             return;
         }
-        Vector2 norm = Vector2.Normalize(player.Position - Position);
+        Vector2 norm = Vector2.Normalize(playerCenter - trainerCenter);
         float dt = (float)gametime.ElapsedGameTime.TotalSeconds;
         Position += norm * SpeedPxPerSec * dt;
-    }
-
-    private void Idle(GameTime gametime)
-    {
-        if (_moving)
-        {
-            // Might add random moving later
-        }
     }
 
     public void Draw(SpriteBatch spriteBatch, float scale = 1f)
@@ -119,6 +131,24 @@ public class Trainer
     public void PrevSprite()
     {
         _sprite = new(--_spriteIndex < 0 ? ++_spriteIndex : _spriteIndex);
+    }
+
+    private bool IsWithinOneTile(Point trainerTile, Point playerTile)
+    {
+        int dx = System.Math.Abs(trainerTile.X - playerTile.X);
+        int dy = System.Math.Abs(trainerTile.Y - playerTile.Y);
+        return dx + dy <= 1;
+    }
+
+    private Point GetTilePosition()
+    {
+        int tileW = Map?.TileWidth ?? PlayerSprite.SpriteSize;
+        int tileH = Map?.TileHeight ?? PlayerSprite.SpriteSize;
+        Vector2 center = GetWorldCenterPosition();
+        return new Point(
+            (int)System.MathF.Floor(center.X / tileW),
+            (int)System.MathF.Floor(center.Y / tileH)
+        );
     }
 
 }
