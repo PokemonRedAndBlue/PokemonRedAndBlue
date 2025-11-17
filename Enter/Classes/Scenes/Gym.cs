@@ -62,6 +62,10 @@ namespace Enter.Classes.Scenes
                 "Ground",
                 Physics.SolidTileCollision.IsSolid
             );
+
+            // * TEMP: Initialize player tile position (spawn at same 160px,0px => tile (10,0))
+            player.SetTilePosition(new Point(5, 13));
+            Cam.Update(player);
         }
 
         public void Update(GameTime gameTime)
