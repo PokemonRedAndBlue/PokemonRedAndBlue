@@ -45,7 +45,7 @@ public class Game1 : Core
     {
         // get player object
         Texture2D character = Content.Load<Texture2D>("images/Pokemon_Characters");
-        Pokemon[] playersPokemon = {new Pokemon("charmander", 6)};
+        Pokemon[] playersPokemon = {new Pokemon("squirtle", 6)};
         Team team = new Team(playersPokemon);
         Player player = new Player(character, this.Window, team);
 

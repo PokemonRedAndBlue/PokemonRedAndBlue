@@ -62,6 +62,11 @@ namespace Enter.Classes.Scenes
                     _sceneManager.TransitionTo("overworld");
                 }
 
+                if (wildUI.resetBattle)
+                {
+                    _sceneManager.TransitionTo("overworld");
+                }
+
                 // update UI
                 wildUI.Update(gameTime);
         }

@@ -60,7 +60,7 @@
         <Region name="chief" x="1" y="529" width="32" height="32"/>
         <Region name="mr-fuji" x="34" y="529" width="32" height="32"/>
         <Region name="silph-pres" x="67" y="529" width="32" height="32"/>
-        <Region name="player-back" x="8" y="824" width="32" height="32"/>
+        <Region name="player-back" x="9" y="825" width="30" height="30"/>
         <Region name="player-back-alt" x="133" y="529" width="32" height="32"/>
         <Region name="old-man" x="1" y="562" width="32" height="32"/>
         <Region name="fuji-flute" x="34" y="562" width="32" height="32"/>

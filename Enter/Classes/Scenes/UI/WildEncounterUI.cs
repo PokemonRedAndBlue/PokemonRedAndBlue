@@ -13,6 +13,11 @@ using Enter.Classes.Characters;
 using System.Net;
 using Enter.Classes.Scenes;
 using PokemonGame;
+using Enter.Classes.Input;
+using System.Globalization;
+using Microsoft.Xna.Framework.Input;
+using System.Collections;
+using System.Runtime.ConstrainedExecution;
 
 public class WildEncounterUI
 {
@@ -44,6 +49,7 @@ public class WildEncounterUI
     static private Player _Player;
     static private Sprite _border;
 
+    public Boolean resetBattle = false;
     public Boolean didRun = false;
 
     private Dictionary<string, int> stateMapping = new Dictionary<string, int>
@@ -156,19 +162,34 @@ public class WildEncounterUI
                 // draw both health
                 battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, true);
                 battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, false);
+                KeyboardState keysState = Keyboard.GetState();
+                if (keysState.IsKeyDown(Keys.R))
+                {
+                    resetBattle = true;
+                }
                 break;
             case "Item": // Bag
                 // draw base UI
                 UIsprites[4].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
                 // only draw opponent health
                 battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, false);
+                KeyboardState currentState = Keyboard.GetState();
+                if (currentState.IsKeyDown(Keys.R))
+                {
+                    resetBattle = true;
+                }
                 break;
             case "Ball": // ball item selected TODO MOVE THIS WITHIN BAG SCENE
                 // need to be able to process catch event
                 break;
             case "PkMn":
             // draw base UI
+                KeyboardState keyState = Keyboard.GetState();
                 UIsprites[3].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
+                if (keyState.IsKeyDown(Keys.R))
+                {
+                    resetBattle = true;
+                }
                 break;
             case "Run":
                 didRun = true;
