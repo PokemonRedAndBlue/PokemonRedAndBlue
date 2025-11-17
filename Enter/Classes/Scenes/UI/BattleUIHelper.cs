@@ -187,6 +187,11 @@ public String handleArrowEvent(int currentCol, int currentRow)
         return this.currentBattleState;
     }
 
+    public void setBattleState(String newState)
+    {
+        this.currentBattleState = newState;
+    }
+
     public void Update(GameTime gameTime)
     {
         double TIME_TO_WAIT_MS = 4000;

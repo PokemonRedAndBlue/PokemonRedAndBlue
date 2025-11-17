@@ -139,14 +139,14 @@ public class WildEncounterUI
                 break;
             case "Fight":
                 // draw base UI
-                UIsprites[1].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
+                UIsprites[2].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
                 break;
-            case "Bag": // Bag
-                didRun = true;
+            case "Item": // Bag
+                // draw base UI
+                UIsprites[3].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
                 break;
-            case "Run": // Run
-                // need to be able to process the run event
-                didRun = true;
+            case "Ball": // Run
+                // need to be able to process catch event
                 break;
             default:
                 break;
