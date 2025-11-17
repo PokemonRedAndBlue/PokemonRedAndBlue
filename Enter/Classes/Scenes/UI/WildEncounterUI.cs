@@ -32,8 +32,7 @@ public class WildEncounterUI
     static private Vector2 pokemonLevelPosition = new Vector2(uiBasePosition.X + 250, uiBasePosition.Y + 280);
     static private Vector2 arrowPosition = new Vector2(uiBasePosition.X + 50, uiBasePosition.Y + 400);
     static private Vector2 enemyPokemonPosition = new Vector2(uiBasePosition.X, uiBasePosition.Y);
-    static private Vector2 playerPokemonPosition = new Vector2(uiBasePosition.X + 450, uiBasePosition.Y + 200);
-    static private Vector2 playerTrainerPosition = new Vector2(uiBasePosition.X + (8 * _scale) - 5, uiBasePosition.Y + (40 * _scale) - 5);
+    static private Vector2 playerPosition = new Vector2(uiBasePosition.X + (8 * _scale) - 5, uiBasePosition.Y + (40 * _scale) - 5);
     static private Vector2 wildPokemonPosition = new Vector2(uiBasePosition.X + (96 * _scale), uiBasePosition.Y);
     static private Vector2 _wildPokemonMessagePos1 = new Vector2(uiBasePosition.X + (8 * _scale), uiBasePosition.Y + (110 * _scale) + 1);
     static private Vector2 _wildPokemonMessagePos2 = new Vector2(uiBasePosition.X + (8 * _scale), uiBasePosition.Y + (125 * _scale) + 1);
@@ -72,6 +71,7 @@ public class WildEncounterUI
 
         // load wild pokemon sprite
         PokemonFrontFactory.Instance.LoadAllTextures(content);
+        PokemonBackFactory.Instance.LoadAllTextures(content);
         _wildPokemonSpriteFront = PokemonFrontFactory.Instance.CreateAnimatedSprite(_wildPokemonID + "-front"); // Example: Bulbasaur
 
         // create UI elements
@@ -110,7 +110,7 @@ public class WildEncounterUI
                 _wildPokemonMessage1.DrawTextSpriteWithScale(spriteBatch, _wildPokemonMessagePos1, 2f);
                 _wildPokemonMessage2.DrawTextSpriteWithScale(spriteBatch, _wildPokemonMessagePos2, 2f);
                 // draw player trainer sprite
-                _trainerSpriteBack.Draw(spriteBatch, Color.White, playerTrainerPosition, 8f);
+                _trainerSpriteBack.Draw(spriteBatch, Color.White, playerPosition, 8f);
                 // draw wild pokemon sprite
                 _wildPokemonSpriteFront.Draw(spriteBatch, Color.White, wildPokemonPosition, 4f);
                 // draw player trainer party bar
@@ -119,8 +119,10 @@ public class WildEncounterUI
             case "Fight": // Fight
                 // draw base UI
                 UIsprites[1].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
-                // draw player trainer sprite
-                _trainerSpriteBack.Draw(spriteBatch, Color.White, playerTrainerPosition, 8f);
+                // draw players pokemon sprite, get first alive pokemon
+                String playersPokemon = _Player.thePlayersTeam.Pokemons[0].Name.ToString();
+                Sprite currentMon = PokemonBackFactory.Instance.CreateStaticSprite( playersPokemon.ToLower()+ "-back");
+                currentMon.Draw(spriteBatch, Color.White, new Vector2(playerPosition.X, playerPosition.Y + (currentMon.Height * _scale)), 4f);
                 // draw wild pokemon sprite
                 _wildPokemonSpriteFront.Draw(spriteBatch, Color.White, wildPokemonPosition, 4f);
                 // arrow handling logic
