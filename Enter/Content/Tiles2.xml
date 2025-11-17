@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+    <Texture>images\Game Boy _ GBC - Pokemon Red _ Blue - Backgrounds (Places) - Cerulean City</Texture>
+    <Regions>
+
+    // Ceruclean City Tiles
+    <Region id="16" name="blue-brick" x="8" y="23" width="16" height="16"/>
+    <Region id="17" name="bush-jewel-hybrid" x="88" y="71" width="16" height="16"/>
+    <Region id="18" name="bush" x="88" y="87" width="16" height="16"/>
+    <Region id="19" name="jewel" x="104" y="71" width="16" height="16"/>
+    <Region id="20" name="water" x="104" y="87" width="16" height="16"/>
+    <Region id="21" name="cylinder" x="120" y="119" width="16" height="16"/>
+    <Region id="22" name="tree" x="136" y="119" width="16" height="16"/>
+    <Region id="23" name="grass" x="136" y="135" width="16" height="16"/>
+    <Region id="24" name="yard" x="136" y="151" width="16" height="16"/>
+    <Region id="25" name="left-top-corner-roof" x="136" y="183" width="16" height="16"/>
+    <Region id="26" name="left-bottom-corner-roof" x="136" y="199" width="16" height="16"/>
+    <Region id="27" name="roof" x="152" y="183" width="16" height="16"/>
+    <Region id="28" name="door" x="152" y="199" width="16" height="16"/>
+    <Region id="29" name="right-window" x="168" y="199" width="16" height="16"/>
+    <Region id="30" name="left-window" x="184" y="199" width="16" height="16"/>
+    <Region id="31" name="dual-window" x="200" y="199" width="16" height="16"/>
+    <Region id="32" name="right-bottom-corner-roof" x="216" y="199" width="16" height="16"/>
+    <Region id="33" name="right-top-corner-roof" x="216" y="183" width="16" height="16"/>
+    <Region id="34" name="left-window-right-stripe" x="248" y="199" width="16" height="16"/>
+    <Region id="35" name="path-grass" x="8" y="215" width="16" height="16"/>
+    <Region id="36" name="water-top-edge" x="8" y="247" width="16" height="16"/>
+    <Region id="37" name="cave-entrance" x="72" y="199" width="16" height="16"/>
+    <Region id="38" name="gate" x="328" y="23" width="16" height="16"/>
+    <Region id="39" name="grass-gate" x="568" y="327" width="16" height="16"/>
+    <Region id="40" name="path-gate" x="136" y="263" width="16" height="16"/>
+    <Region id="41" name="path-left-fence" x="152" y="263" width="16" height="16"/>
+    <Region id="42" name="grass-fence" x="168" y="263" width="16" height="16"/>
+    <Region id="43" name="bottom-bubble" x="8" y="375" width="16" height="16"/>
+    <Region id="44" name="top-bubble" x="8" y="391" width="16" height="16"/>
+    <Region id="45" name="blank-path" x="8" y="327" width="16" height="16"/>
+    <Region id="46" name="bottom-left-grass-path" x="8" y="311" width="16" height="16"/>
+    <Region id="47" name="grass-left-fence" x="600" y="327" width="16" height="16"/>
+    <Region id="48" name="gym-right-wall-window" x="504" y="327" width="16" height="16"/>
+    <Region id="49" name="bollards" x="264" y="487" width="16" height="16"/>
+    <Region id="50" name="signpost" x="280" y="487" width="16" height="16"/>
+    <Region id="51" name="sapling" x="312" y="471" width="16" height="16"/>
+    <Region id="52" name="right-railing" x="216" y="535" width="16" height="16"/>
+    <Region id="53" name="left-railing" x="200" y="535" width="16" height="16"/>
+    <Region id="54" name="path-left-fence" x="520" y="327" width="16" height="16"/>
+    <Region id="55" name="path-fence" x="536" y="327" width="16" height="16"/>
+    <Region id="56" name="grass-right-fence" x="552" y="327" width="16" height="16"/>
+    <Region id="57" name="jewel-bush-hybrid" x="88" y="199" width="16" height="16"/>
+    <Region id="58" name="gym-top-edge-roof" x="408" y="279" width="16" height="16"/>
+    <Region id="59" name="mart-left-wall" x="200" y="422" width="16" height="16"/>
+    <Region id="60" name="mart-left-wall-window" x="200" y="406" width="16" height="16"/>
+    <Region id="61" name="mart-dual-window" x="216" y="406" width="16" height="16"/>
+    <Region id="62" name="mart-right-wall-window" x="248" y="406" width="16" height="16"/>
+    <Region id="63" name="mart-right-wall" x="248" y="422" width="16" height="16"/>
+    <Region id="64" name="mart-door" x="216" y="422" width="16" height="16"/>
+    <Region id="65" name="mart-sign" x="424" y="422" width="16" height="16"/>
+    <Region id="66" name="mart-poke-sign" x="328" y="294" width="16" height="16"/>
+    <Region id="67" name="gym-left-wall-window" x="392" y="327" width="16" height="16"/>
+    <Region id="68" name="gym-right-wall-window" x="504" y="327" width="16" height="16"/>
+    <Region id="69" name="gym-right-sign" x="472" y="311" width="16" height="16"/>
+    <Region id="70" name="gym-left-sign" x="456" y="311" width="16" height="16"/>
+    <Region id="71" name="full-path" x="72" y="215" width="16" height="16"/>
+
+
+    // Ceruclean City Gym Tiles
+    <Region id="72" name="top-border" x="656" y="327" width="16" height="16"/>
+    <Region id="73" name="blue-tile" x="656" y="343" width="16" height="16"/>
+    <Region id="74" name="gym-water" x="672" y="359" width="16" height="16"/>
+    <Region id="75" name="elevated-floor" x="688" y="375" width="16" height="16"/>
+    <Region id="76" name="elevated-bottom-edge-floor" x="720" y="375" width="16" height="16"/>
+    <Region id="77" name="top-edge-floor" x="720" y="359" width="16" height="16"/>
+    <Region id="78" name="floor" x="768" y="391" width="16" height="16"/>
+    <Region id="79" name="entrance" x="720" y="535" width="16" height="16"/>
+    <Region id="80" name="podium" x="704" y="503" width="16" height="16"/>
+    <Region id="81" name="statue" x="704" y="487" width="16" height="16"/>
+
+    // Added missing tiles for city
+    <Region id="82" name="gym-mid-left-roof" x="392" y="295" width="16" height="16"/>
+    <Region id="83" name="gym-bottom-edge-roof" x="408" y="295" width="16" height="16"/>
+    <Region id="84" name="gym-top-dual-window" x="408" y="311" width="16" height="16"/>
+    <Region id="85" name="gym-top-left-roof" x="392" y="279" width="16" height="16"/>
+    <Region id="86" name="gym-bottom-left-roof" x="392" y="311" width="16" height="16"/>
+    <Region id="87" name="gym-left-window-wall" x="392" y="327" width="16" height="16"/>
+    <Region id="88" name="gym-bottom-dual-window" x="408" y="327" width="16" height="16"/>
+    <Region id="89" name="mart-top-left-roof" x="296" y="247" width="16" height="16"/>
+    <Region id="90" name="mart-top-mid-roof" x="312" y="247" width="16" height="16"/>
+    <Region id="91" name="mart-top-right-roof" x="344" y="247" width="16" height="16"/>
+    <Region id="92" name="mart-bottom-left-roof" x="296" y="263" width="16" height="16"/>
+    <Region id="93" name="mart-bottom-mid-roof" x="312" y="263" width="16" height="16"/>
+    <Region id="94" name="mart-bottom-right-roof" x="344" y="263" width="16" height="16"/>
+    <Region id="95" name="gym-top-roof" x="408" y="279" width="16" height="16"/>
+    <Region id="96" name="gym-top-right-roof" x="504" y="279" width="16" height="16"/>
+    <Region id="97" name="gym-mid-right-roof" x="504" y="295" width="16" height="16"/>
+    <Region id="98" name="gym-bottom-right-roof" x="504" y="311" width="16" height="16"/>
+    <Region id="99" name="gym-bottom-left-roof" x="392" y="311" width="16" height="16"/>
+    <Region id="100" name="mart-sign-empty" x="232" y="422" width="16" height="16"/>
+
+    //Added Missing gym tile
+    <Region id="101" name="Elevated-water" x="688" y="391" width="16" height="16"/>
+
+    </Regions>
+</TextureAtlas>

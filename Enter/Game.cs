@@ -51,10 +51,11 @@ public class Game1 : Core
 
         // Initialize Scene Manager and Dependencies
         _sceneManager = new SceneManager(Content, SpriteBatch);
-        _sceneManager.AddScene("overworld", new OverworldScene(_sceneManager, this, _controller, player));
-        _sceneManager.AddScene("trainer", new TrainerBattleScene(_sceneManager, this, "youngster", player));
-        _sceneManager.AddScene("wild", new WildEncounter(_sceneManager, this, player));
-        _currentMap = TilemapLoader.LoadTilemap("Content/Route1Map.xml");
+        _sceneManager.AddScene("overworld", new OverworldScene(_sceneManager, this, _controller));
+        _sceneManager.AddScene("overworld_city", new OverworldCityScene(_sceneManager, this, _controller));
+        _sceneManager.AddScene("gym", new GymScene(_sceneManager, this, _controller));
+        _sceneManager.AddScene("trainer", new TrainerBattleScene(_sceneManager, this, "TRAINER_TESTER"));
+        _sceneManager.AddScene("wild", new WildEncounter(_sceneManager, this));
         _sceneManager.TransitionTo("overworld"); // <-- Set the starting scene
 
         base.LoadContent();
@@ -67,6 +68,23 @@ public class Game1 : Core
 
         // Check for reset key
         if (ResetRequested) { Reset(); return; }
+
+        // check for wild encounter key
+        if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.W))
+        {
+            _sceneManager.TransitionTo("wild");
+        }
+        // If caught in trainer battle in scene, defaults back to Route 1 for now
+        if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.C))
+        {
+            _sceneManager.TransitionTo("overworld_city");
+        }
+        
+        if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.G))
+        {
+            _sceneManager.TransitionTo("gym");
+        }
+
 
         base.Update(gameTime);
     }
