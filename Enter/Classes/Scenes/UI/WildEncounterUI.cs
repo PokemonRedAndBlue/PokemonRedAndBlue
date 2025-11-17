@@ -129,6 +129,7 @@ public class WildEncounterUI
                 // arrow handling logic
                 BattleUIHelper battleUI = new BattleUIHelper();
                 battleUI.DrawArrow(_WildUIAtlas, spriteBatch);
+                battleUI.moveArrow();
                 break;
             case "Bag": // Bag
                 // draw base UI

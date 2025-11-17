@@ -85,7 +85,6 @@ public void moveArrow()
         // 1. Find the current position of the arrow
         int currentRow = 0;
         int currentCol = 0;
-        bool found = false;
         for (int i = 0; i < 2; i++)
         {
             for (int j = 0; j < 2; j++)
@@ -94,20 +93,16 @@ public void moveArrow()
                 {
                     currentRow = i;
                     currentCol = j;
-                    found = true;
                     break;
                 }
             }
-            if (found) break;
         }
 
-        if (!found) return; // Arrow not found, do nothing.
 
         int newRow = currentRow;
         int newCol = currentCol;
 
         // 2. Check for a *single key press*
-        // We check if the key is down NOW, but was UP last frame.
         if (currentState.IsKeyDown(Keys.Up))
         {
             newRow = (currentRow - 1 + 2) % 2; // (0-1+2) % 2 = 1. (1-1+2) % 2 = 0.
@@ -142,7 +137,6 @@ public void DrawArrow(TextureAtlas battleUIAtlas, SpriteBatch spriteBatch)
     {
         for(int j = 0; j < 2; j++)
         {
-            // --- THIS IS THE FIX ---
             // Check the grid spot at [i][j]
             if(arrowLocation[i][j] == 1) 
             {
