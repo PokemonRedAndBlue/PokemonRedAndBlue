@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Tilemap>
+    <Properties>
+        <TileWidth>16</TileWidth>
+        <TileHeight>16</TileHeight>
+        <MapWidth>20</MapWidth>
+        <MapHeight>36</MapHeight>
+        <TileDefinitions>Tiles2.xml</TileDefinitions>
+    </Properties>
+    
+    <!-- Tile IDs from Tiles2.xml:
+         1=blue-brick, 2=bush-jewel-hybrid, 3=bush, 4=jewel, 5=water, 6=cylinder, 7=tree,
+         8=grass, 9=yard, 10=left-top-corner-roof, 11=left-bottom-corner-roof, 12=roof,
+         13=door, 14=right-window, 15=left-window, 16=dual-window, 17=right-bottom-corner-roof,
+         18=right-top-corner-roof, 19=left-window-right-stripe, 20=path-grass, 21=water-top-edge,
+         22=cave-entrance, 23=gate, 24=grass-gate, 25=path-gate, 26=path-fence, 27=grass-fence,
+         28=bottom-bubble, 29=top-bubble, 30=blank-path, 31=bottom-left-grass-path,
+         32=grass-left-fence, 33=gym-window, 34=bollards, 35=signpost, 36=sapling,
+         37=right-railing, 38=left-railing, 39=path-left-fence, 40=path-fence,
+         41=grass-right-fence, 42=jewel-bush-hybrid, 43=middle-roof, 44=mart-left-wall,
+         45=mart-left-wall-window, 46=mart-dual-window, 47=mart-right-wall-window,
+         48=mart-right-wall, 49=mart-door, 50=mart-sign, 51=mart-poke-sign,
+         52=gym-left-wall-window, 53=gym-right-wall-window, 54=gym-right-sign,
+         55=gym-left-sign, 56=top-border, 57=blue-tile, 58=gym-water, 59=elevated-floor,
+         60=elevated-bottom-edge-floor, 61=top-edge-floor, 62=floor, 63=entrance,
+         64=podium, 65=statue -->
+    
+    <Layer name="Ground">
+        <Row>1,1,1,2,1,1,1,1,1,2,4,4,2,1,1,1,1,1,2,1</Row> // First row of the map
+        <Row>1,1,1,2,2,2,2,2,2,2,4,4,2,2,2,2,2,2,2,1</Row> // Second row of the map
+        <Row>1,1,1,2,1,1,1,1,1,1,4,4,1,1,1,1,13,13,2,1</Row> // Third row of the map
+        <Row>1,1,1,2,1,1,1,1,1,1,4,4,1,1,1,1,14,14,2,1</Row> // Fourth row of the map
+        <Row>1,1,1,2,1,1,1,1,1,3,4,4,4,4,4,4,4,4,2,1</Row> // Fifth row of the map
+        <Row>1,1,1,2,12,12,12,12,8,3,10,11,10,11,4,4,4,4,2,1</Row> // Sixth row of the map
+        <Row>1,1,1,3,13,13,13,13,1,3,5,5,5,5,5,5,5,5,3,1</Row> // Seventh row of the map
+        <Row>1,1,1,3,14,14,14,14,1,3,5,5,5,5,5,5,5,5,3,1</Row> // Eighth row of the map
+        <Row>1,1,1,3,1,1,1,1,1,3,5,5,5,5,5,5,5,5,3,1</Row> // Ninth row of the map
+        <Row>1,1,1,3,12,12,12,12,8,3,5,5,5,5,5,5,5,5,3,1</Row> // Tenth row of the map
+        <Row>1,1,1,3,1,1,13,13,13,13,1,1,4,4,4,4,4,4,3,1</Row> // Eleventh row of the map 
+        <Row>1,1,1,3,1,1,14,14,14,14,1,1,4,4,4,4,4,4,3,1</Row> // Twelfth row of the map 
+        <Row>1,1,1,3,1,1,1,1,1,1,1,1,6,7,5,5,5,5,3,1</Row> // Thirteenth row of the map **
+        <Row>1,1,1,3,3,3,12,12,12,12,3,3,3,3,5,5,5,5,3,1</Row> // Fourteenth row of the map 
+        <Row>1,1,1,2,1,1,1,1,13,13,13,13,4,4,5,5,5,5,3,1</Row> // Fifteenth row of the map 
+        <Row>1,1,1,2,1,1,1,1,14,14,14,14,4,4,5,5,5,5,2,1</Row> // Sixteenth row of the map
+        <Row>1,1,1,2,1,1,4,4,4,4,4,4,4,4,13,13,13,13,2,1</Row> // Seventeenth row of the map
+        <Row>1,1,1,2,1,1,4,4,4,4,4,4,4,4,14,14,14,14,2,1</Row> // Eighteenth row of the map 
+        <Row>1,1,1,2,1,1,4,4,1,1,1,1,1,1,1,1,1,1,2,1</Row> // Nineteenth row of the map
+        <Row>1,1,1,2,8,9,10,11,8,9,12,12,12,12,12,12,12,12,2,1</Row> // Twentieth row of the map
+        <Row>1,1,1,2,1,1,4,4,4,4,4,4,4,4,4,4,4,4,2,1</Row> // Twenty-first row of the map
+        <Row>1,1,1,2,1,1,4,4,4,4,4,4,4,4,4,4,4,4,2,1</Row> // Twenty-second row of the map 
+        <Row>1,1,1,2,1,1,1,1,1,1,1,1,5,5,5,5,4,4,2,1</Row> // Twenty-third row of the map 
+        <Row>1,1,1,2,3,3,3,3,3,3,3,3,5,5,5,5,10,11,2,1</Row> // Twenty-fourth row of the map 
+        <Row>1,1,1,2,1,1,1,1,13,13,13,13,5,5,5,5,4,4,2,1</Row> // Twenty-fifth row of the map 
+        <Row>1,1,1,2,1,1,1,1,14,14,14,14,5,5,5,5,4,4,2,1</Row> // Twenty-sixth row of the map
+        <Row>1,1,1,2,4,4,4,4,4,4,4,4,4,4,4,4,4,4,2,1</Row> // Twenty-seventh row of the map
+        <Row>1,1,1,3,10,11,4,4,4,15,10,11,10,11,10,11,10,11,2,1</Row> // Twenty-eighth row of the map
+        <Row>1,1,1,3,1,1,5,5,5,5,4,4,1,1,5,5,5,5,3,1</Row> // Twenty-ninth row of the map 
+        <Row>1,1,1,3,1,1,5,5,5,5,4,4,1,1,5,5,5,5,3,1</Row> // Thirtieth row of the map 
+        <Row>1,1,1,3,5,5,5,5,13,13,4,4,5,5,5,5,13,13,3,1</Row> // Thirty-first row of the map
+        <Row>1,1,1,3,5,5,5,5,14,14,4,4,5,5,5,5,14,14,3,1</Row> // Thirty-second row of the map 
+        <Row>1,1,1,3,2,2,2,2,2,2,5,5,2,2,2,2,2,2,3,1</Row> // Thirty-third row of the map
+        <Row>1,1,1,3,1,1,1,1,1,2,5,5,2,1,1,1,1,1,3,1</Row> // Thirty-fourth row of the map
+        <Row>1,1,1,3,1,1,1,1,1,2,5,5,2,1,1,1,1,1,3,1</Row> // Thirty-fifth row of the map
+        <Row>1,1,1,3,1,1,1,1,1,2,5,5,2,1,1,1,1,1,3,1</Row> // Last row of the map
+    </Layer>
+    
+    <Layer name="Objects">
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+        <Row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</Row>
+    </Layer>
+</Tilemap>
