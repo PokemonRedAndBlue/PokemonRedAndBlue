@@ -172,9 +172,9 @@ public String handleArrowEvent(int currentCol, int currentRow)
             return "Fight";
         } else if(currentCol == 1 && currentRow == 0)
         {
-            return "PrMn";
-        } else if(currentCol == 0 && currentRow == 1){
             return "Item";
+        } else if(currentCol == 0 && currentRow == 1){
+            return "PkMn";
         } else if(currentCol == 1 && currentRow == 1)
         {
             return "Run";

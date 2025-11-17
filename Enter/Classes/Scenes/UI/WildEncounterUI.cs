@@ -143,10 +143,14 @@ public class WildEncounterUI
                 break;
             case "Item": // Bag
                 // draw base UI
-                UIsprites[3].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
+                UIsprites[4].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
                 break;
-            case "Ball": // Run
+            case "Ball": // ball item selected TODO MOVE THIS WITHIN BAG SCENE
                 // need to be able to process catch event
+                break;
+            case "PkMn":
+            // draw base UI
+                UIsprites[3].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
                 break;
             default:
                 break;
