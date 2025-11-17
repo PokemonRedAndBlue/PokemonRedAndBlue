@@ -12,6 +12,7 @@ using System.Runtime.Intrinsics;
 using Enter.Classes.Characters;
 using System.Net;
 using Enter.Classes.Scenes;
+using PokemonGame;
 
 public class WildEncounterUI
 {
@@ -39,6 +40,7 @@ public class WildEncounterUI
     static private Vector2 _borderPostion = new Vector2(uiBasePosition.X - (48 * _scale), uiBasePosition.Y - (40 * _scale) + 1);
     static private Vector2 maxDrawPos = new Vector2(0, uiBasePosition.Y + (103 * _scale));
     private BattleUIHelper battleUI = new BattleUIHelper();
+    private Sprite greenBar, yellowBar, redBar;
     static private Player _Player;
     static private Sprite _border;
 
@@ -69,6 +71,7 @@ public class WildEncounterUI
         TextureAtlas borders = TextureAtlas.FromFile(content, "Borders.xml");
         _border = new Sprite(borders.GetRegion("blue-border"));
 
+
         // load trainer sprite
         TextureAtlas trainerAtlas = TextureAtlas.FromFile(content, "BattleChars.xml");
         _trainerSpriteBack = new Sprite(trainerAtlas.GetRegion("player-back"));
@@ -79,6 +82,10 @@ public class WildEncounterUI
         _wildPokemonSpriteFront = PokemonFrontFactory.Instance.CreateAnimatedSprite(_wildPokemonID + "-front"); // Example: Bulbasaur
 
         // create UI elements
+        greenBar = new Sprite(_WildUIAtlas.GetRegion("green-health"));
+        yellowBar = new Sprite(_WildUIAtlas.GetRegion("yellow-health"));
+        redBar = new Sprite(_WildUIAtlas.GetRegion("red-health"));
+
         UIsprites = new Sprite[_WildUIAtlas._regions.Count];
         int index = 0;
         foreach (var sprite in _WildUIAtlas._regions)
@@ -108,6 +115,9 @@ public class WildEncounterUI
         // always draw border
         _border.Draw(spriteBatch, Color.White, _borderPostion, 4f);
 
+        // always get players pokemon
+         Pokemon currentPokemon = _Player.thePlayersTeam.Pokemons[0];
+
         // draw the UI elements for wild encounter (state based)
             switch (battleUI.getBattleState())
         {
@@ -128,11 +138,14 @@ public class WildEncounterUI
                 // draw base UI
                 UIsprites[1].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
                 // draw players pokemon sprite, get first alive pokemon
-                String playersPokemon = _Player.thePlayersTeam.Pokemons[0].Name.ToString();
+                String playersPokemon = currentPokemon.Name.ToString();
                 Sprite currentMon = PokemonBackFactory.Instance.CreateStaticSprite( playersPokemon.ToLower()+ "-back");
                 currentMon.Draw(spriteBatch, Color.White, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)), 4f);
                 // draw wild pokemon sprite
                 _wildPokemonSpriteFront.Draw(spriteBatch, Color.White, wildPokemonPosition, 4f);
+                // draw both health
+                battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, true);
+                battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, false);
                 // arrow handling logic
                 battleUI.DrawArrow(_WildUIAtlas, spriteBatch);
                 battleUI.moveArrow();
@@ -140,10 +153,15 @@ public class WildEncounterUI
             case "Fight":
                 // draw base UI
                 UIsprites[2].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
+                // draw both health
+                battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, true);
+                battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, false);
                 break;
             case "Item": // Bag
                 // draw base UI
                 UIsprites[4].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
+                // only draw opponent health
+                battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, false);
                 break;
             case "Ball": // ball item selected TODO MOVE THIS WITHIN BAG SCENE
                 // need to be able to process catch event
