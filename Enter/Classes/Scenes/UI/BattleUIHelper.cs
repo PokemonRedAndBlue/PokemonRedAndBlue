@@ -232,7 +232,7 @@ public String handleArrowEvent(int currentCol, int currentRow)
         {
             // draw yellow
             midYellow.Draw(spriteBatch, Color.White, healthBarPosition, _scale);
-        } else
+        } else if(midThird > currentHp)
         {
             // draw red
             redLow.Draw(spriteBatch, Color.White, healthBarPosition, _scale);
