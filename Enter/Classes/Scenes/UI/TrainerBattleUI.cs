@@ -62,6 +62,11 @@ public class TrainerBattleUI
         _enemyTeam = enemyTeam;
     }
 
+    public void Update(GameTime gameTime)
+    {
+        battleUI.Update(gameTime);
+    }
+
     public void LoadContent(ContentManager content)
     {
         // Load UI Textures
@@ -104,7 +109,7 @@ public class TrainerBattleUI
         _border.Draw(spriteBatch, Color.White, _borderPostion, 4f);
 
         // always get players pokemon
-         Pokemon currentPokemon = _playerTeam.Pokemons[0];
+        Pokemon currentPokemon = _playerTeam.Pokemons[0];
 
         // draw the UI elements for wild encounter (state based)
         switch (_currentState)

@@ -94,6 +94,8 @@ namespace Enter.Classes.Scenes
                      _sceneManager.TransitionTo(_returnSceneName ?? "overworld");
                  }
             // }
+            // update UI
+            _trainerUI.Update(gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch)
