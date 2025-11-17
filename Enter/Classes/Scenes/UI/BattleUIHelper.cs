@@ -212,13 +212,18 @@ public String handleArrowEvent(int currentCol, int currentRow)
         }
     }
 
-    public void drawHealthBar(Pokemon poke, Sprite greenMax, Sprite midYellow, Sprite redLow, SpriteBatch spriteBatch)
+    public void drawHealthBar(Pokemon poke, Sprite greenMax, Sprite midYellow, Sprite redLow, SpriteBatch spriteBatch, Boolean isPlayersTeam)
     {
 
         // split max health into 3 sections
         int topThird = poke.MaxHp * (2 / 3);
         int midThird = poke.MaxHp * (1 / 3);
         int currentHp = poke.Hp;
+
+        if(!isPlayersTeam)
+        {
+            healthBarPosition = new Vector2( uiBasePosition.X + (_scale * 95) - 4, uiBasePosition.Y + (_scale * 74) - 4);
+        }
 
         if(currentHp > topThird)
         {
