@@ -43,6 +43,7 @@ public class BattleUIHelper
     private static Vector2 _drawPostionArrow;
     static private Vector2 playerPokeballStartPosition = new Vector2(uiBasePosition.X + (88 * _scale) - 4, uiBasePosition.Y + (80 * _scale) - 4);
     static private Vector2 enemyPokeballStartPosition = new Vector2(uiBasePosition.X + (24 * _scale) - 4, uiBasePosition.Y + (16 * _scale) - 4);
+    static private Vector2 healthBarPosition = new Vector2(uiBasePosition.X + (31 * _scale) - 4, uiBasePosition.Y + (18 * _scale) - 4);
     static public Sprite GetPokeballSprite(string status, TextureAtlas battleUIAtlas)
     {
         switch (status)
@@ -208,6 +209,29 @@ public String handleArrowEvent(int currentCol, int currentRow)
                 currentBattleState = "Menu"; // Transition the state
                 _stateTimer = 0.0;           // Reset timer for future use
             }
+        }
+    }
+
+    public void drawHealthBar(Pokemon poke, Sprite greenMax, Sprite midYellow, Sprite redLow, SpriteBatch spriteBatch)
+    {
+
+        // split max health into 3 sections
+        int topThird = poke.MaxHp * (2 / 3);
+        int midThird = poke.MaxHp * (1 / 3);
+        int currentHp = poke.Hp;
+
+        if(currentHp > topThird)
+        {
+            // draw green
+            greenMax.Draw(spriteBatch, Color.White, healthBarPosition, _scale);
+        } else if(currentHp > midThird)
+        {
+            // draw yellow
+            midYellow.Draw(spriteBatch, Color.White, healthBarPosition, _scale);
+        } else
+        {
+            // draw red
+            redLow.Draw(spriteBatch, Color.White, healthBarPosition, _scale);
         }
     }
 }
