@@ -27,7 +27,7 @@ public class WildEncounterUI
     private string _currentState = "Fight";
 
     // Pre defined regions within UI ADD TO A DICT LATER
-    static private Vector2 uiBasePosition = new Vector2(350, 75);
+    static private Vector2 uiBasePosition = new Vector2(340, 75);
     static private Vector2 pokemonHealthBarPosition = new Vector2(uiBasePosition.X + 150, uiBasePosition.Y + 200);
     static private Vector2 pokemonLevelPosition = new Vector2(uiBasePosition.X + 250, uiBasePosition.Y + 280);
     static private Vector2 arrowPosition = new Vector2(uiBasePosition.X + 50, uiBasePosition.Y + 400);
@@ -107,7 +107,7 @@ public class WildEncounterUI
         {
             case "Initial": // Initial
                 // draw base UI
-                UIsprites[0].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
+                UIsprites[0].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
                 // draw player trainer sprite
                 _trainerSpriteBack.Draw(spriteBatch, Color.White, playerTrainerPosition, 8f);
                 // draw wild pokemon sprite
@@ -117,7 +117,7 @@ public class WildEncounterUI
                 break;
             case "Fight": // Fight
                 // draw base UI
-                UIsprites[1].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
+                UIsprites[1].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
                 // draw player trainer sprite
                 _trainerSpriteBack.Draw(spriteBatch, Color.White, playerTrainerPosition, 8f);
                 // draw wild pokemon sprite
@@ -127,15 +127,15 @@ public class WildEncounterUI
                 break;
             case "Bag": // Bag
                 // draw base UI
-                UIsprites[2].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
+                UIsprites[2].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
                 break;
             case "Pokemon": // Pokemon
                 // draw base UI
-                UIsprites[3].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
+                UIsprites[3].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
                 break;
             case "Run": // Run
                 // draw base UI
-                UIsprites[4].Draw(spriteBatch, Color.White, new Vector2(350, 75), 4f);
+                UIsprites[4].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
                 break;
             default:
                 break;
