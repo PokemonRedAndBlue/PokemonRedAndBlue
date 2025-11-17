@@ -54,7 +54,6 @@ public class TrainerBattleUI
         _font = content.Load<SpriteFont>("PokemonFont");
         _playerTeam = playerTeam;
         _enemyTeam = enemyTeam;
-
     }
 
     public void LoadContent(ContentManager content)

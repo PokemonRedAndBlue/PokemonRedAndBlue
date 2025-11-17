@@ -1,3 +1,4 @@
+
 #----------------------------- Global Properties ----------------------------#
 
 /outputDir:bin/$(Platform)
@@ -996,6 +997,9 @@
 /processorParam:Quality=Best
 /build:Audio/SFX_WITHDRAW_DEPOSIT.wav
 
+#begin BattleChars.xml
+/copy:BattleChars.xml
+
 #begin Borders.xml
 /copy:Borders.xml
 
@@ -1040,11 +1044,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:images/Characters (Battle).png
-#begin CerucleanCityMap.xml
-/copy:CerucleanCityMap.xml
-
-#begin GymMap.xml
-/copy:GymMap.xml
 
 #begin images/Game Boy _ GBC - Pokemon Red _ Blue - Backgrounds (Places) - Cerulean City.png
 /importer:TextureImporter
@@ -1155,26 +1154,3 @@
 #begin Tiles2.xml
 /copy:Tiles2.xml
 
-#begin images/Borders.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:images/Borders.png
-
-#begin images/Characters (Battle).png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:images/Characters (Battle).png
