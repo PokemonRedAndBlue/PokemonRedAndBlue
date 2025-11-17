@@ -14,7 +14,7 @@ using System.Collections;
 public class BattleUIHelper
 {
     static private float _scale = 4.0f;
-    private String currentBattleState = "Fight";
+    private String currentBattleState = "Initial";
     KeyboardController keyBrd = new KeyboardController();
     static private Vector2 uiBasePosition = new Vector2(340, 75);
     private KeyboardState previousKeyState;

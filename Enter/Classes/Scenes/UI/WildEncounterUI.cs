@@ -120,7 +120,7 @@ public class WildEncounterUI
                 // draw player trainer party bar
                 BattleUIHelper.drawPokeballSprites(_Player.thePlayersTeam, _WildUIAtlas, spriteBatch, true);
                 break;
-            case "Fight": // Fight
+            case "Menu": 
                 // draw base UI
                 UIsprites[1].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
                 // draw players pokemon sprite, get first alive pokemon
@@ -133,7 +133,12 @@ public class WildEncounterUI
                 battleUI.DrawArrow(_WildUIAtlas, spriteBatch);
                 battleUI.moveArrow();
                 break;
+            case "Fight":
+                // draw base UI
+                UIsprites[1].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
+                break;
             case "Bag": // Bag
+                didRun = true;
                 break;
             case "Run": // Run
                 // need to be able to process the run event
