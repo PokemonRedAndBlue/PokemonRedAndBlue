@@ -16,6 +16,7 @@ public class BattleUIHelper
     static private float _scale = 4.0f;
     KeyboardController keyBrd = new KeyboardController();
     static private Vector2 uiBasePosition = new Vector2(340, 75);
+    private KeyboardState previousKeyState;
 
     // handle arrow locations in menu
     private int[][] arrowLocation =
@@ -80,52 +81,58 @@ public class BattleUIHelper
 
 public void moveArrow()
 {
-        KeyboardState currentState = Keyboard.GetState();
+    KeyboardState currentState = Keyboard.GetState();
 
-        // 1. Find the current position of the arrow
-        int currentRow = 0;
-        int currentCol = 0;
-        for (int i = 0; i < 2; i++)
+    // 1. Find the current position of the arrow
+    int currentRow = 0;
+    int currentCol = 0;
+    
+    // This loop is fine, but can be made more efficient
+    for (int i = 0; i < 2; i++)
+    {
+        for (int j = 0; j < 2; j++)
         {
-            for (int j = 0; j < 2; j++)
+            if (arrowLocation[i][j] == 1)
             {
-                if (arrowLocation[i][j] == 1)
-                {
-                    currentRow = i;
-                    currentCol = j;
-                    break;
-                }
+                currentRow = i;
+                currentCol = j;
+                i = 2; // A better way to break both loops
+                break;
             }
         }
+    }
 
+    int newRow = currentRow;
+    int newCol = currentCol;
 
-        int newRow = currentRow;
-        int newCol = currentCol;
+    // 2. Check for a *single key press*
+    //    (Is down NOW, but was UP last frame)
+    if (currentState.IsKeyDown(Keys.Up) && previousKeyState.IsKeyUp(Keys.Up))
+    {
+        newRow = (currentRow - 1 + 2) % 2; 
+    }
+    else if (currentState.IsKeyDown(Keys.Down) && previousKeyState.IsKeyUp(Keys.Down))
+    {
+        newRow = (currentRow + 1) % 2;
+    }
+    else if (currentState.IsKeyDown(Keys.Left) && previousKeyState.IsKeyUp(Keys.Left))
+    {
+        newCol = (currentCol - 1 + 2) % 2;
+    }
+    else if (currentState.IsKeyDown(Keys.Right) && previousKeyState.IsKeyUp(Keys.Right))
+    {
+        newCol = (currentCol + 1) % 2;
+    }
 
-        // 2. Check for a *single key press*
-        if (currentState.IsKeyDown(Keys.Up))
-        {
-            newRow = (currentRow - 1 + 2) % 2; // (0-1+2) % 2 = 1. (1-1+2) % 2 = 0.
-        }
-        else if (currentState.IsKeyDown(Keys.Down))
-        {
-            newRow = (currentRow + 1) % 2; // (0+1) % 2 = 1. (1+1) % 2 = 0.
-        }
-        else if (currentState.IsKeyDown(Keys.Left))
-        {
-            newCol = (currentCol - 1 + 2) % 2;
-        }
-        else if (currentState.IsKeyDown(Keys.Right))
-        {
-            newCol = (currentCol + 1) % 2;
-        }
+    // 3. If the position changed, update the array
+    if (newRow != currentRow || newCol != currentCol)
+    {
+        arrowLocation[currentRow][currentCol] = 0; // Clear the old spot
+        arrowLocation[newRow][newCol] = 1;       // Set the new spot
+    }
 
-        // 3. If the position changed, update the array
-        if (newRow != currentRow || newCol != currentCol)
-        {
-            arrowLocation[currentRow][currentCol] = 0; // Clear the old spot
-            arrowLocation[newRow][newCol] = 1;       // Set the new spot
-        }
+    // 4. VERY IMPORTANT: Save the current state for the next frame
+    previousKeyState = currentState;
 }
 
 public void DrawArrow(TextureAtlas battleUIAtlas, SpriteBatch spriteBatch)
