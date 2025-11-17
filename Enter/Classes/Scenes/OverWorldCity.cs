@@ -28,13 +28,15 @@ namespace Enter.Classes.Scenes
         private Player player;
         private Game1 _game;
         private Tilemap _currentMap;
+        private Player _player;
 
         // We must pass in the SceneManager so this scene can request transitions
-        public OverworldCityScene(SceneManager sceneManager, Game1 game1, KeyboardController controller)
+        public OverworldCityScene(SceneManager sceneManager, Game1 game1, KeyboardController controller, Player p)
         {
             _sceneManager = sceneManager;
             _game = game1;
             _controller = controller;
+            _player = p;
         }
 
         public void LoadContent(ContentManager content)
@@ -42,18 +44,17 @@ namespace Enter.Classes.Scenes
             // Load tilemap, player sprites, NPCs, etc.
             Cam = new(((Game)_game).GraphicsDevice.Viewport);
             character = content.Load<Texture2D>("images/Pokemon_Characters");
-            player = new Player(character, _game.Window);
             Cam.Update(player);
             Cam.Zoom = ZoomLevel; //Zoom leve of world
             trainer = new Trainer(
                 character,
                 new Vector2(_game.Window.ClientBounds.Height, _game.Window.ClientBounds.Width) * 0.25f,
-                Facing.Right
+                Facing.Right,
+                trainerId: "youngster"
             );
             _currentMap = TilemapLoader.LoadTilemap("Content/CerucleanCityMap.xml");
 
             // Collision wiring (minimal)
-            player = new Player(character, _game.Window);
             player.Map = _currentMap;
 
             // Build the solid tile index set from the "Ground" layer

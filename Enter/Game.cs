@@ -51,11 +51,11 @@ public class Game1 : Core
 
         // Initialize Scene Manager and Dependencies
         _sceneManager = new SceneManager(Content, SpriteBatch);
-        _sceneManager.AddScene("overworld", new OverworldScene(_sceneManager, this, _controller));
-        _sceneManager.AddScene("overworld_city", new OverworldCityScene(_sceneManager, this, _controller));
-        _sceneManager.AddScene("gym", new GymScene(_sceneManager, this, _controller));
-        _sceneManager.AddScene("trainer", new TrainerBattleScene(_sceneManager, this, "TRAINER_TESTER"));
-        _sceneManager.AddScene("wild", new WildEncounter(_sceneManager, this));
+        _sceneManager.AddScene("overworld", new OverworldScene(_sceneManager, this, _controller, player));
+        _sceneManager.AddScene("overworld_city", new OverworldCityScene(_sceneManager, this, _controller, player));
+        _sceneManager.AddScene("gym", new GymScene(_sceneManager, this, _controller, player));
+        _sceneManager.AddScene("trainer", new TrainerBattleScene(_sceneManager, this, "youngster", player));
+        _sceneManager.AddScene("wild", new WildEncounter(_sceneManager, this, player));
         _sceneManager.TransitionTo("overworld"); // <-- Set the starting scene
 
         base.LoadContent();

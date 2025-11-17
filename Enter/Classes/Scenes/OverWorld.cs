@@ -44,10 +44,10 @@ namespace Enter.Classes.Scenes
             // Load tilemap, player sprites, NPCs, etc.
             Cam = new(((Game)_game).GraphicsDevice.Viewport);
             
-            if ((_game as Game1)?.SavedPlayerPosition is Microsoft.Xna.Framework.Vector2 savedPos)
-            {
-                _player.Position = savedPos;
-            }
+            // if ((_game as Game1)?.SavedPlayerPosition is Microsoft.Xna.Framework.Vector2 savedPos)
+            // {
+            //     _player.Position = savedPos;
+            // }
 
             Cam.Update(_player);
             Cam.Zoom = ZoomLevel; //Zoom level of world
@@ -64,7 +64,7 @@ namespace Enter.Classes.Scenes
             _currentMap = TilemapLoader.LoadTilemap("Content/Route1Map.xml");
 
             // Collision wiring (minimal)
-            player.Map = _currentMap;
+            _player.Map = _currentMap;
 
             // Build the solid tile index set from the "Ground" layer
             _player.SolidTiles = Physics.Collision.BuildSolidIndexSet(
@@ -74,8 +74,8 @@ namespace Enter.Classes.Scenes
             );
 
             // * TEMP: Initialize player tile position (spawn at same 160px,0px => tile (10,0))
-            player.SetTilePosition(new Point(10, 0));
-            Cam.Update(player);
+            _player.SetTilePosition(new Point(10, 0));
+            Cam.Update(_player);
         }
 
         public void Update(GameTime gameTime)
