@@ -2,7 +2,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Enter.Interfaces;
+using Enter.Classes.Characters;
 
 namespace Enter.Classes.Scenes
 {
@@ -13,11 +15,24 @@ namespace Enter.Classes.Scenes
     public class SceneManager
     {
         private IGameScene _currentScene;
+        public IGameScene CurrentScene => _currentScene;
         private readonly Dictionary<string, IGameScene> _scenes = new Dictionary<string, IGameScene>();
         private readonly ContentManager _content;
         private bool _isTransitioning = false;
-
         private SpriteBatch _spriteBatch;
+        // profiling stopwatches
+        private readonly Stopwatch _updateSw = new Stopwatch();
+        private readonly Stopwatch _drawSw = new Stopwatch();
+
+        /// <summary>
+        /// Last measured time spent in scene Update (milliseconds).
+        /// </summary>
+        public double LastUpdateMs { get; private set; } = 0.0;
+
+        /// <summary>
+        /// Last measured time spent in scene Draw (milliseconds).
+        /// </summary>
+        public double LastDrawMs { get; private set; } = 0.0;
 
         public SceneManager(ContentManager content, SpriteBatch spriteBatch)
         {
@@ -58,7 +73,14 @@ namespace Enter.Classes.Scenes
         {
             if (!_isTransitioning && _currentScene != null)
             {
+                _updateSw.Restart();
                 _currentScene.Update(gameTime);
+                _updateSw.Stop();
+                LastUpdateMs = _updateSw.Elapsed.TotalMilliseconds;
+            }
+            else
+            {
+                LastUpdateMs = 0.0;
             }
         }
 
@@ -69,7 +91,14 @@ namespace Enter.Classes.Scenes
         {
             if (!_isTransitioning && _currentScene != null)
             {
+                _drawSw.Restart();
                 _currentScene.Draw(spriteBatch);
+                _drawSw.Stop();
+                LastDrawMs = _drawSw.Elapsed.TotalMilliseconds;
+            }
+            else
+            {
+                LastDrawMs = 0.0;
             }
         }
     }

@@ -3,11 +3,17 @@ using Enter.Classes.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
+using TrainerMethods;
 
 namespace Enter.Classes.Characters;
 
 public class Trainer
 {
+    // Trainer Team init
+    private Team _trainersTeam;
+
+    // Unique identifier for this trainer instance
+    public string TrainerID { get; private set; }
 
     // Might use a scale for tile lengths later
     public Vector2 Position { get; private set; }
@@ -24,13 +30,20 @@ public class Trainer
     private Facing _facing = Facing.Down; // Facing direction
     private bool _visible = false;  // Whether the trainer sees a player now
     public bool colided = false;  // Whether the trainer has collided with the player
+    public bool HasBeenDefeated { get; set; } = false;  // Whether this trainer has been defeated in battle
+    public bool IsApproachingPlayer { get; private set; } = false;  // Whether trainer is currently walking to player
 
-    public Trainer(Texture2D texture, Vector2 Pos, Facing facing) : this(texture, Pos, facing, false) { }
-    public Trainer(Texture2D texture, Vector2 Pos, Facing facing, bool moving) : this(texture, 0, Pos, facing, moving, DefaultVisionRangeTiles) { }
-    public Trainer(Texture2D texture, int spriteIndex, Vector2 Pos, Facing facing, bool moving) : this(texture, spriteIndex, Pos, facing, moving, DefaultVisionRangeTiles) { }
-    public Trainer(Texture2D texture, Vector2 Pos, Facing facing, int visionRangeTiles) : this(texture, 0, Pos, facing, visionRangeTiles) { }
-    public Trainer(Texture2D texture, int spriteIndex, Vector2 Pos, Facing facing, int visionRangeTiles) : this(texture, spriteIndex, Pos, facing, false, visionRangeTiles) { }
-    public Trainer(Texture2D texture, int spriteIndex, Vector2 Pos, Facing facing, bool moving, int visionRangeTiles)
+    public Trainer(Texture2D texture, Vector2 Pos, Facing facing, string trainerId)
+        : this(texture, Pos, facing, false, trainerId) { }
+    public Trainer(Texture2D texture, Vector2 Pos, Facing facing, bool moving, string trainerId)
+        : this(texture, 0, Pos, facing, moving, DefaultVisionRangeTiles, trainerId) { }
+    public Trainer(Texture2D texture, int spriteIndex, Vector2 Pos, Facing facing, bool moving, string trainerId)
+        : this(texture, spriteIndex, Pos, facing, moving, DefaultVisionRangeTiles, trainerId) { }
+    public Trainer(Texture2D texture, Vector2 Pos, Facing facing, int visionRangeTiles, string trainerId)
+        : this(texture, 0, Pos, facing, visionRangeTiles, trainerId) { }
+    public Trainer(Texture2D texture, int spriteIndex, Vector2 Pos, Facing facing, int visionRangeTiles, string trainerId)
+        : this(texture, spriteIndex, Pos, facing, false, visionRangeTiles, trainerId) { }
+    public Trainer(Texture2D texture, int spriteIndex, Vector2 Pos, Facing facing, bool moving, int visionRangeTiles, string trainerId)
     {
         _texture = texture;
         _spriteIndex = spriteIndex;
@@ -39,16 +52,41 @@ public class Trainer
         _facing = facing;
         _moving = moving;
         _visionRangeTiles = visionRangeTiles;
+        TrainerID = trainerId;
         colided = false;
+        _trainersTeam = new Team();
     }
 
     public void Update(GameTime gametime, Player player)    // TODO: Sprites
     {
-        if (!_visible && IsVisible(player)) _visible = true;    // decrease number of condition checks
+        // If trainer has been defeated, they can't trigger battles but can still interact
+        if (HasBeenDefeated)
+        {
+            // Allow interaction when player is close but don't chase or battle
+            if (Math.Abs(Vector2.Distance(player.Position, Position)) <= InteractionRange)
+            {
+                colided = true; // Allow dialogue but won't trigger battle since HasBeenDefeated=true
+            }
+            _sprite.IdleReset(_facing);
+            return;
+        }
+
+        // First-time spotting logic for undefeated trainers
+        if (!_visible && IsVisible(player))
+        {
+            _visible = true;
+            IsApproachingPlayer = true;
+        }
+
         if (_visible)
         {
             player.Stop();
-            GoToPlayer(player, gametime);
+            bool hasReachedPlayer = GoToPlayer(player, gametime);
+            if (hasReachedPlayer)
+            {
+                colided = true;
+                IsApproachingPlayer = false;
+            }
             _sprite.UpdateMovAnim(_facing);
         }
         else
@@ -98,7 +136,7 @@ public class Trainer
         return Position + SpriteHalfSizeVector;
     }
 
-    private void GoToPlayer(Player player, GameTime gametime)
+    private bool GoToPlayer(Player player, GameTime gametime)
     {
         Vector2 playerCenter = player.GetWorldCenterPosition();
         Vector2 trainerCenter = GetWorldCenterPosition();
@@ -109,12 +147,12 @@ public class Trainer
         {
             _visible = false;
             player.StopEnd();
-            colided = true;
-            return;
+            return true; // Reached the player
         }
         Vector2 norm = Vector2.Normalize(playerCenter - trainerCenter);
         float dt = (float)gametime.ElapsedGameTime.TotalSeconds;
         Position += norm * SpeedPxPerSec * dt;
+        return false; // Still approaching
     }
 
     public void Draw(SpriteBatch spriteBatch, float scale = 1f)
