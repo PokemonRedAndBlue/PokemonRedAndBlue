@@ -58,6 +58,15 @@ public class Game1 : Core
         _sceneManager.AddScene("wild", new WildEncounter(_sceneManager, this, player));
         _sceneManager.TransitionTo("overworld"); // <-- Set the starting scene
 
+        // This is just for testing to check that the stats are calculated correctly, will be a random pokemon with random IV
+        var pokemon = PokemonGenerator.GenerateRandom();
+        pokemon.PrintSummary();
+
+        //Music && Sound effect
+        BackgroundMusicLibrary.Load(Content);
+        SoundEffectLibrary.Load(Content);
+
+
         base.LoadContent();
     }
 
@@ -83,6 +92,30 @@ public class Game1 : Core
             _sceneManager.TransitionTo("gym");
         }
 
+        //Music
+        _sceneManager.Update(gameTime);
+        // ----------------------------------------
+        //  MUSIC TESTING KEYS (CAN BE REMOVED)
+        // ----------------------------------------
+        var kb = Keyboard.GetState();
+
+        if (kb.IsKeyDown(Keys.U))
+        {
+            BackgroundMusicPlayer.Play(SongId.OpeningPart2);
+        }
+        if (kb.IsKeyDown(Keys.O))
+        {
+            SoundEffectPlayer.Play(SfxId.SFX_LEVEL_UP);
+        }
+        if (kb.IsKeyDown(Keys.I))
+        {
+            BackgroundMusicPlayer.Play(SongId.BattleWildPokemon);
+        }
+
+        if (kb.IsKeyDown(Keys.Q))
+        {
+            BackgroundMusicPlayer.Stop();
+        }
 
         base.Update(gameTime);
 
