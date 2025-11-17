@@ -124,6 +124,13 @@ public void moveArrow()
         newCol = (currentCol + 1) % 2;
     }
 
+    // handle arrow selection
+        if (currentState.IsKeyDown(Keys.Enter))
+        {
+            handleArrowEvent(newCol, newRow);
+            return;
+        }
+
     // 3. If the position changed, update the array
     if (newRow != currentRow || newCol != currentCol)
     {
@@ -155,4 +162,20 @@ public void DrawArrow(TextureAtlas battleUIAtlas, SpriteBatch spriteBatch)
     }
 }
 
+public String handleArrowEvent(int currentCol, int currentRow)
+    {
+        if(currentCol == 0 && currentRow == 0)
+        {
+            return "Fight";
+        } else if(currentCol == 1 && currentRow == 0)
+        {
+            return "PrMn";
+        } else if(currentCol == 0 && currentRow == 1){
+            return "Item";
+        } else if(currentCol == 1 && currentRow == 1)
+        {
+            return "Run";
+        }
+        return "";
+    }
 }
