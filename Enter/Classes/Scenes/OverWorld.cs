@@ -8,6 +8,7 @@ using Enter.Classes.Input;
 using Enter.Classes.Sprites;
 using Enter.Classes.Physics;
 using Enter.Interfaces;
+using Enter.Classes.Textures;
 
 namespace Enter.Classes.Scenes
 {
@@ -19,36 +20,46 @@ namespace Enter.Classes.Scenes
     {
         private const float ZoomLevel = 4f; 
         private SceneManager _sceneManager;
-        private SpriteFont _font; // Placeholder for UI/debug text
-        private Tilemap _tilemap;
         private Camera Cam;
         private KeyboardController _controller;
         private Texture2D character;
         private Trainer trainer;
-        private Player player;
+        private Player _player;
         private Game1 _game;
         private Tilemap _currentMap;
 
+        public Vector2 GetPlayerPosition() => _player.Position;
+
         // We must pass in the SceneManager so this scene can request transitions
-        public OverworldScene(SceneManager sceneManager, Game1 game1, KeyboardController controller)
+        public OverworldScene(SceneManager sceneManager, Game1 game1, KeyboardController controller, Player player)
         {
             _sceneManager = sceneManager;
             _game = game1;
             _controller = controller;
+            _player = player;
         }
 
         public void LoadContent(ContentManager content)
         {
             // Load tilemap, player sprites, NPCs, etc.
             Cam = new(((Game)_game).GraphicsDevice.Viewport);
-            character = content.Load<Texture2D>("images/Pokemon_Characters");
-            player = new Player(character, _game.Window);
+            
+            if ((_game as Game1)?.SavedPlayerPosition is Microsoft.Xna.Framework.Vector2 savedPos)
+            {
+                _player.Position = savedPos;
+            }
 
-            Cam.Zoom = ZoomLevel; //Zoom leve of world
+            Cam.Update(_player);
+            Cam.Zoom = ZoomLevel; //Zoom level of world
+            // Create trainer with specific ID that matches what's used in TrainerBattle
+            character = content.Load<Texture2D>("images/Pokemon_Characters");
+            const string TRAINER_ID = "youngster"; // This should match the ID used in Game1's AddScene
             trainer = new Trainer(
                 character,
                 new Vector2(_game.Window.ClientBounds.Height, _game.Window.ClientBounds.Width) * 0.25f,
-                Facing.Right
+                Facing.Right,
+                false,  // not moving by default
+                TRAINER_ID
             );
             _currentMap = TilemapLoader.LoadTilemap("Content/Route1Map.xml");
 
@@ -56,7 +67,7 @@ namespace Enter.Classes.Scenes
             player.Map = _currentMap;
 
             // Build the solid tile index set from the "Ground" layer
-            player.SolidTiles = Physics.Collision.BuildSolidIndexSet(
+            _player.SolidTiles = Physics.Collision.BuildSolidIndexSet(
                 _currentMap,
                 "Ground",
                 Physics.SolidTileCollision.IsSolid
@@ -70,13 +81,28 @@ namespace Enter.Classes.Scenes
         public void Update(GameTime gameTime)
         {
             // Update Objects
-            _controller.Update(_game, gameTime, Cam, player, trainer);
-            Cam.Update(player);
+            _controller.Update(_game, gameTime, Cam, _player, trainer);
+            Cam.Update(_player);
 
-            // Force a battle with trainer interaction
-            if (trainer.colided){
-                // Example of starting a specific trainer battle
-                _sceneManager.TransitionTo("trainer");
+            // Handle trainer interactions
+            if (trainer.colided && !trainer.IsApproachingPlayer)
+            {
+                if (!_game.IsTrainerDefeated(trainer.TrainerID))
+                {
+                    // Save position and transition to battle if trainer isn't defeated
+                    _game.SavedPlayerPosition = _player.Position;
+                    _sceneManager.TransitionTo("trainer");
+                }
+                // If trainer is defeated, they're just interacting without battle
+                // Could show dialogue here
+            }
+
+            // check for wild encounter key
+            if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.W))
+            {
+                // Save player position before entering wild battle
+                _game.SavedPlayerPosition = _player.Position;
+                _sceneManager.TransitionTo("wild");
             }
             // no need for base.Update here
         }
@@ -88,12 +114,14 @@ namespace Enter.Classes.Scenes
             // map & world entities affected by camera movement
             spriteBatch.Begin(transformMatrix: Cam.GetViewMatrix(), samplerState: SamplerState.PointClamp);
             _currentMap?.DrawCropped(Cam.VisibleWorldRect);
-            player.Draw(spriteBatch);
+            _player.Draw(spriteBatch);
             trainer.Draw(spriteBatch);
             spriteBatch.End();
 
             // no need for base.Draw here
         }
+
+
     }
 }
 

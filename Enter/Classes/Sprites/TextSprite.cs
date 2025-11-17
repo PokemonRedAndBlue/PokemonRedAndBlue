@@ -22,4 +22,9 @@ public class TextSprite : Sprite
     {
         spriteBatch.DrawString(_font, _text, position, _color);
     }
+
+    public void DrawTextSpriteWithScale(SpriteBatch spriteBatch, Vector2 position, float scale)
+    {
+        spriteBatch.DrawString(_font, _text, position, _color, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+    }
 }

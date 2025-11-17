@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+    <Texture>images/Characters (Battle)</Texture>
+    <Regions>
+        <Region name="youngster" x="8" y="440" width="55" height="55"/>
+        <Region name="bug-catcher" x="34" y="298" width="32" height="32"/>
+        <Region name="lass" x="67" y="298" width="32" height="32"/>
+        <Region name="sailor" x="100" y="298" width="32" height="32"/>
+        <Region name="jr-trainer-m" x="133" y="298" width="32" height="32"/>
+        <Region name="jr-trainer-f" x="166" y="298" width="32" height="32"/>
+        <Region name="pokemaniac" x="199" y="298" width="32" height="32"/>
+        <Region name="super-nerd" x="232" y="298" width="32" height="32"/>
+        <Region name="hiker" x="1" y="331" width="32" height="32"/>
+        <Region name="biker" x="34" y="331" width="32" height="32"/>
+        <Region name="burglar" x="67" y="331" width="32" height="32"/>
+        <Region name="engineer" x="100" y="331" width="32" height="32"/>
+        <Region name="juggler" x="133" y="331" width="32" height="32"/>
+        <Region name="fisherman" x="166" y="331" width="32" height="32"/>
+        <Region name="swimmer" x="199" y="331" width="32" height="32"/>
+        <Region name="tamer" x="232" y="331" width="32" height="32"/>
+        <Region name="bird-keeper" x="1" y="364" width="32" height="32"/>
+        <Region name="blackbelt" x="34" y="364" width="32" height="32"/>
+        <Region name="guard" x="67" y="364" width="32" height="32"/>
+        <Region name="prof-oak" x="100" y="364" width="32" height="32"/>
+        <Region name="player-red" x="133" y="364" width="32" height="32"/>
+        <Region name="rival-blue" x="166" y="364" width="32" height="32"/>
+        <Region name="scientist" x="199" y="364" width="32" height="32"/>
+        <Region name="giovanni" x="232" y="364" width="32" height="32"/>
+        <Region name="rocket" x="1" y="397" width="32" height="32"/>
+        <Region name="cooltrainer-m" x="34" y="397" width="32" height="32"/>
+        <Region name="cooltrainer-f" x="67" y="397" width="32" height="32"/>
+        <Region name="blaine" x="100" y="397" width="32" height="32"/>
+        <Region name="sabrina" x="133" y="397" width="32" height="32"/>
+        <Region name="koga" x="166" y="397" width="32" height="32"/>
+        <Region name="lt-surge" x="199" y="397" width="32" height="32"/>
+        <Region name="erika" x="232" y="397" width="32" height="32"/>
+        <Region name="misty" x="1" y="430" width="32" height="32"/>
+        <Region name="brock" x="34" y="430" width="32" height="32"/>
+        <Region name="gambler" x="67" y="430" width="32" height="32"/>
+        <Region name="beauty" x="100" y="430" width="32" height="32"/>
+        <Region name="channeler" x="133" y="430" width="32" height="32"/>
+        <Region name="lorelei" x="166" y="430" width="32" height="32"/>
+        <Region name="bruno" x="199" y="430" width="32" height="32"/>
+        <Region name="agatha" x="232" y="430" width="32" height="32"/>
+        <Region name="lance" x="1" y="463" width="32" height="32"/>
+        <Region name="gentleman" x="34" y="463" width="32" height="32"/>
+        <Region name="rival-champ" x="67" y="463" width="32" height="32"/>
+        <Region name="player-champ" x="100" y="463" width="32" height="32"/>
+        <Region name="lorelei-chair" x="133" y="463" width="32" height="32"/>
+        <Region name="bruno-alt" x="166" y="463" width="32" height="32"/>
+        <Region name="agatha-alt" x="199" y="463" width="32" height="32"/>
+        <Region name="lance-alt" x="232" y="463" width="32" height="32"/>
+        <Region name="rocker" x="1" y="496" width="32" height="32"/>
+        <Region name="psychic" x="34" y="496" width="32" height="32"/>
+        <Region name="biker-alt" x="67" y="496" width="32" height="32"/>
+        <Region name="cue-ball" x="100" y="496" width="32" height="32"/>
+        <Region name="exorcist" x="133" y="496" width="32" height="32"/>
+        <Region name="rocket-m" x="166" y="496" width="32" height="32"/>
+        <Region name="rocket-f" x="199" y="496" width="32" height="32"/>
+        <Region name="chief" x="1" y="529" width="32" height="32"/>
+        <Region name="mr-fuji" x="34" y="529" width="32" height="32"/>
+        <Region name="silph-pres" x="67" y="529" width="32" height="32"/>
+        <Region name="player-back" x="8" y="824" width="32" height="32"/>
+        <Region name="player-back-alt" x="133" y="529" width="32" height="32"/>
+        <Region name="old-man" x="1" y="562" width="32" height="32"/>
+        <Region name="fuji-flute" x="34" y="562" width="32" height="32"/>
+        <Region name="player-bike" x="67" y="562" width="32" height="32"/>
+        <Region name="player-fishing" x="100" y="562" width="32" height="32"/>
+        <Region name="player-surfing" x="133" y="562" width="32" height="32"/>
+    </Regions>
+    <Animations>
+    </Animations>
+</TextureAtlas>

@@ -13,6 +13,7 @@ public class Player
 {
     //For collision
     public Tilemap Map { get; set; }
+    public Team thePlayersTeam = new Team();
     public HashSet<Point> SolidTiles { get; set; }
 
     // Pixel-space render position (top-left of sprite)
@@ -44,9 +45,10 @@ public class Player
     private bool _seenByTrainer = false;
     private Facing _facing = Facing.Down;
 
-    public Player(Texture2D texture2, GameWindow Window)
+    public Player(Texture2D texture2, GameWindow Window, Team team)
     {
         _texture = texture2;
+        thePlayersTeam = team;
     }
     public Player(Texture2D texture2, Vector2 position)
     {
