@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Enter.Interfaces;
-using Enter.Classes.Characters;
 
 namespace Enter.Classes.Scenes
 {
@@ -14,10 +13,10 @@ namespace Enter.Classes.Scenes
     public class SceneManager
     {
         private IGameScene _currentScene;
-        public IGameScene CurrentScene => _currentScene;
         private readonly Dictionary<string, IGameScene> _scenes = new Dictionary<string, IGameScene>();
         private readonly ContentManager _content;
         private bool _isTransitioning = false;
+
         private SpriteBatch _spriteBatch;
 
         public SceneManager(ContentManager content, SpriteBatch spriteBatch)

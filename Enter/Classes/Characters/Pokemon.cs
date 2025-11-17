@@ -13,31 +13,18 @@ namespace PokemonGame
     public class Pokemon
     {
         private readonly Dictionary<string, Action<Vector2>> _animationActions;
+
         public string Name { get; }
         public int Hp { get; private set; }
         public int MaxHp { get; }
-        private int _level;
         public PokemonView View { get; }
         public StateMachine StateMachine { get; }
         public Sprite Sprite { get; private set; }
         public AnimatedSprite AnimatedSprite { get; private set; }
         public Vector2 Position { get; set; }
+
         public Sprite _sprite;
 
-        public Pokemon(string name, int level)
-        {
-            Name = name;
-            _level = level;
-             StateMachine = new StateMachine(this);
-            StateMachine.AddState("idle", new IdleState());
-            StateMachine.AddState("attacking", new AttackingState());
-            StateMachine.AddState("hurt", new HurtState());
-            StateMachine.AddState("dead", new DeadState());
-            StateMachine.AddState("dying", new DyingState());
-            StateMachine.AddState("deploying", new DeployingState());
-            StateMachine.AddState("retreating", new RetreatingState());
-            StateMachine.TransitionTo("idle");
-        }
         public Pokemon(string name, int level, PokemonView view, AnimatedSprite animatedSprite, Vector2 position)
         {
             Name = name;

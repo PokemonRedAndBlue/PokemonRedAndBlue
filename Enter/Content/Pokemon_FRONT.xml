@@ -2,308 +2,308 @@
 <TextureAtlas>
     <Texture>images/Pokemon_FRONT</Texture>
     <Regions>
-        <Region name="bulbasaur-front-idle" x="18" y="47" width="38" height="38"/>
-        <Region name="bulbasaur-front-attack" x="75" y="47" width="38" height="38"/>
-        <Region name="ivysaur-front-idle" x="132" y="39" width="46" height="46"/>
-        <Region name="ivysaur-front-attack" x="189" y="39" width="46" height="46"/>
-        <Region name="venusaur-front-idle" x="238" y="31" width="54" height="54"/>
-        <Region name="venusaur-front-attack" x="295" y="31" width="54" height="54"/>
-        <Region name="charmander-front-idle" x="360" y="47" width="38" height="38"/>
-        <Region name="charmander-front-attack" x="417" y="47" width="38" height="38"/>
-        <Region name="charmeleon-front-idle" x="474" y="39" width="46" height="46"/>
-        <Region name="charmeleon-front-attack" x="530" y="39" width="46" height="46"/>
-        <Region name="charizard-front-idle" x="580" y="31" width="54" height="54"/>
-        <Region name="charizard-front-attack" x="637" y="31" width="54" height="54"/>
-        <Region name="squirtle-front-idle" x="702" y="47" width="38" height="38"/>
-        <Region name="squirtle-front-attack" x="759" y="47" width="38" height="38"/>
-        <Region name="wartortle-front-idle" x="816" y="39" width="46" height="46"/>
-        <Region name="wartortle-front-attack" x="873" y="39" width="46" height="46"/>
-        <Region name="blastoise-front-idle" x="922" y="31" width="54" height="54"/>
-        <Region name="blastoise-front-attack" x="979" y="31" width="54" height="54"/>
-        <Region name="caterpie-front-idle" x="1043" y="47" width="38" height="38"/>
-        <Region name="caterpie-front-attack" x="1100" y="47" width="38" height="38"/>
-        <Region name="metapod-front-idle" x="1157" y="47" width="38" height="38"/>
-        <Region name="metapod-front-attack" x="1214" y="47" width="38" height="38"/>
-        <Region name="butterfree-front-idle" x="1263" y="31" width="54" height="54"/>
-        <Region name="butterfree-front-attack" x="1320" y="31" width="54" height="54"/>
-        <Region name="weedle-front-idle" x="1385" y="47" width="38" height="38"/>
-        <Region name="weedle-front-attack" x="1443" y="47" width="38" height="38"/>
-        <Region name="kakuna-front-idle" x="1500" y="47" width="38" height="38"/>
-        <Region name="kakuna-front-attack" x="1556" y="47" width="38" height="38"/>
-        <Region name="beedrill-front-idle" x="1606" y="31" width="54" height="54"/>
-        <Region name="beedrill-front-attack" x="1662" y="31" width="54" height="54"/>
-        <Region name="pidgey-front-idle" x="18" y="125" width="38" height="38"/>
-        <Region name="pidgey-front-attack" x="75" y="125" width="38" height="38"/>
-        <Region name="pidgeotto-front-idle" x="132" y="117" width="46" height="46"/>
-        <Region name="pidgeotto-front-attack" x="189" y="117" width="46" height="46"/>
-        <Region name="pidgeot-front-idle" x="238" y="109" width="54" height="54"/>
-        <Region name="pidgeot-front-attack" x="295" y="109" width="54" height="54"/>
-        <Region name="rattata-front-idle" x="360" y="125" width="38" height="38"/>
-        <Region name="rattata-front-attack" x="417" y="125" width="38" height="38"/>
-        <Region name="raticate-front-idle" x="474" y="117" width="46" height="46"/>
-        <Region name="raticate-front-attack" x="530" y="117" width="46" height="46"/>
-        <Region name="spearow-front-idle" x="588" y="125" width="38" height="38"/>
-        <Region name="spearow-front-attack" x="645" y="125" width="38" height="38"/>
-        <Region name="fearow-front-idle" x="694" y="109" width="54" height="54"/>
-        <Region name="fearow-front-attack" x="751" y="109" width="54" height="54"/>
-        <Region name="ekans-front-idle" x="815" y="125" width="38" height="38"/>
-        <Region name="ekans-front-attack" x="872" y="125" width="38" height="38"/>
-        <Region name="arbok-front-idle" x="921" y="109" width="54" height="54"/>
-        <Region name="arbok-front-attack" x="978" y="109" width="54" height="54"/>
-        <Region name="pikachu-front-idle" x="1043" y="125" width="38" height="38"/>
-        <Region name="pikachu-front-attack" x="1100" y="125" width="38" height="38"/>
-        <Region name="raichu-front-idle" x="1150" y="109" width="54" height="54"/>
-        <Region name="raichu-front-attack" x="1207" y="109" width="54" height="54"/>
-        <Region name="sandshrew-front-idle" x="1272" y="125" width="38" height="38"/>
-        <Region name="sandshrew-front-attack" x="1329" y="125" width="38" height="38"/>
-        <Region name="sandslash-front-idle" x="1386" y="117" width="46" height="46"/>
-        <Region name="sandslash-front-attack" x="1443" y="117" width="46" height="46"/>
-        <Region name="nidoran-f-front-idle" x="1500" y="125" width="38" height="38"/>
-        <Region name="nidoran-f-front-attack" x="1556" y="125" width="38" height="38"/>
-        <Region name="nidorina-front-idle" x="1613" y="117" width="46" height="46"/>
-        <Region name="nidorina-front-attack" x="1671" y="117" width="46" height="46"/>
-        <Region name="nidoqueen-front-idle" x="10" y="187" width="54" height="54"/>
-        <Region name="nidoqueen-front-attack" x="67" y="187" width="54" height="54"/>
-        <Region name="nidoran-m-front-idle" x="132" y="203" width="38" height="38"/>
-        <Region name="nidoran-m-front-attack" x="189" y="203" width="38" height="38"/>
-        <Region name="nidorino-front-idle" x="246" y="195" width="46" height="46"/>
-        <Region name="nidorino-front-attack" x="303" y="195" width="46" height="46"/>
-        <Region name="nidoking-front-idle" x="352" y="187" width="54" height="54"/>
-        <Region name="nidoking-front-attack" x="409" y="187" width="54" height="54"/>
-        <Region name="clefairy-front-idle" x="474" y="203" width="38" height="38"/>
-        <Region name="clefairy-front-attack" x="531" y="203" width="38" height="38"/>
-        <Region name="clefable-front-idle" x="588" y="195" width="46" height="46"/>
-        <Region name="clefable-front-attack" x="645" y="195" width="46" height="46"/>
-        <Region name="vulpix-front-idle" x="702" y="195" width="46" height="46"/>
-        <Region name="vulpix-front-attack" x="759" y="195" width="46" height="46"/>
-        <Region name="ninetales-front-idle" x="808" y="187" width="54" height="54"/>
-        <Region name="ninetales-front-attack" x="865" y="187" width="54" height="54"/>
-        <Region name="jigglypuff-front-idle" x="930" y="203" width="38" height="38"/>
-        <Region name="jigglypuff-front-attack" x="987" y="203" width="38" height="38"/>
-        <Region name="wigglytuff-front-idle" x="1043" y="195" width="46" height="46"/>
-        <Region name="wigglytuff-front-attack" x="1100" y="195" width="46" height="46"/>
-        <Region name="zubat-front-idle" x="1158" y="203" width="38" height="38"/>
-        <Region name="zubat-front-attack" x="1215" y="203" width="38" height="38"/>
-        <Region name="golbat-front-idle" x="1264" y="187" width="54" height="54"/>
-        <Region name="golbat-front-attack" x="1321" y="187" width="54" height="54"/>
-        <Region name="oddish-front-idle" x="1386" y="203" width="38" height="38"/>
-        <Region name="oddish-front-attack" x="1443" y="203" width="38" height="38"/>
-        <Region name="gloom-front-idle" x="1500" y="195" width="46" height="46"/>
-        <Region name="gloom-front-attack" x="1556" y="195" width="46" height="46"/>
-        <Region name="vileplume-front-idle" x="1606" y="187" width="54" height="54"/>
-        <Region name="vileplume-front-attack" x="1663" y="187" width="54" height="54"/>
-        <Region name="paras-front-idle" x="18" y="281" width="38" height="38"/>
-        <Region name="paras-front-attack" x="75" y="281" width="38" height="38"/>
-        <Region name="parasect-front-idle" x="132" y="265" width="54" height="54"/>
-        <Region name="parasect-front-attack" x="189" y="265" width="54" height="54"/>
-        <Region name="venonat-front-idle" x="246" y="281" width="38" height="38"/>
-        <Region name="venonat-front-attack" x="303" y="281" width="38" height="38"/>
-        <Region name="venomoth-front-idle" x="360" y="265" width="54" height="54"/>
-        <Region name="venomoth-front-attack" x="417" y="265" width="54" height="54"/>
-        <Region name="diglett-front-idle" x="474" y="281" width="38" height="38"/>
-        <Region name="diglett-front-attack" x="530" y="281" width="38" height="38"/>
-        <Region name="dugtrio-front-idle" x="588" y="274" width="46" height="46"/>
-        <Region name="dugtrio-front-attack" x="645" y="274" width="46" height="46"/>
-        <Region name="meowth-front-idle" x="702" y="281" width="38" height="38"/>
-        <Region name="meowth-front-attack" x="759" y="281" width="38" height="38"/>
-        <Region name="persian-front-idle" x="808" y="265" width="54" height="54"/>
-        <Region name="persian-front-attack" x="865" y="265" width="54" height="54"/>
-        <Region name="psyduck-front-idle" x="930" y="281" width="38" height="38"/>
-        <Region name="psyduck-front-attack" x="987" y="281" width="38" height="38"/>
-        <Region name="golduck-front-idle" x="1043" y="265" width="54" height="54"/>
-        <Region name="golduck-front-attack" x="1100" y="265" width="54" height="54"/>
-        <Region name="mankey-front-idle" x="1157" y="281" width="38" height="38"/>
-        <Region name="mankey-front-attack" x="1214" y="281" width="38" height="38"/>
-        <Region name="primeape-front-idle" x="1263" y="265" width="54" height="54"/>
-        <Region name="primeape-front-attack" x="1320" y="265" width="54" height="54"/>
-        <Region name="growlithe-front-idle" x="1385" y="281" width="38" height="38"/>
-        <Region name="growlithe-front-attack" x="1443" y="281" width="38" height="38"/>
-        <Region name="arcanine-front-idle" x="1500" y="265" width="54" height="54"/>
-        <Region name="arcanine-front-attack" x="1556" y="265" width="54" height="54"/>
-        <Region name="poliwag-front-idle" x="1613" y="281" width="38" height="38"/>
-        <Region name="poliwag-front-attack" x="1671" y="281" width="38" height="38"/>
-        <Region name="poliwhirl-front-idle" x="14" y="352" width="46" height="46"/>
-        <Region name="poliwhirl-front-attack" x="71" y="352" width="46" height="46"/>
-        <Region name="poliwrath-front-idle" x="124" y="343" width="54" height="54"/>
-        <Region name="poliwrath-front-attack" x="181" y="343" width="54" height="54"/>
-        <Region name="abra-front-idle" x="246" y="359" width="38" height="38"/>
-        <Region name="abra-front-attack" x="303" y="359" width="38" height="38"/>
-        <Region name="kadabra-front-idle" x="360" y="352" width="46" height="46"/>
-        <Region name="kadabra-front-attack" x="417" y="352" width="46" height="46"/>
-        <Region name="alakazam-front-idle" x="466" y="343" width="54" height="54"/>
-        <Region name="alakazam-front-attack" x="523" y="343" width="54" height="54"/>
-        <Region name="machop-front-idle" x="588" y="359" width="38" height="38"/>
-        <Region name="machop-front-attack" x="645" y="359" width="38" height="38"/>
-        <Region name="machoke-front-idle" x="694" y="343" width="54" height="54"/>
-        <Region name="machoke-front-attack" x="751" y="343" width="54" height="54"/>
-        <Region name="machamp-front-idle" x="808" y="343" width="54" height="54"/>
-        <Region name="machamp-front-attack" x="865" y="343" width="54" height="54"/>
-        <Region name="bellsprout-front-idle" x="930" y="359" width="38" height="38"/>
-        <Region name="bellsprout-front-attack" x="987" y="359" width="38" height="38"/>
-        <Region name="weepinbell-front-idle" x="1043" y="352" width="46" height="46"/>
-        <Region name="weepinbell-front-attack" x="1100" y="352" width="46" height="46"/>
-        <Region name="victreebel-front-idle" x="1149" y="343" width="54" height="54"/>
-        <Region name="victreebel-front-attack" x="1206" y="343" width="54" height="54"/>
-        <Region name="tentacool-front-idle" x="1271" y="359" width="38" height="38"/>
-        <Region name="tentacool-front-attack" x="1328" y="359" width="38" height="38"/>
-        <Region name="tentacruel-front-idle" x="1385" y="352" width="46" height="46"/>
-        <Region name="tentacruel-front-attack" x="1442" y="352" width="46" height="46"/>
-        <Region name="geodude-front-idle" x="1500" y="359" width="38" height="38"/>
-        <Region name="geodude-front-attack" x="1556" y="359" width="38" height="38"/>
-        <Region name="graveler-front-idle" x="1613" y="352" width="46" height="46"/>
-        <Region name="graveler-front-attack" x="1670" y="352" width="46" height="46"/>
-        <Region name="golem-front-idle" x="14" y="430" width="46" height="46"/>
-        <Region name="golem-front-attack" x="71" y="430" width="46" height="46"/>
-        <Region name="ponyta-front-idle" x="128" y="430" width="46" height="46"/>
-        <Region name="ponyta-front-attack" x="185" y="430" width="46" height="46"/>
-        <Region name="rapidash-front-idle" x="238" y="421" width="54" height="54"/>
-        <Region name="rapidash-front-attack" x="295" y="421" width="54" height="54"/>
-        <Region name="slowpoke-front-idle" x="360" y="437" width="38" height="38"/>
-        <Region name="slowpoke-front-attack" x="417" y="437" width="38" height="38"/>
-        <Region name="slowbro-front-idle" x="466" y="421" width="54" height="54"/>
-        <Region name="slowbro-front-attack" x="523" y="421" width="54" height="54"/>
-        <Region name="magnemite-front-idle" x="588" y="437" width="38" height="38"/>
-        <Region name="magnemite-front-attack" x="645" y="437" width="38" height="38"/>
-        <Region name="magneton-front-idle" x="702" y="430" width="46" height="46"/>
-        <Region name="magneton-front-attack" x="759" y="430" width="46" height="46"/>
-        <Region name="farfetchd-front-idle" x="816" y="430" width="46" height="46"/>
-        <Region name="farfetchd-front-attack" x="873" y="430" width="46" height="46"/>
-        <Region name="doduo-front-idle" x="930" y="437" width="38" height="38"/>
-        <Region name="doduo-front-attack" x="987" y="437" width="38" height="38"/>
-        <Region name="dodrio-front-idle" x="1036" y="421" width="54" height="54"/>
-        <Region name="dodrio-front-attack" x="1093" y="421" width="54" height="54"/>
-        <Region name="seel-front-idle" x="1157" y="430" width="46" height="46"/>
-        <Region name="seel-front-attack" x="1214" y="430" width="46" height="46"/>
-        <Region name="dewgong-front-idle" x="1271" y="430" width="46" height="46"/>
-        <Region name="dewgong-front-attack" x="1328" y="430" width="46" height="46"/>
-        <Region name="grimer-front-idle" x="1385" y="437" width="38" height="38"/>
-        <Region name="grimer-front-attack" x="1442" y="437" width="38" height="38"/>
-        <Region name="muk-front-idle" x="1500" y="421" width="54" height="54"/>
-        <Region name="muk-front-attack" x="1557" y="421" width="54" height="54"/>
-        <Region name="shellder-front-idle" x="1613" y="437" width="38" height="38"/>
-        <Region name="shellder-front-attack" x="1670" y="437" width="38" height="38"/>
-        <Region name="cloyster-front-idle" x="10" y="499" width="54" height="54"/>
-        <Region name="cloyster-front-attack" x="67" y="499" width="54" height="54"/>
-        <Region name="gastly-front-idle" x="124" y="499" width="54" height="54"/>
-        <Region name="gastly-front-attack" x="181" y="499" width="54" height="54"/>
-        <Region name="haunter-front-idle" x="246" y="508" width="46" height="46"/>
-        <Region name="haunter-front-attack" x="303" y="508" width="46" height="46"/>
-        <Region name="gengar-front-idle" x="360" y="508" width="46" height="46"/>
-        <Region name="gengar-front-attack" x="417" y="508" width="46" height="46"/>
-        <Region name="onix-front-idle" x="466" y="499" width="54" height="54"/>
-        <Region name="onix-front-attack" x="523" y="499" width="54" height="54"/>
-        <Region name="drowzee-front-idle" x="588" y="508" width="46" height="46"/>
-        <Region name="drowzee-front-attack" x="645" y="508" width="46" height="46"/>
-        <Region name="hypno-front-idle" x="694" y="499" width="54" height="54"/>
-        <Region name="hypno-front-attack" x="751" y="499" width="54" height="54"/>
-        <Region name="krabby-front-idle" x="816" y="515" width="38" height="38"/>
-        <Region name="krabby-front-attack" x="873" y="515" width="38" height="38"/>
-        <Region name="kingler-front-idle" x="922" y="499" width="54" height="54"/>
-        <Region name="kingler-front-attack" x="979" y="499" width="54" height="54"/>
-        <Region name="voltorb-front-idle" x="1043" y="515" width="38" height="38"/>
-        <Region name="voltorb-front-attack" x="1100" y="515" width="38" height="38"/>
-        <Region name="electrode-front-idle" x="1157" y="515" width="38" height="38"/>
-        <Region name="electrode-front-attack" x="1214" y="515" width="38" height="38"/>
-        <Region name="exeggcute-front-idle" x="1263" y="499" width="54" height="54"/>
-        <Region name="exeggcute-front-attack" x="1320" y="499" width="54" height="54"/>
-        <Region name="exeggutor-front-idle" x="1377" y="499" width="54" height="54"/>
-        <Region name="exeggutor-front-attack" x="1434" y="499" width="54" height="54"/>
-        <Region name="cubone-front-idle" x="1500" y="515" width="38" height="38"/>
-        <Region name="cubone-front-attack" x="1556" y="515" width="38" height="38"/>
-        <Region name="marowak-front-idle" x="1613" y="508" width="46" height="46"/>
-        <Region name="marowak-front-attack" x="1670" y="508" width="46" height="46"/>
-        <Region name="hitmonlee-front-idle" x="10" y="577" width="54" height="54"/>
-        <Region name="hitmonlee-front-attack" x="67" y="577" width="54" height="54"/>
-        <Region name="hitmonchan-front-idle" x="128" y="586" width="46" height="46"/>
-        <Region name="hitmonchan-front-attack" x="185" y="586" width="46" height="46"/>
-        <Region name="lickitung-front-idle" x="238" y="577" width="54" height="54"/>
-        <Region name="lickitung-front-attack" x="295" y="577" width="54" height="54"/>
-        <Region name="koffing-front-idle" x="360" y="586" width="46" height="46"/>
-        <Region name="koffing-front-attack" x="417" y="586" width="46" height="46"/>
-        <Region name="weezing-front-idle" x="466" y="577" width="54" height="54"/>
-        <Region name="weezing-front-attack" x="523" y="577" width="54" height="54"/>
-        <Region name="rhyhorn-front-idle" x="580" y="577" width="54" height="54"/>
-        <Region name="rhyhorn-front-attack" x="637" y="577" width="54" height="54"/>
-        <Region name="rhydon-front-idle" x="694" y="577" width="54" height="54"/>
-        <Region name="rhydon-front-attack" x="751" y="577" width="54" height="54"/>
-        <Region name="chansey-front-idle" x="816" y="586" width="46" height="46"/>
-        <Region name="chansey-front-attack" x="873" y="586" width="46" height="46"/>
-        <Region name="tangela-front-idle" x="930" y="586" width="46" height="46"/>
-        <Region name="tangela-front-attack" x="987" y="586" width="46" height="46"/>
-        <Region name="kangaskhan-front-idle" x="1036" y="577" width="54" height="54"/>
-        <Region name="kangaskhan-front-attack" x="1093" y="577" width="54" height="54"/>
-        <Region name="horsea-front-idle" x="1157" y="593" width="38" height="38"/>
-        <Region name="horsea-front-attack" x="1214" y="593" width="38" height="38"/>
-        <Region name="seadra-front-idle" x="1271" y="586" width="46" height="46"/>
-        <Region name="seadra-front-attack" x="1328" y="586" width="46" height="46"/>
-        <Region name="goldeen-front-idle" x="1385" y="586" width="46" height="46"/>
-        <Region name="goldeen-front-attack" x="1442" y="586" width="46" height="46"/>
-        <Region name="seaking-front-idle" x="1500" y="577" width="54" height="54"/>
-        <Region name="seaking-front-attack" x="1557" y="577" width="54" height="54"/>
-        <Region name="staryu-front-idle" x="1613" y="586" width="46" height="46"/>
-        <Region name="staryu-front-attack" x="1670" y="586" width="46" height="46"/>
-        <Region name="starmie-front-idle" x="14" y="664" width="46" height="46"/>
-        <Region name="starmie-front-attack" x="71" y="664" width="46" height="46"/>
-        <Region name="mr-mime-front-idle" x="128" y="664" width="46" height="46"/>
-        <Region name="mr-mime-front-attack" x="185" y="664" width="46" height="46"/>
-        <Region name="scyther-front-idle" x="238" y="655" width="54" height="54"/>
-        <Region name="scyther-front-attack" x="295" y="655" width="54" height="54"/>
-        <Region name="jynx-front-idle" x="360" y="664" width="46" height="46"/>
-        <Region name="jynx-front-attack" x="417" y="664" width="46" height="46"/>
-        <Region name="electabuzz-front-idle" x="474" y="664" width="46" height="46"/>
-        <Region name="electabuzz-front-attack" x="530" y="664" width="46" height="46"/>
-        <Region name="magmar-front-idle" x="588" y="664" width="46" height="46"/>
-        <Region name="magmar-front-attack" x="645" y="664" width="46" height="46"/>
-        <Region name="pinsir-front-idle" x="694" y="655" width="54" height="54"/>
-        <Region name="pinsir-front-attack" x="751" y="655" width="54" height="54"/>
-        <Region name="tauros-front-idle" x="808" y="655" width="54" height="54"/>
-        <Region name="tauros-front-attack" x="865" y="655" width="54" height="54"/>
-        <Region name="magikarp-front-idle" x="930" y="664" width="46" height="46"/>
-        <Region name="magikarp-front-attack" x="987" y="664" width="46" height="46"/>
-        <Region name="gyarados-front-idle" x="1036" y="655" width="54" height="54"/>
-        <Region name="gyarados-front-attack" x="1093" y="655" width="54" height="54"/>
-        <Region name="lapras-front-idle" x="1150" y="655" width="54" height="54"/>
-        <Region name="lapras-front-attack" x="1207" y="655" width="54" height="54"/>
-        <Region name="ditto-front-idle" x="1272" y="671" width="38" height="38"/>
-        <Region name="ditto-front-attack" x="1329" y="671" width="38" height="38"/>
-        <Region name="eevee-front-idle" x="1386" y="671" width="38" height="38"/>
-        <Region name="eevee-front-attack" x="1443" y="671" width="38" height="38"/>
-        <Region name="vaporeon-front-idle" x="1500" y="664" width="46" height="46"/>
-        <Region name="vaporeon-front-attack" x="1556" y="664" width="46" height="46"/>
-        <Region name="jolteon-front-idle" x="1613" y="664" width="46" height="46"/>
-        <Region name="jolteon-front-attack" x="1670" y="664" width="46" height="46"/>
-        <Region name="flareon-front-idle" x="14" y="742" width="46" height="46"/>
-        <Region name="flareon-front-attack" x="71" y="742" width="46" height="46"/>
-        <Region name="porygon-front-idle" x="128" y="742" width="46" height="46"/>
-        <Region name="porygon-front-attack" x="185" y="742" width="46" height="46"/>
-        <Region name="omanyte-front-idle" x="246" y="749" width="38" height="38"/>
-        <Region name="omanyte-front-attack" x="303" y="749" width="38" height="38"/>
-        <Region name="omastar-front-idle" x="360" y="742" width="46" height="46"/>
-        <Region name="omastar-front-attack" x="417" y="742" width="46" height="46"/>
-        <Region name="kabuto-front-idle" x="474" y="749" width="38" height="38"/>
-        <Region name="kabuto-front-attack" x="530" y="749" width="38" height="38"/>
-        <Region name="kabutops-front-idle" x="588" y="742" width="46" height="46"/>
-        <Region name="kabutops-front-attack" x="645" y="742" width="46" height="46"/>
-        <Region name="aerodactyl-front-idle" x="694" y="733" width="54" height="54"/>
-        <Region name="aerodactyl-front-attack" x="751" y="733" width="54" height="54"/>
-        <Region name="snorlax-front-idle" x="808" y="733" width="54" height="54"/>
-        <Region name="snorlax-front-attack" x="865" y="733" width="54" height="54"/>
-        <Region name="articuno-front-idle" x="922" y="733" width="54" height="54"/>
-        <Region name="articuno-front-attack" x="979" y="733" width="54" height="54"/>
-        <Region name="zapdos-front-idle" x="1036" y="733" width="54" height="54"/>
-        <Region name="zapdos-front-attack" x="1093" y="733" width="54" height="54"/>
-        <Region name="moltres-front-idle" x="1150" y="733" width="54" height="54"/>
-        <Region name="moltres-front-attack" x="1207" y="733" width="54" height="54"/>
-        <Region name="dratini-front-idle" x="1272" y="749" width="38" height="38"/>
-        <Region name="dratini-front-attack" x="1329" y="749" width="38" height="38"/>
-        <Region name="dragonair-front-idle" x="1386" y="742" width="46" height="46"/>
-        <Region name="dragonair-front-attack" x="1443" y="742" width="46" height="46"/>
-        <Region name="dragonite-front-idle" x="1500" y="733" width="54" height="54"/>
-        <Region name="dragonite-front-attack" x="1556" y="733" width="54" height="54"/>
-        <Region name="mewtwo-front-idle" x="1613" y="733" width="54" height="54"/>
-        <Region name="mewtwo-front-attack" x="1670" y="733" width="54" height="54"/>
-        <Region name="mew-front-idle" x="18" y="827" width="38" height="38"/>
-        <Region name="mew-front-attack" x="75" y="827" width="38" height="38"/>
+        <Region name="bulbasaur-front-idle" x="17" y="46" width="40" height="40"/>
+        <Region name="bulbasaur-front-attack" x="74" y="46" width="40" height="40"/>
+        <Region name="ivysaur-front-idle" x="131" y="38" width="48" height="48"/>
+        <Region name="ivysaur-front-attack" x="188" y="38" width="48" height="48"/>
+        <Region name="venusaur-front-idle" x="237" y="30" width="56" height="56"/>
+        <Region name="venusaur-front-attack" x="294" y="30" width="56" height="56"/>
+        <Region name="charmander-front-idle" x="359" y="46" width="40" height="40"/>
+        <Region name="charmander-front-attack" x="416" y="46" width="40" height="40"/>
+        <Region name="charmeleon-front-idle" x="473" y="38" width="48" height="48"/>
+        <Region name="charmeleon-front-attack" x="529" y="38" width="48" height="48"/>
+        <Region name="charizard-front-idle" x="579" y="30" width="56" height="56"/>
+        <Region name="charizard-front-attack" x="636" y="30" width="56" height="56"/>
+        <Region name="squirtle-front-idle" x="701" y="46" width="40" height="40"/>
+        <Region name="squirtle-front-attack" x="758" y="46" width="40" height="40"/>
+        <Region name="wartortle-front-idle" x="815" y="38" width="48" height="48"/>
+        <Region name="wartortle-front-attack" x="872" y="38" width="48" height="48"/>
+        <Region name="blastoise-front-idle" x="921" y="30" width="56" height="56"/>
+        <Region name="blastoise-front-attack" x="978" y="30" width="56" height="56"/>
+        <!-- <Region name="Caterpie-front-idle" x="1042" y="46" width="40" height="40"/>
+        <Region name="Caterpie-front-attack" x="1099" y="46" width="40" height="40"/>
+        <Region name="Metapod-front-idle" x="1156" y="46" width="40" height="40"/>
+        <Region name="Metapod-front-attack" x="1213" y="46" width="40" height="40"/>
+        <Region name="Butterfree-front-idle" x="1262" y="30" width="56" height="56"/>
+        <Region name="Butterfree-front-attack" x="1319" y="30" width="56" height="56"/>
+        <Region name="Weedle-front-idle" x="1384" y="46" width="40" height="40"/>
+        <Region name="Weedle-front-attack" x="1442" y="46" width="40" height="40"/>
+        <Region name="Kakuna-front-idle" x="1499" y="46" width="40" height="40"/>
+        <Region name="Kakuna-front-attack" x="1555" y="46" width="40" height="40"/>
+        <Region name="Beedrill-front-idle" x="1605" y="30" width="56" height="56"/>
+        <Region name="Beedrill-front-attack" x="1661" y="30" width="56" height="56"/>
+        <Region name="Pidgey-front-idle" x="17" y="124" width="40" height="40"/>
+        <Region name="Pidgey-front-attack" x="74" y="124" width="40" height="40"/>
+        <Region name="Pidgeotto-front-idle" x="131" y="116" width="48" height="48"/>
+        <Region name="Pidgeotto-front-attack" x="188" y="116" width="48" height="48"/>
+        <Region name="Pidgeot-front-idle" x="237" y="108" width="56" height="56"/>
+        <Region name="Pidgeot-front-attack" x="294" y="108" width="56" height="56"/>
+        <Region name="Rattata-front-idle" x="359" y="124" width="40" height="40"/>
+        <Region name="Rattata-front-attack" x="416" y="124" width="40" height="40"/>
+        <Region name="Raticate-front-idle" x="473" y="116" width="48" height="48"/>
+        <Region name="Raticate-front-attack" x="529" y="116" width="48" height="48"/>
+        <Region name="Spearow-front-idle" x="587" y="124" width="40" height="40"/>
+        <Region name="Spearow-front-attack" x="644" y="124" width="40" height="40"/>
+        <Region name="Fearow-front-idle" x="693" y="108" width="56" height="56"/>
+        <Region name="Fearow-front-attack" x="750" y="108" width="56" height="56"/>
+        <Region name="Ekans-front-idle" x="814" y="124" width="40" height="40"/>
+        <Region name="Ekans-front-attack" x="871" y="124" width="40" height="40"/>
+        <Region name="Arbok-front-idle" x="920" y="108" width="56" height="56"/>
+        <Region name="Arbok-front-attack" x="977" y="108" width="56" height="56"/>
+        <Region name="Pikachu-front-idle" x="1042" y="124" width="40" height="40"/>
+        <Region name="Pikachu-front-attack" x="1099" y="124" width="40" height="40"/>
+        <Region name="Raichu-front-idle" x="1149" y="108" width="56" height="56"/>
+        <Region name="Raichu-front-attack" x="1206" y="108" width="56" height="56"/>
+        <Region name="Sandshrew-front-idle" x="1271" y="124" width="40" height="40"/>
+        <Region name="Sandshrew-front-attack" x="1328" y="124" width="40" height="40"/>
+        <Region name="Sandslash-front-idle" x="1385" y="116" width="48" height="48"/>
+        <Region name="Sandslash-front-attack" x="1442" y="116" width="48" height="48"/>
+        <Region name="Nidoran♀-front-idle" x="1499" y="124" width="40" height="40"/>
+        <Region name="Nidoran♀-front-attack" x="1555" y="124" width="40" height="40"/>
+        <Region name="Nidorina-front-idle" x="1612" y="116" width="48" height="48"/>
+        <Region name="Nidorina-front-attack" x="1670" y="116" width="48" height="48"/>
+        <Region name="Nidoqueen-front-idle" x="9" y="186" width="56" height="56"/>
+        <Region name="Nidoqueen-front-attack" x="66" y="186" width="56" height="56"/>
+        <Region name="Nidoran♂-front-idle" x="131" y="202" width="40" height="40"/>
+        <Region name="Nidoran♂-front-attack" x="188" y="202" width="40" height="40"/>
+        <Region name="Nidorino-front-idle" x="245" y="194" width="48" height="48"/>
+        <Region name="Nidorino-front-attack" x="302" y="194" width="48" height="48"/>
+        <Region name="Nidoking-front-idle" x="351" y="186" width="56" height="56"/>
+        <Region name="Nidoking-front-attack" x="408" y="186" width="56" height="56"/>
+        <Region name="Clefairy-front-idle" x="473" y="202" width="40" height="40"/>
+        <Region name="Clefairy-front-attack" x="530" y="202" width="40" height="40"/>
+        <Region name="Clefable-front-idle" x="587" y="194" width="48" height="48"/>
+        <Region name="Clefable-front-attack" x="644" y="194" width="48" height="48"/>
+        <Region name="Vulpix-front-idle" x="701" y="194" width="48" height="48"/>
+        <Region name="Vulpix-front-attack" x="758" y="194" width="48" height="48"/>
+        <Region name="Ninetales-front-idle" x="807" y="186" width="56" height="56"/>
+        <Region name="Ninetales-front-attack" x="864" y="186" width="56" height="56"/>
+        <Region name="Jigglypuff-front-idle" x="929" y="202" width="40" height="40"/>
+        <Region name="Jigglypuff-front-attack" x="986" y="202" width="40" height="40"/>
+        <Region name="Wigglytuff-front-idle" x="1042" y="194" width="48" height="48"/>
+        <Region name="Wigglytuff-front-attack" x="1099" y="194" width="48" height="48"/>
+        <Region name="Zubat-front-idle" x="1157" y="202" width="40" height="40"/>
+        <Region name="Zubat-front-attack" x="1214" y="202" width="40" height="40"/>
+        <Region name="Golbat-front-idle" x="1263" y="186" width="56" height="56"/>
+        <Region name="Golbat-front-attack" x="1320" y="186" width="56" height="56"/>
+        <Region name="Oddish-front-idle" x="1385" y="202" width="40" height="40"/>
+        <Region name="Oddish-front-attack" x="1442" y="202" width="40" height="40"/>
+        <Region name="Gloom-front-idle" x="1499" y="194" width="48" height="48"/>
+        <Region name="Gloom-front-attack" x="1555" y="194" width="48" height="48"/>
+        <Region name="Vileplume-front-idle" x="1605" y="186" width="56" height="56"/>
+        <Region name="Vileplume-front-attack" x="1662" y="186" width="56" height="56"/> -->
+        <!-- <Region name="Paras-front-idle" x="" y="280" width="40" height="40"/>
+        <Region name="Paras-front-attack" x="" y="280" width="40" height="40"/>
+        <Region name="Parasect-front-idle" x="" y="264" width="56" height="56"/>
+        <Region name="Parasect-front-attack" x="" y="264" width="56" height="56"/>
+        <Region name="Venonat-front-idle" x="" y="280" width="40" height="40"/>
+        <Region name="Venonat-front-attack" x="" y="280" width="40" height="40"/>
+        <Region name="Venomoth-front-idle" x="" y="264" width="56" height="56"/>
+        <Region name="Venomoth-front-attack" x="" y="264" width="56" height="56"/>
+        <Region name="Diglett-front-idle" x="" y="280" width="40" height="40"/>
+        <Region name="Diglett-front-attack" x="" y="280" width="40" height="40"/>
+        <Region name="Dugtrio-front-idle" x="" y="273" width="48" height="48"/>
+        <Region name="Dugtrio-front-attack" x="" y="273" width="48" height="48"/>
+        <Region name="Meowth-front-idle" x="" y="280" width="40" height="40"/>
+        <Region name="Meowth-front-attack" x="" y="280" width="40" height="40"/>
+        <Region name="Persian-front-idle" x="" y="264" width="56" height="56"/>
+        <Region name="Persian-front-attack" x="" y="264" width="56" height="56"/>
+        <Region name="Psyduck-front-idle" x="" y="280" width="40" height="40"/>
+        <Region name="Psyduck-front-attack" x="" y="280" width="40" height="40"/>
+        <Region name="Golduck-front-idle" x="" y="264" width="56" height="56"/>
+        <Region name="Golduck-front-attack" x="" y="264" width="56" height="56"/>
+        <Region name="Mankey-front-idle" x="" y="280" width="40" height="40"/>
+        <Region name="Mankey-front-attack" x="" y="280" width="40" height="40"/>
+        <Region name="Primeape-front-idle" x="" y="264" width="56" height="56"/>
+        <Region name="Primeape-front-attack" x="" y="264" width="56" height="56"/>
+        <Region name="Growlithe-front-idle" x="" y="280" width="40" height="40"/>
+        <Region name="Growlithe-front-attack" x="" y="280" width="40" height="40"/>
+        <Region name="Arcanine-front-idle" x="" y="264" width="56" height="56"/>
+        <Region name="Arcanine-front-attack" x="" y="264" width="56" height="56"/>
+        <Region name="Poliwag-front-idle" x="" y="280" width="40" height="40"/>
+        <Region name="Poliwag-front-attack" x="" y="280" width="40" height="40"/>
+        <Region name="Poliwhirl-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Poliwhirl-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Poliwrath-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Poliwrath-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Abra-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Abra-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Kadabra-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Kadabra-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Alakazam-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Alakazam-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Machop-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Machop-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Machoke-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Machoke-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Machamp-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Machamp-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Bellsprout-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Bellsprout-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Weepinbell-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Weepinbell-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Victreebel-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Victreebel-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Tentacool-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Tentacool-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Tentacruel-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Tentacruel-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Geodude-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Geodude-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Graveler-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Graveler-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Golem-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Golem-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Ponyta-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Ponyta-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Rapidash-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Rapidash-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Slowpoke-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Slowpoke-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Slowbro-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Slowbro-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Magnemite-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Magnemite-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Magneton-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Magneton-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Farfetch'd-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Farfetch'd-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Doduo-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Doduo-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Dodrio-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Dodrio-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Seel-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Seel-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Dewgong-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Dewgong-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Grimer-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Grimer-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Muk-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Muk-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Shellder-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Shellder-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Cloyster-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Cloyster-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Gastly-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Gastly-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Haunter-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Haunter-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Gengar-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Gengar-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Onix-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Onix-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Drowzee-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Drowzee-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Hypno-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Hypno-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Krabby-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Krabby-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Kingler-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Kingler-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Voltorb-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Voltorb-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Electrode-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Electrode-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Exeggcute-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Exeggcute-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Exeggutor-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Exeggutor-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Cubone-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Cubone-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Marowak-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Marowak-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Hitmonlee-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Hitmonlee-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Hitmonchan-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Hitmonchan-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Lickitung-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Lickitung-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Koffing-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Koffing-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Weezing-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Weezing-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Rhyhorn-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Rhyhorn-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Rhydon-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Rhydon-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Chansey-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Chansey-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Tangela-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Tangela-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Kangaskhan-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Kangaskhan-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Horsea-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Horsea-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Seadra-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Seadra-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Goldeen-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Goldeen-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Seaking-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Seaking-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Staryu-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Staryu-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Starmie-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Starmie-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Mr. Mime-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Mr. Mime-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Scyther-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Scyther-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Jynx-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Jynx-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Electabuzz-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Electabuzz-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Magmar-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Magmar-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Pinsir-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Pinsir-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Tauros-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Tauros-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Magikarp-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Magikarp-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Gyarados-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Gyarados-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Lapras-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Lapras-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Ditto-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Ditto-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Eevee-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Eevee-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Vaporeon-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Vaporeon-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Jolteon-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Jolteon-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Flareon-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Flareon-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Porygon-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Porygon-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Omanyte-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Omanyte-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Omastar-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Omastar-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Kabuto-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Kabuto-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Kabutops-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Kabutops-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Aerodactyl-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Aerodactyl-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Snorlax-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Snorlax-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Articuno-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Articuno-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Zapdos-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Zapdos-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Moltres-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Moltres-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Dratini-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Dratini-front-attack" x="" y="" width="40" height="40"/>
+        <Region name="Dragonair-front-idle" x="" y="" width="48" height="48"/>
+        <Region name="Dragonair-front-attack" x="" y="" width="48" height="48"/>
+        <Region name="Dragonite-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Dragonite-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Mewtwo-front-idle" x="" y="" width="56" height="56"/>
+        <Region name="Mewtwo-front-attack" x="" y="" width="56" height="56"/>
+        <Region name="Mew-front-idle" x="" y="" width="40" height="40"/>
+        <Region name="Mew-front-attack" x="" y="" width="40" height="40"/> -->
     </Regions>
     <Animations>
         <Animation name="bulbasaur-front" frameCount="3" frameDuration="200" scale="4">
@@ -351,7 +351,7 @@
             <Frame region="blastoise-front-attack" />
             <Frame region="blastoise-front-idle" />
         </Animation>
-        <Animation name="caterpie-front" frameCount="3" frameDuration="2" scale="4">
+        <!-- <Animation name="caterpie-front" frameCount="3" frameDuration="2" scale="4">
             <Frame region="caterpie-front-idle" />
             <Frame region="caterpie-front-attack" />
             <Frame region="caterpie-front-idle" />
@@ -446,10 +446,10 @@
             <Frame region="sandslash-front-attack" />
             <Frame region="sandslash-front-idle" />
         </Animation>
-        <Animation name="nidoran-f-front" frameCount="3" frameDuration="2" scale="4">
-            <Frame region="nidoran-f-front-idle" />
-            <Frame region="nidoran-f-front-attack" />
-            <Frame region="nidoran-f-front-idle" />
+        <Animation name="nidoran♀-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="nidoran♀-front-idle" />
+            <Frame region="nidoran♀-front-attack" />
+            <Frame region="nidoran♀-front-idle" />
         </Animation>
         <Animation name="nidorina-front" frameCount="3" frameDuration="2" scale="4">
             <Frame region="nidorina-front-idle" />
@@ -461,10 +461,10 @@
             <Frame region="nidoqueen-front-attack" />
             <Frame region="nidoqueen-front-idle" />
         </Animation>
-        <Animation name="nidoran-m-front" frameCount="3" frameDuration="2" scale="4">
-            <Frame region="nidoran-m-front-idle" />
-            <Frame region="nidoran-m-front-attack" />
-            <Frame region="nidoran-m-front-idle" />
+        <Animation name="nidoran♂-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="nidoran♂-front-idle" />
+            <Frame region="nidoran♂-front-attack" />
+            <Frame region="nidoran♂-front-idle" />
         </Animation>
         <Animation name="nidorino-front" frameCount="3" frameDuration="2" scale="4">
             <Frame region="nidorino-front-idle" />
@@ -530,8 +530,8 @@
             <Frame region="vileplume-front-idle" />
             <Frame region="vileplume-front-attack" />
             <Frame region="vileplume-front-idle" />
-        </Animation>
-        <Animation name="paras-front" frameCount="3" frameDuration="2" scale="4">
+        </Animation> -->
+        <!-- <Animation name="paras-front" frameCount="3" frameDuration="2" scale="4">
             <Frame region="paras-front-idle" />
             <Frame region="paras-front-attack" />
             <Frame region="paras-front-idle" />
@@ -716,10 +716,10 @@
             <Frame region="magneton-front-attack" />
             <Frame region="magneton-front-idle" />
         </Animation>
-        <Animation name="farfetchd-front" frameCount="3" frameDuration="2" scale="4">
-            <Frame region="farfetchd-front-idle" />
-            <Frame region="farfetchd-front-attack" />
-            <Frame region="farfetchd-front-idle" />
+        <Animation name="farfetch'd-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="farfetch'd-front-idle" />
+            <Frame region="farfetch'd-front-attack" />
+            <Frame region="farfetch'd-front-idle" />
         </Animation>
         <Animation name="doduo-front" frameCount="3" frameDuration="2" scale="4">
             <Frame region="doduo-front-idle" />
@@ -911,10 +911,10 @@
             <Frame region="starmie-front-attack" />
             <Frame region="starmie-front-idle" />
         </Animation>
-        <Animation name="mr-mime-front" frameCount="3" frameDuration="2" scale="4">
-            <Frame region="mr-mime-front-idle" />
-            <Frame region="mr-mime-front-attack" />
-            <Frame region="mr-mime-front-idle" />
+        <Animation name="mr. mime-front" frameCount="3" frameDuration="2" scale="4">
+            <Frame region="mr. mime-front-idle" />
+            <Frame region="mr. mime-front-attack" />
+            <Frame region="mr. mime-front-idle" />
         </Animation>
         <Animation name="scyther-front" frameCount="3" frameDuration="2" scale="4">
             <Frame region="scyther-front-idle" />
@@ -1060,6 +1060,6 @@
             <Frame region="mew-front-idle" />
             <Frame region="mew-front-attack" />
             <Frame region="mew-front-idle" />
-        </Animation>
+        </Animation> -->
     </Animations>
 </TextureAtlas>

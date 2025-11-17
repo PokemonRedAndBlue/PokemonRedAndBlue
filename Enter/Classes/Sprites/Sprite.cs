@@ -105,9 +105,7 @@ public class Sprite
     /// <param name="position">The xy-coordinate position to render this sprite at.</param>
     public void Draw(SpriteBatch spriteBatch, Color color, Vector2 position, float scale)
     {
-        // Combine the sprite's existing Scale vector with the passed uniform scale
-        Vector2 finalScale = Scale * new Vector2(scale, scale);
-        Region.Draw(spriteBatch, position, color, Rotation, Origin, finalScale, Effects, LayerDepth);
+        Region.Draw(spriteBatch, position, color, Rotation, Origin, Scale, Effects, LayerDepth);
     }
 
     /// <summary>

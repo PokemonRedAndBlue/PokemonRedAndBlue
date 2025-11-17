@@ -7,35 +7,29 @@ using Enter.Classes.Animations;
 using Enter.Classes.Sprites;
 using Enter.Classes.Textures;
 using Enter.Interfaces;
-using Enter.Classes.Characters;
-using TrainerMethods;
 
 namespace Enter.Classes.Scenes    
 {
     /// <summary>
     /// The scene for a battle against a Trainer.
     /// </summary>
-    public class TrainerBattleScene: IGameScene
+    public class TrainerBattleScene : IGameScene
     {
-        private Color pokemonBackgroundColor = new Color(246, 232, 248);
         private SceneManager _sceneManager;
         private String _trainerID;
         private Vector2 _enemyPokemonPosition = new Vector2(800, 200);
         private Vector2 _playerPokemonPosition = new Vector2(400, 400);
         private Game _game;
-        private Player _player;
-        private Team _playersTeam;
-        private Team _trainersTeam;
-        private TrainerBattleUI _trainerUI;
         private TextureAtlas _PokemonBackAtlas;
         private TextureAtlas _PokemonFrontAtlas;
         private TextSprite trainerText;
         private SpriteFont _font;
-        public TrainerBattleScene(SceneManager sceneManager, Game game1, string trainerID, Player ourPlayer)
+        private Sprite _playerPokemon;
+        private AnimatedSprite _enemyPokemon;
+        public TrainerBattleScene(SceneManager sceneManager, Game game1, string trainerID)
         {
             _sceneManager = sceneManager;
             _trainerID = trainerID; // e.g., "TRAINER_BROCK"
-            _player = ourPlayer;
             _game = game1;
         }
 
@@ -46,18 +40,13 @@ namespace Enter.Classes.Scenes
             _PokemonBackAtlas = TextureAtlas.FromFile(content, "Pokemon_BACK.xml");
             _PokemonFrontAtlas = TextureAtlas.FromFile(content, "Pokemon_FRONT.xml");
 
-            // load from trainer dict
-            TrainerTeam trainerTeams = new TrainerTeam();
-
             // Load Trainer and their Pokemon
-            _trainersTeam = trainerTeams.GetTrainerTeam(_trainerID);
-            _playersTeam = _player.thePlayersTeam;
+            _enemyPokemon = PokemonFrontFactory.Instance.CreateAnimatedSprite("bulbasaur-front");
+            _playerPokemon = PokemonBackFactory.Instance.CreateStaticSprite("squirtle-back");
 
             // Load UI
             _font = content.Load<SpriteFont>("PokemonFont");
             trainerText = new TextSprite($"TRAINER BATTLE", _font, Color.Black);
-            _trainerUI = new TrainerBattleUI(_PokemonBackAtlas, content, _trainerID, _playersTeam, _trainersTeam);
-            _trainerUI.LoadContent(content);
         }
 
         public void Update(GameTime gameTime)
@@ -73,11 +62,6 @@ namespace Enter.Classes.Scenes
             // {
                  if (Keyboard.GetState().IsKeyDown(Keys.Tab)) // Placeholder for battle end condition
                  {
-                     // Mark this specific trainer as defeated using their ID
-                     if (_game is Game1 game)
-                     {
-                         game.MarkTrainerDefeated(_trainerID);
-                     }
                      _sceneManager.TransitionTo("overworld");
                  }
             // }
@@ -86,9 +70,13 @@ namespace Enter.Classes.Scenes
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            spriteBatch.GraphicsDevice.Clear(pokemonBackgroundColor);
+            // Draw Pokemon, health bars, menus
+            spriteBatch.GraphicsDevice.Clear(Color.White); // Trainer battle color
+            _enemyPokemon.Draw(spriteBatch, Color.White, _enemyPokemonPosition, 4f);
+            _playerPokemon.Draw(spriteBatch, Color.White, _playerPokemonPosition, 4f);
+
             // Draw UI elements
-            _trainerUI.Draw(spriteBatch);
+            trainerText.DrawTextSprite(spriteBatch, new Vector2(100, 100));
             spriteBatch.End();
         }
     }

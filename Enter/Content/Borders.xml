@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-    <TextureAtlas>
-      <Texture>images/Borders</Texture>
-        <Regions>
-          <Region name="blue-border" x="272" y="272" width="255" height="223"/>
-        </Regions>
-    </TextureAtlas>
