@@ -61,16 +61,13 @@ namespace Enter.Classes.Scenes
             // Load tilemap, player sprites, NPCs, etc.
             Cam = new(((Game)_game).GraphicsDevice.Viewport);
 
-            // Always restore from static NextSpawnPosition if set, else from Game1.SavedPlayerPosition, else default
+            // Only restore from Game1.SavedPlayerPosition if returning from a battle, else use this scene's last known position
             Vector2 spawn = _playerPosition;
-            if (NextSpawnPosition.HasValue)
-            {
-                spawn = NextSpawnPosition.Value;
-                NextSpawnPosition = null;
-            }
-            else if ((_game as Game1)?.SavedPlayerPosition is Microsoft.Xna.Framework.Vector2 savedPos)
+            if ((_game as Game1)?.SavedPlayerPosition is Microsoft.Xna.Framework.Vector2 savedPos)
             {
                 spawn = savedPos;
+                // Clear after use so it doesn't leak between scenes
+                (_game as Game1).SavedPlayerPosition = null;
             }
             SetPlayerPosition(spawn);
 
@@ -119,6 +116,7 @@ namespace Enter.Classes.Scenes
                 if (!_game.IsTrainerDefeated(trainer.TrainerID))
                 {
                     // Save the actual player position before battle
+                    _playerPosition = _player.Position;
                     _game.SavedPlayerPosition = _player.Position;
                     _sceneManager.TransitionTo("trainer");
                 }
@@ -131,6 +129,7 @@ namespace Enter.Classes.Scenes
             if (keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.W))
             {
                 // Save the actual player position before wild battle
+                _playerPosition = _player.Position;
                 _game.SavedPlayerPosition = _player.Position;
                 _sceneManager.TransitionTo("wild");
             }

@@ -55,6 +55,8 @@ public class Game1 : Core
         _sceneManager.AddScene("overworld_city", new OverworldCityScene(_sceneManager, this, _controller, player));
         _sceneManager.AddScene("gym", new GymScene(_sceneManager, this, _controller, player));
         _sceneManager.AddScene("trainer", new TrainerBattleScene(_sceneManager, this, "youngster", player));
+        _sceneManager.AddScene("city_trainer1", new TrainerBattleScene(_sceneManager, this, "hiker", player, "overworld_city"));
+        _sceneManager.AddScene("city_trainer2", new TrainerBattleScene(_sceneManager, this, "blackbelt", player, "overworld_city"));
         _sceneManager.AddScene("wild", new WildEncounter(_sceneManager, this, player));
         _sceneManager.TransitionTo("overworld"); // <-- Set the starting scene
 

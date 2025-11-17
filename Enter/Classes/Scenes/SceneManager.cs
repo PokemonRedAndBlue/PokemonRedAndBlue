@@ -17,6 +17,8 @@ namespace Enter.Classes.Scenes
         private IGameScene _currentScene;
         public IGameScene CurrentScene => _currentScene;
         private readonly Dictionary<string, IGameScene> _scenes = new Dictionary<string, IGameScene>();
+        private string _currentSceneName = null;
+        public string PreviousSceneName { get; private set; } = null;
         private readonly ContentManager _content;
         private bool _isTransitioning = false;
         private SpriteBatch _spriteBatch;
@@ -58,7 +60,11 @@ namespace Enter.Classes.Scenes
                 return;
 
             _isTransitioning = true;
-            
+
+            // Track previous scene name
+            PreviousSceneName = _currentSceneName;
+            _currentSceneName = sceneName;
+
             // Load and set the new scene
             _currentScene = _scenes[sceneName];
             _currentScene.LoadContent(_content);

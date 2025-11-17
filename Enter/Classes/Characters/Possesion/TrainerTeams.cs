@@ -16,15 +16,25 @@ namespace TrainerMethods
             // Create a team for the "Youngster"
             Team youngsterTeam = new Team(new Pokemon[]
             {
-            new Pokemon("Rattata", 5),
-            new Pokemon("Pidgey", 5)
+            new Pokemon("Rattata", 5)
+            });
+
+            // Create a team for the "hiker"
+            Team hikerTeam = new Team(new Pokemon[]
+            {
+            new Pokemon("Pikachu", 8)
+            });
+
+            // Create a team for the "blackbelt"
+            Team blackbeltTeam = new Team(new Pokemon[]
+            {
+            new Pokemon("abra", 8)
             });
 
             // Create a team for the "GymLeader"
             Team gymLeaderTeam = new Team(new Pokemon[]
             {
-            new Pokemon("Geodude", 12),
-            new Pokemon("Onix", 14),
+            new Pokemon("Onix", 14)
             });
 
             //initialize the dictionary with our new teams
@@ -33,7 +43,8 @@ namespace TrainerMethods
             // The "key" is the string ID, the "value" is the Team object.
             { "youngster", youngsterTeam },
             { "gymLeader", gymLeaderTeam },
-            
+            { "hiker", hikerTeam },
+            { "blackbelt", blackbeltTeam },
             // You can add more teams here
         };
         }

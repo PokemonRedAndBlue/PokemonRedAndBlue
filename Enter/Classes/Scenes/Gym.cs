@@ -26,6 +26,20 @@ namespace Enter.Classes.Scenes
         private Texture2D character;
         private Trainer trainer;
         private Player player;
+        // Scene-managed player position (in pixels)
+        private Vector2 _playerPosition = new Vector2(5 * 32, 13 * 32); // Default spawn (tile 5,13)
+                public Vector2 GetPlayerPosition() => _playerPosition;
+
+                public void SetPlayerPosition(Vector2 pos)
+                {
+                    _playerPosition = pos;
+                    if (player != null)
+                    {
+                        player.Position = pos;
+                        Point tile = player.PixelToTile(pos);
+                        player.SetTilePosition(tile);
+                    }
+                }
         private Game1 _game;
         private Tilemap _currentMap;
 
@@ -43,8 +57,23 @@ namespace Enter.Classes.Scenes
             // Load tilemap, player sprites, NPCs, etc.
             Cam = new(((Game)_game).GraphicsDevice.Viewport);
             character = content.Load<Texture2D>("images/Pokemon_Characters");
+
+            // Only restore from Game1.SavedPlayerPosition if returning from a battle scene, else use this scene's last known position
+            Vector2 spawn = _playerPosition;
+            if ((_game as Game1)?.SavedPlayerPosition is Microsoft.Xna.Framework.Vector2 savedPos)
+            {
+                // Only use if coming from a battle scene (trainer or wild)
+                var prev = _sceneManager?.PreviousSceneName;
+                if (prev == "trainer" || prev == "wild")
+                {
+                    spawn = savedPos;
+                }
+                (_game as Game1).SavedPlayerPosition = null;
+            }
+            SetPlayerPosition(spawn);
+
             Cam.Update(player);
-            Cam.Zoom = ZoomLevel; //Zoom leve of world
+            Cam.Zoom = ZoomLevel; //Zoom level of world
             trainer = new Trainer(
                 character,
                 new Vector2(_game.Window.ClientBounds.Height, _game.Window.ClientBounds.Width) * 0.25f,
@@ -63,8 +92,6 @@ namespace Enter.Classes.Scenes
                 Physics.SolidTileCollision.IsSolid
             );
 
-            // * TEMP: Initialize player tile position (spawn at same 160px,0px => tile (10,0))
-            player.SetTilePosition(new Point(5, 13));
             Cam.Update(player);
         }
 
@@ -76,7 +103,9 @@ namespace Enter.Classes.Scenes
 
             // Force a battle with trainer interaction
             if (trainer.colided){
-                // Example of starting a specific trainer battle
+                // Save the actual player position before battle
+                _playerPosition = player.Position;
+                _game.SavedPlayerPosition = player.Position;
                 _sceneManager.TransitionTo("trainer");
             }
             // no need for base.Update here

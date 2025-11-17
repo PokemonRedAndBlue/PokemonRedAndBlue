@@ -10,7 +10,7 @@
         <Region name="jr-trainer-f" x="166" y="298" width="32" height="32"/>
         <Region name="pokemaniac" x="199" y="298" width="32" height="32"/>
         <Region name="super-nerd" x="232" y="298" width="32" height="32"/>
-        <Region name="hiker" x="1" y="331" width="32" height="32"/>
+        <Region name="hiker" x="456" y="504" width="55" height="55"/>
         <Region name="biker" x="34" y="331" width="32" height="32"/>
         <Region name="burglar" x="67" y="331" width="32" height="32"/>
         <Region name="engineer" x="100" y="331" width="32" height="32"/>

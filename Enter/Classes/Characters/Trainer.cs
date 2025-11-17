@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 using TrainerMethods;
+using Enter.Classes.Textures;
 
 namespace Enter.Classes.Characters;
 
@@ -21,7 +22,7 @@ public class Trainer
     /// </summary>
     public Vector2 Position { get; set; }
     public Tilemap Map { get; set; }
-
+    private TextureAtlas battleCharsAtlas;
     private const float SpeedPxPerSec = 80f;
     private const float InteractionRange = 64f; // Use the larger value for more forgiving interaction
     private const int DefaultVisionRangeTiles = 4;
@@ -63,14 +64,10 @@ public class Trainer
 
     public void Update(GameTime gametime, Player player)    // TODO: Sprites
     {
-        // If trainer has been defeated, they can't trigger battles but can still interact
+        // If trainer has been defeated, they can't trigger battles or freeze the player
         if (HasBeenDefeated)
         {
-            // Allow interaction when player is close but don't chase or battle
-            if (Math.Abs(Vector2.Distance(player.TilePos.ToVector2(), Position)) <= InteractionRange)
-            {
-                colided = true; // Allow dialogue but won't trigger battle since HasBeenDefeated=true
-            }
+            // Optionally: allow dialogue if close, but do NOT set colided or freeze player
             _sprite.IdleReset(_facing);
             return;
         }

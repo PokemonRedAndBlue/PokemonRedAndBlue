@@ -8,6 +8,7 @@ using Enter.Classes.Input;
 using Enter.Classes.Sprites;
 using Enter.Classes.Physics;
 using Enter.Interfaces;
+using Enter.Classes.Textures;
 
 namespace Enter.Classes.Scenes
 {
@@ -24,10 +25,25 @@ namespace Enter.Classes.Scenes
         private Camera Cam;
         private KeyboardController _controller;
         private Texture2D character;
-        private Trainer trainer;
+        private Trainer trainer1;
+        private Trainer trainer2;
         private Game1 _game;
         private Tilemap _currentMap;
         private Player _player;
+        // Scene-managed player position (in pixels)
+        private Vector2 _playerPosition = new Vector2(0, 9 * 32); // Default spawn (tile 0,9)
+        public Vector2 GetPlayerPosition() => _playerPosition;
+
+        public void SetPlayerPosition(Vector2 pos)
+        {
+            _playerPosition = pos;
+            if (_player != null)
+            {
+                _player.Position = pos;
+                Point tile = _player.PixelToTile(pos);
+                _player.SetTilePosition(tile);
+            }
+        }
 
         // We must pass in the SceneManager so this scene can request transitions
         public OverworldCityScene(SceneManager sceneManager, Game1 game1, KeyboardController controller, Player p)
@@ -41,19 +57,40 @@ namespace Enter.Classes.Scenes
         public void LoadContent(ContentManager content)
         {
             // Load tilemap, player sprites, NPCs, etc.
+            _currentMap = TilemapLoader.LoadTilemap("Content/CerucleanCityMap.xml");
             Cam = new(((Game)_game).GraphicsDevice.Viewport);
             character = content.Load<Texture2D>("images/Pokemon_Characters");
-            Cam.Update(_player);
-            Cam.Zoom = ZoomLevel; //Zoom leve of world
-            trainer = new Trainer(
-                character,
-                new Vector2(_game.Window.ClientBounds.Height, _game.Window.ClientBounds.Width) * 0.25f,
-                Facing.Right,
-                trainerId: "youngster"
-            );
-            _currentMap = TilemapLoader.LoadTilemap("Content/CerucleanCityMap.xml");
 
-            // Collision wiring (minimal)
+            // Only restore from Game1.SavedPlayerPosition if available
+            Vector2 spawn = _playerPosition;
+            if ((_game as Game1)?.SavedPlayerPosition is Microsoft.Xna.Framework.Vector2 savedPos)
+            {
+                spawn = savedPos;
+                (_game as Game1).SavedPlayerPosition = null;
+            }
+            SetPlayerPosition(spawn);
+            Cam.Update(_player);
+            Cam.Zoom = ZoomLevel; //Zoom level of world
+
+            // Use explicit sprite indices for unique trainers
+            trainer1 = new Trainer(
+                character,
+                1, // spriteIndex for hiker (adjust as needed)
+                new Vector2(5 * 32, 10 * 32),
+                Facing.Right,
+                false, // not moving by default
+                "hiker"
+            );
+            trainer2 = new Trainer(
+                character,
+                2, // spriteIndex for blackbelt (adjust as needed)
+                new Vector2(10 * 32, 11 * 32),
+                Facing.Left,
+                false, // not moving by default
+                "blackbelt"
+            );
+            trainer1.Map = _currentMap;
+            trainer2.Map = _currentMap;
             _player.Map = _currentMap;
 
             // Build the solid tile index set from the "Ground" layer
@@ -62,24 +99,69 @@ namespace Enter.Classes.Scenes
                 "Ground",
                 Physics.SolidTileCollision.IsSolid
             );
-
-            // * TEMP: Initialize player tile position (spawn at same 160px,0px => tile (10,0))
-            _player.SetTilePosition(new Point(0, 18));
             Cam.Update(_player);
         }
 
         public void Update(GameTime gameTime)
         {
             // Update Objects
-            _controller.Update(_game, gameTime, Cam, _player, trainer);
+            trainer1.Update(gameTime, _player);
+            trainer2.Update(gameTime, _player);
+            _controller.Update(_game, gameTime, Cam, _player, trainer1); // Optionally pass both trainers to controller if needed
             Cam.Update(_player);
 
-            // Force a battle with trainer interaction
-            if (trainer.colided){
-                // Example of starting a specific trainer battle
-                _sceneManager.TransitionTo("trainer");
+            // Prevent repeat battles and trigger correct battle scene
+            if (trainer1.colided && !_game.IsTrainerDefeated(trainer1.TrainerID))
+            {
+                _playerPosition = _player.Position;
+                _game.SavedPlayerPosition = _player.Position;
+                _sceneManager.TransitionTo("city_trainer1");
             }
+            else if (trainer2.colided && !_game.IsTrainerDefeated(trainer2.TrainerID))
+            {
+                _playerPosition = _player.Position;
+                _game.SavedPlayerPosition = _player.Position;
+                _sceneManager.TransitionTo("city_trainer2");
+            }
+
+            // Mark trainers as defeated if their ID is in the defeated list (after returning from battle)
+            if (_game.IsTrainerDefeated(trainer1.TrainerID))
+                trainer1.HasBeenDefeated = true;
+            if (_game.IsTrainerDefeated(trainer2.TrainerID))
+                trainer2.HasBeenDefeated = true;
+
+            // If neither trainer is colliding, ensure player is not frozen
+            if (!trainer1.colided && !trainer2.colided)
+                _player.StopEnd();
             // no need for base.Update here
+        {
+            // Update Objects
+            trainer1.Update(gameTime, _player);
+            trainer2.Update(gameTime, _player);
+            _controller.Update(_game, gameTime, Cam, _player, trainer1); // Optionally pass both trainers to controller if needed
+            Cam.Update(_player);
+
+            // Prevent repeat battles and trigger correct battle scene
+            if (trainer1.colided && !_game.IsTrainerDefeated(trainer1.TrainerID))
+            {
+                _playerPosition = _player.Position;
+                _game.SavedPlayerPosition = _player.Position;
+                _sceneManager.TransitionTo("city_trainer1");
+            }
+            else if (trainer2.colided && !_game.IsTrainerDefeated(trainer2.TrainerID))
+            {
+                _playerPosition = _player.Position;
+                _game.SavedPlayerPosition = _player.Position;
+                _sceneManager.TransitionTo("city_trainer2");
+            }
+
+            // Mark trainers as defeated if their ID is in the defeated list (after returning from battle)
+            if (_game.IsTrainerDefeated(trainer1.TrainerID))
+                trainer1.HasBeenDefeated = true;
+            if (_game.IsTrainerDefeated(trainer2.TrainerID))
+                trainer2.HasBeenDefeated = true;
+            // no need for base.Update here
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -90,7 +172,8 @@ namespace Enter.Classes.Scenes
             spriteBatch.Begin(transformMatrix: Cam.GetViewMatrix(), samplerState: SamplerState.PointClamp);
             _currentMap?.DrawCropped(Cam.VisibleWorldRect);
             _player.Draw(spriteBatch);
-            trainer.Draw(spriteBatch);
+            trainer1.Draw(spriteBatch);
+            trainer2.Draw(spriteBatch);
             spriteBatch.End();
 
             // no need for base.Draw here
