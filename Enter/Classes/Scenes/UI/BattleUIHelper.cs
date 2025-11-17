@@ -10,10 +10,12 @@ using System.Collections.Generic;
 using System.Globalization;
 using Microsoft.Xna.Framework.Input;
 using System.Collections;
+using System.Runtime.ConstrainedExecution;
 
 public class BattleUIHelper
 {
     static private float _scale = 4.0f;
+    private double _stateTimer;
     private String currentBattleState = "Initial";
     KeyboardController keyBrd = new KeyboardController();
     static private Vector2 uiBasePosition = new Vector2(340, 75);
@@ -183,5 +185,24 @@ public String handleArrowEvent(int currentCol, int currentRow)
     public String getBattleState()
     {
         return this.currentBattleState;
+    }
+
+    public void Update(GameTime gameTime)
+    {
+        double TIME_TO_WAIT_MS = 4000;
+
+        // Check the current state
+        if (currentBattleState == "Initial")
+        {
+            // We are in the "Initial" state, so run the timer
+            _stateTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            // Check if 5 seconds (5000ms) have passed
+            if (_stateTimer >= TIME_TO_WAIT_MS)
+            {
+                currentBattleState = "Menu"; // Transition the state
+                _stateTimer = 0.0;           // Reset timer for future use
+            }
+        }
     }
 }

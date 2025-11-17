@@ -93,6 +93,10 @@ public class WildEncounterUI
         _wildPokemonMessage2 = new TextSprite("appeared!", _font, Color.Black);
     }
 
+    public void Update(GameTime gameTime)
+    {
+        battleUI.Update(gameTime);
+    }
     public void Draw(SpriteBatch spriteBatch)
     {
         // Draw the base UI
