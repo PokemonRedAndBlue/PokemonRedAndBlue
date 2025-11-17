@@ -11,6 +11,7 @@ using System.Threading;
 using System.Runtime.Intrinsics;
 using Enter.Classes.Characters;
 using System.Net;
+using Enter.Classes.Scenes;
 
 public class WildEncounterUI
 {
@@ -132,16 +133,8 @@ public class WildEncounterUI
                 battleUI.moveArrow();
                 break;
             case "Bag": // Bag
-                // draw base UI
-                UIsprites[2].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
-                break;
-            case "Pokemon": // Pokemon
-                // draw base UI
-                UIsprites[3].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
                 break;
             case "Run": // Run
-                // draw base UI
-                UIsprites[4].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
                 break;
             default:
                 break;
