@@ -37,6 +37,7 @@ public class WildEncounterUI
     static private Vector2 _wildPokemonMessagePos1 = new Vector2(uiBasePosition.X + (8 * _scale), uiBasePosition.Y + (110 * _scale) + 1);
     static private Vector2 _wildPokemonMessagePos2 = new Vector2(uiBasePosition.X + (8 * _scale), uiBasePosition.Y + (125 * _scale) + 1);
     static private Vector2 _borderPostion = new Vector2(uiBasePosition.X - (48 * _scale), uiBasePosition.Y - (40 * _scale) + 1);
+    static private Vector2 maxDrawPos = new Vector2(0, uiBasePosition.Y + (103 * _scale));
     static private Player _Player;
     static private Sprite _border;
 
@@ -122,7 +123,7 @@ public class WildEncounterUI
                 // draw players pokemon sprite, get first alive pokemon
                 String playersPokemon = _Player.thePlayersTeam.Pokemons[0].Name.ToString();
                 Sprite currentMon = PokemonBackFactory.Instance.CreateStaticSprite( playersPokemon.ToLower()+ "-back");
-                currentMon.Draw(spriteBatch, Color.White, new Vector2(playerPosition.X, playerPosition.Y + (currentMon.Height * _scale)), 4f);
+                currentMon.Draw(spriteBatch, Color.White, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)), 4f);
                 // draw wild pokemon sprite
                 _wildPokemonSpriteFront.Draw(spriteBatch, Color.White, wildPokemonPosition, 4f);
                 // arrow handling logic
