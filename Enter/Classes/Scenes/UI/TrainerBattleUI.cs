@@ -33,8 +33,10 @@ public class TrainerBattleUI
     static private Vector2 playerTrainerPosition = new Vector2(uiBasePosition.X + (8 * _scale) - 5, uiBasePosition.Y + (40 * _scale) - 5);
     static private Vector2 enemyTrainerPosition = new Vector2(uiBasePosition.X + (96 * _scale) - 4, uiBasePosition.Y);
     static private Vector2 enemyTrainerIDPosition = new Vector2(uiBasePosition.X + (8 * _scale), uiBasePosition.Y + (110 * _scale) + 1);
+    static private Vector2 _borderPostion = new Vector2(uiBasePosition.X - (48 * _scale), uiBasePosition.Y - (40 * _scale) + 1);
     static private Team _playerTeam;
     static private Team _enemyTeam;
+    static private Sprite _border;
     private Dictionary<string, int> stateMapping = new Dictionary<string, int>
     {
         { "Initial", 0 },
@@ -60,6 +62,8 @@ public class TrainerBattleUI
         // Load UI Textures
         UIFactory.Instance.LoadAllTextures(content, "BattleInterface.xml");
         _TrainerUIAtlas = TextureAtlas.FromFile(content, "BattleInterface.xml");
+        TextureAtlas borders = TextureAtlas.FromFile(content, "Borders.xml");
+        _border = new Sprite(borders.GetRegion("blue-border"));
 
         // load trainer sprite
         TextureAtlas trainerAtlas = TextureAtlas.FromFile(content, "BattleChars.xml");
@@ -91,7 +95,9 @@ public class TrainerBattleUI
 
     public void WildEncounterStateBasedDraw(Sprite[] UI_BaseSprites, SpriteBatch spriteBatch)
     {
-
+        // always draw border
+        _border.Draw(spriteBatch, Color.White, _borderPostion, 4f);
+        
         // draw the UI elements for wild encounter (state based)
         switch (_currentState)
         {
