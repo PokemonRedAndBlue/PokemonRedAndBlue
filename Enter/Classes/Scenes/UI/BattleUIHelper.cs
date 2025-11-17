@@ -8,6 +8,8 @@ using Enter.Classes.Animations;
 using Enter.Classes.Input;
 using System.Collections.Generic;
 using System.Globalization;
+using Microsoft.Xna.Framework.Input;
+using System.Collections;
 
 public class BattleUIHelper
 {
@@ -16,7 +18,7 @@ public class BattleUIHelper
     static private Vector2 uiBasePosition = new Vector2(340, 75);
 
     // handle arrow locations in menu
-    static private int[][] arrowLocation =
+    private int[][] arrowLocation =
     {
         new int[] {1,0}, // Top left
         new int[] {0,0}  // Top right
@@ -76,26 +78,80 @@ public class BattleUIHelper
         }
     }
 
-    static public void DrawArrow(TextureAtlas battleUIAtlas, SpriteBatch spriteBatch)
-    {   
-        Sprite arrowSprite = new Sprite(battleUIAtlas.GetRegion("horizzontal-arrow"));
+public void moveArrow()
+{
+        KeyboardState currentState = Keyboard.GetState();
 
-        for(int i = 0; i < 2; i++)
+        // 1. Find the current position of the arrow
+        int currentRow = 0;
+        int currentCol = 0;
+        bool found = false;
+        for (int i = 0; i < 2; i++)
         {
-            for(int j = 0; j < 2; j++)
+            for (int j = 0; j < 2; j++)
             {
-                if(arrowLocation[i][j] == 1)// Check if the arrow is at this grid spot
+                if (arrowLocation[i][j] == 1)
                 {
-                        // Use (i, j) directly as the key
-                        _drawPostionArrow = numsToArrowLocals[(i, j)];
-                        arrowSprite.Draw(spriteBatch, Color.White, _drawPostionArrow, _scale);
+                    currentRow = i;
+                    currentCol = j;
+                    found = true;
+                    break;
                 }
+            }
+            if (found) break;
+        }
+
+        if (!found) return; // Arrow not found, do nothing.
+
+        int newRow = currentRow;
+        int newCol = currentCol;
+
+        // 2. Check for a *single key press*
+        // We check if the key is down NOW, but was UP last frame.
+        if (currentState.IsKeyDown(Keys.Up))
+        {
+            newRow = (currentRow - 1 + 2) % 2; // (0-1+2) % 2 = 1. (1-1+2) % 2 = 0.
+        }
+        else if (currentState.IsKeyDown(Keys.Down))
+        {
+            newRow = (currentRow + 1) % 2; // (0+1) % 2 = 1. (1+1) % 2 = 0.
+        }
+        else if (currentState.IsKeyDown(Keys.Left))
+        {
+            newCol = (currentCol - 1 + 2) % 2;
+        }
+        else if (currentState.IsKeyDown(Keys.Right))
+        {
+            newCol = (currentCol + 1) % 2;
+        }
+
+        // 3. If the position changed, update the array
+        if (newRow != currentRow || newCol != currentCol)
+        {
+            arrowLocation[currentRow][currentCol] = 0; // Clear the old spot
+            arrowLocation[newRow][newCol] = 1;       // Set the new spot
+        }
+}
+
+public void DrawArrow(TextureAtlas battleUIAtlas, SpriteBatch spriteBatch)
+{ 
+    // This creates a new sprite object every frame. See optimization tip below.
+    Sprite arrowSprite = new Sprite(battleUIAtlas.GetRegion("horizzontal-arrow"));
+
+    for(int i = 0; i < 2; i++)
+    {
+        for(int j = 0; j < 2; j++)
+        {
+            // --- THIS IS THE FIX ---
+            // Check the grid spot at [i][j]
+            if(arrowLocation[i][j] == 1) 
+            {
+                // Use (i, j) directly as the key
+                _drawPostionArrow = numsToArrowLocals[(i, j)];
+                arrowSprite.Draw(spriteBatch, Color.White, _drawPostionArrow, _scale);
+            }
         }
     }
 }
 
-    public int[][] moveArrow(int[][] currentArrow)
-    {
-        return null;
-    }
 }
