@@ -77,6 +77,11 @@ namespace Enter.Classes.Scenes
                      if (_game is Game1 game)
                      {
                          game.MarkTrainerDefeated(_trainerID);
+                         // Save the player's last position for the overworld
+                         if (game.SavedPlayerPosition.HasValue)
+                         {
+                             Enter.Classes.Scenes.OverworldScene.SetNextSpawn(game.SavedPlayerPosition.Value);
+                         }
                      }
                      _sceneManager.TransitionTo("overworld");
                  }

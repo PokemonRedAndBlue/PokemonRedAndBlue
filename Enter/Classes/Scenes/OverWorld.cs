@@ -29,16 +29,22 @@ namespace Enter.Classes.Scenes
         private Game1 _game;
         private Tilemap _currentMap;
 
-        public Vector2 GetPlayerPosition()
+        // Scene-managed player position (in pixels)
+        private Vector2 _playerPosition = new Vector2(160, 0); // Default spawn
+        // Static field to allow other scenes to set the next spawn position
+        public static Vector2? NextSpawnPosition = null;
+
+        public Vector2 GetPlayerPosition() => _playerPosition;
+
+        public void SetPlayerPosition(Vector2 pos)
         {
-            // Use reflection to read the 'Position' property to avoid compile-time ambiguity
-            var prop = _player?.GetType().GetProperty("Position");
-            if (prop != null)
+            _playerPosition = pos;
+            if (_player != null)
             {
-                var value = prop.GetValue(_player);
-                if (value is Vector2 v) return v;
+                _player.Position = pos;
+                Point tile = _player.PixelToTile(pos);
+                _player.SetTilePosition(tile);
             }
-            return default;
         }
 
         // We must pass in the SceneManager so this scene can request transitions
@@ -54,12 +60,19 @@ namespace Enter.Classes.Scenes
         {
             // Load tilemap, player sprites, NPCs, etc.
             Cam = new(((Game)_game).GraphicsDevice.Viewport);
-            
-            if ((_game as Game1)?.SavedPlayerPosition is Microsoft.Xna.Framework.Vector2 savedPos)
+
+            // Always restore from static NextSpawnPosition if set, else from Game1.SavedPlayerPosition, else default
+            Vector2 spawn = _playerPosition;
+            if (NextSpawnPosition.HasValue)
             {
-                Point tile = _player.PixelToTile(savedPos);  
-                _player.SetTilePosition(tile);               
+                spawn = NextSpawnPosition.Value;
+                NextSpawnPosition = null;
             }
+            else if ((_game as Game1)?.SavedPlayerPosition is Microsoft.Xna.Framework.Vector2 savedPos)
+            {
+                spawn = savedPos;
+            }
+            SetPlayerPosition(spawn);
 
             Cam.Update(_player);
             Cam.Zoom = ZoomLevel; //Zoom level of world
@@ -86,9 +99,12 @@ namespace Enter.Classes.Scenes
                 Physics.SolidTileCollision.IsSolid
             );
 
-            // * TEMP: Initialize player tile position (spawn at same 160px,0px => tile (10,0))
-            _player.SetTilePosition(new Point(10, 0));
             Cam.Update(_player);
+        }
+        // Static helper for other scenes to set the next spawn position before transitioning to overworld
+        public static void SetNextSpawn(Vector2 pos)
+        {
+            NextSpawnPosition = pos;
         }
 
         public void Update(GameTime gameTime)
@@ -102,8 +118,8 @@ namespace Enter.Classes.Scenes
             {
                 if (!_game.IsTrainerDefeated(trainer.TrainerID))
                 {
-                    // Save position and transition to battle if trainer isn't defeated
-                    _game.SavedPlayerPosition = GetPlayerPosition();
+                    // Save the actual player position before battle
+                    _game.SavedPlayerPosition = _player.Position;
                     _sceneManager.TransitionTo("trainer");
                 }
                 // If trainer is defeated, they're just interacting without battle
@@ -114,8 +130,8 @@ namespace Enter.Classes.Scenes
             KeyboardState keyState = Keyboard.GetState();
             if (keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.W))
             {
-                // Save player position before entering wild battle
-                _game.SavedPlayerPosition = GetPlayerPosition();
+                // Save the actual player position before wild battle
+                _game.SavedPlayerPosition = _player.Position;
                 _sceneManager.TransitionTo("wild");
             }
             // no need for base.Update here

@@ -58,12 +58,13 @@ namespace Enter.Classes.Scenes
             
             // --- Transition Logic ---
             // if (PlayerWon || Fainted)
-                if(wildUI.didRun){
-                    _sceneManager.TransitionTo("overworld");
-                }
 
-                if (wildUI.resetBattle)
-                {
+                if(wildUI.didRun || wildUI.resetBattle){
+                    // Save the player's last position for the overworld
+                    if ((_game as Game1)?.SavedPlayerPosition is Microsoft.Xna.Framework.Vector2 savedPos)
+                    {
+                        Enter.Classes.Scenes.OverworldScene.SetNextSpawn(savedPos);
+                    }
                     _sceneManager.TransitionTo("overworld");
                 }
 
