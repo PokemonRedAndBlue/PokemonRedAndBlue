@@ -64,6 +64,7 @@ namespace Enter.Classes.Scenes
                 TRAINER_ID
             );
             _currentMap = TilemapLoader.LoadTilemap("Content/Route1Map.xml");
+            trainer.Map = _currentMap;
 
             // Collision wiring (minimal)
             _player.Map = _currentMap;
