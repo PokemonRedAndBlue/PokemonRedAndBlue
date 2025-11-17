@@ -38,10 +38,11 @@ public class WildEncounterUI
     static private Vector2 _wildPokemonMessagePos2 = new Vector2(uiBasePosition.X + (8 * _scale), uiBasePosition.Y + (125 * _scale) + 1);
     static private Vector2 _borderPostion = new Vector2(uiBasePosition.X - (48 * _scale), uiBasePosition.Y - (40 * _scale) + 1);
     static private Vector2 maxDrawPos = new Vector2(0, uiBasePosition.Y + (103 * _scale));
-
     private BattleUIHelper battleUI = new BattleUIHelper();
     static private Player _Player;
     static private Sprite _border;
+
+    public Boolean didRun = false;
 
     private Dictionary<string, int> stateMapping = new Dictionary<string, int>
     {
@@ -135,6 +136,8 @@ public class WildEncounterUI
             case "Bag": // Bag
                 break;
             case "Run": // Run
+                // need to be able to process the run event
+                didRun = true;
                 break;
             default:
                 break;

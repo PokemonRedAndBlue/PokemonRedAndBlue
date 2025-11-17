@@ -65,6 +65,10 @@ namespace Enter.Classes.Scenes
                     // restored by OverworldScene.LoadContent using Game1.SavedPlayerPosition
                     _sceneManager.TransitionTo("overworld");
                 }
+
+                if(wildUI.didRun){
+                    _sceneManager.TransitionTo("overworld");
+                }
             // }
         }
 
