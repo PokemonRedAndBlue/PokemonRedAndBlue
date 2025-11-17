@@ -26,8 +26,8 @@ public class BattleUIHelper
     };
     static private Vector2 topLeft = new Vector2(uiBasePosition.X + (72 * _scale) - 5, uiBasePosition.Y + (112 * _scale) - 5);
     static private Vector2 topRight = new Vector2(uiBasePosition.X + (120 * _scale) - 5, uiBasePosition.Y + (112 * _scale) - 5);
-    static private Vector2 botLeft = new Vector2(uiBasePosition.X + (72 * _scale) - 5, uiBasePosition.Y + (138 * _scale) - 5);
-    static private Vector2 botRight = new Vector2(uiBasePosition.X + (120 * _scale) - 5, uiBasePosition.Y + (138 * _scale) - 5);
+    static private Vector2 botLeft = new Vector2(uiBasePosition.X + (72 * _scale) - 5, uiBasePosition.Y + (128 * _scale) - 5);
+    static private Vector2 botRight = new Vector2(uiBasePosition.X + (120 * _scale) - 5, uiBasePosition.Y + (128 * _scale) - 5);
     static private Dictionary<(int, int), Vector2> numsToArrowLocals = new Dictionary<(int, int), Vector2>
     {
         // The key is just (0, 0) and the entry is { key, value }
@@ -107,19 +107,19 @@ public void moveArrow()
 
     // 2. Check for a *single key press*
     //    (Is down NOW, but was UP last frame)
-    if (currentState.IsKeyDown(Keys.Up) && previousKeyState.IsKeyUp(Keys.Up))
+    if (currentState.IsKeyDown(Keys.Left) && previousKeyState.IsKeyUp(Keys.Left))
     {
         newRow = (currentRow - 1 + 2) % 2; 
     }
-    else if (currentState.IsKeyDown(Keys.Down) && previousKeyState.IsKeyUp(Keys.Down))
+    else if (currentState.IsKeyDown(Keys.Right) && previousKeyState.IsKeyUp(Keys.Right))
     {
         newRow = (currentRow + 1) % 2;
     }
-    else if (currentState.IsKeyDown(Keys.Left) && previousKeyState.IsKeyUp(Keys.Left))
+    else if (currentState.IsKeyDown(Keys.Up) && previousKeyState.IsKeyUp(Keys.Up))
     {
         newCol = (currentCol - 1 + 2) % 2;
     }
-    else if (currentState.IsKeyDown(Keys.Right) && previousKeyState.IsKeyUp(Keys.Right))
+    else if (currentState.IsKeyDown(Keys.Down) && previousKeyState.IsKeyUp(Keys.Down))
     {
         newCol = (currentCol + 1) % 2;
     }
