@@ -93,8 +93,6 @@ public class WildEncounterUI
     {
         // Draw the base UI
         WildEncounterStateBasedDraw(UIsprites, spriteBatch);
-        _wildPokemonMessage1.DrawTextSpriteWithScale(spriteBatch, _wildPokemonMessagePos1, 2f);
-        _wildPokemonMessage2.DrawTextSpriteWithScale(spriteBatch, _wildPokemonMessagePos2, 2f);
     }
 
     public void WildEncounterStateBasedDraw(Sprite[] UI_BaseSprites, SpriteBatch spriteBatch)
@@ -108,6 +106,9 @@ public class WildEncounterUI
             case "Initial": // Initial
                 // draw base UI
                 UIsprites[0].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
+                // draw _____ appeared messages
+                _wildPokemonMessage1.DrawTextSpriteWithScale(spriteBatch, _wildPokemonMessagePos1, 2f);
+                _wildPokemonMessage2.DrawTextSpriteWithScale(spriteBatch, _wildPokemonMessagePos2, 2f);
                 // draw player trainer sprite
                 _trainerSpriteBack.Draw(spriteBatch, Color.White, playerTrainerPosition, 8f);
                 // draw wild pokemon sprite
