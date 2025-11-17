@@ -27,7 +27,7 @@ namespace Enter.Classes.Scenes
         private Trainer trainer;
         private Player player;
         // Scene-managed player position (in pixels)
-        private Vector2 _playerPosition = new Vector2(5 * 32, 13 * 32); // Default spawn (tile 5,13)
+        private Vector2 _playerPosition = new Vector2(2 * 32, 6 * 32); // Default spawn (tile 1,3)
                 public Vector2 GetPlayerPosition() => _playerPosition;
 
                 public void SetPlayerPosition(Vector2 pos)
