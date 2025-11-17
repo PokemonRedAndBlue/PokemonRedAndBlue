@@ -20,7 +20,6 @@ public class Player
     // Pixel-space render position (top-left of sprite)
     private Vector2 _pixelPosition;
     private static readonly Vector2 SpriteHalfSizeVector = 0.5f * new Vector2(PlayerSprite.SpriteSize);
-    public Vector2 Position { get; private set; }
     private const float SpeedPxPerSec = 80f; // movement speed (pixels/sec)
 
     // Tile-space state

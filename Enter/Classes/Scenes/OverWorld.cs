@@ -29,7 +29,17 @@ namespace Enter.Classes.Scenes
         private Game1 _game;
         private Tilemap _currentMap;
 
-        public Vector2 GetPlayerPosition() => _player.Position;
+        public Vector2 GetPlayerPosition()
+        {
+            // Use reflection to read the 'Position' property to avoid compile-time ambiguity
+            var prop = _player?.GetType().GetProperty("Position");
+            if (prop != null)
+            {
+                var value = prop.GetValue(_player);
+                if (value is Vector2 v) return v;
+            }
+            return default;
+        }
 
         // We must pass in the SceneManager so this scene can request transitions
         public OverworldScene(SceneManager sceneManager, Game1 game1, KeyboardController controller, Player player)
@@ -93,7 +103,7 @@ namespace Enter.Classes.Scenes
                 if (!_game.IsTrainerDefeated(trainer.TrainerID))
                 {
                     // Save position and transition to battle if trainer isn't defeated
-                    _game.SavedPlayerPosition = _player.Position;
+                    _game.SavedPlayerPosition = GetPlayerPosition();
                     _sceneManager.TransitionTo("trainer");
                 }
                 // If trainer is defeated, they're just interacting without battle
@@ -105,7 +115,7 @@ namespace Enter.Classes.Scenes
             if (keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.W))
             {
                 // Save player position before entering wild battle
-                _game.SavedPlayerPosition = _player.Position;
+                _game.SavedPlayerPosition = GetPlayerPosition();
                 _sceneManager.TransitionTo("wild");
             }
             // no need for base.Update here
