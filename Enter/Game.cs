@@ -36,6 +36,9 @@ public class Game1 : Core
         var pokemon = PokemonGenerator.GenerateRandom();
         pokemon.PrintSummary();
 
+        //Music
+        MusicLibrary.Load(Content);
+
         base.LoadContent();
     }
 
@@ -51,6 +54,31 @@ public class Game1 : Core
         if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.W))
         {
             _sceneManager.TransitionTo("wild");
+        }
+
+        //Music
+        _sceneManager.Update(gameTime);
+        // ----------------------------------------
+        //  MUSIC TESTING KEYS (SAFE PLACE)
+        // ----------------------------------------
+        var kb = Keyboard.GetState();
+
+        if (kb.IsKeyDown(Keys.U))
+        {
+            MusicPlayer.Play(SongId.OpeningPart2);
+        }
+        if (kb.IsKeyDown(Keys.O))
+        {
+            MusicPlayer.Play(SongId.RoadToViridianFromPallet);
+        }
+        if (kb.IsKeyDown(Keys.I))
+        {
+            MusicPlayer.Play(SongId.BattleWildPokemon);
+        }
+
+        if (kb.IsKeyDown(Keys.Q))
+        {
+            MusicPlayer.Stop();
         }
 
         base.Update(gameTime);
