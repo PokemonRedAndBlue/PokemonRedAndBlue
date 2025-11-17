@@ -31,7 +31,7 @@ public class BattleUIHelper
     };
     static private float _scale = 4.0f;
     KeyboardController keyBrd = new KeyboardController();
-    static private Vector2 uiBasePosition = new Vector2(350, 75);
+    static private Vector2 uiBasePosition = new Vector2(340, 75);
     private static Vector2 _pokeballStartPosition;
     static private Vector2 playerPokeballStartPosition = new Vector2(uiBasePosition.X + (88 * _scale) - 4, uiBasePosition.Y + (80 * _scale) - 4);
     static private Vector2 enemyPokeballStartPosition = new Vector2(uiBasePosition.X + (24 * _scale) - 4, uiBasePosition.Y + (16 * _scale) - 4);
