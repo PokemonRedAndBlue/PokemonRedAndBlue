@@ -69,19 +69,35 @@ public class Game1 : Core
         // Check for reset key
         if (ResetRequested) { Reset(); return; }
         
+        // Cache keyboard state to avoid multiple calls
+        KeyboardState keyState = Keyboard.GetState();
+        
         // If caught in trainer battle in scene, defaults back to Route 1 for now
-        if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.C))
+        if (keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.C))
         {
             _sceneManager.TransitionTo("overworld_city");
         }
         
-        if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.G))
+        if (keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.G))
         {
             _sceneManager.TransitionTo("gym");
         }
 
 
         base.Update(gameTime);
+
+        // Update window title with FPS and recent scene timings (update/draw ms)
+        try
+        {
+            string baseTitle = Window.Title?.Split('|')[0].Trim() ?? "";
+            int fps = Core.CurrentFps;
+            double uMs = _sceneManager?.LastUpdateMs ?? 0.0;
+            double dMs = _sceneManager?.LastDrawMs ?? 0.0;
+            Window.Title = string.IsNullOrEmpty(baseTitle)
+                ? $"FPS: {fps} | U:{uMs:F1}ms D:{dMs:F1}ms"
+                : $"{baseTitle} | FPS: {fps} | U:{uMs:F1}ms D:{dMs:F1}ms";
+        }
+        catch { }
     }
 
     private void Reset()

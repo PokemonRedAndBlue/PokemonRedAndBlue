@@ -170,6 +170,9 @@ public class WildEncounterUI
             // draw base UI
                 UIsprites[3].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
                 break;
+            case "Run":
+                didRun = true;
+                break;
             default:
                 break;
         }

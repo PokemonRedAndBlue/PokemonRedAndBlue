@@ -34,6 +34,15 @@ public class Core : Game
     /// </summary>
     public static new ContentManager Content { get; private set; }
 
+    // Simple FPS tracking
+    private double _fpsElapsed = 0.0;
+    private int _frameCounter = 0;
+    private int _fps = 0;
+    /// <summary>
+    /// Exposes the most recently measured FPS to other classes.
+    /// </summary>
+    public static int CurrentFps { get; private set; } = 0;
+
     /// <summary>
     /// Creates a new Core instance.
     /// </summary>
@@ -75,6 +84,11 @@ public class Core : Game
 
         // Mouse is visible by default.
         IsMouseVisible = true;
+
+        // By default disable fixed time step and VSync to reduce input-to-display latency.
+        // If you prefer a steady 60 FPS with potentially higher input latency, set these differently.
+        Graphics.SynchronizeWithVerticalRetrace = false; // disable VSync
+        IsFixedTimeStep = false;
     }
 
     protected override void Initialize()
@@ -87,5 +101,27 @@ public class Core : Game
 
         // Create the sprite batch instance.
         SpriteBatch = new SpriteBatch(GraphicsDevice);
+    }
+
+    protected override void Update(GameTime gameTime)
+    {
+        // FPS counter: count frames and update once per second in window title
+        _frameCounter++;
+        _fpsElapsed += gameTime.ElapsedGameTime.TotalSeconds;
+        if (_fpsElapsed >= 1.0)
+        {
+            _fps = _frameCounter;
+            _frameCounter = 0;
+            _fpsElapsed -= 1.0;
+
+            // publish for callers
+            CurrentFps = _fps;
+
+            // Keep base title (text before '|') and append FPS
+            string baseTitle = Window.Title?.Split('|')[0].Trim() ?? string.Empty;
+            Window.Title = string.IsNullOrEmpty(baseTitle) ? $"FPS: {_fps}" : $"{baseTitle} | FPS: {_fps}";
+        }
+
+        base.Update(gameTime);
     }
 }

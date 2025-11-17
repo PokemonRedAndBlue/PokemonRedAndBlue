@@ -10,6 +10,7 @@ using Enter.Classes.Physics;
 using Enter.Interfaces;
 using Enter.Classes.Textures;
 
+
 namespace Enter.Classes.Scenes
 {
     /// <summary>
@@ -44,10 +45,11 @@ namespace Enter.Classes.Scenes
             // Load tilemap, player sprites, NPCs, etc.
             Cam = new(((Game)_game).GraphicsDevice.Viewport);
             
-            // if ((_game as Game1)?.SavedPlayerPosition is Microsoft.Xna.Framework.Vector2 savedPos)
-            // {
-            //     _player.Position = savedPos;
-            // }
+            if ((_game as Game1)?.SavedPlayerPosition is Microsoft.Xna.Framework.Vector2 savedPos)
+            {
+                Point tile = _player.PixelToTile(savedPos);  
+                _player.SetTilePosition(tile);               
+            }
 
             Cam.Update(_player);
             Cam.Zoom = ZoomLevel; //Zoom level of world
@@ -97,8 +99,9 @@ namespace Enter.Classes.Scenes
                 // Could show dialogue here
             }
 
-            // check for wild encounter key
-            if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.W))
+            // check for wild encounter key (cache keyboard state)
+            KeyboardState keyState = Keyboard.GetState();
+            if (keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.W))
             {
                 // Save player position before entering wild battle
                 _game.SavedPlayerPosition = _player.Position;

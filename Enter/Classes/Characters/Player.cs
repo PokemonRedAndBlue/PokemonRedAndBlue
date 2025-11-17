@@ -181,7 +181,7 @@ public class Player
         return new Vector2(tile.X * tileW, tile.Y * tileH);
     }
 
-    private Point PixelToTile(Vector2 pos)
+    public Point PixelToTile(Vector2 pos)
     {
         int tileW = Map?.TileWidth ?? PlayerSprite.SpriteSize; // scale?
         int tileH = Map?.TileHeight ?? PlayerSprite.SpriteSize;
