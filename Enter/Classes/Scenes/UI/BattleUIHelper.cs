@@ -14,6 +14,7 @@ using System.Collections;
 public class BattleUIHelper
 {
     static private float _scale = 4.0f;
+    private String currentBattleState = "Fight";
     KeyboardController keyBrd = new KeyboardController();
     static private Vector2 uiBasePosition = new Vector2(340, 75);
     private KeyboardState previousKeyState;
@@ -127,7 +128,7 @@ public void moveArrow()
     // handle arrow selection
         if (currentState.IsKeyDown(Keys.Enter))
         {
-            handleArrowEvent(newCol, newRow);
+            currentBattleState = handleArrowEvent(newCol, newRow);
             return;
         }
 
@@ -177,5 +178,10 @@ public String handleArrowEvent(int currentCol, int currentRow)
             return "Run";
         }
         return "";
+    }
+
+    public String getBattleState()
+    {
+        return this.currentBattleState;
     }
 }

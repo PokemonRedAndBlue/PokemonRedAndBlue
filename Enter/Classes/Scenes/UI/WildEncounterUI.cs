@@ -24,7 +24,6 @@ public class WildEncounterUI
     private Sprite _trainerSpriteBack;
     private String _wildPokemonID;
     private AnimatedSprite _wildPokemonSpriteFront;
-    private string _currentState = "Fight";
 
     // Pre defined regions within UI ADD TO A DICT LATER
     static private Vector2 uiBasePosition = new Vector2(340, 75);
@@ -104,7 +103,7 @@ public class WildEncounterUI
         _border.Draw(spriteBatch, Color.White, _borderPostion, 4f);
 
         // draw the UI elements for wild encounter (state based)
-            switch (_currentState)
+            switch (battleUI.getBattleState())
         {
             case "Initial": // Initial
                 // draw base UI
