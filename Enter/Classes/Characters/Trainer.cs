@@ -16,9 +16,9 @@ public class Trainer
     public string TrainerID { get; private set; }
 
     // Might use a scale for tile lengths later
-    public Vector2 Position { get; private set; }
+    public Vector2 _position { get; private set; }
     public Tilemap Map { get; set; }
-
+    private const float InteractionRange = 40f;
     private const float SpeedPxPerSec = 80f;
     private const int DefaultVisionRangeTiles = 4;
     private static readonly Vector2 SpriteHalfSizeVector = 0.5f * new Vector2(PlayerSprite.SpriteSize);
@@ -48,7 +48,7 @@ public class Trainer
         _texture = texture;
         _spriteIndex = spriteIndex;
         _sprite = new(_spriteIndex);
-        Position = Pos;
+        _position = Pos;
         _facing = facing;
         _moving = moving;
         _visionRangeTiles = visionRangeTiles;
@@ -63,7 +63,7 @@ public class Trainer
         if (HasBeenDefeated)
         {
             // Allow interaction when player is close but don't chase or battle
-            if (Math.Abs(Vector2.Distance(player.Position, Position)) <= InteractionRange)
+            if (Math.Abs(Vector2.Distance(player.TilePos.ToVector2(), _position)) <= InteractionRange)
             {
                 colided = true; // Allow dialogue but won't trigger battle since HasBeenDefeated=true
             }
@@ -133,7 +133,7 @@ public class Trainer
 
     private Vector2 GetWorldCenterPosition()
     {
-        return Position + SpriteHalfSizeVector;
+        return _position + SpriteHalfSizeVector;
     }
 
     private bool GoToPlayer(Player player, GameTime gametime)
@@ -151,13 +151,13 @@ public class Trainer
         }
         Vector2 norm = Vector2.Normalize(playerCenter - trainerCenter);
         float dt = (float)gametime.ElapsedGameTime.TotalSeconds;
-        Position += norm * SpeedPxPerSec * dt;
+        _position += norm * SpeedPxPerSec * dt;
         return false; // Still approaching
     }
 
     public void Draw(SpriteBatch spriteBatch, float scale = 1f)
     {
-        _sprite.Draw(spriteBatch, _texture, scale, Position);
+        _sprite.Draw(spriteBatch, _texture, scale, _position);
     }
 
     // Temporary methods for Sprint 2, not cyclic
