@@ -52,11 +52,6 @@ public class Player
         _pixelPosition = Vector2.Zero;
         thePlayersTeam = team;
     }
-    public Player(Texture2D texture2, Vector2 position)
-    {
-        Position = position;
-        _texture = texture2;
-    }
     public Player(Texture2D texture2, Point tilePos)
     {
         TilePos = tilePos;
