@@ -18,7 +18,7 @@ public class Trainer
     // Might use a scale for tile lengths later
     public Vector2 _position { get; private set; }
     public Tilemap Map { get; set; }
-    private const float InteractionRange = 40f;
+
     private const float SpeedPxPerSec = 80f;
     private const int DefaultVisionRangeTiles = 4;
     private static readonly Vector2 SpriteHalfSizeVector = 0.5f * new Vector2(PlayerSprite.SpriteSize);
@@ -188,5 +188,5 @@ public class Trainer
             (int)System.MathF.Floor(center.Y / tileH)
         );
     }
-
+    
 }
