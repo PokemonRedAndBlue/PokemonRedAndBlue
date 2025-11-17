@@ -59,7 +59,7 @@ namespace Enter.Classes.Scenes
             // --- Transition Logic ---
             // if (PlayerWon || Fainted)
 
-                if(wildUI.didRun || wildUI.resetBattle){
+                if(wildUI.didRunOrCatch || wildUI.resetBattle){
                     // Save the player's last position for the overworld
                     if ((_game as Game1)?.SavedPlayerPosition is Microsoft.Xna.Framework.Vector2 savedPos)
                     {

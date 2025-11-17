@@ -16,11 +16,14 @@ public class TrainerBattleUI
     private TextureAtlas _TrainerUIAtlas;
     private TextSprite _trainerText;
     private SpriteFont _font;
+    private BattleUIHelper battleUI = new BattleUIHelper();
     private String _enemyTrainerString;
     static private float _scale = 4.0f;
     private Sprite _trainerSpriteBack;
+    private AnimatedSprite _enemyPokemonSpriteFront;
     private Sprite _enemyTrainerSpriteFront;
     private TextSprite _enemyTrainerIDSprite;
+    private Sprite greenBar, yellowBar, redBar;
     private string _currentState = "Initial";
 
     // Pre defined regions within UI ADD TO A DICT LATER
@@ -28,12 +31,15 @@ public class TrainerBattleUI
     static private Vector2 pokemonHealthBarPosition = new Vector2(uiBasePosition.X + 150, uiBasePosition.Y + 200);
     static private Vector2 pokemonLevelPosition = new Vector2(uiBasePosition.X + 250, uiBasePosition.Y + 280);
     static private Vector2 arrowPosition = new Vector2(uiBasePosition.X + 50, uiBasePosition.Y + 400);
+    static private Vector2 playerPosition = new Vector2(uiBasePosition.X + (8 * _scale) - 5, uiBasePosition.Y + (40 * _scale) - 5);
     static private Vector2 enemyPokemonPosition = new Vector2(uiBasePosition.X, uiBasePosition.Y);
     static private Vector2 playerPokemonPosition = new Vector2(uiBasePosition.X + 450, uiBasePosition.Y + 200);
     static private Vector2 playerTrainerPosition = new Vector2(uiBasePosition.X + (8 * _scale) - 5, uiBasePosition.Y + (40 * _scale) - 5);
     static private Vector2 enemyTrainerPosition = new Vector2(uiBasePosition.X + (96 * _scale) - 4, uiBasePosition.Y);
     static private Vector2 enemyTrainerIDPosition = new Vector2(uiBasePosition.X + (8 * _scale), uiBasePosition.Y + (110 * _scale) + 1);
     static private Vector2 _borderPostion = new Vector2(uiBasePosition.X - (48 * _scale), uiBasePosition.Y - (40 * _scale) + 1);
+    static private Vector2 enemysPokemonPosition = new Vector2(uiBasePosition.X + (96 * _scale), uiBasePosition.Y);
+    static private Vector2 maxDrawPos = new Vector2(0, uiBasePosition.Y + (103 * _scale));
     static private Team _playerTeam;
     static private Team _enemyTeam;
     static private Sprite _border;
@@ -97,6 +103,9 @@ public class TrainerBattleUI
         // always draw border
         _border.Draw(spriteBatch, Color.White, _borderPostion, 4f);
 
+        // always get players pokemon
+         Pokemon currentPokemon = _playerTeam.Pokemons[0];
+
         // draw the UI elements for wild encounter (state based)
         switch (_currentState)
         {
@@ -113,6 +122,22 @@ public class TrainerBattleUI
                 BattleUIHelper.drawPokeballSprites(_playerTeam, _TrainerUIAtlas, spriteBatch, true);
                 // draw enemy trainer party bar
                 BattleUIHelper.drawPokeballSprites(_enemyTeam, _TrainerUIAtlas, spriteBatch, false);
+                break;
+            case "Menu": 
+                // draw base UI
+                UIBaseSprites[1].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
+                // draw players pokemon sprite, get first alive pokemon
+                String playersPokemon = currentPokemon.Name.ToString();
+                Sprite currentMon = PokemonBackFactory.Instance.CreateStaticSprite( playersPokemon.ToLower()+ "-back");
+                currentMon.Draw(spriteBatch, Color.White, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)), 4f);
+                // draw opponent pokemon sprite
+                _enemyPokemonSpriteFront.Draw(spriteBatch, Color.White, enemysPokemonPosition, 4f);
+                // draw both health
+                battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, true);
+                battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, false);
+                // arrow handling logic
+                battleUI.DrawArrow(_TrainerUIAtlas, spriteBatch);
+                battleUI.moveArrow();
                 break;
             case "Fight": // Fight
                 UIBaseSprites[1].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);

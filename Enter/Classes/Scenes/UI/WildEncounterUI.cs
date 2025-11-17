@@ -50,7 +50,7 @@ public class WildEncounterUI
     static private Sprite _border;
 
     public Boolean resetBattle = false;
-    public Boolean didRun = false;
+    public Boolean didRunOrCatch = false;
 
     private Dictionary<string, int> stateMapping = new Dictionary<string, int>
     {
@@ -192,7 +192,7 @@ public class WildEncounterUI
                 }
                 break;
             case "Run":
-                didRun = true;
+                didRunOrCatch = true;
                 break;
             default:
                 break;
