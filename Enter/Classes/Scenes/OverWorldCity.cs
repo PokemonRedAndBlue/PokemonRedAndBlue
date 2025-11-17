@@ -25,7 +25,6 @@ namespace Enter.Classes.Scenes
         private KeyboardController _controller;
         private Texture2D character;
         private Trainer trainer;
-        private Player player;
         private Game1 _game;
         private Tilemap _currentMap;
         private Player _player;
@@ -44,7 +43,7 @@ namespace Enter.Classes.Scenes
             // Load tilemap, player sprites, NPCs, etc.
             Cam = new(((Game)_game).GraphicsDevice.Viewport);
             character = content.Load<Texture2D>("images/Pokemon_Characters");
-            Cam.Update(player);
+            Cam.Update(_player);
             Cam.Zoom = ZoomLevel; //Zoom leve of world
             trainer = new Trainer(
                 character,
@@ -55,10 +54,10 @@ namespace Enter.Classes.Scenes
             _currentMap = TilemapLoader.LoadTilemap("Content/CerucleanCityMap.xml");
 
             // Collision wiring (minimal)
-            player.Map = _currentMap;
+            _player.Map = _currentMap;
 
             // Build the solid tile index set from the "Ground" layer
-            player.SolidTiles = Physics.Collision.BuildSolidIndexSet(
+            _player.SolidTiles = Physics.Collision.BuildSolidIndexSet(
                 _currentMap,
                 "Ground",
                 Physics.SolidTileCollision.IsSolid
@@ -68,8 +67,8 @@ namespace Enter.Classes.Scenes
         public void Update(GameTime gameTime)
         {
             // Update Objects
-            _controller.Update(_game, gameTime, Cam, player, trainer);
-            Cam.Update(player);
+            _controller.Update(_game, gameTime, Cam, _player, trainer);
+            Cam.Update(_player);
 
             // Force a battle with trainer interaction
             if (trainer.colided){
@@ -86,7 +85,7 @@ namespace Enter.Classes.Scenes
             // map & world entities affected by camera movement
             spriteBatch.Begin(transformMatrix: Cam.GetViewMatrix(), samplerState: SamplerState.PointClamp);
             _currentMap?.DrawCropped(Cam.VisibleWorldRect);
-            player.Draw(spriteBatch);
+            _player.Draw(spriteBatch);
             trainer.Draw(spriteBatch);
             spriteBatch.End();
 
