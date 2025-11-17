@@ -22,6 +22,12 @@
 #begin Borders.xml
 /copy:Borders.xml
 
+#begin CerucleanCityMap.xml
+/copy:CerucleanCityMap.xml
+
+#begin GymMap.xml
+/copy:GymMap.xml
+
 #begin images/BattleInterface.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -57,11 +63,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:images/Characters (Battle).png
-#begin CerucleanCityMap.xml
-/copy:CerucleanCityMap.xml
-
-#begin GymMap.xml
-/copy:GymMap.xml
 
 #begin images/Game Boy _ GBC - Pokemon Red _ Blue - Backgrounds (Places) - Cerulean City.png
 /importer:TextureImporter
@@ -157,11 +158,7 @@
 /copy:pokemon_stats.xml
 
 #begin PokemonFont.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:PokemonFont.spritefont
+/copy:PokemonFont.spritefont
 
 #begin Route1Map.xml
 /copy:Route1Map.xml
