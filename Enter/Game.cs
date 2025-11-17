@@ -36,8 +36,10 @@ public class Game1 : Core
         var pokemon = PokemonGenerator.GenerateRandom();
         pokemon.PrintSummary();
 
-        //Music
-        MusicLibrary.Load(Content);
+        //Music && Sound effect
+        BackgroundMusicLibrary.Load(Content);
+        SoundEffectLibrary.Load(Content);
+
 
         base.LoadContent();
     }
@@ -59,26 +61,26 @@ public class Game1 : Core
         //Music
         _sceneManager.Update(gameTime);
         // ----------------------------------------
-        //  MUSIC TESTING KEYS (SAFE PLACE)
+        //  MUSIC TESTING KEYS (CAN BE REMOVED)
         // ----------------------------------------
         var kb = Keyboard.GetState();
 
         if (kb.IsKeyDown(Keys.U))
         {
-            MusicPlayer.Play(SongId.OpeningPart2);
+            BackgroundMusicPlayer.Play(SongId.OpeningPart2);
         }
         if (kb.IsKeyDown(Keys.O))
         {
-            MusicPlayer.Play(SongId.RoadToViridianFromPallet);
+            SoundEffectPlayer.Play(SfxId.SFX_LEVEL_UP);
         }
         if (kb.IsKeyDown(Keys.I))
         {
-            MusicPlayer.Play(SongId.BattleWildPokemon);
+            BackgroundMusicPlayer.Play(SongId.BattleWildPokemon);
         }
 
         if (kb.IsKeyDown(Keys.Q))
         {
-            MusicPlayer.Stop();
+            BackgroundMusicPlayer.Stop();
         }
 
         base.Update(gameTime);

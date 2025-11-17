@@ -1,16 +1,18 @@
+// MusicPlayer.cs
 using Microsoft.Xna.Framework.Media;
 
-public static class MusicPlayer
+public static class BackgroundMusicPlayer
 {
     private static SongId? _currentId = null;
     private static bool _isPlaying = false;
 
     public static void Play(SongId id, bool loop = true)
     {
-        if (_currentId == id && _isPlaying && MediaPlayer.IsRepeating == loop)
+        // If same song is already playing, do nothing
+        if (_currentId == id && _isPlaying)
             return;
 
-        Song song = MusicLibrary.GetSong(id);
+        Song song = BackgroundMusicLibrary.GetSong(id);
 
         MediaPlayer.IsRepeating = loop;
         MediaPlayer.Play(song);

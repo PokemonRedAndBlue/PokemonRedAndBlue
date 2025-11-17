@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Media;
 
 //Source of Music: www.zophar.net/music/gameboy-gbs/pokemon-red
-public static class MusicLibrary
+public static class BackgroundMusicLibrary
 {
     private static readonly Dictionary<SongId, Song> _songs = new Dictionary<SongId, Song>();
 
