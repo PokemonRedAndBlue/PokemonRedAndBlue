@@ -9,11 +9,7 @@ public static class DamageCalculator
 {
     private static readonly string typeChartPath = "Content/type_chart.xml";
 
-    public static int CalculateDamage(
-        PokemonInstance attacker,
-        PokemonInstance defender,
-        Move move
-    )
+    public static int CalculateDamage(PokemonInstance attacker, PokemonInstance defender, Move move)
     {
         int power = move.Power;
 
