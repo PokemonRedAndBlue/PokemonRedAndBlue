@@ -1,6 +1,6 @@
 # PokemonRedAndBlue
 
-## Sprint 3 Progress Summary
+## Sprint 4 Progress Summary
 
 ### Initial Goals (Per Person)
 Our original Sprint 4 objectives were divided as follows:
