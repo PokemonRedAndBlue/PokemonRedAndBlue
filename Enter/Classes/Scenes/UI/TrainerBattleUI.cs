@@ -61,6 +61,9 @@ public class TrainerBattleUI
     private int enemyMaxHP = 0;
     private bool battleInitialized = false;
     private string battleMessage = "";
+    private bool endMessageActive = false;
+    private double endMessageTimer = 0.0;
+    private const double EndMessagePauseMs = 4000.0;
 
     public TrainerBattleUI(TextureAtlas trainerUIAtlas, ContentManager content, String enemyTrainerID, Team playerTeam, Team enemyTeam)
     {
@@ -77,6 +80,17 @@ public class TrainerBattleUI
         // Ensure battleUI state machine and timer are updated
         battleUI.Update(gameTime);
         _currentState = battleUI.getBattleState();
+
+        // Handle end message pause
+        if (endMessageActive)
+        {
+            endMessageTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (endMessageTimer >= EndMessagePauseMs)
+            {
+                resetBattle = true;
+                endMessageActive = false;
+            }
+        }
     }
 
     public void LoadContent(ContentManager content)
@@ -206,7 +220,7 @@ public class TrainerBattleUI
                 currentMon = PokemonBackFactory.Instance.CreateStaticSprite(playersPokemon.ToLower() + "-back");
                 currentMon.Draw(spriteBatch, Color.White, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)), 4f);
                 _enemyPokemonSpriteFront.Draw(spriteBatch, Color.White, enemysPokemonPosition, 4f);
-                if (Keyboard.GetState().IsKeyDown(Keys.A))
+                if (!endMessageActive && Keyboard.GetState().IsKeyDown(Keys.A))
                 {
                     // Player attacks enemy (reduced damage)
                     int playerDmg = 4; // reduced damage
@@ -217,7 +231,8 @@ public class TrainerBattleUI
                     if (enemyCurrentHP <= 0)
                     {
                         battleMessage = "You win!";
-                        _currentState = "End";
+                        endMessageActive = true;
+                        endMessageTimer = 0.0;
                         break;
                     }
                     playerCurrentHP -= enemyDmg;
@@ -226,10 +241,10 @@ public class TrainerBattleUI
                     if (playerCurrentHP <= 0)
                     {
                         battleMessage = "You lose!";
-                        _currentState = "End";
+                        endMessageActive = true;
+                        endMessageTimer = 0.0;
                         break;
                     }
-                    _currentState = "Menu";
                 }
                 // Use updated HP for health bars
                 DrawHealthBarSprite(spriteBatch, new Vector2(340, 210), playerCurrentHP, playerMaxHP, greenBar, yellowBar, redBar);
@@ -246,9 +261,6 @@ public class TrainerBattleUI
                 break;
             case "Run": // Run (blocked in trainer battles)
                 // Show a message or just ignore; here, just ignore and return to menu
-                resetBattle = true;
-                break;
-            case "End": // End state, triggers battle exit
                 resetBattle = true;
                 break;
             default:
