@@ -65,6 +65,12 @@ public class TrainerBattleUI
     private double endMessageTimer = 0.0;
     private const double EndMessagePauseMs = 4000.0;
 
+    // Turn-based system
+    private enum BattleTurn { Player, Cpu, Waiting, End }
+    private BattleTurn currentTurn = BattleTurn.Player;
+    private double turnTimer = 0.0;
+    private const double CpuAttackDelayMs = 2000.0;
+
     public TrainerBattleUI(TextureAtlas trainerUIAtlas, ContentManager content, String enemyTrainerID, Team playerTeam, Team enemyTeam)
     {
         // init class vars
@@ -89,6 +95,32 @@ public class TrainerBattleUI
             {
                 resetBattle = true;
                 endMessageActive = false;
+            }
+        }
+
+        // Handle CPU turn timer
+        if (currentTurn == BattleTurn.Waiting)
+        {
+            turnTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (turnTimer >= CpuAttackDelayMs)
+            {
+                // CPU attacks
+                int enemyDmg = 8;
+                playerCurrentHP -= enemyDmg;
+                if (playerCurrentHP < 0) playerCurrentHP = 0;
+                battleMessage = $"Enemy attacks! Player loses {enemyDmg} HP.";
+                if (playerCurrentHP <= 0)
+                {
+                    battleMessage = "You lose!";
+                    endMessageActive = true;
+                    endMessageTimer = 0.0;
+                    currentTurn = BattleTurn.End;
+                }
+                else
+                {
+                    currentTurn = BattleTurn.Player;
+                }
+                turnTimer = 0.0;
             }
         }
     }
@@ -142,11 +174,14 @@ public class TrainerBattleUI
 
     private void DrawMessage(SpriteBatch spriteBatch, string message)
     {
-        // Show win in green, lose in red, else yellow
+        // Draw all messages at the same coordinates
+        Vector2 msgPos = new Vector2(340, 350);
         Color color = Color.Yellow;
         if (message.Contains("You win!")) color = Color.LawnGreen;
         else if (message.Contains("You lose!")) color = Color.Red;
-        spriteBatch.DrawString(_font, message, new Vector2(340, 350), color);
+        else if (message.StartsWith("Player attacks!")) color = Color.LawnGreen;
+        else if (message.StartsWith("Enemy attacks!")) color = Color.Red;
+        spriteBatch.DrawString(_font, message, msgPos, color);
     }
 
     private void DrawHealthBarSprite(SpriteBatch spriteBatch, Vector2 pos, int currentHP, int maxHP, Sprite greenBar, Sprite yellowBar, Sprite redBar)
@@ -220,11 +255,10 @@ public class TrainerBattleUI
                 currentMon = PokemonBackFactory.Instance.CreateStaticSprite(playersPokemon.ToLower() + "-back");
                 currentMon.Draw(spriteBatch, Color.White, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)), 4f);
                 _enemyPokemonSpriteFront.Draw(spriteBatch, Color.White, enemysPokemonPosition, 4f);
-                if (!endMessageActive && Keyboard.GetState().IsKeyDown(Keys.A))
+                if (!endMessageActive && currentTurn == BattleTurn.Player && Keyboard.GetState().IsKeyDown(Keys.A))
                 {
                     // Player attacks enemy (reduced damage)
                     int playerDmg = 4; // reduced damage
-                    int enemyDmg = 8;   // fixed damage for demo
                     enemyCurrentHP -= playerDmg;
                     if (enemyCurrentHP < 0) enemyCurrentHP = 0;
                     battleMessage = $"Player attacks! Enemy loses {playerDmg} HP.";
@@ -233,17 +267,12 @@ public class TrainerBattleUI
                         battleMessage = "You win!";
                         endMessageActive = true;
                         endMessageTimer = 0.0;
-                        break;
+                        currentTurn = BattleTurn.End;
                     }
-                    playerCurrentHP -= enemyDmg;
-                    if (playerCurrentHP < 0) playerCurrentHP = 0;
-                    battleMessage += $"\nEnemy attacks! Player loses {enemyDmg} HP.";
-                    if (playerCurrentHP <= 0)
+                    else
                     {
-                        battleMessage = "You lose!";
-                        endMessageActive = true;
-                        endMessageTimer = 0.0;
-                        break;
+                        currentTurn = BattleTurn.Waiting;
+                        turnTimer = 0.0;
                     }
                 }
                 // Use updated HP for health bars
