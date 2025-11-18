@@ -1,6 +1,5 @@
 using Microsoft.Xna.Framework;
 using Enter.Classes.Characters;
-using Enter.Classes.Sprites;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Enter.Classes.Cameras;
@@ -14,8 +13,8 @@ public class Camera
     public Rectangle VisibleWorldRect => new(
         (int)_viewOrigin.X,
         (int)_viewOrigin.Y,
-        _viewport.Width,
-        _viewport.Height
+        (int)(_viewport.Width/Zoom), //reflect zoom viewport
+        (int)(_viewport.Height/Zoom) ////reflect zoom viewport
     );
 
     private readonly Viewport _viewport;
@@ -41,7 +40,7 @@ public class Camera
     /// <param name="player">The player object</param>
     public void Update(Player player)
     {
-        CenterOn(player.Position + 0.5f * Zoom * new Vector2(PlayerSprite.SpriteSize));
+        CenterOn(player.GetWorldCenterPosition());
     }
 
     /// <summary>
@@ -50,14 +49,15 @@ public class Camera
     /// <param name="Pos">the position to center on</param>
     public void CenterOn(Vector2 Pos)
     {
-        _viewOrigin = Pos - 0.5f * new Vector2(_viewport.Width, _viewport.Height);
+        _viewOrigin = Pos - 0.5f * new Vector2(_viewport.Width, _viewport.Height) / Zoom; //use viewport size expressed in WORLD units
     }
 
     // Matrix used by SpriteBatch to convert world -> screen, as camera offset
     public Matrix GetViewMatrix()
     {
         // moves the world opposite of the camera, zoom, and recenter after scaling
-        return Matrix.CreateTranslation(new Vector3(-_viewOrigin, 0f));
+        return Matrix.CreateTranslation(new Vector3(-_viewOrigin, 0f))
+        * Matrix.CreateScale(Zoom, Zoom, 1f); // Matrix used by SpriteBatch to convert world -> screen
     }
 
 }

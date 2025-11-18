@@ -5,15 +5,28 @@ using Vector2 = Microsoft.Xna.Framework.Vector2;
 using Enter.Classes.Cameras;
 using Enter.Classes.Input;
 using Enter.Classes.Sprites;
+using Enter.Classes.Behavior;
 
 namespace Enter.Classes.Characters;
 
 public enum Facing { Down, Up, Left, Right }
 public class Player
 {
+    //For collision
+    public Tilemap Map { get; set; }
+    public Team thePlayersTeam = new Team();
+    public HashSet<Point> SolidTiles { get; set; }
 
-    public Vector2 Position { get; set; } = Vector2.Zero;
-    private const float SpeedPxPerSec = 120f; // movement speed
+    // Pixel-space render position (top-left of sprite)
+    private Vector2 _pixelPosition;
+    private static readonly Vector2 SpriteHalfSizeVector = 0.5f * new Vector2(PlayerSprite.SpriteSize);
+    private const float SpeedPxPerSec = 80f; // movement speed (pixels/sec)
+
+    // Tile-space state
+    public Point TilePos { get; private set; } // current tile position
+    private TileMoveCommand _activeMoveCommand;
+    private bool _initializedTileFromPosition = false;
+
     protected static readonly Dictionary<Facing, Vector2> _directions = new()
     {
         { Facing.Up,    new Vector2(0, -1) },
@@ -21,78 +34,148 @@ public class Player
         { Facing.Left,  new Vector2(-1, 0) },
         { Facing.Right, new Vector2(1, 0) },
     };
+    private static readonly Dictionary<Direction, Facing> _facings = new()
+    {
+        { Direction.Up, Facing.Up },
+        { Direction.Down, Facing.Down },
+        { Direction.Left, Facing.Left },
+        { Direction.Right, Facing.Right },
+    };
     private readonly Texture2D _texture;
     private readonly PlayerSprite _sprite = new();
     private bool _seenByTrainer = false;
     private Facing _facing = Facing.Down;
 
-    public Player(Texture2D texture2, GameWindow Window)
+    public Player(Texture2D texture2, GameWindow Window, Team team)
     {
-        Position = new Vector2(Window.ClientBounds.X, Window.ClientBounds.Y) * 0.5f;
         _texture = texture2;
+        _pixelPosition = Vector2.Zero;
+        thePlayersTeam = team;
     }
-    public Player(Texture2D texture2, Vector2 position)
+    public Player(Texture2D texture2, Point tilePos)
     {
-        Position = position;
+        TilePos = tilePos;
         _texture = texture2;
+        _pixelPosition = TileToPixel(tilePos);
     }
+
+    public Vector2 GetWorldCenterPosition() => GetSnappedPixelPosition() + SpriteHalfSizeVector;
+
+    public Point GetTileFromWorldPosition(Vector2 worldPosition) => PixelToTile(worldPosition);
 
     public void Update(GameTime gameTime, KeyboardController keyboard, Camera Cam)
     {
-        // Determine if moving, and which way we face
-        bool isMoving = (!_seenByTrainer) && UpdateDirection(keyboard);
+        EnsureTileInitialized();
 
-        if (isMoving)
+        float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+        bool hasIntent = (!_seenByTrainer) && UpdateDirection(keyboard);
+
+        if (_activeMoveCommand == null)
         {
-            float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            UpdatePosition(dt, Cam);
-            _sprite.UpdateMovAnim(_facing, dt);
+            if (hasIntent)
+                TryBeginStepFromFacing();
+
+            // if we cannot enter next tile
+            if (_activeMoveCommand == null)
+            {
+                _sprite.IdleReset(_facing);
+                return;
+            }
         }
-        else
-        {
-            // Idle frame for the facing direction
-            _sprite.IdleReset(_facing);
-        }
+
+        PerformStep(dt, Cam);
+        HandleArrivalAtTarget();
+        _sprite.UpdateMovAnim(_facing, dt);
+    }
+
+    private void TryBeginStepFromFacing()
+    {
+        Point dir = FacingToPoint(_facing);
+        Point next = new(TilePos.X + dir.X, TilePos.Y + dir.Y);
+        if (!CanEnter(next)) return;
+
+        Vector2 targetPixel = TileToPixel(next);
+        _activeMoveCommand = new TileMoveCommand(TilePos, next, _pixelPosition, targetPixel);
+    }
+
+    private void PerformStep(float dt, Camera Cam)
+    {
+        if (_activeMoveCommand == null) return;
+
+        Vector2 newPos = _activeMoveCommand.Advance(_pixelPosition, SpeedPxPerSec, dt);
+        Cam.DiffPos = newPos - _pixelPosition;
+        _pixelPosition = newPos;
+    }
+
+    private void HandleArrivalAtTarget()
+    {
+        if (_activeMoveCommand == null || !_activeMoveCommand.HasArrived(_pixelPosition)) return;
+
+        TilePos = _activeMoveCommand.TargetTile;
+        _activeMoveCommand = null;
     }
 
     /// <summary>
-    /// Update player's facing, return whether player is moving. 
+    /// Update player's facing, return whether there is movement intent from input.
     /// </summary>
-    /// <param name="keyboard"></param>
-    /// <returns></returns>
     private bool UpdateDirection(KeyboardController keyboard)
     {
-        switch (keyboard.MoveDirection)
-        {
-            case Direction.Left:
-                _facing = Facing.Left;
-                break;
-            case Direction.Right:
-                _facing = Facing.Right;
-                break;
-            case Direction.Up:
-                _facing = Facing.Up;
-                break;
-            case Direction.Down:
-                _facing = Facing.Down;
-                break;
-            default:
-                return false;
-        }
+        if (keyboard.MoveDirection == Direction.None) return false;
+        _facing = _facings[keyboard.MoveDirection];
         return true;
     }
 
-    private void UpdatePosition(float dt, Camera Cam)
+    private void EnsureTileInitialized()
     {
-        // Normalize axis (already unit in each axis), move in pixels/sec
-        Vector2 diffPos = _directions[_facing] * SpeedPxPerSec * dt;
-        Cam.DiffPos = diffPos;
-        Position += diffPos;
+        if (_initializedTileFromPosition || Map == null) return;
+        TilePos = PixelToTile(_pixelPosition);
+        _pixelPosition = TileToPixel(TilePos); // snap to grid
+        _activeMoveCommand = null;
+        _initializedTileFromPosition = true;
     }
 
-    public void Draw(SpriteBatch spriteBatch, float scale)
+    public void SetTilePosition(Point tile)
     {
-        _sprite.Draw(spriteBatch, _texture, scale, Position);
+        TilePos = tile;
+        _pixelPosition = TileToPixel(tile);
+        _initializedTileFromPosition = true;
+        _activeMoveCommand = null;
+    }
+
+    private static Point FacingToPoint(Facing facing)
+    {
+        return new Point((int)_directions[facing].X, (int)_directions[facing].Y);
+    }
+
+    private bool CanEnter(Point tile)
+    {
+        if (Map == null) return true;
+        // bounds
+        if (tile.X < 0 || tile.Y < 0 || tile.X >= Map.MapWidth || tile.Y >= Map.MapHeight)
+            return false;
+        // solids
+        if (SolidTiles != null && SolidTiles.Contains(tile))
+            return false;
+        return true;
+    }
+
+    private Vector2 TileToPixel(Point tile)
+    {
+        int tileW = Map?.TileWidth ?? PlayerSprite.SpriteSize; // scale?
+        int tileH = Map?.TileHeight ?? PlayerSprite.SpriteSize;
+        return new Vector2(tile.X * tileW, tile.Y * tileH);
+    }
+
+    public Point PixelToTile(Vector2 pos)
+    {
+        int tileW = Map?.TileWidth ?? PlayerSprite.SpriteSize; // scale?
+        int tileH = Map?.TileHeight ?? PlayerSprite.SpriteSize;
+        return new Point((int)System.MathF.Floor(pos.X / tileW), (int)System.MathF.Floor(pos.Y / tileH));
+    }
+
+    public void Draw(SpriteBatch spriteBatch, float scale = 1f)
+    {
+        _sprite.Draw(spriteBatch, _texture, scale, GetSnappedPixelPosition());
     }
 
     /// <summary>
@@ -109,6 +192,27 @@ public class Player
     public void StopEnd()
     {
         _seenByTrainer = false;
+    }
+
+    private Vector2 GetSnappedPixelPosition()
+    {
+        float snappedX = System.MathF.Round(_pixelPosition.X);
+        float snappedY = System.MathF.Round(_pixelPosition.Y);
+        return new Vector2(snappedX, snappedY);
+    }
+
+    /// <summary>
+    /// The player's current pixel-space position (top-left of sprite).
+    /// Used for saving/restoring position between scenes.
+    /// </summary>
+    public Vector2 Position
+    {
+        get => _pixelPosition;
+        set
+        {
+            _pixelPosition = value;
+            _initializedTileFromPosition = false; // force re-snap on next update
+        }
     }
 
 }

@@ -3,24 +3,32 @@
 ## Project Description (Anticipated Final Game): 
   This project is a simplified Pokémon-style game built with MonoGame. Players will explore a route leading to a town featuring a Pokémon Center and a Gym, where they can battle a gym trainer and leader. The game includes around 15–20 Pokémon, each with up to four learnable attacks, simplified stats (no IVs, EVs, or natures), and basic trainer AI that selects moves randomly. To streamline development, moves with similar effects and animations are reused, and complex battle mechanics like accuracy variations, priority moves, and status effects are omitted for a smoother early-game experience.
 
+## Key Update To Docummentation
+  -Most of our documentation and planning has been moved to a Jira board which has been made public and is available at the following link:
+  https://cse3902group6.atlassian.net/jira/software/projects/SCRUM/boards/1?atlOrigin=eyJpIjoiNzllMGE4ZjUxYTMxNDM2ODliZmQ4NGQ2NzdlMjEzNzgiLCJwIjoiaiJ9
+  -Pull requests were all done via github
+  -Backlog still remain IN THIS ZIP FILE as backlog.md
+
 ## Project structure (key folders)
 - We have 2 main folders within our root directory: Enter and Code Review
   - Within our Enter Directory we have a few key folders as well:
     - Classes which contains ALL classes
-      - Deeper we have directorys for different sub classes:
-        -Animations
-        -Behavior
-        -Sprites
-        -Input
-        -Content
+      - Deeper we have directories for different sub classes:
+        - Animations
+        - Behavior
+        - Cameras
+        - Physics
+        - Scenes
+        - Sprites
+        - Input
+        - Content
     - Interfaces which contains our few interfaces as of now
       - ISprite
       - IController
       - IPlayer
+      - IScene
+      - IState
     - Enter also has some floating cs files like Program, Core and Game
-  - Code Review is where we will place all of our pull code review markup files
-- Additionally we have a backlog.md in the root directory containing backlog info
-
 > Note: `Program.cs`, `Core.cs`, and `Game.cs` are planned to be organized into appropriate subfolders in a future refactor.
 
 ## Build & Run  
@@ -37,36 +45,40 @@
    dotnet run --project Enter/Enter.csproj
 
 ## Key Features
-- Fully animated player movement and overworld navigation
-- Trainer AI that approaches when the player enters their line of sight (even with collision wowwwwww)
-- Gen I starter Pokémon and their evolutions with front-attack animations
-- A Poké Ball throw and capture wobble animation
-- Ability to cycle tiles for variety and testing
-- A cycling view of all pokemon back sprites
+- Tile-based collision system that prevents the player from walking through solid objects
+- Accurate map boundary detection that keeps the player within the playable world
+- Scene handling for battles and wild encounters
+- Background on player and trainer removed
+- Pseudo route walkable by player and trainer approachable with triggerable battle
 
 ## Controls
-### Action	Key(s)
-- Move player:	Arrow Keys
-- Reset game state:	R
-- Cycle tiles:	Y / T
-- Switch trainer sprite:	O / P
-- Exit game:	Escape
+### Action  Key(s)
+- Move player:  Arrow Keys
+- Exit game:  Escape
+- Exit the battle scene with trainer: Tab
+- Enter Wild Encounter Scene - 'w' key press
+- Enter Trainer Battle - approach the trainer from the side
 
 ## Known Bugs & Limitations
-- Lacks a dedicated Pokemon class — management currently hard-coded
-- Heavy reliance on magic numbers and static logic
-- Missing proper state management — a state machine would improve structure
-- AI and battle systems are minimal and unrefined
-- SO SO SO many variables declared in game
+- Collision tiles are manually defined, requiring updates to TileCollisionProfile.cs whenever new tiles are added
+- Data handling for Pokémon and trainers is spread out over pokemon.cs and external classes
+  - Needs to be more centralized and consistent
 
 ## Planned Improvements
+- Add clear separation between walkable, solid, and interactive tiles within TileCollisionProfile.cs
+- Overall, get the game functioning
+- Be far more thorough and consistent with our code reviews
+  - We have a good structure in place, but some merges occurred without review/insufficient review was provided
+  - Or the review that was given did not follow our template
+
 ### Short-Term Goals
-- Implement Pokemon and Move classes for cleaner management
-- Introduce a simple state machine (Overworld, Battle, Dialogue, etc.)
-- Increase use of Dictionaries for move and species lookup
-- Reduce hard-coded values and improve abstraction
+- Add clear separation between walkable, solid, and interactive tiles within TileCollisionProfile.cs
+- Preserve player position when entering a battle scene
+- Use the Pokémon generator to make wild Pokémon truly random (including stats, etc).
 
 ### Long-Term Goals
-- Add camera follow and smoother overworld transitions
-- Expand move variety and visual polish
-- Strengthen architecture using consistent design patterns (e.g., Command pattern)
+- Integrate interaction zones (e.g., door triggers, tall grass, signposts) into the collision framework
+- Add dialogue for trainers and battle scenes
+- Integrate full animations for the battle sequence
+- Add sound
+- Have Pokémon appear after the Poké Ball is thrown

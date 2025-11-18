@@ -3,6 +3,7 @@ using Enter.Classes.Characters;
 using Enter.Classes.Behavior;
 using Microsoft.Xna.Framework;
 using Enter.Classes.Cameras;
+using Enter.Classes.Scenes;
 
 namespace Enter.Classes.Input;
 

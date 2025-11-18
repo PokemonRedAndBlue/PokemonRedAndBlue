@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -76,7 +77,6 @@ public class TilemapLayer
         int y0 = Math.Max(0, viewRect.Top / tileH);
         int x1 = Math.Min(cols - 1, (viewRect.Right - 1) / tileW);
         int y1 = Math.Min(rows - 1, (viewRect.Bottom - 1) / tileH);
-
         for (int y = y0; y <= y1; y++)
         {
             for (int x = x0; x <= x1; x++)
