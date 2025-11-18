@@ -70,6 +70,7 @@ dotnet mgcb build Content/Content.mgcb
 - Data handling for Pokémon and trainers is spread out over multiple classes (needs centralization)
 - Some merges occurred without full code review or did not follow the review template
 - Music and sound effect code/assets are present, but not yet fully implemented in gameplay
+- There is giant gray bars extending off HP bars, im not sure why that is happening, xml looks fine, will fix.
 
 ## Planned Improvements
 - Add clear separation between walkable, solid, and interactive tiles within TileCollisionProfile.cs
