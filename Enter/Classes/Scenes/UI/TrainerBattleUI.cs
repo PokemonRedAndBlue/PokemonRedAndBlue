@@ -55,6 +55,13 @@ public class TrainerBattleUI
         { "Run", 4 }
     };
 
+    private int playerCurrentHP = 0;
+    private int enemyCurrentHP = 0;
+    private int playerMaxHP = 0;
+    private int enemyMaxHP = 0;
+    private bool battleInitialized = false;
+    private string battleMessage = "";
+
     public TrainerBattleUI(TextureAtlas trainerUIAtlas, ContentManager content, String enemyTrainerID, Team playerTeam, Team enemyTeam)
     {
         // init class vars
@@ -122,6 +129,17 @@ public class TrainerBattleUI
         Pokemon enemyPokemon = _enemyTeam.Pokemons[0];
         _enemyPokemonSpriteFront = PokemonFrontFactory.Instance.CreateAnimatedSprite(enemyPokemon.Name.ToString().ToLower() + "-front");
 
+        // Initialize battle HP on first draw only
+        if (!battleInitialized)
+        {
+            playerCurrentHP = currentPokemon.Hp > 0 ? currentPokemon.Hp : 50; // fallback if 0
+            playerMaxHP = currentPokemon.MaxHp > 0 ? currentPokemon.MaxHp : 50;
+            enemyCurrentHP = enemyPokemon.Hp > 0 ? enemyPokemon.Hp : 50;
+            enemyMaxHP = enemyPokemon.MaxHp > 0 ? enemyPokemon.MaxHp : 50;
+            battleInitialized = true;
+            battleMessage = "";
+        }
+
         // draw the UI elements for wild encounter (state based)
         switch (_currentState)
         {
@@ -143,20 +161,64 @@ public class TrainerBattleUI
                 battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, false);
                 battleUI.DrawArrow(_TrainerUIAtlas, spriteBatch);
                 battleUI.moveArrow();
+
+                // Display HP
+                DrawHP(spriteBatch, playerCurrentHP, playerMaxHP, new Vector2(340, 220), "Player HP");
+                DrawHP(spriteBatch, enemyCurrentHP, enemyMaxHP, new Vector2(700, 100), "Enemy HP");
+                if (!string.IsNullOrEmpty(battleMessage))
+                {
+                    DrawMessage(spriteBatch, battleMessage);
+                }
                 break;
             case "Fight": // Fight
-                UIBaseSprites[2].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
-                // Simulate a win with N key
-                if (Keyboard.GetState().IsKeyDown(Keys.N))
+                UIBaseSprites[1].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
+                playersPokemon = currentPokemon.Name.ToString();
+                currentMon = PokemonBackFactory.Instance.CreateStaticSprite(playersPokemon.ToLower() + "-back");
+                // Simulate attack with A key
+                currentMon.Draw(spriteBatch, Color.White, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)), 4f);
+                _enemyPokemonSpriteFront.Draw(spriteBatch, Color.White, enemysPokemonPosition, 4f);
+                // draw new healt h 
+                battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, true);
+                battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, false);
+                if (Keyboard.GetState().IsKeyDown(Keys.A))
                 {
-                    _currentState = "End";
+                    // Player attacks enemy
+                    int playerDmg = 10; // fixed damage for demo
+                    int enemyDmg = 8;   // fixed damage for demo
+                    enemyCurrentHP -= playerDmg;
+                    if (enemyCurrentHP < 0) enemyCurrentHP = 0;
+                    battleMessage = $"Player attacks! Enemy loses {playerDmg} HP.";
+                    // Check for enemy faint
+                    if (enemyCurrentHP <= 0)
+                    {
+                        battleMessage = "You win!";
+                        _currentState = "End";
+                        break;
+                    }
+                    // Enemy attacks player
+                    playerCurrentHP -= enemyDmg;
+                    if (playerCurrentHP < 0) playerCurrentHP = 0;
+                    battleMessage += $"\nEnemy attacks! Player loses {enemyDmg} HP.";
+                    // Check for player faint
+                    if (playerCurrentHP <= 0)
+                    {
+                        battleMessage = "You lose!";
+                        _currentState = "End";
+                        break;
+                    }
+                    // Return to menu after attack
+                    _currentState = "Menu";
+                }
+                // Display HP and message
+                DrawHP(spriteBatch, playerCurrentHP, playerMaxHP, new Vector2(340, 220), "Player HP");
+                DrawHP(spriteBatch, enemyCurrentHP, enemyMaxHP, new Vector2(700, 100), "Enemy HP");
+                if (!string.IsNullOrEmpty(battleMessage))
+                {
+                    DrawMessage(spriteBatch, battleMessage);
                 }
                 break;
             case "Item": // Bag
                 UIBaseSprites[4].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
-                UIBaseSprites[3].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
-                break;
-            case "PkMn": // Pokemon
                 UIBaseSprites[3].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
                 break;
             case "Run": // Run (blocked in trainer battles)
@@ -171,7 +233,20 @@ public class TrainerBattleUI
                 break;
         }
     }
-    
+
+    private void DrawHP(SpriteBatch spriteBatch, int hp, int maxHp, Vector2 pos, string label)
+    {
+        // Draw player HP in black, enemy in white
+        Color color = label.Contains("Player") ? Color.Black : Color.White;
+        spriteBatch.DrawString(_font, $"{label}: {hp}/{maxHp}", pos, color);
+    }
+
+    private void DrawMessage(SpriteBatch spriteBatch, string message)
+    {
+        // Simple text output for messages
+        spriteBatch.DrawString(_font, message, new Vector2(340, 350), Color.Yellow);
+    }
+
     public string formatTrainerName(string trainerID)
     {
         // add .'s for any remaing characters available up to 11
