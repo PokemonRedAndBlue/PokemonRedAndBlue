@@ -50,6 +50,38 @@ namespace Enter.Classes.Scenes
 
         public void Update(GameTime gameTime)
         {
+
+            // Update the UI first to get user input
+            wildUI.Update(gameTime);
+
+            // Get current battle state decided by UI
+            string state = wildUI.battleUI.getBattleState();
+
+            switch (state)
+            {
+                case "Initial":
+                    // Wait for user to choose an action
+                    if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                    {
+                        // Transition to Menu state
+                        wildUI.battleUI.setBattleState("Menu");
+                    }
+                    break;
+                case "Menu":
+                    // UI handles menu navigation
+                    break;
+                case "Bag":
+                    // Handle bag logic
+                    break;
+                case "Pokemon":
+                    // Handle Pokemon switch logic
+                    break;
+                case "Run":
+                    // Handle run logic
+                    break;
+                default:
+                    break;
+            }
             // --- Wild Encounter Logic ---
             // Similar to trainer battle, but with different rules:
             // - Can run
