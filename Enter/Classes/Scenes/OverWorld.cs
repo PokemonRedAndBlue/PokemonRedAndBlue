@@ -62,14 +62,24 @@ namespace Enter.Classes.Scenes
             Cam = new(((Game)_game).GraphicsDevice.Viewport);
 
             // Only restore from Game1.SavedPlayerPosition if returning from a battle, else use this scene's last known position
-            Vector2 spawn = _playerPosition;
-            if ((_game as Game1)?.SavedPlayerPosition is Microsoft.Xna.Framework.Vector2 savedPos)
+            // Vector2 spawn = _playerPosition;
+            // if ((_game as Game1)?.SavedPlayerPosition is Microsoft.Xna.Framework.Vector2 savedPos)
+            // {
+            //     spawn = savedPos;
+            //     // Clear after use so it doesn't leak between scenes
+            //     (_game as Game1).SavedPlayerPosition = null;
+            // }
+            // SetPlayerPosition(spawn);
+
+            if (_game.SavedPlayerTiles.TryGetValue("overworld", out Point savedTile))
             {
-                spawn = savedPos;
-                // Clear after use so it doesn't leak between scenes
-                (_game as Game1).SavedPlayerPosition = null;
+                _player.SetTilePosition(savedTile + new Point(0, -1));
             }
-            SetPlayerPosition(spawn);
+            else
+            {
+                // Default location for this scene if no saved tile, (on first visit)
+                _player.SetTilePosition(new Point(10, 0));
+            }
 
             Cam.Update(_player);
             Cam.Zoom = ZoomLevel; //Zoom level of world
@@ -96,7 +106,6 @@ namespace Enter.Classes.Scenes
                 Physics.SolidTileCollision.IsSolid
             );
 
-            Cam.Update(_player);
         }
         // Static helper for other scenes to set the next spawn position before transitioning to overworld
         public static void SetNextSpawn(Vector2 pos)
@@ -116,8 +125,9 @@ namespace Enter.Classes.Scenes
                 if (!_game.IsTrainerDefeated(trainer.TrainerID))
                 {
                     // Save the actual player position before battle
-                    _playerPosition = _player.Position;
-                    _game.SavedPlayerPosition = _player.Position;
+                    // _playerPosition = _player.Position;
+                    // _game.SavedPlayerPosition = _player.Position;
+                    _game.SavedPlayerTiles["overworld"] = _player.TilePos + new Point(0, 1);
                     _sceneManager.TransitionTo("trainer");
                 }
                 // If trainer is defeated, they're just interacting without battle
@@ -129,10 +139,26 @@ namespace Enter.Classes.Scenes
             if (keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.W))
             {
                 // Save the actual player position before wild battle
-                _playerPosition = _player.Position;
-                _game.SavedPlayerPosition = _player.Position;
+                // _playerPosition = _player.Position;
+                // _game.SavedPlayerPosition = _player.Position;
+                _game.SavedPlayerTiles["overworld"] = _player.TilePos + new Point(0, 1);
                 _sceneManager.TransitionTo("wild");
             }
+
+            Vector2 PlayerPosition = GetPlayerPosition();
+            Point exit = _player.TilePos;
+            //Console.WriteLine("exit Tile pos: " + exit);
+            if (exit.X == 10 && exit.Y == 35)
+            {
+                _game.SavedPlayerTiles["overworld"] = _player.TilePos;
+                _sceneManager.TransitionTo("overworld_city");
+            }
+            if(exit.X == 11 && exit.Y == 35)
+            {
+                _game.SavedPlayerTiles["overworld"] = _player.TilePos;
+                _sceneManager.TransitionTo("overworld_city");
+            }
+
             // no need for base.Update here
         }
 

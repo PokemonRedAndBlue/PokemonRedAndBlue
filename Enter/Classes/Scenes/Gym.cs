@@ -72,6 +72,16 @@ namespace Enter.Classes.Scenes
             }
             SetPlayerPosition(spawn);
 
+            if (_game.SavedPlayerTiles.TryGetValue("gym", out Point savedTile))
+            {
+                player.SetTilePosition(savedTile + new Point(0, -1));
+            }
+            else
+            {
+                // Default location for this scene if no saved tile, (on first visit)
+                player.SetTilePosition(new Point(5, 12));
+            }
+
             Cam.Update(player);
             Cam.Zoom = ZoomLevel; //Zoom level of world
             trainer = new Trainer(
@@ -102,11 +112,25 @@ namespace Enter.Classes.Scenes
             Cam.Update(player);
 
             // Force a battle with trainer interaction
-            if (trainer.colided){
+            if (trainer.colided)
+            {
                 // Save the actual player position before battle
                 _playerPosition = player.Position;
                 _game.SavedPlayerPosition = player.Position;
                 _sceneManager.TransitionTo("trainer");
+            }
+            Vector2 PlayerPosition = GetPlayerPosition();
+            Point exit = player.TilePos;
+            //System.Console.WriteLine("exit Tile pos: " + exit);
+            if (exit.X == 4 && exit.Y == 13)
+            {
+                _game.SavedPlayerTiles["gym"] = player.TilePos;
+                _sceneManager.TransitionTo("overworld_city");
+            }
+            if (exit.X == 5 && exit.Y == 13)
+            {
+                _game.SavedPlayerTiles["gym"] = player.TilePos;
+                _sceneManager.TransitionTo("overworld_city");
             }
             // no need for base.Update here
         }

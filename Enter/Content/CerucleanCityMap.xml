@@ -25,7 +25,7 @@
          84=gym-top-dual-window, 85=gym-top-left-roof, 86=gym-bottom-left-roof, 87=gym-left-window-wall,
          88=gym-bottom-dual-window, 89=mart-top-left-roof, 90=mart-top-mid-roof, 91=mart-top-right-roof,
          92=mart-bottom-left-roof, 93=mart-bottom-mid-roof, 94=mart-bottom-right-roof, 95=gym-top-roof, 96=gym-top-right-roof
-         97=gym-mid-right-roof, 98=gym-bottom-right-roof, 99=gym-bottom-left-roof, 100=mart-sign-empty -->
+         97=gym-mid-right-roof, 98=gym-bottom-right-roof, 99=gym-bottom-left-roof, 100=mart-sign-empty , 101=elevated-water --> 
 
     
     <Layer name="Ground">
