@@ -215,9 +215,9 @@ public String handleArrowEvent(int currentCol, int currentRow)
     public void drawHealthBar(Pokemon poke, Sprite greenMax, Sprite midYellow, Sprite redLow, SpriteBatch spriteBatch, Boolean isPlayersTeam)
     {
         // split max health into 3 sections
-        int topThird = poke.MaxHp * (2 / 3);
-        int midThird = poke.MaxHp * (1 / 3);
-        int currentHp = poke.Hp;
+        double topThird = poke.MaxHp * (2.0 / 3.0);
+        double midThird = poke.MaxHp * (1.0 / 3.0);
+        double currentHp = poke.Hp;
 
         if(isPlayersTeam)
         {

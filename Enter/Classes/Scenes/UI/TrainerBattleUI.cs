@@ -40,6 +40,8 @@ public class TrainerBattleUI
     static private Vector2 _borderPostion = new Vector2(uiBasePosition.X - (48 * _scale), uiBasePosition.Y - (40 * _scale) + 1);
     static private Vector2 enemysPokemonPosition = new Vector2(uiBasePosition.X + (96 * _scale), uiBasePosition.Y);
     static private Vector2 maxDrawPos = new Vector2(0, uiBasePosition.Y + (103 * _scale));
+    public Boolean resetBattle = false;
+    public Boolean didRunOrCatch = false;
     static private Team _playerTeam;
     static private Team _enemyTeam;
     static private Sprite _border;
@@ -153,16 +155,16 @@ public class TrainerBattleUI
                 battleUI.moveArrow();
                 break;
             case "Fight": // Fight
-                UIBaseSprites[1].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
-                break;
-            case "Bag": // Bag
                 UIBaseSprites[2].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
                 break;
-            case "Pokemon": // Pokemon
+            case "Item": // Bag
+                UIBaseSprites[4].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
+                break;
+            case "PkMn": // Pokemon
                 UIBaseSprites[3].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
                 break;
             case "Run": // Run
-                UIBaseSprites[4].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
+                didRunOrCatch = true;
                 break;
             default:
                 UIBaseSprites[0].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
