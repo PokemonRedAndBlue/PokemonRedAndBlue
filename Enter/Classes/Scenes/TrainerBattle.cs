@@ -68,36 +68,19 @@ namespace Enter.Classes.Scenes
 
         public void Update(GameTime gameTime)
         {
-            // --- Battle Logic ---
-            // Similar to wild battle, but with different rules:
-            // - Cannot run
-            // - Cannot catch Pokemon
-            // - Trainer may switch Pokemon
-            
-            // --- Transition Logic ---
-            // if (PlayerWon || TrainerWon)
-            // {
-                 if (Keyboard.GetState().IsKeyDown(Keys.Tab)) // Placeholder for battle end condition
-                 {
-                     // Mark this specific trainer as defeated using their ID
-                     if (_game is Game1 game)
-                     {
-                         game.MarkTrainerDefeated(_trainerID);
-                         // Save the player's last position for the overworld/city/gym
-                         if (game.SavedPlayerPosition.HasValue)
-                         {
-                             // Only set next spawn for overworld if returning there
-                             if (_returnSceneName == "overworld")
-                                 Enter.Classes.Scenes.OverworldScene.SetNextSpawn(game.SavedPlayerPosition.Value);
-                         }
-                     }
-                     _sceneManager.TransitionTo(_returnSceneName ?? "overworld");
-                 }
-            // }
             // update UI
             _trainerUI.Update(gameTime);
-        }
 
+            if(_trainerUI.didRunOrCatch || _trainerUI.resetBattle){
+                    // Save the player's last position for the overworld
+                    if ((_game as Game1)?.SavedPlayerPosition is Microsoft.Xna.Framework.Vector2 savedPos)
+                    {
+                        Enter.Classes.Scenes.OverworldScene.SetNextSpawn(savedPos);
+                    }
+                    (_game as Game1)?.MarkTrainerDefeated(_trainerID);
+                    _sceneManager.TransitionTo("overworld");
+                }
+        }
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();

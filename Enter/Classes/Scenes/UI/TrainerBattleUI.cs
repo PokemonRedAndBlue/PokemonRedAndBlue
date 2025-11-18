@@ -162,7 +162,7 @@ public class TrainerBattleUI
                 UIBaseSprites[4].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
                 KeyboardState keyStates = Keyboard.GetState();
                 UIBaseSprites[3].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
-                if (keyStates.IsKeyDown(Keys.R))
+                if (keyStates.IsKeyDown(Keys.N))
                 {
                     resetBattle = true;
                 }
@@ -170,7 +170,7 @@ public class TrainerBattleUI
             case "PkMn": // Pokemon
                 KeyboardState keyState = Keyboard.GetState();
                 UIBaseSprites[3].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
-                if (keyState.IsKeyDown(Keys.R))
+                if (keyState.IsKeyDown(Keys.N))
                 {
                     resetBattle = true;
                 }

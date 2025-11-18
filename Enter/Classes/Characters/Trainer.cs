@@ -67,9 +67,6 @@ public class Trainer
         // If trainer has been defeated, they can't trigger battles or freeze the player
         if (HasBeenDefeated)
         {
-            // Ensure trainer does not follow or approach after defeat
-            _visible = false;
-            IsApproachingPlayer = false;
             // Optionally: allow dialogue if close, but do NOT set colided or freeze player
             _sprite.IdleReset(_facing);
             return;

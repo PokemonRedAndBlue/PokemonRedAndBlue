@@ -125,10 +125,14 @@ namespace Enter.Classes.Scenes
             }
 
             // Mark trainers as defeated if their ID is in the defeated list (after returning from battle)
-            if (_game.IsTrainerDefeated(trainer1.TrainerID))
+            if (_game.IsTrainerDefeated(trainer1.TrainerID)) {
                 trainer1.HasBeenDefeated = true;
-            if (_game.IsTrainerDefeated(trainer2.TrainerID))
+                trainer1.colided = false;
+            }
+            if (_game.IsTrainerDefeated(trainer2.TrainerID)) {
                 trainer2.HasBeenDefeated = true;
+                trainer2.colided = false;
+            }
 
             // If neither trainer is colliding, ensure player is not frozen
             if (!trainer1.colided && !trainer2.colided)
