@@ -254,8 +254,6 @@ public class TrainerBattleUI
                 UIBaseSprites[1].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
                 playersPokemon = currentPokemon.Name.ToString();
                 currentMon = PokemonBackFactory.Instance.CreateStaticSprite(playersPokemon.ToLower() + "-back");
-                currentMon.Draw(spriteBatch, Color.White, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)), 4f);
-                _enemyPokemonSpriteFront.Draw(spriteBatch, Color.White, enemysPokemonPosition, 4f);
                 if (!endMessageActive && currentTurn == BattleTurn.Player && Keyboard.GetState().IsKeyDown(Keys.A))
                 {
                     // Player attacks enemy (random damage 0-20)
@@ -288,6 +286,9 @@ public class TrainerBattleUI
                 battleUI.drawHealthBar(enemyCurrentHP, enemyMaxHP, greenBar, yellowBar, redBar, spriteBatch, false);
                 DrawHP(spriteBatch, playerCurrentHP, playerMaxHP, new Vector2(340, 220), "Player HP");
                 DrawHP(spriteBatch, enemyCurrentHP, enemyMaxHP, new Vector2(700, 100), "Enemy HP");
+                // draw after HP bars so its on top of gaint gray bars
+                currentMon.Draw(spriteBatch, Color.White, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)), 4f);
+                _enemyPokemonSpriteFront.Draw(spriteBatch, Color.White, enemysPokemonPosition, 4f);
                 if (!string.IsNullOrEmpty(battleMessage))
                 {
                     DrawMessage(spriteBatch, battleMessage);
