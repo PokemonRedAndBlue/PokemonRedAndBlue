@@ -126,57 +126,45 @@ public class TrainerBattleUI
         switch (_currentState)
         {
             case "Initial": // Initial
-                // draw base UI
                 UIBaseSprites[0].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
-                // draw player trainer sprite
                 _trainerSpriteBack.Draw(spriteBatch, Color.White, playerTrainerPosition, 8f);
-                // draw enemy trainer sprite
                 _enemyTrainerSpriteFront.Draw(spriteBatch, Color.White, enemyTrainerPosition, 4f);
-                // draw enemy trainer name
                 _enemyTrainerIDSprite.DrawTextSpriteWithScale(spriteBatch, enemyTrainerIDPosition, 2f);
-                // draw player trainer party bar
                 BattleUIHelper.drawPokeballSprites(_playerTeam, _TrainerUIAtlas, spriteBatch, true);
-                // draw enemy trainer party bar
                 BattleUIHelper.drawPokeballSprites(_enemyTeam, _TrainerUIAtlas, spriteBatch, false);
                 break;
-            case "Menu": 
-                // draw base UI
+            case "Menu":
                 UIBaseSprites[1].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
-                // draw players pokemon sprite, get first alive pokemon
                 String playersPokemon = currentPokemon.Name.ToString();
-                Sprite currentMon = PokemonBackFactory.Instance.CreateStaticSprite( playersPokemon.ToLower()+ "-back");
+                Sprite currentMon = PokemonBackFactory.Instance.CreateStaticSprite(playersPokemon.ToLower() + "-back");
                 currentMon.Draw(spriteBatch, Color.White, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)), 4f);
-                // draw opponent pokemon sprite
                 _enemyPokemonSpriteFront.Draw(spriteBatch, Color.White, enemysPokemonPosition, 4f);
-                // draw both health
                 battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, true);
                 battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, false);
-                // arrow handling logic
                 battleUI.DrawArrow(_TrainerUIAtlas, spriteBatch);
                 battleUI.moveArrow();
                 break;
             case "Fight": // Fight
                 UIBaseSprites[2].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
+                // Simulate a win with N key
+                if (Keyboard.GetState().IsKeyDown(Keys.N))
+                {
+                    _currentState = "End";
+                }
                 break;
             case "Item": // Bag
                 UIBaseSprites[4].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
-                KeyboardState keyStates = Keyboard.GetState();
                 UIBaseSprites[3].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
-                if (keyStates.IsKeyDown(Keys.N))
-                {
-                    resetBattle = true;
-                }
                 break;
             case "PkMn": // Pokemon
-                KeyboardState keyState = Keyboard.GetState();
                 UIBaseSprites[3].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
-                if (keyState.IsKeyDown(Keys.N))
-                {
-                    resetBattle = true;
-                }
                 break;
-            case "Run": // Run
-                didRunOrCatch = true;
+            case "Run": // Run (blocked in trainer battles)
+                // Show a message or just ignore; here, just ignore and return to menu
+                _currentState = "Menu";
+                break;
+            case "End": // End state, triggers battle exit
+                resetBattle = true;
                 break;
             default:
                 UIBaseSprites[0].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
