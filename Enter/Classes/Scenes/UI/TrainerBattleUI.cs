@@ -160,6 +160,12 @@ public class TrainerBattleUI
                 break;
             case "Item": // Bag
                 UIBaseSprites[4].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
+                KeyboardState keyStates = Keyboard.GetState();
+                UIBaseSprites[3].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
+                if (keyStates.IsKeyDown(Keys.R))
+                {
+                    resetBattle = true;
+                }
                 break;
             case "PkMn": // Pokemon
                 KeyboardState keyState = Keyboard.GetState();
