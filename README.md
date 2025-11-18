@@ -51,6 +51,11 @@ dotnet mgcb build Content/Content.mgcb
 - Pseudo route walkable by player and trainer approachable with triggerable battle
 - Tile-memory system using a dictionary, so tile positions are saved per scene
 - Level-transitioning logic between scenes which is built upon the new tile-based movement
+- Turn-based battle UI with state machine
+- Health bar logic: color-only (green/yellow/red, always full width) or percent-based (scaled by HP)
+- Sprite and texture atlas system
+- XML-driven data for Pokémon, moves, maps, etc.
+- Music and sound effect code/assets present (see below)
 
 ## Controls
 ### Action  Key(s)
@@ -62,11 +67,6 @@ dotnet mgcb build Content/Content.mgcb
 - Walk to the bottom of Route 1 to get to Cerulean City
 - Walk to the left of Cerulean City to get to Route 1
 - Walk to the door of the Gym within the Cerulean City to get into the Gym
-- Turn-based battle UI with state machine
-- Health bar logic: color-only (green/yellow/red, always full width) or percent-based (scaled by HP)
-- Sprite and texture atlas system
-- XML-driven data for Pokémon, moves, maps, etc.
-- Music and sound effect code/assets present (see below)
 
 ## Controls
 | Action                        | Key(s)         |
