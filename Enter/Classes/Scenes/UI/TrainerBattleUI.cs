@@ -8,6 +8,7 @@ using System.Data;
 using System.Collections.Generic;
 using Enter.Classes.Animations;
 using PokemonGame;
+using Microsoft.Xna.Framework.Input;
 
 public class TrainerBattleUI
 {
@@ -161,7 +162,12 @@ public class TrainerBattleUI
                 UIBaseSprites[4].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
                 break;
             case "PkMn": // Pokemon
+                KeyboardState keyState = Keyboard.GetState();
                 UIBaseSprites[3].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
+                if (keyState.IsKeyDown(Keys.R))
+                {
+                    resetBattle = true;
+                }
                 break;
             case "Run": // Run
                 didRunOrCatch = true;
