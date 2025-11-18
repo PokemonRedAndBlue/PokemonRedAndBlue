@@ -47,6 +47,21 @@ dotnet mgcb build Content/Content.mgcb
 - Tile-based collision system that prevents the player from walking through solid objects
 - Accurate map boundary detection that keeps the player within the playable world
 - Scene handling for battles and wild encounters
+- Background on player and trainer removed
+- Pseudo route walkable by player and trainer approachable with triggerable battle
+- Tile-memory system using a dictionary, so tile positions are saved per scene
+- Level-transitioning logic between scenes which is built upon the new tile-based movement
+
+## Controls
+### Action  Key(s)
+- Move player:  Arrow Keys
+- Exit game:  Escape
+- Exit the battle scene with trainer: Tab
+- Enter Wild Encounter Scene - 'w' key press
+- Enter Trainer Battle - approach the trainer from the side
+- Walk to the bottom of Route 1 to get to Cerulean City
+- Walk to the left of Cerulean City to get to Route 1
+- Walk to the door of the Gym within the Cerulean City to get into the Gym
 - Turn-based battle UI with state machine
 - Health bar logic: color-only (green/yellow/red, always full width) or percent-based (scaled by HP)
 - Sprite and texture atlas system
@@ -82,6 +97,11 @@ dotnet mgcb build Content/Content.mgcb
 - Add dialogue and more animations for battle scenes
 - Expand XML-driven content (Pokémon, moves, maps)
 
+### Short-Term Goals
+- Add clear separation between walkable, solid, and interactive tiles within TileCollisionProfile.cs
+- Preserve player position when entering a battle scene
+- Use the Pokémon generator to make wild Pokémon truly random (including stats, etc).
+- Extract common scene initialization into one base class to reduce code duplication
 ## Recent Developments
 - Health bars now use color-only logic (green/yellow/red) and reflect local HP values
 - Instructional messages:
