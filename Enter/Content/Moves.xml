@@ -1,18 +1,36 @@
 <Moves>
-    <Move name="Tackle" type="Normal" power="40" accuracy="100" />
-    <Move name="Growl" type="Normal" power="-1" accuracy="100" />
-    <Move name="Vine Whip" type="Grass" power="45" accuracy="100" />
-    <Move name="Growth" type="Normal" power="-1" accuracy="-1" />
-    <Move name="Leech Seed" type="Grass" power="-1" accuracy="90" />
-    <Move name="Razor Leaf" type="Grass" power="55" accuracy="95" />
-    <Move name="Poison Powder" type="Poison" power="-1" accuracy="75" />
-    <Move name="Sleep Powder" type="Grass" power="-1" accuracy="75" />
-    <Move name="Seed Bomb" type="Grass" power="80" accuracy="100" />
-    <Move name="Take Down" type="Normal" power="90" accuracy="85" />
-    <Move name="Sweet Scent" type="Normal" power="-1" accuracy="100" />
-    <Move name="Synthesis" type="Grass" power="-1" accuracy="-1" />
-    <Move name="Worry Seed" type="Grass" power="-1" accuracy="100" />
-    <Move name="Double-Edge" type="Normal" power="120" accuracy="100" />
-    <Move name="Solar Beam" type="Grass" power="120" accuracy="100" />
-    <Move name="Petal Blizzard" type="Grass" power="90" accuracy="100" />
+    <Move name="Astonish"        type="Ghost"    power="30"  category="Physical" />
+    <Move name="Bite"            type="Dark"     power="60"  category="Physical" />
+    <Move name="Body Slam"       type="Normal"   power="85"  category="Physical" />
+    <Move name="Bug Bite"        type="Bug"      power="60"  category="Physical" />
+    <Move name="Bulldoze"        type="Ground"   power="60"  category="Physical" />
+    <Move name="Confusion"       type="Psychic"  power="50"  category="Special" />
+    <Move name="Covet"           type="Normal"   power="60"  category="Physical" />
+    <Move name="Disarming Voice" type="Fairy"    power="40"  category="Special" />
+    <Move name="Dragon Breath"   type="Dragon"   power="60"  category="Special" />
+    <Move name="Ember"           type="Fire"     power="40"  category="Special" />
+    <Move name="Energy Ball"     type="Grass"    power="90"  category="Special" />
+    <Move name="Extrasensory"    type="Psychic"  power="80"  category="Special" />
+    <Move name="Feint"           type="Normal"   power="30"  category="Physical" />
+    <Move name="Fire Fang"       type="Fire"     power="65"  category="Physical" />
+    <Move name="Gust"            type="Flying"   power="40"  category="Special" />
+    <Move name="Headbutt"        type="Normal"   power="70"  category="Physical" />
+    <Move name="Horn Attack"     type="Normal"   power="65"  category="Physical" />
+    <Move name="Icy Wind"        type="Ice"      power="55"  category="Special" />
+    <Move name="Iron Tail"       type="Steel"    power="100" category="Physical" />
+    <Move name="Lick"            type="Ghost"    power="30"  category="Physical" />
+    <Move name="Magical Leaf"    type="Grass"    power="60"  category="Special" />
+    <Move name="Nuzzle"          type="Electric" power="20"  category="Physical" />
+    <Move name="Peck"            type="Flying"   power="35"  category="Physical" />
+    <Move name="Poison Sting"    type="Poison"   power="15"  category="Physical" />
+    <Move name="Scratch"         type="Normal"   power="40"  category="Physical" />
+    <Move name="Sludge Wave"     type="Poison"   power="95"  category="Special" />
+    <Move name="Swift"           type="Normal"   power="60"  category="Special" />
+    <Move name="Tackle"          type="Normal"   power="40"  category="Physical" />
+    <Move name="Thunder Shock"   type="Electric" power="40"  category="Special" />
+    <Move name="Twister"         type="Dragon"   power="40"  category="Special" />
+    <Move name="Vine Whip"       type="Grass"    power="45"  category="Physical" />
+    <Move name="Water Gun"       type="Water"    power="40"  category="Special" />
+    <Move name="Wing Attack"     type="Flying"   power="60"  category="Physical" />
+    <Move name="Zen Headbutt"    type="Psychic"  power="80"  category="Physical" />
 </Moves>

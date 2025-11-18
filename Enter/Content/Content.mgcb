@@ -61,6 +61,18 @@
 /processorParam:TextureFormat=Color
 /build:images/Pokemon_BACK.png
 
+#begin images/Pokemon_Characters_old.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/Pokemon_Characters_old.png
+
 #begin images/Pokemon_Characters.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -86,9 +98,7 @@
 /build:images/Pokemon_FRONT.png
 
 #begin Moves.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:Moves.xml
+/copy:Moves.xml
 
 #begin Pokemon_BACK.xml
 /copy:Pokemon_BACK.xml
@@ -107,23 +117,20 @@
 /build:PokemonFont.spritefont
 
 #begin PokemonXML/001.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:PokemonXML/001.xml
+/copy:PokemonXML/001.xml
 
 #begin PokemonXML/002.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:PokemonXML/002.xml
+/copy:PokemonXML/002.xml
 
 #begin PokemonXML/003.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:PokemonXML/003.xml
+/copy:PokemonXML/003.xml
 
 #begin Route1Map.xml
 /copy:Route1Map.xml
 
 #begin Tiles.xml
 /copy:Tiles.xml
+
+#begin type_chart.xml
+/copy:type_chart.xml
 

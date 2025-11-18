@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TypeChart>
+  <Attack type="Normal">
+    <Effectiveness target="Rock" multiplier="0.5"/>
+    <Effectiveness target="Steel" multiplier="0.5"/>
+    <Effectiveness target="Ghost" multiplier="0"/>
+  </Attack>
+
+  <Attack type="Fire">
+    <Effectiveness target="Grass" multiplier="2"/>
+    <Effectiveness target="Ice" multiplier="2"/>
+    <Effectiveness target="Bug" multiplier="2"/>
+    <Effectiveness target="Steel" multiplier="2"/>
+    <Effectiveness target="Fire" multiplier="0.5"/>
+    <Effectiveness target="Water" multiplier="0.5"/>
+    <Effectiveness target="Rock" multiplier="0.5"/>
+    <Effectiveness target="Dragon" multiplier="0.5"/>
+  </Attack>
+
+  <Attack type="Water">
+    <Effectiveness target="Fire" multiplier="2"/>
+    <Effectiveness target="Ground" multiplier="2"/>
+    <Effectiveness target="Rock" multiplier="2"/>
+    <Effectiveness target="Water" multiplier="0.5"/>
+    <Effectiveness target="Grass" multiplier="0.5"/>
+    <Effectiveness target="Dragon" multiplier="0.5"/>
+  </Attack>
+
+  <Attack type="Electric">
+    <Effectiveness target="Water" multiplier="2"/>
+    <Effectiveness target="Flying" multiplier="2"/>
+    <Effectiveness target="Electric" multiplier="0.5"/>
+    <Effectiveness target="Grass" multiplier="0.5"/>
+    <Effectiveness target="Dragon" multiplier="0.5"/>
+    <Effectiveness target="Ground" multiplier="0"/>
+  </Attack>
+
+  <Attack type="Grass">
+    <Effectiveness target="Water" multiplier="2"/>
+    <Effectiveness target="Ground" multiplier="2"/>
+    <Effectiveness target="Rock" multiplier="2"/>
+    <Effectiveness target="Fire" multiplier="0.5"/>
+    <Effectiveness target="Grass" multiplier="0.5"/>
+    <Effectiveness target="Poison" multiplier="0.5"/>
+    <Effectiveness target="Flying" multiplier="0.5"/>
+    <Effectiveness target="Bug" multiplier="0.5"/>
+    <Effectiveness target="Dragon" multiplier="0.5"/>
+    <Effectiveness target="Steel" multiplier="0.5"/>
+  </Attack>
+
+  <Attack type="Ice">
+    <Effectiveness target="Grass" multiplier="2"/>
+    <Effectiveness target="Ground" multiplier="2"/>
+    <Effectiveness target="Flying" multiplier="2"/>
+    <Effectiveness target="Dragon" multiplier="2"/>
+    <Effectiveness target="Fire" multiplier="0.5"/>
+    <Effectiveness target="Water" multiplier="0.5"/>
+    <Effectiveness target="Ice" multiplier="0.5"/>
+    <Effectiveness target="Steel" multiplier="0.5"/>
+  </Attack>
+
+  <Attack type="Fighting">
+    <Effectiveness target="Normal" multiplier="2"/>
+    <Effectiveness target="Ice" multiplier="2"/>
+    <Effectiveness target="Rock" multiplier="2"/>
+    <Effectiveness target="Dark" multiplier="2"/>
+    <Effectiveness target="Steel" multiplier="2"/>
+    <Effectiveness target="Poison" multiplier="0.5"/>
+    <Effectiveness target="Flying" multiplier="0.5"/>
+    <Effectiveness target="Psychic" multiplier="0.5"/>
+    <Effectiveness target="Bug" multiplier="0.5"/>
+    <Effectiveness target="Fairy" multiplier="0.5"/>
+    <Effectiveness target="Ghost" multiplier="0"/>
+  </Attack>
+
+  <Attack type="Poison">
+    <Effectiveness target="Grass" multiplier="2"/>
+    <Effectiveness target="Fairy" multiplier="2"/>
+    <Effectiveness target="Poison" multiplier="0.5"/>
+    <Effectiveness target="Ground" multiplier="0.5"/>
+    <Effectiveness target="Rock" multiplier="0.5"/>
+    <Effectiveness target="Ghost" multiplier="0.5"/>
+    <Effectiveness target="Steel" multiplier="0"/>
+  </Attack>
+
+  <Attack type="Ground">
+    <Effectiveness target="Fire" multiplier="2"/>
+    <Effectiveness target="Electric" multiplier="2"/>
+    <Effectiveness target="Poison" multiplier="2"/>
+    <Effectiveness target="Rock" multiplier="2"/>
+    <Effectiveness target="Steel" multiplier="2"/>
+    <Effectiveness target="Grass" multiplier="0.5"/>
+    <Effectiveness target="Bug" multiplier="0.5"/>
+    <Effectiveness target="Flying" multiplier="0"/>
+  </Attack>
+
+  <Attack type="Flying">
+    <Effectiveness target="Grass" multiplier="2"/>
+    <Effectiveness target="Fighting" multiplier="2"/>
+    <Effectiveness target="Bug" multiplier="2"/>
+    <Effectiveness target="Electric" multiplier="0.5"/>
+    <Effectiveness target="Rock" multiplier="0.5"/>
+    <Effectiveness target="Steel" multiplier="0.5"/>
+  </Attack>
+
+  <Attack type="Psychic">
+    <Effectiveness target="Fighting" multiplier="2"/>
+    <Effectiveness target="Poison" multiplier="2"/>
+    <Effectiveness target="Psychic" multiplier="0.5"/>
+    <Effectiveness target="Steel" multiplier="0.5"/>
+    <Effectiveness target="Dark" multiplier="0"/>
+  </Attack>
+
+  <Attack type="Bug">
+    <Effectiveness target="Grass" multiplier="2"/>
+    <Effectiveness target="Psychic" multiplier="2"/>
+    <Effectiveness target="Dark" multiplier="2"/>
+    <Effectiveness target="Fire" multiplier="0.5"/>
+    <Effectiveness target="Fighting" multiplier="0.5"/>
+    <Effectiveness target="Poison" multiplier="0.5"/>
+    <Effectiveness target="Flying" multiplier="0.5"/>
+    <Effectiveness target="Ghost" multiplier="0.5"/>
+    <Effectiveness target="Steel" multiplier="0.5"/>
+    <Effectiveness target="Fairy" multiplier="0.5"/>
+  </Attack>
+
+  <Attack type="Rock">
+    <Effectiveness target="Fire" multiplier="2"/>
+    <Effectiveness target="Ice" multiplier="2"/>
+    <Effectiveness target="Flying" multiplier="2"/>
+    <Effectiveness target="Bug" multiplier="2"/>
+    <Effectiveness target="Fighting" multiplier="0.5"/>
+    <Effectiveness target="Ground" multiplier="0.5"/>
+    <Effectiveness target="Steel" multiplier="0.5"/>
+  </Attack>
+
+  <Attack type="Ghost">
+    <Effectiveness target="Psychic" multiplier="2"/>
+    <Effectiveness target="Ghost" multiplier="2"/>
+    <Effectiveness target="Dark" multiplier="0.5"/>
+    <Effectiveness target="Normal" multiplier="0"/>
+  </Attack>
+
+  <Attack type="Dragon">
+    <Effectiveness target="Dragon" multiplier="2"/>
+    <Effectiveness target="Steel" multiplier="0.5"/>
+    <Effectiveness target="Fairy" multiplier="0"/>
+  </Attack>
+
+  <Attack type="Dark">
+    <Effectiveness target="Psychic" multiplier="2"/>
+    <Effectiveness target="Ghost" multiplier="2"/>
+    <Effectiveness target="Fighting" multiplier="0.5"/>
+    <Effectiveness target="Dark" multiplier="0.5"/>
+    <Effectiveness target="Fairy" multiplier="0.5"/>
+  </Attack>
+
+  <Attack type="Steel">
+    <Effectiveness target="Ice" multiplier="2"/>
+    <Effectiveness target="Rock" multiplier="2"/>
+    <Effectiveness target="Fairy" multiplier="2"/>
+    <Effectiveness target="Fire" multiplier="0.5"/>
+    <Effectiveness target="Water" multiplier="0.5"/>
+    <Effectiveness target="Electric" multiplier="0.5"/>
+    <Effectiveness target="Steel" multiplier="0.5"/>
+  </Attack>
+
+  <Attack type="Fairy">
+    <Effectiveness target="Fighting" multiplier="2"/>
+    <Effectiveness target="Dragon" multiplier="2"/>
+    <Effectiveness target="Dark" multiplier="2"/>
+    <Effectiveness target="Fire" multiplier="0.5"/>
+    <Effectiveness target="Poison" multiplier="0.5"/>
+    <Effectiveness target="Steel" multiplier="0.5"/>
+  </Attack>
+</TypeChart>
