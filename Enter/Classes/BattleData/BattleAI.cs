@@ -13,7 +13,7 @@ public static class BattleAI
         int bestDamage = -1;
 
         // The attacker.Species.Moves contains the move NAMES from your XML
-        foreach (string moveName in attacker.Moves)
+        foreach (string moveName in attacker.Species.Moves)
         {
             Move move = MoveDatabase.Get(moveName);
 

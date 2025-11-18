@@ -9,11 +9,12 @@ using Microsoft.VisualBasic;
 
 class PokemonGenerator
 {
-    public static  readonly string filePath = "Content/pokemon_stats.xml";
+    public static readonly string filePath = "Content/pokemon_stats.xml";
+
+    public static Random rand = new Random();
 
     public static PokemonInstance GenerateWildPokemon()
     {
-        var rand = new Random();
         int randomDex = rand.Next(1, 20); // 001–003 range
 
         var species = GenerateSpecies(randomDex);
@@ -22,7 +23,7 @@ class PokemonGenerator
         var ivs = RandomIV();
 
         // Random level between 1–100
-        int randomLevel = rand.Next(1, 101);
+        int randomLevel = rand.Next(1, 13);
 
         // Create the Pokémon instance
         var instance = new PokemonInstance(species, ivs, randomLevel);
@@ -47,8 +48,6 @@ class PokemonGenerator
 
     public static IVSet RandomIV()
     {
-        var rand = new Random();
-
         var ivs = new IVSet
         {
             HP = rand.Next(0, 32),

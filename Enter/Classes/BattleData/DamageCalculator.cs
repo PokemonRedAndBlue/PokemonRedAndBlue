@@ -29,7 +29,7 @@ public static class DamageCalculator
 
         //Modifier (STAB * TypeEffectiveness * Random)
         double modifier =
-            GetSTAB(attacker, move.Name) *
+            GetSTAB(attacker, move.Type) *
             GetTypeEffectiveness(move.Type, defender.Species.Type1, defender.Species.Type2) *
             GetRandom();
 
