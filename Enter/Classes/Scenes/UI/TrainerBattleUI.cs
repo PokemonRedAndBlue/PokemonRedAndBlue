@@ -105,10 +105,17 @@ public class TrainerBattleUI
             if (turnTimer >= CpuAttackDelayMs)
             {
                 // CPU attacks
-                int enemyDmg = 8;
+                int enemyDmg = new Random().Next(0, 11);
                 playerCurrentHP -= enemyDmg;
                 if (playerCurrentHP < 0) playerCurrentHP = 0;
-                battleMessage = $"Enemy attacks! Player loses {enemyDmg} HP.";
+                string enemyMsg = "Enemy attacks! ";
+                if (enemyDmg == 10)
+                    enemyMsg += "Critical hit! ";
+                else if (enemyDmg == 0)
+                    enemyMsg += "Enemy missed! ";
+                else
+                    enemyMsg += $"Player loses {enemyDmg} HP.";
+                battleMessage = enemyMsg;
                 if (playerCurrentHP <= 0)
                 {
                     battleMessage = "You lose!";
@@ -257,11 +264,18 @@ public class TrainerBattleUI
                 _enemyPokemonSpriteFront.Draw(spriteBatch, Color.White, enemysPokemonPosition, 4f);
                 if (!endMessageActive && currentTurn == BattleTurn.Player && Keyboard.GetState().IsKeyDown(Keys.A))
                 {
-                    // Player attacks enemy (reduced damage)
-                    int playerDmg = 4; // reduced damage
+                    // Player attacks enemy (random damage 0-20)
+                    int playerDmg = new Random().Next(0, 21);
+                    string playerMsg = "Player attacks! ";
+                    if (playerDmg == 20)
+                        playerMsg += "Critical hit! ";
+                    else if (playerDmg == 0)
+                        playerMsg += "You missed! ";
+                    else
+                        playerMsg += $"Enemy loses {playerDmg} HP.";
                     enemyCurrentHP -= playerDmg;
                     if (enemyCurrentHP < 0) enemyCurrentHP = 0;
-                    battleMessage = $"Player attacks! Enemy loses {playerDmg} HP.";
+                    battleMessage = playerMsg;
                     if (enemyCurrentHP <= 0)
                     {
                         battleMessage = "You win!";
