@@ -60,13 +60,6 @@ public class Game1 : Core
         _sceneManager.AddScene("wild", new WildEncounter(_sceneManager, this, player));
         _sceneManager.TransitionTo("overworld"); // <-- Set the starting scene
 
-        // This is just for testing to check that the stats are calculated correctly, will be a random pokemon with random IV
-        // var pokemon = PokemonGenerator.GenerateWildPokemon();
-        // pokemon.PrintSummary();
-
-        // DamageTest.Run();
-        // BattleAITest.Run();
-
         //Music && Sound effect
         BackgroundMusicLibrary.Load(Content);
         SoundEffectLibrary.Load(Content);
