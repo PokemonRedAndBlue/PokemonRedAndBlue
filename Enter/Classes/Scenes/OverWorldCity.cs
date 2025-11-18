@@ -62,13 +62,24 @@ namespace Enter.Classes.Scenes
             character = content.Load<Texture2D>("images/Pokemon_Characters");
 
             // Only restore from Game1.SavedPlayerPosition if available
-            Vector2 spawn = _playerPosition;
+              Vector2 spawn = _playerPosition;
             if ((_game as Game1)?.SavedPlayerPosition is Microsoft.Xna.Framework.Vector2 savedPos)
             {
                 spawn = savedPos;
                 (_game as Game1).SavedPlayerPosition = null;
             }
-            SetPlayerPosition(spawn);
+
+            if (_game.SavedPlayerTiles.TryGetValue("overworld_city", out Point savedTile))
+            {
+                _player.SetTilePosition(savedTile);
+            }
+            else
+            {
+                // Default location for this scene if no saved tile, (on first visit)
+                _player.SetTilePosition(new Point(1, 18));
+            }
+
+            //SetPlayerPosition(spawn);
             Cam.Update(_player);
             Cam.Zoom = ZoomLevel; //Zoom level of world
 
@@ -99,7 +110,6 @@ namespace Enter.Classes.Scenes
                 "Ground",
                 Physics.SolidTileCollision.IsSolid
             );
-            Cam.Update(_player);
         }
 
         public void Update(GameTime gameTime)
@@ -113,14 +123,16 @@ namespace Enter.Classes.Scenes
             // Prevent repeat battles and trigger correct battle scene
             if (trainer1.colided && !_game.IsTrainerDefeated(trainer1.TrainerID))
             {
-                _playerPosition = _player.Position;
-                _game.SavedPlayerPosition = _player.Position;
+                // _playerPosition = _player.Position;
+                // _game.SavedPlayerPosition = _player.Position;
+                _game.SavedPlayerTiles["overworld_city"] = _player.TilePos;
                 _sceneManager.TransitionTo("city_trainer1");
             }
             else if (trainer2.colided && !_game.IsTrainerDefeated(trainer2.TrainerID))
             {
-                _playerPosition = _player.Position;
-                _game.SavedPlayerPosition = _player.Position;
+                // _playerPosition = _player.Position;
+                // _game.SavedPlayerPosition = _player.Position;
+                _game.SavedPlayerTiles["overworld_city"] = _player.TilePos;
                 _sceneManager.TransitionTo("city_trainer2");
             }
 
@@ -133,6 +145,25 @@ namespace Enter.Classes.Scenes
             // If neither trainer is colliding, ensure player is not frozen
             if (!trainer1.colided && !trainer2.colided)
                 _player.StopEnd();
+
+            Vector2 PlayerPosition = GetPlayerPosition();
+            Point exit = _player.TilePos;
+            //System.Console.WriteLine("exit Tile pos: " + exit);
+            if (exit.X == 0 && exit.Y == 18)
+            {
+                _game.SavedPlayerTiles["overworld_city"] = _player.TilePos + new Point(1, 0);
+                _sceneManager.TransitionTo("overworld");
+            }
+            if (exit.X == 0 && exit.Y == 19)
+            {
+                _game.SavedPlayerTiles["overworld_city"] = _player.TilePos + new Point(1, 0);
+                _sceneManager.TransitionTo("overworld");
+            }
+            if (exit.X == 30 && exit.Y == 19)
+            {
+                _game.SavedPlayerTiles["overworld_city"] = _player.TilePos + new Point(0, 1);
+                _sceneManager.TransitionTo("gym");
+            }
             // no need for base.Update here
         }
 

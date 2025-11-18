@@ -18,6 +18,7 @@ public class Game1 : Core
 {
     // Needed class vars
     public bool ResetRequested { get; set; } = false;   // added to reset game
+    public Dictionary<string, Point> SavedPlayerTiles { get; set; } = new Dictionary<string, Point>();
     Dictionary<String, AnimatedSprite> FrontPokemon = new Dictionary<string, AnimatedSprite>();
     // Tracks which trainers have been defeated, keyed by trainer ID
     private Dictionary<string, bool> _defeatedTrainers = new Dictionary<string, bool>();
