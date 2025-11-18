@@ -16,7 +16,7 @@ namespace TrainerMethods
             // Create a team for the "Youngster"
             Team youngsterTeam = new Team(new Pokemon[]
             {
-            new Pokemon("Rattata", 5)
+            new Pokemon("Pidgey", 5)
             });
 
             // Create a team for the "hiker"

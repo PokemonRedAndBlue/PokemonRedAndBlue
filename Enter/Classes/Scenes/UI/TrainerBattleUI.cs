@@ -116,6 +116,8 @@ public class TrainerBattleUI
 
         // always get players pokemon
         Pokemon currentPokemon = _playerTeam.Pokemons[0];
+        Pokemon enemyPokemon = _enemyTeam.Pokemons[0];
+        _enemyPokemonSpriteFront = PokemonFrontFactory.Instance.CreateAnimatedSprite(enemyPokemon.Name.ToString().ToLower() + "-front");
 
         // draw the UI elements for wild encounter (state based)
         switch (_currentState)
