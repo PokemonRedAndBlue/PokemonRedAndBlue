@@ -174,8 +174,8 @@ public class TrainerBattleUI
 
     private void DrawMessage(SpriteBatch spriteBatch, string message)
     {
-        // Draw all messages at the same coordinates
-        Vector2 msgPos = new Vector2(340, 350);
+        // Draw all messages at a slightly higher Y position
+        Vector2 msgPos = new Vector2(340, 320);
         Color color = Color.Yellow;
         if (message.Contains("You win!")) color = Color.LawnGreen;
         else if (message.Contains("You lose!")) color = Color.Red;
