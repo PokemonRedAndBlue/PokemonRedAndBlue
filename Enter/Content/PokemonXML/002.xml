@@ -1,0 +1,39 @@
+<Pokemon>
+    <Name>Ivysaur</Name>
+    <Dex>002</Dex>
+    <Type1>Grass</Type1>
+    <Type2>Poison</Type2>
+    <BaseStats>
+        <HP>60</HP>
+        <Attack>62</Attack>
+        <Defense>63</Defense>
+        <SpAttack>80</SpAttack>
+        <SpDefense>80</SpDefense>
+        <Speed>60</Speed>
+    </BaseStats>
+    <BaseExperience>142</BaseExperience>
+    <CatchRate>45</CatchRate>
+    <GenderRatio>
+        <Male>87.5</Male>
+        <Female>12.5</Female>
+    </GenderRatio>
+    <Moves>
+        <Move level="1">Tackle</Move>
+        <Move level="1">Growl</Move>
+        <Move level="1">Leech Seed</Move>
+        <Move level="3">Growl</Move>
+        <Move level="7">Vine Whip</Move>
+        <Move level="9">Growth</Move>
+        <Move level="13">Leech Seed</Move>
+        <Move level="15">Razor Leaf</Move>
+        <Move level="20">Poison Powder</Move>
+        <Move level="23">Sleep Powder</Move>
+        <Move level="28">Seed Bomb</Move>
+        <Move level="31">Take Down</Move>
+        <Move level="36">Sweet Scent</Move>
+        <Move level="39">Synthesis</Move>
+        <Move level="44">Worry Seed</Move>
+        <Move level="47">Double-Edge</Move>
+        <Move level="52">Solar Beam</Move>
+    </Moves>
+</Pokemon>

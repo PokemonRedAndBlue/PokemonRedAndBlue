@@ -1,36 +1,40 @@
 using System;
+using System.Collections.Generic;
 
-class PokemonSpecies
+public class PokemonSpecies
 {
     public int Dex;
     public string Name;
     public string Type1;
     public string Type2;
     public BaseStats BaseStats;
+    public List<string> Moves { get; set; }
 }
 
-class BaseStats
+public class BaseStats
 {
     public int HP, Attack, Defense, SpAttack, SpDefense, Speed;
 }
 
-class IVSet
+public class IVSet
 {
     public int HP, Attack, Defense, SpAttack, SpDefense, Speed;
 }
 
-class PokemonInstance
+public class PokemonInstance
 {
     public PokemonSpecies Species;
     public IVSet IVs;
     public int Level;
     public int FinalHP, FinalAttack, FinalDefense, FinalSpAttack, FinalSpDefense, FinalSpeed;
+    public List<string> Moves { get; set; }
 
     public PokemonInstance(PokemonSpecies species, IVSet ivs, int level)
     {
         Species = species;
         IVs = ivs;
         Level = level;
+        Moves = [.. species.Moves];
     }
 
     public void CalculateStats()
