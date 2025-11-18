@@ -57,7 +57,7 @@ dotnet mgcb build Content/Content.mgcb
 |-------------------------------|----------------|
 | Move player                   | Arrow Keys     |
 | Exit game                     | Escape         |
-| Exit the battle scene         | Tab            |
+| Exit a battle scene           | Tab            |
 | Enter Wild Encounter Scene    | W              |
 | Enter Trainer Battle          | Approach trainer from the side |
 | Transport to Gym              | G              |
