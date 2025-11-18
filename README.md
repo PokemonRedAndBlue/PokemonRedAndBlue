@@ -31,6 +31,7 @@ PokemonRedAndBlue is a MonoGame-based, Pokémon-inspired game. Players explore a
    ```bash
    dotnet run --project Enter/Enter.csproj
    ```
+4. WHEN TESTING BATTLE NOTE: ONLY RUN AND FIGHT ARE IMPLEMENTED THE OTHERS WILL SHOW BLANK UI WHICH YOU CAN EXIT WITH TAB
 
 ## Content Pipeline
 XML and image assets are managed via the MonoGame Content Pipeline. To rebuild content:
