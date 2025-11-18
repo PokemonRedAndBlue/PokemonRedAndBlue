@@ -8,6 +8,7 @@ using System.Data;
 using System.Collections.Generic;
 using Enter.Classes.Animations;
 using PokemonGame;
+using Microsoft.Xna.Framework.Input;
 
 public class TrainerBattleUI
 {
@@ -40,6 +41,8 @@ public class TrainerBattleUI
     static private Vector2 _borderPostion = new Vector2(uiBasePosition.X - (48 * _scale), uiBasePosition.Y - (40 * _scale) + 1);
     static private Vector2 enemysPokemonPosition = new Vector2(uiBasePosition.X + (96 * _scale), uiBasePosition.Y);
     static private Vector2 maxDrawPos = new Vector2(0, uiBasePosition.Y + (103 * _scale));
+    public Boolean resetBattle = false;
+    public Boolean didRunOrCatch = false;
     static private Team _playerTeam;
     static private Team _enemyTeam;
     static private Sprite _border;
@@ -51,6 +54,22 @@ public class TrainerBattleUI
         { "Pokemon", 3 },
         { "Run", 4 }
     };
+
+    private int playerCurrentHP = 0;
+    private int enemyCurrentHP = 0;
+    private int playerMaxHP = 0;
+    private int enemyMaxHP = 0;
+    private bool battleInitialized = false;
+    private string battleMessage = "";
+    private bool endMessageActive = false;
+    private double endMessageTimer = 0.0;
+    private const double EndMessagePauseMs = 4000.0;
+
+    // Turn-based system
+    private enum BattleTurn { Player, Cpu, Waiting, End }
+    private BattleTurn currentTurn = BattleTurn.Player;
+    private double turnTimer = 0.0;
+    private const double CpuAttackDelayMs = 2000.0;
 
     public TrainerBattleUI(TextureAtlas trainerUIAtlas, ContentManager content, String enemyTrainerID, Team playerTeam, Team enemyTeam)
     {
@@ -64,8 +83,53 @@ public class TrainerBattleUI
 
     public void Update(GameTime gameTime)
     {
+        // Ensure battleUI state machine and timer are updated
         battleUI.Update(gameTime);
         _currentState = battleUI.getBattleState();
+
+        // Handle end message pause
+        if (endMessageActive)
+        {
+            endMessageTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (endMessageTimer >= EndMessagePauseMs)
+            {
+                resetBattle = true;
+                endMessageActive = false;
+            }
+        }
+
+        // Handle CPU turn timer
+        if (currentTurn == BattleTurn.Waiting)
+        {
+            turnTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (turnTimer >= CpuAttackDelayMs)
+            {
+                // CPU attacks
+                int enemyDmg = new Random().Next(0, 11);
+                playerCurrentHP -= enemyDmg;
+                if (playerCurrentHP < 0) playerCurrentHP = 0;
+                string enemyMsg = "Enemy attacks! ";
+                if (enemyDmg == 10)
+                    enemyMsg += "Critical hit! ";
+                else if (enemyDmg == 0)
+                    enemyMsg += "Enemy missed! ";
+                else
+                    enemyMsg += $"Player loses {enemyDmg} HP.";
+                battleMessage = enemyMsg;
+                if (playerCurrentHP <= 0)
+                {
+                    battleMessage = "You lose!";
+                    endMessageActive = true;
+                    endMessageTimer = 0.0;
+                    currentTurn = BattleTurn.End;
+                }
+                else
+                {
+                    currentTurn = BattleTurn.Player;
+                }
+                turnTimer = 0.0;
+            }
+        }
     }
 
     public void LoadContent(ContentManager content)
@@ -109,6 +173,30 @@ public class TrainerBattleUI
         WildEncounterStateBasedDraw(UIBaseSprites, spriteBatch);
     }
 
+    private void DrawHP(SpriteBatch spriteBatch, int hp, int maxHp, Vector2 pos, string label)
+    {
+        // Draw both HP in black
+        spriteBatch.DrawString(_font, $"{label}: {hp}/{maxHp}", pos, Color.Black);
+    }
+
+    private void DrawMessage(SpriteBatch spriteBatch, string message)
+    {
+        // Draw all messages at a slightly higher Y position
+        Vector2 msgPos = new Vector2(340, 320);
+        Color color = Color.Yellow;
+        if (message.Contains("You win!")) color = Color.LawnGreen;
+        else if (message.Contains("You lose!")) color = Color.Red;
+        else if (message.StartsWith("Player attacks!")) color = Color.LawnGreen;
+        else if (message.StartsWith("Enemy attacks!")) color = Color.Red;
+        // Draw instructional messages in black and higher
+        if (message == "Press A to use Tackle" || message == "Use arrow keys to navigate and Enter to select")
+        {
+            msgPos.Y -= 50;
+            color = Color.Black;
+        }
+        spriteBatch.DrawString(_font, message, msgPos, color);
+    }
+
     public void WildEncounterStateBasedDraw(Sprite[] UI_BaseSprites, SpriteBatch spriteBatch)
     {
         // always draw border
@@ -119,57 +207,107 @@ public class TrainerBattleUI
         Pokemon enemyPokemon = _enemyTeam.Pokemons[0];
         _enemyPokemonSpriteFront = PokemonFrontFactory.Instance.CreateAnimatedSprite(enemyPokemon.Name.ToString().ToLower() + "-front");
 
+        // Initialize battle HP on first draw only
+        if (!battleInitialized)
+        {
+            playerCurrentHP = currentPokemon.Hp > 0 ? currentPokemon.Hp : 50;
+            playerMaxHP = currentPokemon.MaxHp > 0 ? currentPokemon.MaxHp : 50;
+            enemyCurrentHP = enemyPokemon.Hp > 0 ? enemyPokemon.Hp : 50;
+            enemyMaxHP = enemyPokemon.MaxHp > 0 ? enemyPokemon.MaxHp : 50;
+            battleInitialized = true;
+            battleMessage = "";
+        }
+
         // draw the UI elements for wild encounter (state based)
         switch (_currentState)
         {
-            case "Initial": // Initial
-                // draw base UI
+            case "Initial":
                 UIBaseSprites[0].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
-                // draw player trainer sprite
                 _trainerSpriteBack.Draw(spriteBatch, Color.White, playerTrainerPosition, 8f);
-                // draw enemy trainer sprite
                 _enemyTrainerSpriteFront.Draw(spriteBatch, Color.White, enemyTrainerPosition, 4f);
-                // draw enemy trainer name
                 _enemyTrainerIDSprite.DrawTextSpriteWithScale(spriteBatch, enemyTrainerIDPosition, 2f);
-                // draw player trainer party bar
                 BattleUIHelper.drawPokeballSprites(_playerTeam, _TrainerUIAtlas, spriteBatch, true);
-                // draw enemy trainer party bar
                 BattleUIHelper.drawPokeballSprites(_enemyTeam, _TrainerUIAtlas, spriteBatch, false);
                 break;
-            case "Menu": 
-                // draw base UI
+            case "Menu":
                 UIBaseSprites[1].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
-                // draw players pokemon sprite, get first alive pokemon
                 String playersPokemon = currentPokemon.Name.ToString();
-                Sprite currentMon = PokemonBackFactory.Instance.CreateStaticSprite( playersPokemon.ToLower()+ "-back");
+                Sprite currentMon = PokemonBackFactory.Instance.CreateStaticSprite(playersPokemon.ToLower() + "-back");
                 currentMon.Draw(spriteBatch, Color.White, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)), 4f);
-                // draw opponent pokemon sprite
                 _enemyPokemonSpriteFront.Draw(spriteBatch, Color.White, enemysPokemonPosition, 4f);
-                // draw both health
-                battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, true);
-                battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, false);
-                // arrow handling logic
-                battleUI.DrawArrow(_TrainerUIAtlas, spriteBatch);
+                // Use updated HP for health bars
+                battleUI.drawHealthBar(playerCurrentHP, playerMaxHP, greenBar, yellowBar, redBar, spriteBatch, true);
+                battleUI.drawHealthBar(enemyCurrentHP, enemyMaxHP, greenBar, yellowBar, redBar, spriteBatch, false);
+                DrawHP(spriteBatch, playerCurrentHP, playerMaxHP, new Vector2(340, 220), "Player HP");
+                DrawHP(spriteBatch, enemyCurrentHP, enemyMaxHP, new Vector2(700, 100), "Enemy HP");
+                if (!string.IsNullOrEmpty(battleMessage))
+                {
+                    DrawMessage(spriteBatch, battleMessage);
+                }
+                // Show menu navigation instructions
+                DrawMessage(spriteBatch, "Use arrow keys to navigate and Enter to select");
+                // Enable menu navigation
                 battleUI.moveArrow();
+                battleUI.DrawArrow(_TrainerUIAtlas, spriteBatch);
                 break;
-            case "Fight": // Fight
+            case "Fight":
                 UIBaseSprites[1].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
+                playersPokemon = currentPokemon.Name.ToString();
+                currentMon = PokemonBackFactory.Instance.CreateStaticSprite(playersPokemon.ToLower() + "-back");
+                currentMon.Draw(spriteBatch, Color.White, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)), 4f);
+                _enemyPokemonSpriteFront.Draw(spriteBatch, Color.White, enemysPokemonPosition, 4f);
+                if (!endMessageActive && currentTurn == BattleTurn.Player && Keyboard.GetState().IsKeyDown(Keys.A))
+                {
+                    // Player attacks enemy (random damage 0-20)
+                    int playerDmg = new Random().Next(0, 21);
+                    string playerMsg = "Player attacks! ";
+                    if (playerDmg == 20)
+                        playerMsg += "Critical hit! ";
+                    else if (playerDmg == 0)
+                        playerMsg += "You missed! ";
+                    else
+                        playerMsg += $"Enemy loses {playerDmg} HP.";
+                    enemyCurrentHP -= playerDmg;
+                    if (enemyCurrentHP < 0) enemyCurrentHP = 0;
+                    battleMessage = playerMsg;
+                    if (enemyCurrentHP <= 0)
+                    {
+                        battleMessage = "You win!";
+                        endMessageActive = true;
+                        endMessageTimer = 0.0;
+                        currentTurn = BattleTurn.End;
+                    }
+                    else
+                    {
+                        currentTurn = BattleTurn.Waiting;
+                        turnTimer = 0.0;
+                    }
+                }
+                // Use updated HP for health bars
+                battleUI.drawHealthBar(playerCurrentHP, playerMaxHP, greenBar, yellowBar, redBar, spriteBatch, true);
+                battleUI.drawHealthBar(enemyCurrentHP, enemyMaxHP, greenBar, yellowBar, redBar, spriteBatch, false);
+                DrawHP(spriteBatch, playerCurrentHP, playerMaxHP, new Vector2(340, 220), "Player HP");
+                DrawHP(spriteBatch, enemyCurrentHP, enemyMaxHP, new Vector2(700, 100), "Enemy HP");
+                if (!string.IsNullOrEmpty(battleMessage))
+                {
+                    DrawMessage(spriteBatch, battleMessage);
+                }
+                // Show fight instructions
+                DrawMessage(spriteBatch, "Press A to use Tackle");
                 break;
-            case "Bag": // Bag
-                UIBaseSprites[2].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
-                break;
-            case "Pokemon": // Pokemon
-                UIBaseSprites[3].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
-                break;
-            case "Run": // Run
+            case "Item": // Bag
                 UIBaseSprites[4].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
+                break;
+            case "Run": // Run (blocked in trainer battles)
+                // Show a message or just ignore; here, just ignore and return to menu
+                resetBattle = true;
                 break;
             default:
                 UIBaseSprites[0].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
                 break;
         }
     }
-    
+
     public string formatTrainerName(string trainerID)
     {
         // add .'s for any remaing characters available up to 11

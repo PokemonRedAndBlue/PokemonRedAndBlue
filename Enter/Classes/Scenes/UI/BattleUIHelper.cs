@@ -1,3 +1,5 @@
+// ...using statements...
+
 using Microsoft.Xna.Framework;
 using Enter.Classes.Textures;
 using Enter.Classes.Sprites;
@@ -14,6 +16,28 @@ using System.Runtime.ConstrainedExecution;
 
 public class BattleUIHelper
 {
+    // Overload: draw health bar with explicit HP/maxHP values
+    public void drawHealthBar(int currentHp, int maxHp, Sprite greenMax, Sprite midYellow, Sprite redLow, SpriteBatch spriteBatch, bool isPlayersTeam)
+    {
+        double topThird = maxHp * (2.0 / 3.0);
+        double midThird = maxHp * (1.0 / 3.0);
+        Vector2 barPos = isPlayersTeam
+            ? new Vector2(uiBasePosition.X + (_scale * 95) - 4, uiBasePosition.Y + (_scale * 74) - 4)
+            : new Vector2(uiBasePosition.X + (31 * _scale) - 4, uiBasePosition.Y + (18 * _scale) - 4);
+
+        if (currentHp > topThird)
+        {
+            greenMax.Draw(spriteBatch, Color.White, barPos, _scale);
+        }
+        else if (currentHp > midThird)
+        {
+            midYellow.Draw(spriteBatch, Color.White, barPos, _scale);
+        }
+        else
+        {
+            redLow.Draw(spriteBatch, Color.White, barPos, _scale);
+        }
+    }
     static private float _scale = 4.0f;
     private double _stateTimer;
     private String currentBattleState = "Initial";
@@ -215,9 +239,9 @@ public String handleArrowEvent(int currentCol, int currentRow)
     public void drawHealthBar(Pokemon poke, Sprite greenMax, Sprite midYellow, Sprite redLow, SpriteBatch spriteBatch, Boolean isPlayersTeam)
     {
         // split max health into 3 sections
-        int topThird = poke.MaxHp * (2 / 3);
-        int midThird = poke.MaxHp * (1 / 3);
-        int currentHp = poke.Hp;
+        double topThird = poke.MaxHp * (2.0 / 3.0);
+        double midThird = poke.MaxHp * (1.0 / 3.0);
+        double currentHp = poke.Hp;
 
         if(isPlayersTeam)
         {

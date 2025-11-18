@@ -115,6 +115,11 @@ namespace Enter.Classes.Scenes
 
         public void Update(GameTime gameTime)
         {
+            // Reset collision if trainer is defeated to prevent immediate retrigger
+            if (_game.IsTrainerDefeated(trainer.TrainerID)) {
+                trainer.HasBeenDefeated = true;
+                trainer.colided = false;
+            }
             // Update Objects
             _controller.Update(_game, gameTime, Cam, _player, trainer);
             Cam.Update(_player);

@@ -48,7 +48,6 @@ public class WildEncounterUI
     private Sprite greenBar, yellowBar, redBar;
     static private Player _Player;
     static private Sprite _border;
-
     public Boolean resetBattle = false;
     public Boolean didRunOrCatch = false;
 
