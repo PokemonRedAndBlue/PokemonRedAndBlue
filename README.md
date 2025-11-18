@@ -50,6 +50,8 @@
 - Scene handling for battles and wild encounters
 - Background on player and trainer removed
 - Pseudo route walkable by player and trainer approachable with triggerable battle
+- Tile-memory system using a dictionary, so tile positions are saved per scene
+- Level-transitioning logic between scenes which is built upon the new tile-based movement
 
 ## Controls
 ### Action  Key(s)
@@ -58,6 +60,9 @@
 - Exit the battle scene with trainer: Tab
 - Enter Wild Encounter Scene - 'w' key press
 - Enter Trainer Battle - approach the trainer from the side
+- Walk to the bottom of Route 1 to get to Cerulean City
+- Walk to the left of Cerulean City to get to Route 1
+- Walk to the door of the Gym within the Cerulean City to get into the Gym
 
 ## Known Bugs & Limitations
 - Collision tiles are manually defined, requiring updates to TileCollisionProfile.cs whenever new tiles are added
@@ -75,6 +80,7 @@
 - Add clear separation between walkable, solid, and interactive tiles within TileCollisionProfile.cs
 - Preserve player position when entering a battle scene
 - Use the Pokémon generator to make wild Pokémon truly random (including stats, etc).
+- Extract common scene initialization into one base class to reduce code duplication
 
 ### Long-Term Goals
 - Integrate interaction zones (e.g., door triggers, tall grass, signposts) into the collision framework
