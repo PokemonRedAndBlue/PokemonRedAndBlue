@@ -162,7 +162,7 @@ public class WildEncounterUI
                 battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, true);
                 battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, false);
                 KeyboardState keysState = Keyboard.GetState();
-                if (keysState.IsKeyDown(Keys.R))
+                if (keysState.IsKeyDown(Keys.Tab))
                 {
                     resetBattle = true;
                 }
@@ -173,7 +173,7 @@ public class WildEncounterUI
                 // only draw opponent health
                 battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, false);
                 KeyboardState currentState = Keyboard.GetState();
-                if (currentState.IsKeyDown(Keys.R))
+                if (currentState.IsKeyDown(Keys.Tab))
                 {
                     resetBattle = true;
                 }
@@ -185,7 +185,7 @@ public class WildEncounterUI
             // draw base UI
                 KeyboardState keyState = Keyboard.GetState();
                 UIsprites[3].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
-                if (keyState.IsKeyDown(Keys.R))
+                if (keyState.IsKeyDown(Keys.Tab))
                 {
                     resetBattle = true;
                 }

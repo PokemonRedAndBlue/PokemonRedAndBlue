@@ -297,10 +297,23 @@ public class TrainerBattleUI
                 break;
             case "Item": // Bag
                 UIBaseSprites[4].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
+                KeyboardState keyState = Keyboard.GetState();
+                if (keyState.IsKeyDown(Keys.Tab))
+                {
+                    resetBattle = true;
+                }
                 break;
             case "Run": // Run (blocked in trainer battles)
                 // Show a message or just ignore; here, just ignore and return to menu
                 resetBattle = true;
+                break;
+            case "PkMn": // Pokemon
+                KeyboardState keyStates = Keyboard.GetState();
+                UIBaseSprites[3].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
+                if (keyStates.IsKeyDown(Keys.Tab))
+                {
+                    resetBattle = true;
+                }
                 break;
             default:
                 UIBaseSprites[0].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
