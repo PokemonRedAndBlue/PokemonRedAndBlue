@@ -188,21 +188,13 @@ public class TrainerBattleUI
         else if (message.Contains("You lose!")) color = Color.Red;
         else if (message.StartsWith("Player attacks!")) color = Color.LawnGreen;
         else if (message.StartsWith("Enemy attacks!")) color = Color.Red;
+        // Draw instructional messages in black and higher
+        if (message == "Press A to use Tackle" || message == "Use arrow keys to navigate and Enter to select")
+        {
+            msgPos.Y -= 50;
+            color = Color.Black;
+        }
         spriteBatch.DrawString(_font, message, msgPos, color);
-    }
-
-    private void DrawHealthBarSprite(SpriteBatch spriteBatch, Vector2 pos, int currentHP, int maxHP, Sprite greenBar, Sprite yellowBar, Sprite redBar)
-    {
-        float percent = (float)currentHP / maxHP;
-        Sprite bar = greenBar;
-        if (percent <= 0.5f && percent > 0.2f)
-            bar = yellowBar;
-        else if (percent <= 0.2f)
-            bar = redBar;
-        // Use scale to represent HP percentage (assuming 1f is full bar)
-        bar.Draw(spriteBatch, Color.White, pos, percent);
-        // Draw border (full length, semi-transparent black)
-        greenBar.Draw(spriteBatch, Color.Black * 0.5f, pos, 1f);
     }
 
     public void WildEncounterStateBasedDraw(Sprite[] UI_BaseSprites, SpriteBatch spriteBatch)
@@ -252,6 +244,8 @@ public class TrainerBattleUI
                 {
                     DrawMessage(spriteBatch, battleMessage);
                 }
+                // Show menu navigation instructions
+                DrawMessage(spriteBatch, "Use arrow keys to navigate and Enter to select");
                 // Enable menu navigation
                 battleUI.moveArrow();
                 battleUI.DrawArrow(_TrainerUIAtlas, spriteBatch);
@@ -298,6 +292,8 @@ public class TrainerBattleUI
                 {
                     DrawMessage(spriteBatch, battleMessage);
                 }
+                // Show fight instructions
+                DrawMessage(spriteBatch, "Press A to use Tackle");
                 break;
             case "Item": // Bag
                 UIBaseSprites[4].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
