@@ -88,6 +88,9 @@ dotnet mgcb build Content/Content.mgcb
 - No more reflection or temp objects for HP bar drawing; now uses explicit HP values
 - Refactored UI code for clarity and maintainability
 - Music and sound effect libraries and assets added (not yet fully implemented)
+- Added full Pokémon data systems: move loading, stat generation (IV-based), and species catch rates.
+- Implemented core battle math including damage calculation (STAB, typing, physical/special) and trainer AI move selection.
+- Added catching probability logic and separate generation paths for wild vs. trainer Pokémon.
 
 ## Backlog
 See [`backlog.md`](backlog.md) for current backlog, sprint summaries, and future plans.
