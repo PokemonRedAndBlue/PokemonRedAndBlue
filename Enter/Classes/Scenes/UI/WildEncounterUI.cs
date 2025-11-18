@@ -64,7 +64,7 @@ public class WildEncounterUI
     public WildEncounterUI(TextureAtlas wildUIAtlas, ContentManager content, Player ourPlayer)
     {
         _WildUIAtlas = wildUIAtlas;
-        _wildPokemonID = PokemonGenerator.GenerateRandom().Species.Name.ToLower(); // Example: "bulbasaur"
+        _wildPokemonID = PokemonGenerator.GenerateWildPokemon().Species.Name.ToLower(); // Example: "bulbasaur"
         _font = content.Load<SpriteFont>("PokemonFont");
         _Player = ourPlayer;
     }

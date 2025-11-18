@@ -30,7 +30,7 @@ namespace Enter.Classes.Scenes
         {
             _sceneManager = sceneManager;
             _game = game1;
-            _wildPokemonID = PokemonGenerator.GenerateRandom().Species.Name.ToLower(); // Example: "bulbasaur"
+            _wildPokemonID = PokemonGenerator.GenerateWildPokemon().Species.Name.ToLower(); // Example: "bulbasaur"
             _player = player;
         }
 

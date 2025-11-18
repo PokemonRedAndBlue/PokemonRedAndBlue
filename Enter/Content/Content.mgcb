@@ -1129,6 +1129,9 @@
 /processorParam:TextureFormat=Color
 /build:images/Pokemon_FRONT.png
 
+#begin Moves.xml
+/copy:Moves.xml
+
 #begin Pokemon_BACK.xml
 /copy:Pokemon_BACK.xml
 
@@ -1145,12 +1148,18 @@
 /processorParam:TextureFormat=Compressed
 /build:PokemonFont.spritefont
 
+#begin PokemonXML/001.xml
+/copy:PokemonXML/001.xml
+
+#begin PokemonXML/002.xml
+/copy:PokemonXML/002.xml
+
+#begin PokemonXML/003.xml
+/copy:PokemonXML/003.xml
+
 #begin Route1Map.xml
 /copy:Route1Map.xml
 
 #begin Tiles.xml
 /copy:Tiles.xml
-
-#begin Tiles2.xml
-/copy:Tiles2.xml
 

@@ -1,154 +1,514 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <PokemonList>
-  <Pokemon dex="1" name="Bulbasaur" type1="Grass" type2="Poison" hp="45" attack="49" defense="49" sp_attack="65" sp_defense="65" speed="45" total="318"/>
-  <Pokemon dex="2" name="Ivysaur" type1="Grass" type2="Poison" hp="60" attack="62" defense="63" sp_attack="80" sp_defense="80" speed="60" total="405"/>
-  <Pokemon dex="3" name="Venusaur" type1="Grass" type2="Poison" hp="80" attack="82" defense="83" sp_attack="100" sp_defense="100" speed="80" total="525"/>
-  <Pokemon dex="4" name="Charmander" type1="Fire" type2="" hp="39" attack="52" defense="43" sp_attack="60" sp_defense="50" speed="65" total="309"/>
-  <Pokemon dex="5" name="Charmeleon" type1="Fire" type2="" hp="58" attack="64" defense="58" sp_attack="80" sp_defense="65" speed="80" total="405"/>
-  <Pokemon dex="6" name="Charizard" type1="Fire" type2="Flying" hp="78" attack="84" defense="78" sp_attack="109" sp_defense="85" speed="100" total="534"/>
-  <Pokemon dex="7" name="Squirtle" type1="Water" type2="" hp="44" attack="48" defense="65" sp_attack="50" sp_defense="64" speed="43" total="314"/>
-  <Pokemon dex="8" name="Wartortle" type1="Water" type2="" hp="59" attack="63" defense="80" sp_attack="65" sp_defense="80" speed="58" total="405"/>
-  <Pokemon dex="9" name="Blastoise" type1="Water" type2="" hp="79" attack="83" defense="100" sp_attack="85" sp_defense="105" speed="78" total="530"/>
-  <Pokemon dex="10" name="Caterpie" type1="Bug" type2="" hp="45" attack="30" defense="35" sp_attack="20" sp_defense="20" speed="45" total="195"/>
-  <Pokemon dex="11" name="Metapod" type1="Bug" type2="" hp="50" attack="20" defense="55" sp_attack="25" sp_defense="25" speed="30" total="205"/>
-  <Pokemon dex="12" name="Butterfree" type1="Bug" type2="Flying" hp="60" attack="45" defense="50" sp_attack="90" sp_defense="80" speed="70" total="395"/>
-  <Pokemon dex="13" name="Weedle" type1="Bug" type2="Poison" hp="40" attack="35" defense="30" sp_attack="20" sp_defense="20" speed="50" total="195"/>
-  <Pokemon dex="14" name="Kakuna" type1="Bug" type2="Poison" hp="45" attack="25" defense="50" sp_attack="25" sp_defense="25" speed="35" total="205"/>
-  <Pokemon dex="15" name="Beedrill" type1="Bug" type2="Poison" hp="65" attack="90" defense="40" sp_attack="45" sp_defense="80" speed="75" total="395"/>
-  <Pokemon dex="16" name="Pidgey" type1="Normal" type2="Flying" hp="40" attack="45" defense="40" sp_attack="35" sp_defense="35" speed="56" total="251"/>
-  <Pokemon dex="17" name="Pidgeotto" type1="Normal" type2="Flying" hp="63" attack="60" defense="55" sp_attack="50" sp_defense="50" speed="71" total="349"/>
-  <Pokemon dex="18" name="Pidgeot" type1="Normal" type2="Flying" hp="83" attack="80" defense="75" sp_attack="70" sp_defense="70" speed="101" total="479"/>
-  <Pokemon dex="19" name="Rattata" type1="Normal" type2="" hp="30" attack="56" defense="35" sp_attack="25" sp_defense="35" speed="72" total="253"/>
-  <Pokemon dex="20" name="Raticate" type1="Normal" type2="" hp="55" attack="81" defense="60" sp_attack="50" sp_defense="70" speed="97" total="413"/>
-  <Pokemon dex="21" name="Spearow" type1="Normal" type2="Flying" hp="40" attack="60" defense="30" sp_attack="31" sp_defense="31" speed="70" total="262"/>
-  <Pokemon dex="22" name="Fearow" type1="Normal" type2="Flying" hp="65" attack="90" defense="65" sp_attack="61" sp_defense="61" speed="100" total="442"/>
-  <Pokemon dex="23" name="Ekans" type1="Poison" type2="" hp="35" attack="60" defense="44" sp_attack="40" sp_defense="54" speed="55" total="288"/>
-  <Pokemon dex="24" name="Arbok" type1="Poison" type2="" hp="60" attack="95" defense="69" sp_attack="65" sp_defense="79" speed="80" total="448"/>
-  <Pokemon dex="25" name="Pikachu" type1="Electric" type2="" hp="35" attack="55" defense="40" sp_attack="50" sp_defense="50" speed="90" total="320"/>
-  <Pokemon dex="26" name="Raichu" type1="Electric" type2="" hp="60" attack="90" defense="55" sp_attack="90" sp_defense="80" speed="110" total="485"/>
-  <Pokemon dex="27" name="Sandshrew" type1="Ground" type2="" hp="50" attack="75" defense="85" sp_attack="20" sp_defense="30" speed="40" total="300"/>
-  <Pokemon dex="28" name="Sandslash" type1="Ground" type2="" hp="75" attack="100" defense="110" sp_attack="45" sp_defense="55" speed="65" total="450"/>
-  <Pokemon dex="29" name="Nidoran-f" type1="Poison" type2="" hp="55" attack="47" defense="52" sp_attack="40" sp_defense="40" speed="41" total="275"/>
-  <Pokemon dex="30" name="Nidorina" type1="Poison" type2="" hp="70" attack="62" defense="67" sp_attack="55" sp_defense="55" speed="56" total="365"/>
-  <Pokemon dex="31" name="Nidoqueen" type1="Poison" type2="Ground" hp="90" attack="92" defense="87" sp_attack="75" sp_defense="85" speed="76" total="505"/>
-  <Pokemon dex="32" name="Nidoran-m" type1="Poison" type2="" hp="46" attack="57" defense="40" sp_attack="40" sp_defense="40" speed="50" total="273"/>
-  <Pokemon dex="33" name="Nidorino" type1="Poison" type2="" hp="61" attack="72" defense="57" sp_attack="55" sp_defense="55" speed="65" total="365"/>
-  <Pokemon dex="34" name="Nidoking" type1="Poison" type2="Ground" hp="81" attack="102" defense="77" sp_attack="85" sp_defense="75" speed="85" total="505"/>
-  <Pokemon dex="35" name="Clefairy" type1="Fairy" type2="" hp="70" attack="45" defense="48" sp_attack="60" sp_defense="65" speed="35" total="323"/>
-  <Pokemon dex="36" name="Clefable" type1="Fairy" type2="" hp="95" attack="70" defense="73" sp_attack="95" sp_defense="90" speed="60" total="483"/>
-  <Pokemon dex="37" name="Vulpix" type1="Fire" type2="" hp="38" attack="41" defense="40" sp_attack="50" sp_defense="65" speed="65" total="299"/>
-  <Pokemon dex="38" name="Ninetales" type1="Fire" type2="" hp="73" attack="76" defense="75" sp_attack="81" sp_defense="100" speed="100" total="505"/>
-  <Pokemon dex="39" name="Jigglypuff" type1="Normal" type2="Fairy" hp="115" attack="45" defense="20" sp_attack="45" sp_defense="25" speed="20" total="270"/>
-  <Pokemon dex="40" name="Wigglytuff" type1="Normal" type2="Fairy" hp="140" attack="70" defense="45" sp_attack="85" sp_defense="50" speed="45" total="435"/>
-  <Pokemon dex="41" name="Zubat" type1="Poison" type2="Flying" hp="40" attack="45" defense="35" sp_attack="30" sp_defense="40" speed="55" total="245"/>
-  <Pokemon dex="42" name="Golbat" type1="Poison" type2="Flying" hp="75" attack="80" defense="70" sp_attack="65" sp_defense="75" speed="90" total="455"/>
-  <Pokemon dex="43" name="Oddish" type1="Grass" type2="Poison" hp="45" attack="50" defense="55" sp_attack="75" sp_defense="65" speed="30" total="320"/>
-  <Pokemon dex="44" name="Gloom" type1="Grass" type2="Poison" hp="60" attack="65" defense="70" sp_attack="85" sp_defense="75" speed="40" total="395"/>
-  <Pokemon dex="45" name="Vileplume" type1="Grass" type2="Poison" hp="75" attack="80" defense="85" sp_attack="110" sp_defense="90" speed="50" total="490"/>
-  <Pokemon dex="46" name="Paras" type1="Bug" type2="Grass" hp="35" attack="70" defense="55" sp_attack="45" sp_defense="55" speed="25" total="285"/>
-  <Pokemon dex="47" name="Parasect" type1="Bug" type2="Grass" hp="60" attack="95" defense="80" sp_attack="60" sp_defense="80" speed="30" total="405"/>
-  <Pokemon dex="48" name="Venonat" type1="Bug" type2="Poison" hp="60" attack="55" defense="50" sp_attack="40" sp_defense="55" speed="45" total="305"/>
-  <Pokemon dex="49" name="Venomoth" type1="Bug" type2="Poison" hp="70" attack="65" defense="60" sp_attack="90" sp_defense="75" speed="90" total="450"/>
-  <Pokemon dex="50" name="Diglett" type1="Ground" type2="" hp="10" attack="55" defense="25" sp_attack="35" sp_defense="45" speed="95" total="265"/>
-  <Pokemon dex="51" name="Dugtrio" type1="Ground" type2="" hp="35" attack="100" defense="50" sp_attack="50" sp_defense="70" speed="120" total="425"/>
-  <Pokemon dex="52" name="Meowth" type1="Normal" type2="" hp="40" attack="45" defense="35" sp_attack="40" sp_defense="40" speed="90" total="290"/>
-  <Pokemon dex="53" name="Persian" type1="Normal" type2="" hp="65" attack="70" defense="60" sp_attack="65" sp_defense="65" speed="115" total="440"/>
-  <Pokemon dex="54" name="Psyduck" type1="Water" type2="" hp="50" attack="52" defense="48" sp_attack="65" sp_defense="50" speed="55" total="320"/>
-  <Pokemon dex="55" name="Golduck" type1="Water" type2="" hp="80" attack="82" defense="78" sp_attack="95" sp_defense="80" speed="85" total="500"/>
-  <Pokemon dex="56" name="Mankey" type1="Fighting" type2="" hp="40" attack="80" defense="35" sp_attack="35" sp_defense="45" speed="70" total="305"/>
-  <Pokemon dex="57" name="Primeape" type1="Fighting" type2="" hp="65" attack="105" defense="60" sp_attack="60" sp_defense="70" speed="95" total="455"/>
-  <Pokemon dex="58" name="Growlithe" type1="Fire" type2="" hp="55" attack="70" defense="45" sp_attack="70" sp_defense="50" speed="60" total="350"/>
-  <Pokemon dex="59" name="Arcanine" type1="Fire" type2="" hp="90" attack="110" defense="80" sp_attack="100" sp_defense="80" speed="95" total="555"/>
-  <Pokemon dex="60" name="Poliwag" type1="Water" type2="" hp="40" attack="50" defense="40" sp_attack="40" sp_defense="40" speed="90" total="300"/>
-  <Pokemon dex="61" name="Poliwhirl" type1="Water" type2="" hp="65" attack="65" defense="65" sp_attack="50" sp_defense="50" speed="90" total="385"/>
-  <Pokemon dex="62" name="Poliwrath" type1="Water" type2="Fighting" hp="90" attack="95" defense="95" sp_attack="70" sp_defense="90" speed="70" total="510"/>
-  <Pokemon dex="63" name="Abra" type1="Psychic" type2="" hp="25" attack="20" defense="15" sp_attack="105" sp_defense="55" speed="90" total="310"/>
-  <Pokemon dex="64" name="Kadabra" type1="Psychic" type2="" hp="40" attack="35" defense="30" sp_attack="120" sp_defense="70" speed="105" total="400"/>
-  <Pokemon dex="65" name="Alakazam" type1="Psychic" type2="" hp="55" attack="50" defense="45" sp_attack="135" sp_defense="95" speed="120" total="500"/>
-  <Pokemon dex="66" name="Machop" type1="Fighting" type2="" hp="70" attack="80" defense="50" sp_attack="35" sp_defense="35" speed="35" total="305"/>
-  <Pokemon dex="67" name="Machoke" type1="Fighting" type2="" hp="80" attack="100" defense="70" sp_attack="50" sp_defense="60" speed="45" total="405"/>
-  <Pokemon dex="68" name="Machamp" type1="Fighting" type2="" hp="90" attack="130" defense="80" sp_attack="65" sp_defense="85" speed="55" total="505"/>
-  <Pokemon dex="69" name="Bellsprout" type1="Grass" type2="Poison" hp="50" attack="75" defense="35" sp_attack="70" sp_defense="30" speed="40" total="300"/>
-  <Pokemon dex="70" name="Weepinbell" type1="Grass" type2="Poison" hp="65" attack="90" defense="50" sp_attack="85" sp_defense="45" speed="55" total="390"/>
-  <Pokemon dex="71" name="Victreebel" type1="Grass" type2="Poison" hp="80" attack="105" defense="65" sp_attack="100" sp_defense="70" speed="70" total="490"/>
-  <Pokemon dex="72" name="Tentacool" type1="Water" type2="Poison" hp="40" attack="40" defense="35" sp_attack="50" sp_defense="100" speed="70" total="335"/>
-  <Pokemon dex="73" name="Tentacruel" type1="Water" type2="Poison" hp="80" attack="70" defense="65" sp_attack="80" sp_defense="120" speed="100" total="515"/>
-  <Pokemon dex="74" name="Geodude" type1="Rock" type2="Ground" hp="40" attack="80" defense="100" sp_attack="30" sp_defense="30" speed="20" total="300"/>
-  <Pokemon dex="75" name="Graveler" type1="Rock" type2="Ground" hp="55" attack="95" defense="115" sp_attack="45" sp_defense="45" speed="35" total="390"/>
-  <Pokemon dex="76" name="Golem" type1="Rock" type2="Ground" hp="80" attack="120" defense="130" sp_attack="55" sp_defense="65" speed="45" total="495"/>
-  <Pokemon dex="77" name="Ponyta" type1="Fire" type2="" hp="50" attack="85" defense="55" sp_attack="65" sp_defense="65" speed="90" total="410"/>
-  <Pokemon dex="78" name="Rapidash" type1="Fire" type2="" hp="65" attack="100" defense="70" sp_attack="80" sp_defense="80" speed="105" total="500"/>
-  <Pokemon dex="79" name="Slowpoke" type1="Water" type2="Psychic" hp="90" attack="65" defense="65" sp_attack="40" sp_defense="40" speed="15" total="315"/>
-  <Pokemon dex="80" name="Slowbro" type1="Water" type2="Psychic" hp="95" attack="75" defense="110" sp_attack="100" sp_defense="80" speed="30" total="490"/>
-  <Pokemon dex="81" name="Magnemite" type1="Electric" type2="Steel" hp="25" attack="35" defense="70" sp_attack="95" sp_defense="55" speed="45" total="325"/>
-  <Pokemon dex="82" name="Magneton" type1="Electric" type2="Steel" hp="50" attack="60" defense="95" sp_attack="120" sp_defense="70" speed="70" total="465"/>
-  <Pokemon dex="83" name="Farfetchd" type1="Normal" type2="Flying" hp="52" attack="90" defense="55" sp_attack="58" sp_defense="62" speed="60" total="377"/>
-  <Pokemon dex="84" name="Doduo" type1="Normal" type2="Flying" hp="35" attack="85" defense="45" sp_attack="35" sp_defense="35" speed="75" total="310"/>
-  <Pokemon dex="85" name="Dodrio" type1="Normal" type2="Flying" hp="60" attack="110" defense="70" sp_attack="60" sp_defense="60" speed="110" total="470"/>
-  <Pokemon dex="86" name="Seel" type1="Water" type2="" hp="65" attack="45" defense="55" sp_attack="45" sp_defense="70" speed="45" total="325"/>
-  <Pokemon dex="87" name="Dewgong" type1="Water" type2="Ice" hp="90" attack="70" defense="80" sp_attack="70" sp_defense="95" speed="70" total="475"/>
-  <Pokemon dex="88" name="Grimer" type1="Poison" type2="" hp="80" attack="80" defense="50" sp_attack="40" sp_defense="50" speed="25" total="325"/>
-  <Pokemon dex="89" name="Muk" type1="Poison" type2="" hp="105" attack="105" defense="75" sp_attack="65" sp_defense="100" speed="50" total="500"/>
-  <Pokemon dex="90" name="Shellder" type1="Water" type2="" hp="30" attack="65" defense="100" sp_attack="45" sp_defense="25" speed="40" total="305"/>
-  <Pokemon dex="91" name="Cloyster" type1="Water" type2="Ice" hp="50" attack="95" defense="180" sp_attack="85" sp_defense="45" speed="70" total="525"/>
-  <Pokemon dex="92" name="Gastly" type1="Ghost" type2="Poison" hp="30" attack="35" defense="30" sp_attack="100" sp_defense="35" speed="80" total="310"/>
-  <Pokemon dex="93" name="Haunter" type1="Ghost" type2="Poison" hp="45" attack="50" defense="45" sp_attack="115" sp_defense="55" speed="95" total="405"/>
-  <Pokemon dex="94" name="Gengar" type1="Ghost" type2="Poison" hp="60" attack="65" defense="60" sp_attack="130" sp_defense="75" speed="110" total="500"/>
-  <Pokemon dex="95" name="Onix" type1="Rock" type2="Ground" hp="35" attack="45" defense="160" sp_attack="30" sp_defense="45" speed="70" total="385"/>
-  <Pokemon dex="96" name="Drowzee" type1="Psychic" type2="" hp="60" attack="48" defense="45" sp_attack="43" sp_defense="90" speed="42" total="328"/>
-  <Pokemon dex="97" name="Hypno" type1="Psychic" type2="" hp="85" attack="73" defense="70" sp_attack="73" sp_defense="115" speed="67" total="483"/>
-  <Pokemon dex="98" name="Krabby" type1="Water" type2="" hp="30" attack="105" defense="90" sp_attack="25" sp_defense="25" speed="50" total="325"/>
-  <Pokemon dex="99" name="Kingler" type1="Water" type2="" hp="55" attack="130" defense="115" sp_attack="50" sp_defense="50" speed="75" total="475"/>
-  <Pokemon dex="100" name="Voltorb" type1="Electric" type2="" hp="40" attack="30" defense="50" sp_attack="55" sp_defense="55" speed="100" total="330"/>
-  <Pokemon dex="101" name="Electrode" type1="Electric" type2="" hp="60" attack="50" defense="70" sp_attack="80" sp_defense="80" speed="150" total="490"/>
-  <Pokemon dex="102" name="Exeggcute" type1="Grass" type2="Psychic" hp="60" attack="40" defense="80" sp_attack="60" sp_defense="45" speed="40" total="325"/>
-  <Pokemon dex="103" name="Exeggutor" type1="Grass" type2="Psychic" hp="95" attack="95" defense="85" sp_attack="125" sp_defense="75" speed="55" total="530"/>
-  <Pokemon dex="104" name="Cubone" type1="Ground" type2="" hp="50" attack="50" defense="95" sp_attack="40" sp_defense="50" speed="35" total="320"/>
-  <Pokemon dex="105" name="Marowak" type1="Ground" type2="" hp="60" attack="80" defense="110" sp_attack="50" sp_defense="80" speed="45" total="425"/>
-  <Pokemon dex="106" name="Hitmonlee" type1="Fighting" type2="" hp="50" attack="120" defense="53" sp_attack="35" sp_defense="110" speed="87" total="455"/>
-  <Pokemon dex="107" name="Hitmonchan" type1="Fighting" type2="" hp="50" attack="105" defense="79" sp_attack="35" sp_defense="110" speed="76" total="455"/>
-  <Pokemon dex="108" name="Lickitung" type1="Normal" type2="" hp="90" attack="55" defense="75" sp_attack="60" sp_defense="75" speed="30" total="385"/>
-  <Pokemon dex="109" name="Koffing" type1="Poison" type2="" hp="40" attack="65" defense="95" sp_attack="60" sp_defense="45" speed="35" total="340"/>
-  <Pokemon dex="110" name="Weezing" type1="Poison" type2="" hp="65" attack="90" defense="120" sp_attack="85" sp_defense="70" speed="60" total="490"/>
-  <Pokemon dex="111" name="Rhyhorn" type1="Ground" type2="Rock" hp="80" attack="85" defense="95" sp_attack="30" sp_defense="30" speed="25" total="345"/>
-  <Pokemon dex="112" name="Rhydon" type1="Ground" type2="Rock" hp="105" attack="130" defense="120" sp_attack="45" sp_defense="45" speed="40" total="485"/>
-  <Pokemon dex="113" name="Chansey" type1="Normal" type2="" hp="250" attack="5" defense="5" sp_attack="35" sp_defense="105" speed="50" total="450"/>
-  <Pokemon dex="114" name="Tangela" type1="Grass" type2="" hp="65" attack="55" defense="115" sp_attack="100" sp_defense="40" speed="60" total="435"/>
-  <Pokemon dex="115" name="Kangaskhan" type1="Normal" type2="" hp="105" attack="95" defense="80" sp_attack="40" sp_defense="80" speed="90" total="490"/>
-  <Pokemon dex="116" name="Horsea" type1="Water" type2="" hp="30" attack="40" defense="70" sp_attack="70" sp_defense="25" speed="60" total="295"/>
-  <Pokemon dex="117" name="Seadra" type1="Water" type2="" hp="55" attack="65" defense="95" sp_attack="95" sp_defense="45" speed="85" total="440"/>
-  <Pokemon dex="118" name="Goldeen" type1="Water" type2="" hp="45" attack="67" defense="60" sp_attack="35" sp_defense="50" speed="63" total="320"/>
-  <Pokemon dex="119" name="Seaking" type1="Water" type2="" hp="80" attack="92" defense="65" sp_attack="65" sp_defense="80" speed="68" total="450"/>
-  <Pokemon dex="120" name="Staryu" type1="Water" type2="" hp="30" attack="45" defense="55" sp_attack="70" sp_defense="55" speed="85" total="340"/>
-  <Pokemon dex="121" name="Starmie" type1="Water" type2="Psychic" hp="60" attack="75" defense="85" sp_attack="100" sp_defense="85" speed="115" total="520"/>
-  <Pokemon dex="122" name="Mr-Mime" type1="Psychic" type2="Fairy" hp="40" attack="45" defense="65" sp_attack="100" sp_defense="120" speed="90" total="460"/>
-  <Pokemon dex="123" name="Scyther" type1="Bug" type2="Flying" hp="70" attack="110" defense="80" sp_attack="55" sp_defense="80" speed="105" total="500"/>
-  <Pokemon dex="124" name="Jynx" type1="Ice" type2="Psychic" hp="65" attack="50" defense="35" sp_attack="115" sp_defense="95" speed="95" total="455"/>
-  <Pokemon dex="125" name="Electabuzz" type1="Electric" type2="" hp="65" attack="83" defense="57" sp_attack="95" sp_defense="85" speed="105" total="490"/>
-  <Pokemon dex="126" name="Magmar" type1="Fire" type2="" hp="65" attack="95" defense="57" sp_attack="100" sp_defense="85" speed="93" total="495"/>
-  <Pokemon dex="127" name="Pinsir" type1="Bug" type2="" hp="65" attack="125" defense="100" sp_attack="55" sp_defense="70" speed="85" total="500"/>
-  <Pokemon dex="128" name="Tauros" type1="Normal" type2="" hp="75" attack="100" defense="95" sp_attack="40" sp_defense="70" speed="110" total="490"/>
-  <Pokemon dex="129" name="Magikarp" type1="Water" type2="" hp="20" attack="10" defense="55" sp_attack="15" sp_defense="20" speed="80" total="200"/>
-  <Pokemon dex="130" name="Gyarados" type1="Water" type2="Flying" hp="95" attack="125" defense="79" sp_attack="60" sp_defense="100" speed="81" total="540"/>
-  <Pokemon dex="131" name="Lapras" type1="Water" type2="Ice" hp="130" attack="85" defense="80" sp_attack="85" sp_defense="95" speed="60" total="535"/>
-  <Pokemon dex="132" name="Ditto" type1="Normal" type2="" hp="48" attack="48" defense="48" sp_attack="48" sp_defense="48" speed="48" total="288"/>
-  <Pokemon dex="133" name="Eevee" type1="Normal" type2="" hp="55" attack="55" defense="50" sp_attack="45" sp_defense="65" speed="55" total="325"/>
-  <Pokemon dex="134" name="Vaporeon" type1="Water" type2="" hp="130" attack="65" defense="60" sp_attack="110" sp_defense="95" speed="65" total="525"/>
-  <Pokemon dex="135" name="Jolteon" type1="Electric" type2="" hp="65" attack="65" defense="60" sp_attack="110" sp_defense="95" speed="130" total="525"/>
-  <Pokemon dex="136" name="Flareon" type1="Fire" type2="" hp="65" attack="130" defense="60" sp_attack="95" sp_defense="110" speed="65" total="525"/>
-  <Pokemon dex="137" name="Porygon" type1="Normal" type2="" hp="65" attack="60" defense="70" sp_attack="85" sp_defense="75" speed="40" total="395"/>
-  <Pokemon dex="138" name="Omanyte" type1="Rock" type2="Water" hp="35" attack="40" defense="100" sp_attack="90" sp_defense="55" speed="35" total="355"/>
-  <Pokemon dex="139" name="Omastar" type1="Rock" type2="Water" hp="70" attack="60" defense="125" sp_attack="115" sp_defense="70" speed="55" total="495"/>
-  <Pokemon dex="140" name="Kabuto" type1="Rock" type2="Water" hp="30" attack="80" defense="90" sp_attack="55" sp_defense="45" speed="55" total="355"/>
-  <Pokemon dex="141" name="Kabutops" type1="Rock" type2="Water" hp="60" attack="115" defense="105" sp_attack="65" sp_defense="70" speed="80" total="495"/>
-  <Pokemon dex="142" name="Aerodactyl" type1="Rock" type2="Flying" hp="80" attack="105" defense="65" sp_attack="60" sp_defense="75" speed="130" total="515"/>
-  <Pokemon dex="143" name="Snorlax" type1="Normal" type2="" hp="160" attack="110" defense="65" sp_attack="65" sp_defense="110" speed="30" total="540"/>
-  <Pokemon dex="144" name="Articuno" type1="Ice" type2="Flying" hp="90" attack="85" defense="100" sp_attack="95" sp_defense="125" speed="85" total="580"/>
-  <Pokemon dex="145" name="Zapdos" type1="Electric" type2="Flying" hp="90" attack="90" defense="85" sp_attack="125" sp_defense="90" speed="100" total="580"/>
-  <Pokemon dex="146" name="Moltres" type1="Fire" type2="Flying" hp="90" attack="100" defense="90" sp_attack="125" sp_defense="85" speed="90" total="580"/>
-  <Pokemon dex="147" name="Dratini" type1="Dragon" type2="" hp="41" attack="64" defense="45" sp_attack="50" sp_defense="50" speed="50" total="300"/>
-  <Pokemon dex="148" name="Dragonair" type1="Dragon" type2="" hp="61" attack="84" defense="65" sp_attack="70" sp_defense="70" speed="70" total="420"/>
-  <Pokemon dex="149" name="Dragonite" type1="Dragon" type2="Flying" hp="91" attack="134" defense="95" sp_attack="100" sp_defense="100" speed="80" total="600"/>
-  <Pokemon dex="150" name="Mewtwo" type1="Psychic" type2="" hp="106" attack="110" defense="90" sp_attack="154" sp_defense="90" speed="130" total="680"/>
-  <Pokemon dex="151" name="Mew" type1="Psychic" type2="" hp="100" attack="100" defense="100" sp_attack="100" sp_defense="100" speed="100" total="600"/>
+  <Pokemon>
+      <Name>Bulbasaur</Name>
+      <Dex>1</Dex>
+      <Type1>Grass</Type1>
+      <Type2>Poison</Type2>
+      <BaseStats>
+          <HP>45</HP>
+          <Attack>49</Attack>
+          <Defense>49</Defense>
+          <SpAttack>65</SpAttack>
+          <SpDefense>65</SpDefense>
+          <Speed>45</Speed>
+      </BaseStats>
+      <BaseExperience>64</BaseExperience>
+      <CatchRate>45</CatchRate>
+      <GenderRatio>
+        <Male>87.5</Male>
+        <Female>12.5</Female>
+      </GenderRatio>
+      <Moves>
+          <Move slot="1">Tackle</Move>
+          <Move slot="2">Vine Whip</Move>
+          <Move slot="3">Sludge Wave</Move>
+          <Move slot="4">Magical Leaf</Move>
+      </Moves>
+  </Pokemon>
+
+  <Pokemon>
+      <Name>Charmander</Name>
+      <Dex>2</Dex>
+      <Type1>Fire</Type1>
+      <Type2></Type2>
+      <BaseStats>
+          <HP>39</HP>
+          <Attack>52</Attack>
+          <Defense>43</Defense>
+          <SpAttack>60</SpAttack>
+          <SpDefense>50</SpDefense>
+          <Speed>65</Speed>
+      </BaseStats>
+      <BaseExperience>62</BaseExperience>
+      <CatchRate>45</CatchRate>
+      <GenderRatio>
+          <Male>87.5</Male>
+          <Female>12.5</Female>
+      </GenderRatio>
+      <Moves>
+          <Move slot="1">Tackle</Move>
+          <Move slot="2">Ember</Move>
+          <Move slot="3">Fire Fang</Move>
+          <Move slot="4">Dragon Breath</Move>
+      </Moves>
+  </Pokemon>
+
+  <Pokemon>
+      <Name>Squirtle</Name>
+      <Dex>3</Dex>
+      <Type1>Water</Type1>
+      <Type2></Type2>
+      <BaseStats>
+          <HP>44</HP>
+          <Attack>48</Attack>
+          <Defense>65</Defense>
+          <SpAttack>50</SpAttack>
+          <SpDefense>64</SpDefense>
+          <Speed>43</Speed>
+      </BaseStats>
+      <BaseExperience>63</BaseExperience>
+      <CatchRate>45</CatchRate>
+      <GenderRatio>
+          <Male>87.5</Male>
+          <Female>12.5</Female>
+      </GenderRatio>
+      <Moves>
+          <Move slot="1">Tackle</Move>
+          <Move slot="2">Water Gun</Move>
+          <Move slot="3">Bite</Move>
+          <Move slot="4">Icy Wind</Move>
+      </Moves>
+  </Pokemon>
+
+  <Pokemon>
+      <Name>Pidgey</Name>
+      <Dex>4</Dex>
+      <Type1>Normal</Type1>
+      <Type2>Flying</Type2>
+      <BaseStats>
+          <HP>40</HP>
+          <Attack>45</Attack>
+          <Defense>40</Defense>
+          <SpAttack>35</SpAttack>
+          <SpDefense>35</SpDefense>
+          <Speed>56</Speed>
+      </BaseStats>
+      <BaseExperience>50</BaseExperience>
+      <CatchRate>255</CatchRate>
+      <GenderRatio>
+          <Male>50</Male>
+          <Female>50</Female>
+      </GenderRatio>
+      <Moves>
+          <Move slot="1">Tackle</Move>
+          <Move slot="2">Gust</Move>
+          <Move slot="3">Twister</Move>
+          <Move slot="4">Wing Attack</Move>
+      </Moves>
+  </Pokemon>
+
+  <Pokemon>
+      <Name>Caterpie</Name>
+      <Dex>5</Dex>
+      <Type1>Bug</Type1>
+      <Type2></Type2>
+      <BaseStats>
+          <HP>45</HP>
+          <Attack>30</Attack>
+          <Defense>35</Defense>
+          <SpAttack>20</SpAttack>
+          <SpDefense>20</SpDefense>
+          <Speed>45</Speed>
+      </BaseStats>
+      <BaseExperience>39</BaseExperience>
+      <CatchRate>255</CatchRate>
+      <GenderRatio>
+          <Male>50</Male>
+          <Female>50</Female>
+      </GenderRatio>
+      <Moves>
+          <Move slot="1">Tackle</Move>
+          <Move slot="2">Bug Bite</Move>
+          <Move slot="3">Poison Sting</Move>
+          <Move slot="4">Headbutt</Move>
+      </Moves>
+  </Pokemon>
+
+  <Pokemon>
+      <Name>Weedle</Name>
+      <Dex>6</Dex>
+      <Type1>Bug</Type1>
+      <Type2>Poison</Type2>
+      <BaseStats>
+          <HP>40</HP>
+          <Attack>35</Attack>
+          <Defense>30</Defense>
+          <SpAttack>20</SpAttack>
+          <SpDefense>20</SpDefense>
+          <Speed>50</Speed>
+      </BaseStats>
+      <BaseExperience>39</BaseExperience>
+      <CatchRate>255</CatchRate>
+      <GenderRatio>
+          <Male>50</Male>
+          <Female>50</Female>
+      </GenderRatio>
+      <Moves>
+          <Move slot="1">Poison Sting</Move>
+          <Move slot="2">Bug Bite</Move>
+          <Move slot="3">Tackle</Move>
+          <Move slot="4">Headbutt</Move>
+      </Moves>
+  </Pokemon>
+
+  <Pokemon>
+      <Name>Rattata</Name>
+      <Dex>7</Dex>
+      <Type1>Normal</Type1>
+      <Type2></Type2>
+      <BaseStats>
+          <HP>30</HP>
+          <Attack>56</Attack>
+          <Defense>35</Defense>
+          <SpAttack>25</SpAttack>
+          <SpDefense>35</SpDefense>
+          <Speed>72</Speed>
+      </BaseStats>
+      <BaseExperience>51</BaseExperience>
+      <CatchRate>255</CatchRate>
+      <GenderRatio>
+          <Male>50</Male>
+          <Female>50</Female>
+      </GenderRatio>
+      <Moves>
+          <Move slot="1">Tackle</Move>
+          <Move slot="2">Bite</Move>
+          <Move slot="3">Headbutt</Move>
+          <Move slot="4">Scratch</Move>
+      </Moves>
+  </Pokemon>
+
+  <Pokemon>
+      <Name>Pikachu</Name>
+      <Dex>8</Dex>
+      <Type1>Electric</Type1>
+      <Type2></Type2>
+      <BaseStats>
+          <HP>35</HP>
+          <Attack>55</Attack>
+          <Defense>40</Defense>
+          <SpAttack>50</SpAttack>
+          <SpDefense>50</SpDefense>
+          <Speed>90</Speed>
+      </BaseStats>
+      <BaseExperience>112</BaseExperience>
+      <CatchRate>190</CatchRate>
+      <GenderRatio>
+          <Male>50</Male>
+          <Female>50</Female>
+      </GenderRatio>
+      <Moves>
+          <Move slot="1">Nuzzle</Move>
+          <Move slot="2">Thunder Shock</Move>
+          <Move slot="3">Feint</Move>
+          <Move slot="4">Iron Tail</Move>
+      </Moves>
+  </Pokemon>
+
+  <Pokemon>
+      <Name>Eevee</Name>
+      <Dex>9</Dex>
+      <Type1>Normal</Type1>
+      <Type2></Type2>
+      <BaseStats>
+          <HP>55</HP>
+          <Attack>55</Attack>
+          <Defense>50</Defense>
+          <SpAttack>45</SpAttack>
+          <SpDefense>65</SpDefense>
+          <Speed>55</Speed>
+      </BaseStats>
+      <BaseExperience>65</BaseExperience>
+      <CatchRate>45</CatchRate>
+      <GenderRatio>
+          <Male>87.5</Male>
+          <Female>12.5</Female>
+      </GenderRatio>
+      <Moves>
+          <Move slot="1">Tackle</Move>
+          <Move slot="2">Disarming Voice</Move>
+          <Move slot="3">Bite</Move>
+          <Move slot="4">Swift</Move>
+      </Moves>
+  </Pokemon>
+
+  <Pokemon>
+      <Name>Snorlax</Name>
+      <Dex>10</Dex>
+      <Type1>Normal</Type1>
+      <Type2></Type2>
+      <BaseStats>
+          <HP>160</HP>
+          <Attack>110</Attack>
+          <Defense>65</Defense>
+          <SpAttack>65</SpAttack>
+          <SpDefense>110</SpDefense>
+          <Speed>30</Speed>
+      </BaseStats>
+      <BaseExperience>189</BaseExperience>
+      <CatchRate>25</CatchRate>
+      <GenderRatio>
+          <Male>87.5</Male>
+          <Female>12.5</Female>
+      </GenderRatio>
+      <Moves>
+          <Move slot="1">Tackle</Move>
+          <Move slot="2">Lick</Move>
+          <Move slot="3">Bite</Move>
+          <Move slot="4">Body Slam</Move>
+      </Moves>
+  </Pokemon>
+
+  <Pokemon>
+      <Name>Nidoran-m</Name>
+      <Dex>11</Dex>
+      <Type1>Poison</Type1>
+      <Type2></Type2>
+      <BaseStats>
+          <HP>46</HP>
+          <Attack>57</Attack>
+          <Defense>40</Defense>
+          <SpAttack>40</SpAttack>
+          <SpDefense>40</SpDefense>
+          <Speed>50</Speed>
+      </BaseStats>
+      <BaseExperience>55</BaseExperience>
+      <CatchRate>235</CatchRate>
+      <GenderRatio>
+          <Male>100</Male>
+          <Female>0</Female>
+      </GenderRatio>
+      <Moves>
+          <Move slot="1">Poison Sting</Move>
+          <Move slot="2">Peck</Move>
+          <Move slot="3">Horn Attack</Move>
+          <Move slot="4">Tackle</Move>
+      </Moves>
+  </Pokemon>
+
+  <Pokemon>
+      <Name>Nidoran-f</Name>
+      <Dex>12</Dex>
+      <Type1>Poison</Type1>
+      <Type2></Type2>
+      <BaseStats>
+          <HP>55</HP>
+          <Attack>47</Attack>
+          <Defense>52</Defense>
+          <SpAttack>40</SpAttack>
+          <SpDefense>40</SpDefense>
+          <Speed>41</Speed>
+      </BaseStats>
+      <BaseExperience>55</BaseExperience>
+      <CatchRate>235</CatchRate>
+      <GenderRatio>
+          <Male>0</Male>
+          <Female>100</Female>
+      </GenderRatio>
+      <Moves>
+          <Move slot="1">Poison Sting</Move>
+          <Move slot="2">Peck</Move>
+          <Move slot="3">Horn Attack</Move>
+          <Move slot="4">Tackle</Move>
+      </Moves>
+  </Pokemon>
+
+  <Pokemon>
+      <Name>Vulpix</Name>
+      <Dex>13</Dex>
+      <Type1>Fire</Type1>
+      <Type2></Type2>
+      <BaseStats>
+          <HP>38</HP>
+          <Attack>41</Attack>
+          <Defense>40</Defense>
+          <SpAttack>50</SpAttack>
+          <SpDefense>65</SpDefense>
+          <Speed>65</Speed>
+      </BaseStats>
+      <BaseExperience>60</BaseExperience>
+      <CatchRate>190</CatchRate>
+      <GenderRatio>
+          <Male>25</Male>
+          <Female>75</Female>
+      </GenderRatio>
+      <Moves>
+          <Move slot="1">Ember</Move>
+          <Move slot="2">Extrasensory</Move>
+          <Move slot="3">Tackle</Move>
+          <Move slot="4">Lick</Move>
+      </Moves>
+  </Pokemon>
+
+  <Pokemon>
+      <Name>Jigglypuff</Name>
+      <Dex>14</Dex>
+      <Type1>Normal</Type1>
+      <Type2>Fairy</Type2>
+      <BaseStats>
+          <HP>115</HP>
+          <Attack>45</Attack>
+          <Defense>20</Defense>
+          <SpAttack>45</SpAttack>
+          <SpDefense>25</SpDefense>
+          <Speed>20</Speed>
+      </BaseStats>
+      <BaseExperience>95</BaseExperience>
+      <CatchRate>170</CatchRate>
+      <GenderRatio>
+          <Male>25</Male>
+          <Female>75</Female>
+      </GenderRatio>
+      <Moves>
+          <Move slot="1">Tackle</Move>
+          <Move slot="2">Scratch</Move>
+          <Move slot="3">Disarming Voice</Move>
+          <Move slot="4">Covet</Move>
+      </Moves>
+  </Pokemon>
+
+  <Pokemon>
+      <Name>Diglett</Name>
+      <Dex>15</Dex>
+      <Type1>Ground</Type1>
+      <Type2></Type2>
+      <BaseStats>
+          <HP>10</HP>
+          <Attack>55</Attack>
+          <Defense>25</Defense>
+          <SpAttack>35</SpAttack>
+          <SpDefense>45</SpDefense>
+          <Speed>95</Speed>
+      </BaseStats>
+      <BaseExperience>53</BaseExperience>
+      <CatchRate>255</CatchRate>
+      <GenderRatio>
+          <Male>50</Male>
+          <Female>50</Female>
+      </GenderRatio>
+      <Moves>
+          <Move slot="1">Scratch</Move>
+          <Move slot="2">Astonish</Move>
+          <Move slot="3">Headbutt</Move>
+          <Move slot="4">Bulldoze</Move>
+      </Moves>
+  </Pokemon>
+
+  <Pokemon>
+      <Name>Psyduck</Name>
+      <Dex>16</Dex>
+      <Type1>Water</Type1>
+      <Type2></Type2>
+      <BaseStats>
+          <HP>50</HP>
+          <Attack>52</Attack>
+          <Defense>48</Defense>
+          <SpAttack>65</SpAttack>
+          <SpDefense>50</SpDefense>
+          <Speed>55</Speed>
+      </BaseStats>
+      <BaseExperience>64</BaseExperience>
+      <CatchRate>190</CatchRate>
+      <GenderRatio>
+          <Male>50</Male>
+          <Female>50</Female>
+      </GenderRatio>
+      <Moves>
+          <Move slot="1">Scratch</Move>
+          <Move slot="2">Water Gun</Move>
+          <Move slot="3">Confusion</Move>
+          <Move slot="4">Zen Headbutt</Move>
+      </Moves>
+  </Pokemon>
+
+  <Pokemon>
+      <Name>Staryu</Name>
+      <Dex>17</Dex>
+      <Type1>Water</Type1>
+      <Type2></Type2>
+      <BaseStats>
+          <HP>30</HP>
+          <Attack>45</Attack>
+          <Defense>55</Defense>
+          <SpAttack>70</SpAttack>
+          <SpDefense>55</SpDefense>
+          <Speed>85</Speed>
+      </BaseStats>
+      <BaseExperience>68</BaseExperience>
+      <CatchRate>225</CatchRate>
+      <GenderRatio>
+          <Male>0</Male>
+          <Female>0</Female>
+      </GenderRatio>
+      <Moves>
+          <Move slot="1">Tackle</Move>
+          <Move slot="2">Water Gun</Move>
+          <Move slot="3">Swift</Move>
+          <Move slot="4">Extrasensory</Move>
+      </Moves>
+  </Pokemon>
+
+  <Pokemon>
+      <Name>Goldeen</Name>
+      <Dex>18</Dex>
+      <Type1>Water</Type1>
+      <Type2></Type2>
+      <BaseStats>
+          <HP>45</HP>
+          <Attack>67</Attack>
+          <Defense>60</Defense>
+          <SpAttack>35</SpAttack>
+          <SpDefense>50</SpDefense>
+          <Speed>63</Speed>
+      </BaseStats>
+      <BaseExperience>64</BaseExperience>
+      <CatchRate>225</CatchRate>
+      <GenderRatio>
+          <Male>50</Male>
+          <Female>50</Female>
+      </GenderRatio>
+      <Moves>
+          <Move slot="1">Peck</Move>
+          <Move slot="2">Water Gun</Move>
+          <Move slot="3">Tackle</Move>
+          <Move slot="4">Horn Attack</Move>
+      </Moves>
+  </Pokemon>
+
+  <Pokemon>
+      <Name>Exeggcute</Name>
+      <Dex>19</Dex>
+      <Type1>Grass</Type1>
+      <Type2>Psychic</Type2>
+      <BaseStats>
+          <HP>60</HP>
+          <Attack>40</Attack>
+          <Defense>80</Defense>
+          <SpAttack>60</SpAttack>
+          <SpDefense>45</SpDefense>
+          <Speed>40</Speed>
+      </BaseStats>
+      <BaseExperience>65</BaseExperience>
+      <CatchRate>90</CatchRate>
+      <GenderRatio>
+          <Male>50</Male>
+          <Female>50</Female>
+      </GenderRatio>
+      <Moves>
+          <Move slot="1">Extrasensory</Move>
+          <Move slot="2">Energy Ball</Move>
+          <Move slot="3">Tackle</Move>
+          <Move slot="4">Confusion</Move>
+      </Moves>
+  </Pokemon>
 </PokemonList>
