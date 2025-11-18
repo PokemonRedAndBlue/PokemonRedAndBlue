@@ -98,6 +98,7 @@ class PokemonGenerator
                 SpDefense = int.Parse(p.Element("BaseStats").Element("SpDefense").Value),
                 Speed = int.Parse(p.Element("BaseStats").Element("Speed").Value)
             },
+            CatchRate = int.Parse(p.Element("CatchRate").Value),
             Moves = moves
         };
 

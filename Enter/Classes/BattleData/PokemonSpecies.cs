@@ -9,6 +9,8 @@ public class PokemonSpecies
     public string Type2;
     public BaseStats BaseStats;
     public List<string> Moves { get; set; }
+    public int CatchRate;
+    
 }
 
 public class BaseStats
