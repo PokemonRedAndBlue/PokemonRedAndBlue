@@ -61,6 +61,9 @@ namespace Enter.Classes.Scenes
             Cam = new(((Game)_game).GraphicsDevice.Viewport);
             character = content.Load<Texture2D>("images/Pokemon_Characters");
 
+            // Load Background Music
+            BackgroundMusicLibrary.Load(content);
+
             // Only restore from Game1.SavedPlayerPosition if available
               Vector2 spawn = _playerPosition;
             if ((_game as Game1)?.SavedPlayerPosition is Microsoft.Xna.Framework.Vector2 savedPos)
@@ -168,6 +171,10 @@ namespace Enter.Classes.Scenes
                 _game.SavedPlayerTiles["overworld_city"] = _player.TilePos + new Point(0, 1);
                 _sceneManager.TransitionTo("gym");
             }
+
+            //Music
+            BackgroundMusicPlayer.Play(SongId.CeruleanCityTheme);
+
             // no need for base.Update here
         }
 
