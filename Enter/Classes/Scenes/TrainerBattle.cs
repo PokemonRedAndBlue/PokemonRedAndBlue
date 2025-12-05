@@ -55,6 +55,9 @@ namespace Enter.Classes.Scenes
             // load from trainer dict
             TrainerTeam trainerTeams = new TrainerTeam();
 
+            // Load Background Music
+            BackgroundMusicLibrary.Load(content);
+
             // Load Trainer and their Pokemon
             _trainersTeam = trainerTeams.GetTrainerTeam(_trainerID);
             _playersTeam = _player.thePlayersTeam;
@@ -80,6 +83,9 @@ namespace Enter.Classes.Scenes
                     (_game as Game1)?.MarkTrainerDefeated(_trainerID);
                     _sceneManager.TransitionTo("overworld");
                 }
+
+            //Music
+            BackgroundMusicPlayer.Play(SongId.BattleTrainer);
         }
         public void Draw(SpriteBatch spriteBatch)
         {
