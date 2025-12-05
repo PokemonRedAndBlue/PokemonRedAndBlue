@@ -138,27 +138,28 @@ public void moveArrow()
     if (currentState.IsKeyDown(Keys.Left) && previousKeyState.IsKeyUp(Keys.Left))
     {
         newRow = (currentRow - 1 + 2) % 2; 
-        SoundEffectPlayer.Play(SfxId.SFX_PRESS_AB); 
+ 
     }
     else if (currentState.IsKeyDown(Keys.Right) && previousKeyState.IsKeyUp(Keys.Right))
     {
         newRow = (currentRow + 1) % 2;
-        SoundEffectPlayer.Play(SfxId.SFX_PRESS_AB); 
+        
     }
     else if (currentState.IsKeyDown(Keys.Up) && previousKeyState.IsKeyUp(Keys.Up))
     {
         newCol = (currentCol - 1 + 2) % 2;
-        SoundEffectPlayer.Play(SfxId.SFX_PRESS_AB); 
+        
     }
     else if (currentState.IsKeyDown(Keys.Down) && previousKeyState.IsKeyUp(Keys.Down))
     {
         newCol = (currentCol + 1) % 2;
-        SoundEffectPlayer.Play(SfxId.SFX_PRESS_AB); 
+        
     }
 
     // handle arrow selection
         if (currentState.IsKeyDown(Keys.Enter))
         {
+            SoundEffectPlayer.Play(SfxId.SFX_PRESS_AB); 
             currentBattleState = handleArrowEvent(newCol, newRow);
             return;
         }
