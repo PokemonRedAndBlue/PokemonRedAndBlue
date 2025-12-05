@@ -63,6 +63,8 @@ namespace Enter.Classes.Scenes
 
             // Load Background Music
             BackgroundMusicLibrary.Load(content);
+            //Music
+            BackgroundMusicPlayer.Play(SongId.CeruleanCityTheme, loop: true);
 
             // Only restore from Game1.SavedPlayerPosition if available
               Vector2 spawn = _playerPosition;
@@ -172,8 +174,7 @@ namespace Enter.Classes.Scenes
                 _sceneManager.TransitionTo("gym");
             }
 
-            //Music
-            BackgroundMusicPlayer.Play(SongId.CeruleanCityTheme);
+
 
             // no need for base.Update here
         }

@@ -63,6 +63,8 @@ namespace Enter.Classes.Scenes
 
             // Load Background Music
             BackgroundMusicLibrary.Load(content);
+            //Music
+            BackgroundMusicPlayer.Play(SongId.RoadToViridianFromPallet, loop: true);
 
             // Only restore from Game1.SavedPlayerPosition if returning from a battle, else use this scene's last known position
             // Vector2 spawn = _playerPosition;
@@ -167,8 +169,6 @@ namespace Enter.Classes.Scenes
                 _sceneManager.TransitionTo("overworld_city");
             }
 
-            //Music
-            BackgroundMusicPlayer.Play(SongId.RoadToViridianFromPallet);
 
             // no need for base.Update here
         }
