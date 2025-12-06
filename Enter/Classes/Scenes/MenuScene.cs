@@ -15,7 +15,7 @@ namespace Enter.Classes.Scenes
         private string[] options = { "Start Game", "Exit" };
         private int selected = 0;
         private KeyboardState prev;
-        private double _inputDelay = 0.15;   // 0.15 seconds = 150 ms
+        private double _inputDelay = 1;   
 
         private Texture2D _menuImage;
 
@@ -30,6 +30,7 @@ namespace Enter.Classes.Scenes
         {
             _font = content.Load<SpriteFont>("PokemonFont");
             _menuImage = content.Load<Texture2D>("images/menu");
+            SoundEffectLibrary.Load(content);
 
         }
 
@@ -46,8 +47,9 @@ namespace Enter.Classes.Scenes
 
             if (IsPressed(kb, Keys.Enter))
             {
+                SoundEffectPlayer.Play(SfxId.SFX_PRESS_AB);
                 if (selected == 0)     // Start Game
-                    _sceneManager.TransitionTo("overworld");
+                    _sceneManager.TransitionTo("oakIntro");
                 else if (selected == 1)
                     _game.Exit();
             }
