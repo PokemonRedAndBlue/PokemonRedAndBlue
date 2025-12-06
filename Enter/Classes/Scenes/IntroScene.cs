@@ -70,7 +70,7 @@ namespace Enter.Classes.Scenes
                 PickRandomPokemon();
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            if (Keyboard.GetState().IsKeyDown(Keys.Enter))
             {
                 SoundEffectPlayer.Play(SfxId.SFX_CRY_19);
                 _sceneManager.TransitionTo("menu");
@@ -105,7 +105,7 @@ namespace Enter.Classes.Scenes
             }
 
             // --- Press Enter Text ---
-            string press = "Press  space  to  continue";
+            string press = "Press  enter  to  continue";
             Vector2 pSize = _font.MeasureString(press);
             Vector2 pPos = new Vector2((W - pSize.X) / 2, H * 0.82f);
             spriteBatch.DrawString(_font, press, pPos, Color.Black);
