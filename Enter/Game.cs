@@ -54,6 +54,7 @@ public class Game1 : Core
         _sceneManager = new SceneManager(Content, SpriteBatch);
 
         _sceneManager.AddScene("intro", new IntroScene(_sceneManager, this));
+        _sceneManager.AddScene("menu", new MenuScene(_sceneManager, this));
         _sceneManager.AddScene("overworld", new OverworldScene(_sceneManager, this, _controller, player));
         _sceneManager.AddScene("overworld_city", new OverworldCityScene(_sceneManager, this, _controller, player));
         _sceneManager.AddScene("gym", new GymScene(_sceneManager, this, _controller, player));

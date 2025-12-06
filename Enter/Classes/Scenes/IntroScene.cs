@@ -73,7 +73,7 @@ namespace Enter.Classes.Scenes
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
                 SoundEffectPlayer.Play(SfxId.SFX_CRY_19);
-                _sceneManager.TransitionTo("overworld");
+                _sceneManager.TransitionTo("menu");
             }
         }
 
