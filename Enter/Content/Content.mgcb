@@ -1069,6 +1069,18 @@
 /processorParam:TextureFormat=Color
 /build:images/Game Boy _ GBC - Pokemon Red _ Blue - Backgrounds (Routes) - Route 01.png
 
+#begin images/intro1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/intro1.png
+
 #begin images/Pokeball.png
 /importer:TextureImporter
 /processor:TextureProcessor
