@@ -15,6 +15,8 @@ namespace Enter.Classes.Scenes
         private string[] options = { "Start Game", "Exit" };
         private int selected = 0;
         private KeyboardState prev;
+        private double _inputDelay = 0.15;   // 0.15 seconds = 150 ms
+
         private Texture2D _menuImage;
 
 
@@ -34,6 +36,10 @@ namespace Enter.Classes.Scenes
         public void Update(GameTime gameTime)
         {
             var kb = Keyboard.GetState();
+
+            _inputDelay -= gameTime.ElapsedGameTime.TotalSeconds;
+            if (_inputDelay > 0)
+                return;
 
             if (IsPressed(kb, Keys.Up)) selected = (selected - 1 + options.Length) % options.Length;
             if (IsPressed(kb, Keys.Down)) selected = (selected + 1) % options.Length;
