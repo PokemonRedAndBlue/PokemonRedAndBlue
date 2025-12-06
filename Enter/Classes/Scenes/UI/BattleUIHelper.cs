@@ -159,8 +159,18 @@ public void moveArrow()
     // handle arrow selection
         if (currentState.IsKeyDown(Keys.Enter))
         {
-            SoundEffectPlayer.Play(SfxId.SFX_PRESS_AB); 
             currentBattleState = handleArrowEvent(newCol, newRow);
+
+            //Button SFX but RUN has different SFX
+            if (currentBattleState == "Run")
+            {
+                SoundEffectPlayer.Play(SfxId.SFX_RUN);   // play run SFX immediately
+            }
+            else
+            {
+                SoundEffectPlayer.Play(SfxId.SFX_PRESS_AB); // normal menu confirm sound
+            }
+            
             return;
         }
 
