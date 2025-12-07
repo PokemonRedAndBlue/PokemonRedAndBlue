@@ -58,7 +58,7 @@ public partial class TrainerBattleUI
             enemyScaleMenu = faintScale;
         }
         enemyPokemon.AnimatedSprite?.Draw(spriteBatch, enemyColorMenu, enemysPokemonPosition + enemyOffsetMenu, 4f * enemyScaleMenu);
-        // Draw HP just above enemy pokemon
-        DrawHP(spriteBatch, enemyCurrentHP, enemyMaxHP, new Vector2(enemysPokemonPosition.X + 20, enemysPokemonPosition.Y - 40), "Enemy");
+        // Draw HP just above enemy pokemon (25px lower)
+        DrawHP(spriteBatch, enemyCurrentHP, enemyMaxHP, new Vector2(enemysPokemonPosition.X + 20, enemysPokemonPosition.Y - 15), "Enemy");
     }
 }
