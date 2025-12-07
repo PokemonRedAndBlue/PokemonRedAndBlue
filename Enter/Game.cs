@@ -24,7 +24,6 @@ public class Game1 : Core
     private Dictionary<string, bool> _defeatedTrainers = new Dictionary<string, bool>();
     private KeyboardController _controller = new KeyboardController();
     private Vector2 postion = new Vector2(100, 100);
-    private Tilemap _currentMap;
 
     private SceneManager _sceneManager;
     // State that persists across scene transitions
@@ -83,42 +82,6 @@ public class Game1 : Core
         
         // Cache keyboard state to avoid multiple calls
         KeyboardState keyState = Keyboard.GetState();
-        
-        // If caught in trainer battle in scene, defaults back to Route 1 for now
-        if (keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.C))
-        {
-            _sceneManager.TransitionTo("overworld_city");
-        }
-        
-        if (keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.G))
-        {
-            _sceneManager.TransitionTo("gym");
-        }
-
-        //Music
-        _sceneManager.Update(gameTime);
-        // ----------------------------------------
-        //  MUSIC TESTING KEYS (CAN BE REMOVED)
-        // ----------------------------------------
-        var kb = Keyboard.GetState();
-
-        if (kb.IsKeyDown(Keys.U))
-        {
-            BackgroundMusicPlayer.Play(SongId.OpeningPart2);
-        }
-        if (kb.IsKeyDown(Keys.O))
-        {
-            SoundEffectPlayer.Play(SfxId.SFX_LEVEL_UP);
-        }
-        if (kb.IsKeyDown(Keys.I))
-        {
-            BackgroundMusicPlayer.Play(SongId.BattleWildPokemon);
-        }
-
-        if (kb.IsKeyDown(Keys.Q))
-        {
-            BackgroundMusicPlayer.Stop();
-        }
 
         base.Update(gameTime);
 
