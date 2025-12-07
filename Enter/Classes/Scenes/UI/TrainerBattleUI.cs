@@ -270,6 +270,7 @@ public class TrainerBattleUI
                     battleMessage = playerMsg;
                     if (enemyCurrentHP <= 0)
                     {
+                        BackgroundMusicPlayer.Play(SongId.VictoryTrainer, loop: false);
                         battleMessage = "You win!";
                         endMessageActive = true;
                         endMessageTimer = 0.0;

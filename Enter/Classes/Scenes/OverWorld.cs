@@ -61,6 +61,11 @@ namespace Enter.Classes.Scenes
             // Load tilemap, player sprites, NPCs, etc.
             Cam = new(((Game)_game).GraphicsDevice.Viewport);
 
+            // Load Background Music
+            BackgroundMusicLibrary.Load(content);
+            //Music
+            BackgroundMusicPlayer.Play(SongId.RoadToViridianFromPallet, loop: true);
+
             // Only restore from Game1.SavedPlayerPosition if returning from a battle, else use this scene's last known position
             // Vector2 spawn = _playerPosition;
             // if ((_game as Game1)?.SavedPlayerPosition is Microsoft.Xna.Framework.Vector2 savedPos)
@@ -163,6 +168,7 @@ namespace Enter.Classes.Scenes
                 _game.SavedPlayerTiles["overworld"] = _player.TilePos;
                 _sceneManager.TransitionTo("overworld_city");
             }
+
 
             // no need for base.Update here
         }

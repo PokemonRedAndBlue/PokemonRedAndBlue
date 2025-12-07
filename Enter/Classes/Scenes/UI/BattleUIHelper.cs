@@ -138,24 +138,39 @@ public void moveArrow()
     if (currentState.IsKeyDown(Keys.Left) && previousKeyState.IsKeyUp(Keys.Left))
     {
         newRow = (currentRow - 1 + 2) % 2; 
+ 
     }
     else if (currentState.IsKeyDown(Keys.Right) && previousKeyState.IsKeyUp(Keys.Right))
     {
         newRow = (currentRow + 1) % 2;
+        
     }
     else if (currentState.IsKeyDown(Keys.Up) && previousKeyState.IsKeyUp(Keys.Up))
     {
         newCol = (currentCol - 1 + 2) % 2;
+        
     }
     else if (currentState.IsKeyDown(Keys.Down) && previousKeyState.IsKeyUp(Keys.Down))
     {
         newCol = (currentCol + 1) % 2;
+        
     }
 
     // handle arrow selection
         if (currentState.IsKeyDown(Keys.Enter))
         {
             currentBattleState = handleArrowEvent(newCol, newRow);
+
+            //Button SFX but RUN has different SFX
+            if (currentBattleState == "Run")
+            {
+                SoundEffectPlayer.Play(SfxId.SFX_RUN);   // play run SFX immediately
+            }
+            else
+            {
+                SoundEffectPlayer.Play(SfxId.SFX_PRESS_AB); // normal menu confirm sound
+            }
+            
             return;
         }
 
