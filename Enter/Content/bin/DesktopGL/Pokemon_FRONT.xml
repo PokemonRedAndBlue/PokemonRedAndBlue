@@ -50,8 +50,8 @@
         <Region name="ekans-front-attack" x="872" y="125" width="38" height="38"/>
         <Region name="arbok-front-idle" x="921" y="109" width="54" height="54"/>
         <Region name="arbok-front-attack" x="978" y="109" width="54" height="54"/>
-        <Region name="pikachu-front-idle" x="1043" y="125" width="38" height="38"/>
-        <Region name="pikachu-front-attack" x="1100" y="125" width="38" height="38"/>
+        <Region name="pikachu-front-idle" x="1044" y="125" width="37" height="38"/>
+        <Region name="pikachu-front-attack" x="1101" y="125" width="37" height="38"/>
         <Region name="raichu-front-idle" x="1150" y="109" width="54" height="54"/>
         <Region name="raichu-front-attack" x="1207" y="109" width="54" height="54"/>
         <Region name="sandshrew-front-idle" x="1272" y="125" width="38" height="38"/>

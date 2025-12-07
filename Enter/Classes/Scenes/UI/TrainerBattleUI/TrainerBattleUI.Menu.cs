@@ -1,6 +1,9 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System;
+using Enter.Classes.Sprites;
+using PokemonGame;
 
 public partial class TrainerBattleUI
 {

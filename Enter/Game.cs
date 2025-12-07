@@ -62,8 +62,8 @@ public class Game1 : Core
         _sceneManager.TransitionTo("overworld"); // <-- Set the starting scene
 
         //Music && Sound effect
-        BackgroundMusicLibrary.Load(Content);
-        SoundEffectLibrary.Load(Content);
+        //BackgroundMusicLibrary.Load(Content);
+        //SoundEffectLibrary.Load(Content);
 
 
         base.LoadContent();
