@@ -13,6 +13,10 @@ public static class BackgroundMusicPlayer
             return;
 
         Song song = BackgroundMusicLibrary.GetSong(id);
+        
+        // If song is null (audio not loaded), skip playback
+        if (song == null)
+            return;
 
         MediaPlayer.IsRepeating = loop;
         MediaPlayer.Play(song);
