@@ -10,6 +10,7 @@ using Enter.Classes.Physics;
 using Enter.Interfaces;
 using Enter.Classes.Textures;
 using System;
+using Enter.Classes.Behavior;
 
 
 namespace Enter.Classes.Scenes
@@ -21,7 +22,8 @@ namespace Enter.Classes.Scenes
     public class OverworldScene : IGameScene
     {
         private const float ZoomLevel = 4f; 
-        private const float WildEncounterTriggerChance = 0.1f;
+        private const float WildEncounterTriggerChance = 0.5f;
+        private const double WildEncounterCooldown = 2.0;
         private const int WildGrassTileId = 5; // wild-grass-route1
         private SceneManager _sceneManager;
         private Camera Cam;
@@ -32,6 +34,7 @@ namespace Enter.Classes.Scenes
         private Game1 _game;
         private Tilemap _currentMap;
         private readonly Random _rand = new();
+        private double _encounterTimer = WildEncounterCooldown;
 
         // Scene-managed player position (in pixels)
         private Vector2 _playerPosition = new Vector2(160, 0); // Default spawn
@@ -124,7 +127,7 @@ namespace Enter.Classes.Scenes
 
         private void WildEncounterTrigger(Player player)
         {
-            if (_currentMap.GetTileAt("Groud", player.TilePos.X, player.TilePos.Y) == WildGrassTileId)
+            if (_currentMap.GetTileAt("Ground", player.TilePos.X, player.TilePos.Y) == WildGrassTileId)
                 if (_rand.NextSingle() <= WildEncounterTriggerChance)
                     _sceneManager.TransitionTo("wild");
         }
@@ -155,7 +158,8 @@ namespace Enter.Classes.Scenes
                 // Could show dialogue here
             }
 
-            WildEncounterTrigger(_player);
+            if (_encounterTimer > 0) _encounterTimer -= gameTime.ElapsedGameTime.TotalSeconds;
+            if (_encounterTimer <= 0 && _player.HasArrived) WildEncounterTrigger(_player);
 
             // check for wild encounter key (cache keyboard state)
             KeyboardState keyState = Keyboard.GetState();

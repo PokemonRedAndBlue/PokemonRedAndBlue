@@ -24,6 +24,7 @@ public class Player
 
     // Tile-space state
     public Point TilePos { get; private set; } // current tile position
+    public bool HasArrived { get; private set; } = false;
     private TileMoveCommand _activeMoveCommand;
     private bool _initializedTileFromPosition = false;
 
@@ -102,6 +103,7 @@ public class Player
     {
         if (_activeMoveCommand == null) return;
 
+        HasArrived = false;
         Vector2 newPos = _activeMoveCommand.Advance(_pixelPosition, SpeedPxPerSec, dt);
         Cam.DiffPos = newPos - _pixelPosition;
         _pixelPosition = newPos;
@@ -113,6 +115,7 @@ public class Player
 
         TilePos = _activeMoveCommand.TargetTile;
         _activeMoveCommand = null;
+        HasArrived = true;
     }
 
     /// <summary>
