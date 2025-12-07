@@ -96,7 +96,7 @@ namespace Enter.Classes.Scenes
                 Vector2 size = _font.MeasureString(text);
                 Vector2 pos = new Vector2((W - size.X) / 2, startY + spacing * i);
 
-                Color color = (i == selected ? Color.Black : Color.Gray);
+                Color color = (i == selected ? Color.SteelBlue : Color.Black);
 
                 spriteBatch.DrawString(_font, text, pos, color);
             }
