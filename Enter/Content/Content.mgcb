@@ -16,6 +16,9 @@
 #begin BattleChars.xml
 /copy:BattleChars.xml
 
+#begin BattleInterface.xml
+/copy:BattleInterface.xml
+
 #begin Borders.xml
 /copy:Borders.xml
 

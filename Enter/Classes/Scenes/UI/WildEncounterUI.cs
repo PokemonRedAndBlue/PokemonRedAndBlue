@@ -31,6 +31,7 @@ public class WildEncounterUI
     private SpriteFont _font;
     static private float _scale = 4.0f;
     private Sprite _trainerSpriteBack;
+    private Sprite wildUIAppeared;
     private String _wildPokemonID;
     private AnimatedSprite _wildPokemonSpriteFront;
     // Animation attack state tracking
@@ -164,14 +165,16 @@ public class WildEncounterUI
         yellowBar = new Sprite(_WildUIAtlas.GetRegion("yellow-health"));
         redBar = new Sprite(_WildUIAtlas.GetRegion("red-health"));
 
-        UIsprites = new Sprite[_WildUIAtlas._regions.Count];
-        int index = 0;
-        foreach (var sprite in _WildUIAtlas._regions)
-        {
-            // Example: Create UI sprites as needed
-            var uiSprite = _WildUIAtlas.CreateSprite(sprite.Key);
-            UIsprites[index++] = uiSprite;
-        }
+        // Populate UIsprites array in order matching stateMapping: Initial=0, Menu=1, Fight=2, Bag=4, Pokemon=3
+        UIsprites = new Sprite[5];
+        UIsprites[0] = _WildUIAtlas.CreateSprite("battle-wild");   // Initial
+        UIsprites[1] = _WildUIAtlas.CreateSprite("battle-menu");     // Menu
+        UIsprites[2] = _WildUIAtlas.CreateSprite("battle-attack");   // Fight
+        UIsprites[3] = _WildUIAtlas.CreateSprite("battle-pokemon");  // Pokemon
+        UIsprites[4] = _WildUIAtlas.CreateSprite("battle-item");     // Bag
+
+        // wildUIAppeared is same as Initial state UI sprite
+        wildUIAppeared = UIsprites[0];
 
         // _____ has appeared text sprite
         _wildPokemonMessage1 = new TextSprite("Wild    " + _wildPokemonID.ToUpper(), _font, Color.Black);
@@ -198,7 +201,7 @@ public class WildEncounterUI
         {
             case "Initial": // Initial
                 // draw base UI
-                UIsprites[0].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
+                wildUIAppeared.Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
                 // draw _____ appeared messages
                 _wildPokemonMessage1.DrawTextSpriteWithScale(spriteBatch, _wildPokemonMessagePos1, 2f);
                 _wildPokemonMessage2.DrawTextSpriteWithScale(spriteBatch, _wildPokemonMessagePos2, 2f);
