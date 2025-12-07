@@ -17,6 +17,7 @@ public partial class TrainerBattleUI
     private Sprite[] UIBaseSprites;
     private TextureAtlas _TrainerUIAtlas;
     private TextureAtlas _BattleCharactersAtlas;
+    private TextureAtlas _BordersAtlas;
     private TextSprite _trainerText;
     private SpriteFont _font;
     private BattleUIHelper battleUI = new BattleUIHelper();
@@ -100,11 +101,12 @@ public partial class TrainerBattleUI
     private double turnTimer = 0.0;
     private const double CpuAttackDelayMs = 2000.0;
 
-    public TrainerBattleUI(TextureAtlas trainerUIAtlas, TextureAtlas battleCharactersAtlas, ContentManager content, String enemyTrainerID, Team playerTeam, Team enemyTeam)
+    public TrainerBattleUI(TextureAtlas trainerUIAtlas, TextureAtlas battleCharactersAtlas, TextureAtlas bordersAtlas, ContentManager content, String enemyTrainerID, Team playerTeam, Team enemyTeam)
     {
         // init class vars
         _TrainerUIAtlas = trainerUIAtlas;
         _BattleCharactersAtlas = battleCharactersAtlas;
+        _BordersAtlas = bordersAtlas;
         _enemyTrainerString = enemyTrainerID.ToLower();
         _font = content.Load<SpriteFont>("PokemonFont");
         _playerTeam = playerTeam;
@@ -126,15 +128,15 @@ public partial class TrainerBattleUI
         UIBaseSprites[4] = _TrainerUIAtlas.CreateSprite("battle-pokemon");  // PkMn state
         UIBaseSprites[5] = _TrainerUIAtlas.CreateSprite("battle-run");      // Run state
 
-        // Load trainer sprites from the BattleCharacters atlas
-        _trainerSpriteBack = _BattleCharactersAtlas.CreateSprite("player-red");
+        // Load trainer sprites from the BattleCharacters atlas (use player-back like WildEncounterUI)
+        _trainerSpriteBack = new Sprite(_BattleCharactersAtlas.GetRegion("player-back"));
         _enemyTrainerSpriteFront = _BattleCharactersAtlas.CreateSprite(_enemyTrainerString);
 
         // Load enemy trainer ID sprite
         _enemyTrainerIDSprite = new TextSprite(formatTrainerName(_enemyTrainerString), _font, Color.Black);
 
-        // Load border
-        _border = new Sprite(_TrainerUIAtlas.GetRegion("battle-prompt"));
+        // Load border from Borders atlas
+        _border = _BordersAtlas.CreateSprite("blue-border");
     }
 
     public void Update(GameTime gameTime)
@@ -243,10 +245,63 @@ public partial class TrainerBattleUI
                 resetBattle = true;
             }
         }
+
+        // Handle turn transitions
+        if (currentTurn == BattleTurn.Waiting)
+        {
+            turnTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (turnTimer >= CpuAttackDelayMs)
+            {
+                // Switch to CPU turn and trigger enemy attack
+                currentTurn = BattleTurn.Cpu;
+                
+                Pokemon currentPokemon = _playerTeam?.Pokemons?[0];
+                Pokemon enemyPokemon = _enemyTeam?.Pokemons?[0];
+                
+                // CPU attacks player (random damage 0-20)
+                int cpuDmg = new Random().Next(0, 21);
+                string cpuMsg = "Enemy attacks! ";
+                if (cpuDmg == 20)
+                    cpuMsg += "Critical hit! ";
+                else if (cpuDmg == 0)
+                    cpuMsg += "Enemy missed! ";
+                else
+                    cpuMsg += $"Player loses {cpuDmg} HP.";
+                playerCurrentHP -= cpuDmg;
+                if (playerCurrentHP < 0) playerCurrentHP = 0;
+                
+                // Trigger enemy attack animation
+                shouldPlayEnemyAttackAnimation = true;
+                enemyAttackAnimationPlaying = false;
+                
+                // Trigger player damage flash
+                playerTakingDamage = true;
+                playerDamageFlashTimer = 0.0;
+                
+                battleMessage = cpuMsg;
+                if (playerCurrentHP <= 0)
+                {
+                    battleMessage = "You lose!";
+                    playerFainting = true;
+                    playerFaintTimer = 0.0;
+                    endMessageActive = true;
+                    endMessageTimer = 0.0;
+                    currentTurn = BattleTurn.End;
+                }
+                else
+                {
+                    // Return to player's turn after CPU attack animation finishes
+                    currentTurn = BattleTurn.Player;
+                }
+            }
+        }
     }
 
     public void Draw(SpriteBatch spriteBatch)
     {
+        // Draw border first (at the very bottom layer)
+        _border.Draw(spriteBatch, Color.White, _borderPostion, 4f);
+
         // always get players pokemon
         Pokemon currentPokemon = _playerTeam.Pokemons[0];
         Pokemon enemyPokemon = _enemyTeam.Pokemons[0];
@@ -309,8 +364,6 @@ public partial class TrainerBattleUI
                 UIBaseSprites[0].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
                 break;
         }
-        // draw border last so it overlays all UI and pokemon sprites
-        _border.Draw(spriteBatch, Color.White, _borderPostion, 4f);
     }
 
     public string formatTrainerName(string trainerID)

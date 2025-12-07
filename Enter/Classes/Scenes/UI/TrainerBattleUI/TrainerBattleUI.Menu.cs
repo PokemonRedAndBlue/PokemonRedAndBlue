@@ -12,9 +12,9 @@ public partial class TrainerBattleUI
         UIBaseSprites[1].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
         String playersPokemon = currentPokemon.Name.ToString();
         Sprite currentMon = PokemonBackFactory.Instance.CreateStaticSprite(playersPokemon.ToLower() + "-back");
-        // Use updated HP for health bars
-        battleUI.drawHealthBar(playerCurrentHP, playerMaxHP, greenBar, yellowBar, redBar, spriteBatch, true);
-        battleUI.drawHealthBar(enemyCurrentHP, enemyMaxHP, greenBar, yellowBar, redBar, spriteBatch, false);
+        // Use updated HP for health bars (use Pokemon overload like WildEncounterUI)
+        battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, true);
+        battleUI.drawHealthBar(enemyPokemon, greenBar, yellowBar, redBar, spriteBatch, false);
         if (!string.IsNullOrEmpty(battleMessage))
         {
             DrawMessage(spriteBatch, battleMessage);

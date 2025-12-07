@@ -9,7 +9,7 @@ public partial class TrainerBattleUI
 {
     private void DrawState_Fight(SpriteBatch spriteBatch, Pokemon currentPokemon, Pokemon enemyPokemon)
     {
-        UIBaseSprites[1].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
+        UIBaseSprites[2].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
         String playersPokemon = currentPokemon.Name.ToString();
         Sprite currentMon = PokemonBackFactory.Instance.CreateStaticSprite(playersPokemon.ToLower() + "-back");
         if (!endMessageActive && currentTurn == BattleTurn.Player && Keyboard.GetState().IsKeyDown(Keys.A))
@@ -50,9 +50,9 @@ public partial class TrainerBattleUI
                 turnTimer = 0.0;
             }
         }
-        // Use updated HP for health bars
-        battleUI.drawHealthBar(playerCurrentHP, playerMaxHP, greenBar, yellowBar, redBar, spriteBatch, true);
-        battleUI.drawHealthBar(enemyCurrentHP, enemyMaxHP, greenBar, yellowBar, redBar, spriteBatch, false);
+        // Use updated HP for health bars (use Pokemon overload like WildEncounterUI)
+        battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, true);
+        battleUI.drawHealthBar(enemyPokemon, greenBar, yellowBar, redBar, spriteBatch, false);
         // draw after HP bars so its on top of gaint gray bars
         Vector2 playerOffsetFight = Vector2.Zero;
         if (playerAttackAnimationPlaying)
