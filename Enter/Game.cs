@@ -53,6 +53,7 @@ public class Game1 : Core
         // Initialize Scene Manager and Dependencies
         _sceneManager = new SceneManager(Content, SpriteBatch);
 
+        //_sceneManager.AddScene("title_sequence", new TitleSequenceScene(_sceneManager, this));
         _sceneManager.AddScene("intro", new IntroScene(_sceneManager, this));
         _sceneManager.AddScene("menu", new MenuScene(_sceneManager, this));
         _sceneManager.AddScene("oakIntro", new OakIntroScene(_sceneManager, this));

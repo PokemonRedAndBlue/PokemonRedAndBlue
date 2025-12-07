@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+  <Texture>images/Game Boy _ GBC - Pokemon Red _ Blue - Miscellaneous - Intro and Title (GB & SGB)</Texture>
+  
+  <Regions>
+    <!-- Copyright and Blank Screens -->
+    <Region name="copyright_screen" x="822" y="10" width="160" height="144" />
+    <Region name="blank_screen" x="984" y="10" width="160" height="144" />
+    
+    <!-- GAME FREAK Logo - Different Color States -->
+    <Region name="gamefreak_text_black" x="822" y="164" width="160" height="144" />
+    <Region name="gamefreak_text_yellow" x="984" y="164" width="160" height="144" />
+    <Region name="gamefreak_text_darkyellow" x="1146" y="164" width="160" height="144" />
+    
+    <Region name="gamefreak_symbol_black" x="822" y="164" width="160" height="144" />
+    <Region name="gamefreak_symbol_yellow" x="984" y="164" width="160" height="144" />
+    <Region name="gamefreak_symbol_darkyellow" x="1146" y="164" width="160" height="144" />
+    
+    <!-- Letter Cutouts (A and K blank/white) -->
+    <Region name="gamefreak_text_cutout" x="861" y="243" width="81" height="8" />
+    
+    <!-- Sweeping Stars (Large) -->
+    <Region name="sweep_star_yellow" x="1470" y="164" width="15" height="15" />
+    <Region name="sweep_star_orange" x="1470" y="181" width="15" height="15" />
+    <Region name="sweep_star_green" x="1470" y="198" width="15" height="15" />
+    
+    <!-- Falling Stars (Small) - 8 different colors -->
+    <Region name="falling_star_red_orange" x="1308" y="318" width="7" height="7" />
+    <Region name="falling_star_orange" x="1308" y="328" width="7" height="7" />
+    <Region name="falling_star_yellow" x="1328" y="328" width="7" height="7" />
+    <Region name="falling_star_yellow_darkyellow" x="1328" y="318" width="7" height="7" />
+    <Region name="falling_star_lightblue" x="1338" y="328" width="7" height="7" />
+    <Region name="falling_star_lightblue_darkblue" x="1338" y="318" width="7" height="7" />
+    <Region name="falling_star_green" x="1318" y="328" width="7" height="7" />
+    <Region name="falling_star_blue_green" x="1318" y="318" width="7" height="7" />
+    
+    <!-- Reference frame for star positions (not used for rendering, just reference) -->
+    <Region name="falling_stars_reference" x="822" y="318" width="160" height="144" />
+    
+    <!-- Gengar Sprites (Back View) -->
+    <Region name="gengar_idle" x="984" y="472" width="55" height="55" />
+    <Region name="gengar_arm_raised" x="1042" y="472" width="55" height="55" />
+    <Region name="gengar_lunge" x="1100" y="472" width="55" height="55" />
+    
+    <!-- Jigglypuff Sprites (Front View) -->
+    <Region name="jigglypuff_idle" x="984" y="580" width="47" height="47" />
+    <Region name="jigglypuff_hop" x="1042" y="580" width="47" height="47" />
+    <Region name="jigglypuff_jump_attack" x="1100" y="580" width="47" height="47" />
+    
+    <!-- Title Screen Elements (from your existing colored sprites) -->
+    <Region name="title_red_logo" x="816" y="458" width="175" height="56" />
+    <Region name="title_red_trainer" x="829" y="516" width="56" height="56" />
+    <Region name="title_blue_logo" x="991" y="458" width="175" height="56" />
+    <Region name="title_blue_trainer" x="1004" y="516" width="56" height="56" />
+  </Regions>
+  
+  <Animations>
+    <!-- Sweeping star color cycle -->
+    <Animation name="sweep_star_cycle" frameDuration="200">
+      <Frame region="sweep_star_yellow" />
+      <Frame region="sweep_star_orange" />
+      <Frame region="sweep_star_green" />
+    </Animation>
+  </Animations>
+</TextureAtlas>

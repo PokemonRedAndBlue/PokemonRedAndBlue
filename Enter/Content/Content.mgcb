@@ -1069,11 +1069,7 @@
 /processorParam:TextureFormat=Color
 /build:images/Game Boy _ GBC - Pokemon Red _ Blue - Backgrounds (Routes) - Route 01.png
 
-<<<<<<< HEAD
-#begin images/Game Boy _ GBC - Pokemon Red _ Blue - Miscellaneous - Intro and Title (GB & SGB).png
-=======
 #begin images/intro1.png
->>>>>>> 52e238b80e757ecc67238618a58e3db438febf81
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1083,9 +1079,6 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-<<<<<<< HEAD
-/build:images/Game Boy _ GBC - Pokemon Red _ Blue - Miscellaneous - Intro and Title (GB & SGB).png
-=======
 /build:images/intro1.png
 
 #begin images/introPlayer.png
@@ -1135,7 +1128,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:images/oak.png
->>>>>>> 52e238b80e757ecc67238618a58e3db438febf81
 
 #begin images/Pokeball.png
 /importer:TextureImporter
