@@ -154,186 +154,33 @@ public class TrainerBattleUI
         }
         catch { }
 
-        // Handle end message pause
-        if (endMessageActive)
+        switch (_currentState)
         {
-            endMessageTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
-            if (endMessageTimer >= EndMessagePauseMs)
-            {
-                resetBattle = true;
-                endMessageActive = false;
-            }
+            case "Initial":
+                DrawState_Initial(spriteBatch, currentPokemon, enemyPokemon);
+                break;
+            case "Menu":
+                DrawState_Menu(spriteBatch, currentPokemon, enemyPokemon);
+                break;
+            case "Fight":
+                DrawState_Fight(spriteBatch, currentPokemon, enemyPokemon);
+                break;
+            case "Item": // Bag
+                DrawState_Item(spriteBatch, currentPokemon, enemyPokemon);
+                break;
+            case "Ball": // ball item selected TODO MOVE THIS WITHIN BAG SCENE
+                // need to be able to process catch event
+                break;
+            case "PkMn":
+                DrawState_PkMn(spriteBatch, currentPokemon, enemyPokemon);
+                break;
+            case "Run":
+                DrawState_Run(spriteBatch, currentPokemon, enemyPokemon);
+                break;
+            default:
+                UIBaseSprites[0].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
+                break;
         }
-
-        // Handle CPU turn timer
-        if (currentTurn == BattleTurn.Waiting)
-        {
-            turnTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
-            if (turnTimer >= CpuAttackDelayMs)
-            {
-                // CPU attacks
-                int enemyDmg = new Random().Next(0, 11);
-                playerCurrentHP -= enemyDmg;
-                if (playerCurrentHP < 0) playerCurrentHP = 0;
-                string enemyMsg = "Enemy attacks! ";
-                if (enemyDmg == 10)
-                    enemyMsg += "Critical hit! ";
-                else if (enemyDmg == 0)
-                    enemyMsg += "Enemy missed! ";
-                else
-                    enemyMsg += $"Player loses {enemyDmg} HP.";
-                battleMessage = enemyMsg;
-                
-                // Trigger enemy attack animation only when damage occurs (will be started on next Update)
-                if (!enemyAttackAnimationPlaying)
-                {
-                    shouldPlayEnemyAttackAnimation = true;
-                    enemyAttackAnimationPlaying = false; // Will be set true in Update when animation is triggered
-                    // Trigger player damage flash
-                    playerTakingDamage = true;
-                    playerDamageFlashTimer = 0.0;
-                }
-                
-                if (playerCurrentHP <= 0)
-                {
-                    battleMessage = "You lose!";
-                    playerFainting = true;
-                    playerFaintTimer = 0.0;
-                    endMessageActive = true;
-                    endMessageTimer = 0.0;
-                    currentTurn = BattleTurn.End;
-                }
-                else
-                {
-                    currentTurn = BattleTurn.Player;
-                }
-                turnTimer = 0.0;
-            }
-        }
-
-        // Update attack animation timers and revert to idle after duration
-        if (enemyAttackAnimationPlaying)
-        {
-            enemyAttackAnimationTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
-            if (enemyAttackAnimationTimer >= AttackAnimationDurationMs)
-            {
-                enemyAttackAnimationPlaying = false;
-                shouldPlayEnemyAttackAnimation = false;
-                // Revert to idle animation
-                Pokemon enemyPokemon = _enemyTeam?.Pokemons?[0];
-                if (enemyPokemon?.AnimatedSprite != null)
-                {
-                    TrySetPokemonAnimation(enemyPokemon, new string[] {
-                        enemyPokemon.Name.ToString().ToLower() + "-front",
-                    });
-                }
-            }
-        }
-
-        if (playerAttackAnimationPlaying)
-        {
-            playerAttackAnimationTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
-            if (playerAttackAnimationTimer >= AttackAnimationDurationMs)
-            {
-                playerAttackAnimationPlaying = false;
-                shouldPlayPlayerAttackAnimation = false;
-                // Revert to idle animation
-                Pokemon currentPokemon = _playerTeam?.Pokemons?[0];
-                if (currentPokemon?.AnimatedSprite != null)
-                {
-                    TrySetPokemonAnimation(currentPokemon, new string[] {
-                        currentPokemon.Name.ToString().ToLower() + "-back",
-                        currentPokemon.Name.ToString().ToLower() + "-front"
-                    });
-                }
-            }
-        }
-
-        // Update damage flash timers
-        if (enemyTakingDamage)
-        {
-            enemyDamageFlashTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
-            if (enemyDamageFlashTimer >= DamageFlashDurationMs)
-            {
-                enemyTakingDamage = false;
-            }
-        }
-
-        if (playerTakingDamage)
-        {
-            playerDamageFlashTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
-            if (playerDamageFlashTimer >= DamageFlashDurationMs)
-            {
-                playerTakingDamage = false;
-            }
-        }
-
-        // Update faint animations
-        if (enemyFainting)
-        {
-            enemyFaintTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
-        }
-
-        if (playerFainting)
-        {
-            playerFaintTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
-        }
-    }
-
-    public void LoadContent(ContentManager content)
-    {
-        // Load UI Textures
-        UIFactory.Instance.LoadAllTextures(content, "BattleInterface.xml");
-        _TrainerUIAtlas = TextureAtlas.FromFile(content, "BattleInterface.xml");
-        TextureAtlas borders = TextureAtlas.FromFile(content, "Borders.xml");
-        _border = new Sprite(borders.GetRegion("blue-border"));
-
-        // load trainer sprite
-        TextureAtlas trainerAtlas = TextureAtlas.FromFile(content, "BattleChars.xml");
-        _trainerSpriteBack = new Sprite(trainerAtlas.GetRegion("player-back"));
-
-        // load enemy trainer sprite
-        _enemyTrainerSpriteFront = new Sprite(trainerAtlas.GetRegion(_enemyTrainerString.ToLower()));
-
-        // Initialize health bar sprites
-        greenBar = new Sprite(_TrainerUIAtlas.GetRegion("green-health"));
-        yellowBar = new Sprite(_TrainerUIAtlas.GetRegion("yellow-health"));
-        redBar = new Sprite(_TrainerUIAtlas.GetRegion("red-health"));
-
-        // create UI elements
-        UIBaseSprites = new Sprite[_TrainerUIAtlas._regions.Count];
-        int index = 0;
-        foreach (var sprite in _TrainerUIAtlas._regions)
-        {
-            // Example: Create UI sprites as needed
-            var uiSprite = _TrainerUIAtlas.CreateSprite(sprite.Key);
-            UIBaseSprites[index++] = uiSprite;
-        }
-
-        // Example text sprite
-        _enemyTrainerIDSprite = new TextSprite(formatTrainerName(_enemyTrainerString).ToUpper(), _font, Color.Black);
-        _trainerText = new TextSprite("A wild Pokémon appeared!", _font, Color.White);
-    }
-
-    public void Draw(SpriteBatch spriteBatch)
-    {
-        // Draw the base UI elements based on current state
-        WildEncounterStateBasedDraw(UIBaseSprites, spriteBatch);
-    }
-
-    private void DrawHP(SpriteBatch spriteBatch, int hp, int maxHp, Vector2 pos, string label)
-    {
-        // Draw both HP in black
-        spriteBatch.DrawString(_font, $"{label}: {hp}/{maxHp}", pos, Color.Black);
-    }
-
-    private void DrawMessage(SpriteBatch spriteBatch, string message)
-    {
-        // Draw all messages at a slightly higher Y position
-        Vector2 msgPos = new Vector2(340, 320);
-        Color color = Color.Yellow;
-        if (message.Contains("You win!")) color = Color.LawnGreen;
-        else if (message.Contains("You lose!")) color = Color.Red;
         else if (message.StartsWith("Player attacks!")) color = Color.LawnGreen;
         else if (message.StartsWith("Enemy attacks!")) color = Color.Red;
         // Draw instructional messages in black and higher
