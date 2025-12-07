@@ -9,7 +9,7 @@ public partial class TrainerBattleUI
 {
     private void DrawState_Fight(SpriteBatch spriteBatch, Pokemon currentPokemon, Pokemon enemyPokemon)
     {
-        UIBaseSprites[2].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
+        UIBaseSprites[1].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
         String playersPokemon = currentPokemon.Name.ToString();
         Sprite currentMon = PokemonBackFactory.Instance.CreateStaticSprite(playersPokemon.ToLower() + "-back");
         if (!endMessageActive && currentTurn == BattleTurn.Player && Keyboard.GetState().IsKeyDown(Keys.A))
