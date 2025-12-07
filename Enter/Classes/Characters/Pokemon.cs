@@ -118,6 +118,12 @@ namespace PokemonGame
             }
         }
 
+        // Allows external code to assign an AnimatedSprite instance without exposing the property setter.
+        public void SetAnimatedSprite(AnimatedSprite animatedSprite)
+        {
+            AnimatedSprite = animatedSprite;
+        }
+
         // --- simple stub animation handlers ---
         private void UpdateAttackAnimation(Vector2 position)
         {

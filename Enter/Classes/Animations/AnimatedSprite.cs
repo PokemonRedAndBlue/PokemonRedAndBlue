@@ -8,6 +8,16 @@ public class AnimatedSprite : Sprites.Sprite
     private int _currentFrame;
     private TimeSpan _elapsed;
     private Animation _animation;
+    private double _animationSpeedMultiplier = 1.0; // Allow slowdown of animation playback
+
+    /// <summary>
+    /// Gets or Sets the animation playback speed multiplier (1.0 = normal, 0.5 = half speed, etc.)
+    /// </summary>
+    public double AnimationSpeedMultiplier
+    {
+        get => _animationSpeedMultiplier;
+        set => _animationSpeedMultiplier = Math.Max(0.1, value); // Clamp to minimum 0.1
+    }
 
     /// <summary>
     /// Gets or Sets the animation for this animated sprite.
@@ -18,7 +28,13 @@ public class AnimatedSprite : Sprites.Sprite
         set
         {
             _animation = value;
-            Region = _animation.Frames[0];
+            // Reset playback state so new animation always starts from the first frame.
+            _currentFrame = 0;
+            _elapsed = TimeSpan.Zero;
+            if (_animation != null && _animation.Frames.Count > 0)
+            {
+                Region = _animation.Frames[0];
+            }
         }
     }
 
@@ -42,7 +58,9 @@ public class AnimatedSprite : Sprites.Sprite
     /// <param name="gameTime">A snapshot of the game timing values provided by the framework.</param>
     public void Update(GameTime gameTime)
     {
-        _elapsed += gameTime.ElapsedGameTime;
+        // Apply animation speed multiplier to elapsed time
+        TimeSpan adjustedElapsed = TimeSpan.FromMilliseconds(gameTime.ElapsedGameTime.TotalMilliseconds * _animationSpeedMultiplier);
+        _elapsed += adjustedElapsed;
 
         if (_elapsed >= _animation.Delay)
         {

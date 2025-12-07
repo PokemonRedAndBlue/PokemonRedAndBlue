@@ -33,6 +33,9 @@ namespace Enter.Classes.Scenes
         private TrainerBattleUI _trainerUI;
         private TextureAtlas _PokemonBackAtlas;
         private TextureAtlas _PokemonFrontAtlas;
+        private TextureAtlas _UIAtlas;
+        private TextureAtlas _BattleCharactersAtlas;
+        private TextureAtlas _BordersAtlas;
         private TextSprite trainerText;
         private SpriteFont _font;
         public TrainerBattleScene(SceneManager sceneManager, Game game1, string trainerID, Player ourPlayer, string returnSceneName = null)
@@ -51,6 +54,9 @@ namespace Enter.Classes.Scenes
             PokemonBackFactory.Instance.LoadAllTextures(content);
             _PokemonBackAtlas = TextureAtlas.FromFile(content, "Pokemon_BACK.xml");
             _PokemonFrontAtlas = TextureAtlas.FromFile(content, "Pokemon_FRONT.xml");
+            _UIAtlas = TextureAtlas.FromFile(content, "BattleInterface.xml");
+            _BattleCharactersAtlas = TextureAtlas.FromFile(content, "BattleChars.xml");
+            _BordersAtlas = TextureAtlas.FromFile(content, "Borders.xml");
 
             // load from trainer dict
             TrainerTeam trainerTeams = new TrainerTeam();
@@ -66,7 +72,7 @@ namespace Enter.Classes.Scenes
             // Load UI
             _font = content.Load<SpriteFont>("PokemonFont");
             trainerText = new TextSprite($"TRAINER BATTLE", _font, Color.Black);
-            _trainerUI = new TrainerBattleUI(_PokemonBackAtlas, content, _trainerID, _playersTeam, _trainersTeam);
+            _trainerUI = new TrainerBattleUI(_UIAtlas, _BattleCharactersAtlas, _BordersAtlas, content, _trainerID, _playersTeam, _trainersTeam);
             _trainerUI.LoadContent(content);
         }
 

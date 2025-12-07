@@ -8,6 +8,7 @@
     <Region name="battle-pokemon" x="177" y="1249" width="158" height="142"/>
     <Region name="battle-item" x="177" y="1401" width="158" height="142"/>
     <Region name="battle-run" x="177" y="1553" width="158" height="142"/>
+    <Region name="battle-wild" x="8" y="792" width="158" height="142"/>
     <Region name="horizzontal-arrow" x="344" y="856" width="8" height="8"/>
     <Region name="vertical-arrow" x="344" y="872" width="8" height="8"/>
     <Region name="green-health" x="360" y="792" width="48" height="3"/>

@@ -1,18 +1,33 @@
+using System;
 using Enter.Classes.Animations;
+using Microsoft.Xna.Framework;
 
 namespace Enter.Classes.GameState;
 
 public class FrontStateAction : PokemonStateActions
 {
-    public void IdleFrontAction(AnimatedSprite sprite)
+    // Return a positional offset to apply when performing the front/foe attack
+    // elapsedMs: how long the attack has been playing
+    // durationMs: total duration of the attack animation
+    public Vector2 AttackFrontAction(AnimatedSprite sprite, double elapsedMs, double durationMs)
     {
-        // Implement idle front action logic here
-        // essentially do not update the sprite animation still draw
+        // If nothing to do, return zero offset
+        if (sprite == null) return Vector2.Zero;
+        // Use a simple triangular motion: move backward (left) and down then back along X/Y axes
+        // normalized t in [0,1]
+        double t = Math.Min(Math.Max(elapsedMs / durationMs, 0.0), 1.0);
+        // triangular shape: ramp up to 0.5 then ramp down
+        double tri = t < 0.5 ? (t / 0.5) : (1.0 - (t - 0.5) / 0.5);
+        // movement magnitude in pixels (scaled to UI scale elsewhere)
+        float magnitude = 12f;
+        float offsetX = (float)(-magnitude * tri); // front/enemy moves left when attacking
+        // For front/foe, move down and slightly up/down for expressiveness
+        float offsetY = (float)(8f * tri); // move down
+        return new Vector2(offsetX, offsetY);
     }
 
-    public void AttackFrontAction(AnimatedSprite sprite)
+    public Vector2 IdleFrontAction(AnimatedSprite sprite)
     {
-        // Implement attack front action logic here
-        // update sprite animation
+        return Vector2.Zero;
     }
 }
