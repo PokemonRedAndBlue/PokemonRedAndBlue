@@ -1009,7 +1009,7 @@
 #begin GymMap.xml
 /copy:GymMap.xml
 
-#begin images/BattleInterface.png
+#begin images/BattleInterface.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1019,7 +1019,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:images/BattleInterface.png
+/build:images/BattleInterface.jpg
 
 #begin images/Borders.png
 /importer:TextureImporter

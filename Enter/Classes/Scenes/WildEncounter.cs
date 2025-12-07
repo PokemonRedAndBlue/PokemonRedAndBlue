@@ -100,8 +100,7 @@ namespace Enter.Classes.Scenes
                     _sceneManager.TransitionTo("overworld");
                 }
 
-                // update UI
-                wildUI.Update(gameTime);
+            // UI already updated above
         }
 
         public void Draw(SpriteBatch spriteBatch)

@@ -18,7 +18,13 @@ public class AnimatedSprite : Sprites.Sprite
         set
         {
             _animation = value;
-            Region = _animation.Frames[0];
+            // Reset playback state so new animation always starts from the first frame.
+            _currentFrame = 0;
+            _elapsed = TimeSpan.Zero;
+            if (_animation != null && _animation.Frames.Count > 0)
+            {
+                Region = _animation.Frames[0];
+            }
         }
     }
 

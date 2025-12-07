@@ -1,12 +1,14 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using Enter.Classes.Textures;
 using Enter.Classes.Sprites;
 using System;
 using System.Data;
 using System.Collections.Generic;
 using Enter.Classes.Animations;
+using Enter.Classes.GameState;
 using System.Threading;
 using System.Runtime.Intrinsics;
 using Enter.Classes.Characters;
@@ -15,7 +17,7 @@ using Enter.Classes.Scenes;
 using PokemonGame;
 using Enter.Classes.Input;
 using System.Globalization;
-using Microsoft.Xna.Framework.Input;
+// duplicate using removed
 using System.Collections;
 using System.Runtime.ConstrainedExecution;
 
@@ -31,6 +33,16 @@ public class WildEncounterUI
     private Sprite _trainerSpriteBack;
     private String _wildPokemonID;
     private AnimatedSprite _wildPokemonSpriteFront;
+    // Animation attack state tracking
+    private bool shouldPlayPlayerAttackAnimation = false;
+    private bool shouldPlayEnemyAttackAnimation = false;
+    private bool playerAttackAnimationPlaying = false;
+    private bool enemyAttackAnimationPlaying = false;
+    private double playerAttackAnimationTimer = 0.0;
+    private double enemyAttackAnimationTimer = 0.0;
+    private const double AttackAnimationDurationMs = 600.0;
+    private FrontStateAction frontState = new FrontStateAction();
+    private BackStateAction backState = new BackStateAction();
 
     // Pre defined regions within UI ADD TO A DICT LATER
     static private Vector2 uiBasePosition = new Vector2(340, 75);
@@ -66,6 +78,67 @@ public class WildEncounterUI
         _wildPokemonID = PokemonGenerator.GenerateWildPokemon().Species.Name.ToLower(); // Example: "bulbasaur"
         _font = content.Load<SpriteFont>("PokemonFont");
         _Player = ourPlayer;
+    }
+
+    public void Update(GameTime gameTime)
+    {
+        // Update UI state machine
+        battleUI.Update(gameTime);
+
+        // advance animated sprite frames only while attacking (prevents constant looping)
+        if (enemyAttackAnimationPlaying)
+        {
+            _wildPokemonSpriteFront?.Update(gameTime);
+        }
+
+        // Input: pressing A triggers both player's back attack motion and wild front attack motion (demo)
+        if (Keyboard.GetState().IsKeyDown(Keys.A))
+        {
+            shouldPlayEnemyAttackAnimation = true;
+            enemyAttackAnimationPlaying = false; // will start in Update/Draw
+            shouldPlayPlayerAttackAnimation = true;
+            playerAttackAnimationPlaying = false;
+        }
+
+        // Start animations when flagged
+        if (shouldPlayEnemyAttackAnimation && !enemyAttackAnimationPlaying)
+        {
+            enemyAttackAnimationPlaying = true;
+            enemyAttackAnimationTimer = 0.0;
+            // ensure front animation is active
+            TrySetAnimation(_wildPokemonSpriteFront, new string[] { _wildPokemonID + "-front" });
+        }
+
+        if (shouldPlayPlayerAttackAnimation && !playerAttackAnimationPlaying)
+        {
+            playerAttackAnimationPlaying = true;
+            playerAttackAnimationTimer = 0.0;
+        }
+
+        // Update timers for playing animations
+        if (enemyAttackAnimationPlaying)
+        {
+            enemyAttackAnimationTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (enemyAttackAnimationTimer >= AttackAnimationDurationMs)
+            {
+                enemyAttackAnimationPlaying = false;
+                shouldPlayEnemyAttackAnimation = false;
+                enemyAttackAnimationTimer = 0.0;
+                // optionally reset sprite animation to idle by setting front animation again
+                TrySetAnimation(_wildPokemonSpriteFront, new string[] { _wildPokemonID + "-front" });
+            }
+        }
+
+        if (playerAttackAnimationPlaying)
+        {
+            playerAttackAnimationTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (playerAttackAnimationTimer >= AttackAnimationDurationMs)
+            {
+                playerAttackAnimationPlaying = false;
+                shouldPlayPlayerAttackAnimation = false;
+                playerAttackAnimationTimer = 0.0;
+            }
+        }
     }
 
     public void LoadContent(ContentManager content)
@@ -105,10 +178,7 @@ public class WildEncounterUI
         _wildPokemonMessage2 = new TextSprite("appeared!", _font, Color.Black);
     }
 
-    public void Update(GameTime gameTime)
-    {
-        battleUI.Update(gameTime);
-    }
+    
     public void Draw(SpriteBatch spriteBatch)
     {
         // Draw the base UI
@@ -134,8 +204,13 @@ public class WildEncounterUI
                 _wildPokemonMessage2.DrawTextSpriteWithScale(spriteBatch, _wildPokemonMessagePos2, 2f);
                 // draw player trainer sprite
                 _trainerSpriteBack.Draw(spriteBatch, Color.White, playerPosition, 8f);
-                // draw wild pokemon sprite
-                _wildPokemonSpriteFront.Draw(spriteBatch, Color.White, wildPokemonPosition, 4f);
+                // draw wild pokemon sprite (apply attack offset if active)
+                Vector2 wildOffsetInit = Vector2.Zero;
+                if (enemyAttackAnimationPlaying)
+                {
+                    wildOffsetInit = frontState.AttackFrontAction(_wildPokemonSpriteFront, enemyAttackAnimationTimer, AttackAnimationDurationMs);
+                }
+                _wildPokemonSpriteFront.Draw(spriteBatch, Color.White, wildPokemonPosition + wildOffsetInit, 4f);
                 // draw player trainer party bar
                 BattleUIHelper.drawPokeballSprites(_Player.thePlayersTeam, _WildUIAtlas, spriteBatch, true);
                 break;
@@ -144,10 +219,20 @@ public class WildEncounterUI
                 UIsprites[1].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
                 // draw players pokemon sprite, get first alive pokemon
                 String playersPokemon = currentPokemon.Name.ToString();
-                Sprite currentMon = PokemonBackFactory.Instance.CreateStaticSprite( playersPokemon.ToLower()+ "-back");
-                currentMon.Draw(spriteBatch, Color.White, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)), 4f);
-                // draw wild pokemon sprite
-                _wildPokemonSpriteFront.Draw(spriteBatch, Color.White, wildPokemonPosition, 4f);
+                Sprite currentMon = PokemonBackFactory.Instance.CreateStaticSprite(playersPokemon.ToLower() + "-back");
+                Vector2 playerOffsetMenu = Vector2.Zero;
+                if (playerAttackAnimationPlaying)
+                {
+                    playerOffsetMenu = backState.AttackBackAction(currentMon, playerAttackAnimationTimer, AttackAnimationDurationMs);
+                }
+                currentMon.Draw(spriteBatch, Color.White, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)) + playerOffsetMenu, 4f);
+                // draw wild pokemon sprite with potential attack offset
+                Vector2 wildOffset = Vector2.Zero;
+                if (enemyAttackAnimationPlaying)
+                {
+                    wildOffset = frontState.AttackFrontAction(_wildPokemonSpriteFront, enemyAttackAnimationTimer, AttackAnimationDurationMs);
+                }
+                _wildPokemonSpriteFront.Draw(spriteBatch, Color.White, wildPokemonPosition + wildOffset, 4f);
                 // draw both health
                 battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, true);
                 battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, false);
@@ -195,6 +280,33 @@ public class WildEncounterUI
                 break;
             default:
                 break;
+        }
+    }
+
+    private void TrySetAnimation(AnimatedSprite animSprite, string[] candidates)
+    {
+        if (animSprite == null) return;
+        var atlas = PokemonFrontFactory.Instance.Atlas;
+        if (atlas == null) return;
+
+        foreach (var c in candidates)
+        {
+            if (string.IsNullOrEmpty(c)) continue;
+            try
+            {
+                if (atlas._animations.ContainsKey(c))
+                {
+                    animSprite.Animation = atlas.GetAnimation(c);
+                    return;
+                }
+                var lower = c.ToLower();
+                if (atlas._animations.ContainsKey(lower))
+                {
+                    animSprite.Animation = atlas.GetAnimation(lower);
+                    return;
+                }
+            }
+            catch { }
         }
     }
 }

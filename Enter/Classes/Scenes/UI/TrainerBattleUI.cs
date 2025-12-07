@@ -7,6 +7,7 @@ using System;
 using System.Data;
 using System.Collections.Generic;
 using Enter.Classes.Animations;
+using Enter.Classes.GameState;
 using PokemonGame;
 using Microsoft.Xna.Framework.Input;
 
@@ -21,7 +22,7 @@ public class TrainerBattleUI
     private String _enemyTrainerString;
     static private float _scale = 4.0f;
     private Sprite _trainerSpriteBack;
-    private AnimatedSprite _enemyPokemonSpriteFront;
+    // removed unused field _enemyPokemonSpriteFront (we use Pokemon.AnimatedSprite instead)
     private Sprite _enemyTrainerSpriteFront;
     private TextSprite _enemyTrainerIDSprite;
     private Sprite greenBar, yellowBar, redBar;
@@ -65,6 +66,18 @@ public class TrainerBattleUI
     private double endMessageTimer = 0.0;
     private const double EndMessagePauseMs = 4000.0;
 
+    // Animation state tracking
+    private bool shouldPlayPlayerAttackAnimation = false;
+    private bool shouldPlayEnemyAttackAnimation = false;
+    private bool playerAttackAnimationPlaying = false;
+    private bool enemyAttackAnimationPlaying = false;
+    private double playerAttackAnimationTimer = 0.0;
+    private double enemyAttackAnimationTimer = 0.0;
+    private const double AttackAnimationDurationMs = 600.0;
+    // State action instances used to compute positional offsets for attack motions
+    private FrontStateAction frontState = new FrontStateAction();
+    private BackStateAction backState = new BackStateAction();
+
     // Turn-based system
     private enum BattleTurn { Player, Cpu, Waiting, End }
     private BattleTurn currentTurn = BattleTurn.Player;
@@ -86,6 +99,43 @@ public class TrainerBattleUI
         // Ensure battleUI state machine and timer are updated
         battleUI.Update(gameTime);
         _currentState = battleUI.getBattleState();
+        
+        // Update any animated sprites attached to the current pokémon
+        try
+        {
+            Pokemon currentPokemon = _playerTeam?.Pokemons?[0];
+            Pokemon enemyPokemon = _enemyTeam?.Pokemons?[0];
+            // Only advance animated sprite frames while the pokemon is performing an attack animation
+            if (enemyAttackAnimationPlaying)
+            {
+                enemyPokemon?.AnimatedSprite?.Update(gameTime);
+            }
+            if (playerAttackAnimationPlaying)
+            {
+                currentPokemon?.AnimatedSprite?.Update(gameTime);
+            }
+            
+            // Trigger attack animation on flag transition (only set it once)
+            if (shouldPlayEnemyAttackAnimation && !enemyAttackAnimationPlaying && enemyPokemon != null)
+            {
+                TrySetPokemonAnimation(enemyPokemon, new string[] {
+                    enemyPokemon.Name.ToString().ToLower() + "-front",
+                });
+                enemyAttackAnimationPlaying = true;
+                enemyAttackAnimationTimer = 0.0;
+            }
+            
+            if (shouldPlayPlayerAttackAnimation && !playerAttackAnimationPlaying && currentPokemon != null)
+            {
+                TrySetPokemonAnimation(currentPokemon, new string[] {
+                    currentPokemon.Name.ToString().ToLower() + "-back",
+                    currentPokemon.Name.ToString().ToLower() + "-front"
+                });
+                playerAttackAnimationPlaying = true;
+                playerAttackAnimationTimer = 0.0;
+            }
+        }
+        catch { }
 
         // Handle end message pause
         if (endMessageActive)
@@ -116,6 +166,11 @@ public class TrainerBattleUI
                 else
                     enemyMsg += $"Player loses {enemyDmg} HP.";
                 battleMessage = enemyMsg;
+                
+                // Trigger enemy attack animation only when damage occurs
+                shouldPlayEnemyAttackAnimation = true;
+                enemyAttackAnimationPlaying = false; // Will be set true in Update when animation is triggered
+                
                 if (playerCurrentHP <= 0)
                 {
                     battleMessage = "You lose!";
@@ -128,6 +183,44 @@ public class TrainerBattleUI
                     currentTurn = BattleTurn.Player;
                 }
                 turnTimer = 0.0;
+            }
+        }
+
+        // Update attack animation timers and revert to idle after duration
+        if (enemyAttackAnimationPlaying)
+        {
+            enemyAttackAnimationTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (enemyAttackAnimationTimer >= AttackAnimationDurationMs)
+            {
+                enemyAttackAnimationPlaying = false;
+                shouldPlayEnemyAttackAnimation = false;
+                // Revert to idle animation
+                Pokemon enemyPokemon = _enemyTeam?.Pokemons?[0];
+                if (enemyPokemon?.AnimatedSprite != null)
+                {
+                    TrySetPokemonAnimation(enemyPokemon, new string[] {
+                        enemyPokemon.Name.ToString().ToLower() + "-front",
+                    });
+                }
+            }
+        }
+
+        if (playerAttackAnimationPlaying)
+        {
+            playerAttackAnimationTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (playerAttackAnimationTimer >= AttackAnimationDurationMs)
+            {
+                playerAttackAnimationPlaying = false;
+                shouldPlayPlayerAttackAnimation = false;
+                // Revert to idle animation
+                Pokemon currentPokemon = _playerTeam?.Pokemons?[0];
+                if (currentPokemon?.AnimatedSprite != null)
+                {
+                    TrySetPokemonAnimation(currentPokemon, new string[] {
+                        currentPokemon.Name.ToString().ToLower() + "-back",
+                        currentPokemon.Name.ToString().ToLower() + "-front"
+                    });
+                }
             }
         }
     }
@@ -205,7 +298,25 @@ public class TrainerBattleUI
         // always get players pokemon
         Pokemon currentPokemon = _playerTeam.Pokemons[0];
         Pokemon enemyPokemon = _enemyTeam.Pokemons[0];
-        _enemyPokemonSpriteFront = PokemonFrontFactory.Instance.CreateAnimatedSprite(enemyPokemon.Name.ToString().ToLower() + "-front");
+        // Ensure the pokémon have an AnimatedSprite instance created once (do not recreate every draw)
+        if (enemyPokemon.AnimatedSprite == null)
+        {
+            try
+            {
+                var s = PokemonFrontFactory.Instance.CreateAnimatedSprite(enemyPokemon.Name.ToString().ToLower() + "-front");
+                enemyPokemon.SetAnimatedSprite(s);
+            }
+            catch { }
+        }
+        if (currentPokemon.AnimatedSprite == null)
+        {
+            try
+            {
+                var s = PokemonFrontFactory.Instance.CreateAnimatedSprite(currentPokemon.Name.ToString().ToLower() + "-front");
+                currentPokemon.SetAnimatedSprite(s);
+            }
+            catch { }
+        }
 
         // Initialize battle HP on first draw only
         if (!battleInitialized)
@@ -233,8 +344,18 @@ public class TrainerBattleUI
                 UIBaseSprites[1].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
                 String playersPokemon = currentPokemon.Name.ToString();
                 Sprite currentMon = PokemonBackFactory.Instance.CreateStaticSprite(playersPokemon.ToLower() + "-back");
-                currentMon.Draw(spriteBatch, Color.White, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)), 4f);
-                _enemyPokemonSpriteFront.Draw(spriteBatch, Color.White, enemysPokemonPosition, 4f);
+                Vector2 playerOffsetMenu = Vector2.Zero;
+                if (playerAttackAnimationPlaying)
+                {
+                    playerOffsetMenu = backState.AttackBackAction(currentMon, playerAttackAnimationTimer, AttackAnimationDurationMs);
+                }
+                currentMon.Draw(spriteBatch, Color.White, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)) + playerOffsetMenu, 4f);
+                Vector2 enemyOffsetMenu = Vector2.Zero;
+                if (enemyAttackAnimationPlaying)
+                {
+                    enemyOffsetMenu = frontState.AttackFrontAction(enemyPokemon.AnimatedSprite, enemyAttackAnimationTimer, AttackAnimationDurationMs);
+                }
+                enemyPokemon.AnimatedSprite?.Draw(spriteBatch, Color.White, enemysPokemonPosition + enemyOffsetMenu, 4f);
                 // Use updated HP for health bars
                 battleUI.drawHealthBar(playerCurrentHP, playerMaxHP, greenBar, yellowBar, redBar, spriteBatch, true);
                 battleUI.drawHealthBar(enemyCurrentHP, enemyMaxHP, greenBar, yellowBar, redBar, spriteBatch, false);
@@ -267,6 +388,11 @@ public class TrainerBattleUI
                         playerMsg += $"Enemy loses {playerDmg} HP.";
                     enemyCurrentHP -= playerDmg;
                     if (enemyCurrentHP < 0) enemyCurrentHP = 0;
+                    
+                    // Trigger player attack animation when player attacks
+                    shouldPlayPlayerAttackAnimation = true;
+                    playerAttackAnimationPlaying = false; // Will be set true in Update when animation is triggered
+                    
                     battleMessage = playerMsg;
                     if (enemyCurrentHP <= 0)
                     {
@@ -287,8 +413,18 @@ public class TrainerBattleUI
                 DrawHP(spriteBatch, playerCurrentHP, playerMaxHP, new Vector2(340, 220), "Player HP");
                 DrawHP(spriteBatch, enemyCurrentHP, enemyMaxHP, new Vector2(700, 100), "Enemy HP");
                 // draw after HP bars so its on top of gaint gray bars
-                currentMon.Draw(spriteBatch, Color.White, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)), 4f);
-                _enemyPokemonSpriteFront.Draw(spriteBatch, Color.White, enemysPokemonPosition, 4f);
+                Vector2 playerOffsetFight = Vector2.Zero;
+                if (playerAttackAnimationPlaying)
+                {
+                    playerOffsetFight = backState.AttackBackAction(currentMon, playerAttackAnimationTimer, AttackAnimationDurationMs);
+                }
+                currentMon.Draw(spriteBatch, Color.White, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)) + playerOffsetFight, 4f);
+                Vector2 enemyOffsetFight = Vector2.Zero;
+                if (enemyAttackAnimationPlaying)
+                {
+                    enemyOffsetFight = frontState.AttackFrontAction(enemyPokemon.AnimatedSprite, enemyAttackAnimationTimer, AttackAnimationDurationMs);
+                }
+                enemyPokemon.AnimatedSprite?.Draw(spriteBatch, Color.White, enemysPokemonPosition + enemyOffsetFight, 4f);
                 if (!string.IsNullOrEmpty(battleMessage))
                 {
                     DrawMessage(spriteBatch, battleMessage);
@@ -330,5 +466,32 @@ public class TrainerBattleUI
             trainerID += " .";
         }
         return trainerID;
+    }
+
+    private void TrySetPokemonAnimation(Pokemon pokemon, string[] candidates)
+    {
+        if (pokemon == null || pokemon.AnimatedSprite == null) return;
+        var atlas = PokemonFrontFactory.Instance.Atlas;
+        if (atlas == null) return;
+
+        foreach (var c in candidates)
+        {
+            if (string.IsNullOrEmpty(c)) continue;
+            try
+            {
+                if (atlas._animations.ContainsKey(c))
+                {
+                    pokemon.AnimatedSprite.Animation = atlas.GetAnimation(c);
+                    return;
+                }
+                var lower = c.ToLower();
+                if (atlas._animations.ContainsKey(lower))
+                {
+                    pokemon.AnimatedSprite.Animation = atlas.GetAnimation(lower);
+                    return;
+                }
+            }
+            catch { }
+        }
     }
 }
