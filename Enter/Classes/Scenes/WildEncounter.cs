@@ -23,6 +23,8 @@ namespace Enter.Classes.Scenes
         private Game _game;
         private WildEncounterUI wildUI;
         private TextureAtlas _UIAtlas;
+        private TextureAtlas _BattleCharactersAtlas;
+        private TextureAtlas _BordersAtlas;
         private TextSprite trainerText;
         private SpriteFont _font;
         private Player _player;
@@ -40,11 +42,13 @@ namespace Enter.Classes.Scenes
             _font = content.Load<SpriteFont>("PokemonFont");
             trainerText = new TextSprite($"WILD ENCOUNTER", _font, Color.Black);
 
-            // 1. FIX: Load the atlas first, so _UIAtlas is not null
-            _UIAtlas = TextureAtlas.FromFile(content, "BattleInterface.xml"); 
+            // Load all required atlases
+            _UIAtlas = TextureAtlas.FromFile(content, "BattleInterface.xml");
+            _BattleCharactersAtlas = TextureAtlas.FromFile(content, "BattleChars.xml");
+            _BordersAtlas = TextureAtlas.FromFile(content, "Borders.xml");
             
-            // 2. FIX: Remove "WildEncounterUI" to assign to the class field
-            wildUI = new WildEncounterUI(_UIAtlas, content, _player); 
+            // Create WildEncounterUI with all three atlases
+            wildUI = new WildEncounterUI(_UIAtlas, _BattleCharactersAtlas, _BordersAtlas, content, _player);
             wildUI.LoadContent(content);
         }
 
