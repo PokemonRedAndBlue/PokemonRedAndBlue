@@ -217,7 +217,13 @@ public class WildEncounterUI
             case "Menu": 
                 // draw base UI
                 UIsprites[1].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
-                // draw players pokemon sprite, get first alive pokemon
+                // draw both health
+                battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, true);
+                battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, false);
+                // arrow handling logic
+                battleUI.DrawArrow(_WildUIAtlas, spriteBatch);
+                battleUI.moveArrow();
+                // Draw pokémon last (on top) with attack offsets
                 String playersPokemon = currentPokemon.Name.ToString();
                 Sprite currentMon = PokemonBackFactory.Instance.CreateStaticSprite(playersPokemon.ToLower() + "-back");
                 Vector2 playerOffsetMenu = Vector2.Zero;
@@ -233,12 +239,6 @@ public class WildEncounterUI
                     wildOffset = frontState.AttackFrontAction(_wildPokemonSpriteFront, enemyAttackAnimationTimer, AttackAnimationDurationMs);
                 }
                 _wildPokemonSpriteFront.Draw(spriteBatch, Color.White, wildPokemonPosition + wildOffset, 4f);
-                // draw both health
-                battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, true);
-                battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, false);
-                // arrow handling logic
-                battleUI.DrawArrow(_WildUIAtlas, spriteBatch);
-                battleUI.moveArrow();
                 break;
             case "Fight":
                 // draw base UI

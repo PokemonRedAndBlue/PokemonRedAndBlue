@@ -77,6 +77,13 @@ public class TrainerBattleUI
     // State action instances used to compute positional offsets for attack motions
     private FrontStateAction frontState = new FrontStateAction();
     private BackStateAction backState = new BackStateAction();
+    
+    // Damage flash effect timers
+    private double enemyDamageFlashTimer = 0.0;
+    private bool enemyTakingDamage = false;
+    private double playerDamageFlashTimer = 0.0;
+    private bool playerTakingDamage = false;
+    private const double DamageFlashDurationMs = 200.0; // How long the red flash lasts
 
     // Turn-based system
     private enum BattleTurn { Player, Cpu, Waiting, End }
@@ -121,6 +128,8 @@ public class TrainerBattleUI
                 TrySetPokemonAnimation(enemyPokemon, new string[] {
                     enemyPokemon.Name.ToString().ToLower() + "-front",
                 });
+                // Slow down enemy animation playback to 0.4x speed
+                enemyPokemon.AnimatedSprite.AnimationSpeedMultiplier = 0.4;
                 enemyAttackAnimationPlaying = true;
                 enemyAttackAnimationTimer = 0.0;
             }
@@ -167,9 +176,15 @@ public class TrainerBattleUI
                     enemyMsg += $"Player loses {enemyDmg} HP.";
                 battleMessage = enemyMsg;
                 
-                // Trigger enemy attack animation only when damage occurs
-                shouldPlayEnemyAttackAnimation = true;
-                enemyAttackAnimationPlaying = false; // Will be set true in Update when animation is triggered
+                // Trigger enemy attack animation only when damage occurs (will be started on next Update)
+                if (!enemyAttackAnimationPlaying)
+                {
+                    shouldPlayEnemyAttackAnimation = true;
+                    enemyAttackAnimationPlaying = false; // Will be set true in Update when animation is triggered
+                    // Trigger player damage flash
+                    playerTakingDamage = true;
+                    playerDamageFlashTimer = 0.0;
+                }
                 
                 if (playerCurrentHP <= 0)
                 {
@@ -221,6 +236,25 @@ public class TrainerBattleUI
                         currentPokemon.Name.ToString().ToLower() + "-front"
                     });
                 }
+            }
+        }
+
+        // Update damage flash timers
+        if (enemyTakingDamage)
+        {
+            enemyDamageFlashTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (enemyDamageFlashTimer >= DamageFlashDurationMs)
+            {
+                enemyTakingDamage = false;
+            }
+        }
+
+        if (playerTakingDamage)
+        {
+            playerDamageFlashTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (playerDamageFlashTimer >= DamageFlashDurationMs)
+            {
+                playerTakingDamage = false;
             }
         }
     }
@@ -344,23 +378,9 @@ public class TrainerBattleUI
                 UIBaseSprites[1].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
                 String playersPokemon = currentPokemon.Name.ToString();
                 Sprite currentMon = PokemonBackFactory.Instance.CreateStaticSprite(playersPokemon.ToLower() + "-back");
-                Vector2 playerOffsetMenu = Vector2.Zero;
-                if (playerAttackAnimationPlaying)
-                {
-                    playerOffsetMenu = backState.AttackBackAction(currentMon, playerAttackAnimationTimer, AttackAnimationDurationMs);
-                }
-                currentMon.Draw(spriteBatch, Color.White, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)) + playerOffsetMenu, 4f);
-                Vector2 enemyOffsetMenu = Vector2.Zero;
-                if (enemyAttackAnimationPlaying)
-                {
-                    enemyOffsetMenu = frontState.AttackFrontAction(enemyPokemon.AnimatedSprite, enemyAttackAnimationTimer, AttackAnimationDurationMs);
-                }
-                enemyPokemon.AnimatedSprite?.Draw(spriteBatch, Color.White, enemysPokemonPosition + enemyOffsetMenu, 4f);
                 // Use updated HP for health bars
                 battleUI.drawHealthBar(playerCurrentHP, playerMaxHP, greenBar, yellowBar, redBar, spriteBatch, true);
                 battleUI.drawHealthBar(enemyCurrentHP, enemyMaxHP, greenBar, yellowBar, redBar, spriteBatch, false);
-                DrawHP(spriteBatch, playerCurrentHP, playerMaxHP, new Vector2(340, 220), "Player HP");
-                DrawHP(spriteBatch, enemyCurrentHP, enemyMaxHP, new Vector2(700, 100), "Enemy HP");
                 if (!string.IsNullOrEmpty(battleMessage))
                 {
                     DrawMessage(spriteBatch, battleMessage);
@@ -370,6 +390,28 @@ public class TrainerBattleUI
                 // Enable menu navigation
                 battleUI.moveArrow();
                 battleUI.DrawArrow(_TrainerUIAtlas, spriteBatch);
+                // Draw pokémon last (on top) with attack offsets
+                Vector2 playerOffsetMenu = Vector2.Zero;
+                if (playerAttackAnimationPlaying)
+                {
+                    playerOffsetMenu = backState.AttackBackAction(currentMon, playerAttackAnimationTimer, AttackAnimationDurationMs);
+                }
+                // Apply red tint if taking damage
+                Color playerColorMenu = playerTakingDamage ? Color.Red : Color.White;
+                currentMon.Draw(spriteBatch, playerColorMenu, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)) + playerOffsetMenu, 4f);
+                // Draw HP just above player pokemon
+                DrawHP(spriteBatch, playerCurrentHP, playerMaxHP, new Vector2(playerPosition.X + 20, maxDrawPos.Y - (currentMon.Height * _scale) - 20), "Player");
+                
+                Vector2 enemyOffsetMenu = Vector2.Zero;
+                if (enemyAttackAnimationPlaying)
+                {
+                    enemyOffsetMenu = frontState.AttackFrontAction(enemyPokemon.AnimatedSprite, enemyAttackAnimationTimer, AttackAnimationDurationMs);
+                }
+                // Apply red tint if taking damage
+                Color enemyColorMenu = enemyTakingDamage ? Color.Red : Color.White;
+                enemyPokemon.AnimatedSprite?.Draw(spriteBatch, enemyColorMenu, enemysPokemonPosition + enemyOffsetMenu, 4f);
+                // Draw HP just above enemy pokemon
+                DrawHP(spriteBatch, enemyCurrentHP, enemyMaxHP, new Vector2(enemysPokemonPosition.X + 20, enemysPokemonPosition.Y - 20), "Enemy");
                 break;
             case "Fight":
                 UIBaseSprites[1].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
@@ -393,6 +435,10 @@ public class TrainerBattleUI
                     shouldPlayPlayerAttackAnimation = true;
                     playerAttackAnimationPlaying = false; // Will be set true in Update when animation is triggered
                     
+                    // Trigger enemy damage flash
+                    enemyTakingDamage = true;
+                    enemyDamageFlashTimer = 0.0;
+                    
                     battleMessage = playerMsg;
                     if (enemyCurrentHP <= 0)
                     {
@@ -410,21 +456,28 @@ public class TrainerBattleUI
                 // Use updated HP for health bars
                 battleUI.drawHealthBar(playerCurrentHP, playerMaxHP, greenBar, yellowBar, redBar, spriteBatch, true);
                 battleUI.drawHealthBar(enemyCurrentHP, enemyMaxHP, greenBar, yellowBar, redBar, spriteBatch, false);
-                DrawHP(spriteBatch, playerCurrentHP, playerMaxHP, new Vector2(340, 220), "Player HP");
-                DrawHP(spriteBatch, enemyCurrentHP, enemyMaxHP, new Vector2(700, 100), "Enemy HP");
                 // draw after HP bars so its on top of gaint gray bars
                 Vector2 playerOffsetFight = Vector2.Zero;
                 if (playerAttackAnimationPlaying)
                 {
                     playerOffsetFight = backState.AttackBackAction(currentMon, playerAttackAnimationTimer, AttackAnimationDurationMs);
                 }
-                currentMon.Draw(spriteBatch, Color.White, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)) + playerOffsetFight, 4f);
+                // Apply red tint if taking damage
+                Color playerColorFight = playerTakingDamage ? Color.Red : Color.White;
+                currentMon.Draw(spriteBatch, playerColorFight, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)) + playerOffsetFight, 4f);
+                // Draw HP just above player pokemon
+                DrawHP(spriteBatch, playerCurrentHP, playerMaxHP, new Vector2(playerPosition.X + 20, maxDrawPos.Y - (currentMon.Height * _scale) - 20), "Player");
+                
                 Vector2 enemyOffsetFight = Vector2.Zero;
                 if (enemyAttackAnimationPlaying)
                 {
                     enemyOffsetFight = frontState.AttackFrontAction(enemyPokemon.AnimatedSprite, enemyAttackAnimationTimer, AttackAnimationDurationMs);
                 }
-                enemyPokemon.AnimatedSprite?.Draw(spriteBatch, Color.White, enemysPokemonPosition + enemyOffsetFight, 4f);
+                // Apply red tint if taking damage
+                Color enemyColorFight = enemyTakingDamage ? Color.Red : Color.White;
+                enemyPokemon.AnimatedSprite?.Draw(spriteBatch, enemyColorFight, enemysPokemonPosition + enemyOffsetFight, 4f);
+                // Draw HP just above enemy pokemon
+                DrawHP(spriteBatch, enemyCurrentHP, enemyMaxHP, new Vector2(enemysPokemonPosition.X + 20, enemysPokemonPosition.Y - 20), "Enemy");
                 if (!string.IsNullOrEmpty(battleMessage))
                 {
                     DrawMessage(spriteBatch, battleMessage);
