@@ -347,8 +347,8 @@ public class TrainerBattleUI
 
     public void WildEncounterStateBasedDraw(Sprite[] UI_BaseSprites, SpriteBatch spriteBatch)
     {
-        // always draw border
-        _border.Draw(spriteBatch, Color.White, _borderPostion, 4f);
+            // draw border
+            _border.Draw(spriteBatch, Color.White, _borderPostion, 4f);
 
         // always get players pokemon
         Pokemon currentPokemon = _playerTeam.Pokemons[0];
@@ -559,8 +559,8 @@ public class TrainerBattleUI
             default:
                 UIBaseSprites[0].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
                 break;
-        }
-    }
+            }
+            }
 
     public string formatTrainerName(string trainerID)
     {
