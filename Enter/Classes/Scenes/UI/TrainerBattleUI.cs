@@ -40,7 +40,7 @@ public class TrainerBattleUI
     static private Vector2 enemyTrainerPosition = new Vector2(uiBasePosition.X + (96 * _scale) - 4, uiBasePosition.Y);
     static private Vector2 enemyTrainerIDPosition = new Vector2(uiBasePosition.X + (8 * _scale), uiBasePosition.Y + (110 * _scale) + 1);
     static private Vector2 _borderPostion = new Vector2(uiBasePosition.X - (48 * _scale), uiBasePosition.Y - (40 * _scale) + 1);
-    static private Vector2 enemysPokemonPosition = new Vector2(uiBasePosition.X + (96 * _scale), uiBasePosition.Y);
+    static private Vector2 enemysPokemonPosition = new Vector2(uiBasePosition.X + (96 * _scale), uiBasePosition.Y + 20);
     static private Vector2 maxDrawPos = new Vector2(0, uiBasePosition.Y + (103 * _scale));
     public Boolean resetBattle = false;
     public Boolean didRunOrCatch = false;
@@ -84,6 +84,14 @@ public class TrainerBattleUI
     private double playerDamageFlashTimer = 0.0;
     private bool playerTakingDamage = false;
     private const double DamageFlashDurationMs = 200.0; // How long the red flash lasts
+    
+    // Faint/death animation
+    private FaintStateAction faintState = new FaintStateAction();
+    private bool enemyFainting = false;
+    private double enemyFaintTimer = 0.0;
+    private bool playerFainting = false;
+    private double playerFaintTimer = 0.0;
+    private const double FaintAnimationDurationMs = 1000.0; // How long the faint animation lasts
 
     // Turn-based system
     private enum BattleTurn { Player, Cpu, Waiting, End }
@@ -189,6 +197,8 @@ public class TrainerBattleUI
                 if (playerCurrentHP <= 0)
                 {
                     battleMessage = "You lose!";
+                    playerFainting = true;
+                    playerFaintTimer = 0.0;
                     endMessageActive = true;
                     endMessageTimer = 0.0;
                     currentTurn = BattleTurn.End;
@@ -256,6 +266,17 @@ public class TrainerBattleUI
             {
                 playerTakingDamage = false;
             }
+        }
+
+        // Update faint animations
+        if (enemyFainting)
+        {
+            enemyFaintTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
+        }
+
+        if (playerFainting)
+        {
+            playerFaintTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
         }
     }
 
@@ -398,7 +419,14 @@ public class TrainerBattleUI
                 }
                 // Apply red tint if taking damage
                 Color playerColorMenu = playerTakingDamage ? Color.Red : Color.White;
-                currentMon.Draw(spriteBatch, playerColorMenu, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)) + playerOffsetMenu, 4f);
+                float playerScaleMenu = 1.0f;
+                if (playerFainting)
+                {
+                    var (faintColor, faintScale) = faintState.GetFaintEffect(playerFaintTimer, FaintAnimationDurationMs);
+                    playerColorMenu = faintColor;
+                    playerScaleMenu = faintScale;
+                }
+                currentMon.Draw(spriteBatch, playerColorMenu, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)) + playerOffsetMenu, 4f * playerScaleMenu);
                 // Draw HP just above player pokemon
                 DrawHP(spriteBatch, playerCurrentHP, playerMaxHP, new Vector2(playerPosition.X + 20, maxDrawPos.Y - (currentMon.Height * _scale) - 20), "Player");
                 
@@ -409,9 +437,16 @@ public class TrainerBattleUI
                 }
                 // Apply red tint if taking damage
                 Color enemyColorMenu = enemyTakingDamage ? Color.Red : Color.White;
-                enemyPokemon.AnimatedSprite?.Draw(spriteBatch, enemyColorMenu, enemysPokemonPosition + enemyOffsetMenu, 4f);
+                float enemyScaleMenu = 1.0f;
+                if (enemyFainting)
+                {
+                    var (faintColor, faintScale) = faintState.GetFaintEffect(enemyFaintTimer, FaintAnimationDurationMs);
+                    enemyColorMenu = faintColor;
+                    enemyScaleMenu = faintScale;
+                }
+                enemyPokemon.AnimatedSprite?.Draw(spriteBatch, enemyColorMenu, enemysPokemonPosition + enemyOffsetMenu, 4f * enemyScaleMenu);
                 // Draw HP just above enemy pokemon
-                DrawHP(spriteBatch, enemyCurrentHP, enemyMaxHP, new Vector2(enemysPokemonPosition.X + 20, enemysPokemonPosition.Y - 20), "Enemy");
+                DrawHP(spriteBatch, enemyCurrentHP, enemyMaxHP, new Vector2(enemysPokemonPosition.X + 20, enemysPokemonPosition.Y - 40), "Enemy");
                 break;
             case "Fight":
                 UIBaseSprites[1].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
@@ -443,6 +478,8 @@ public class TrainerBattleUI
                     if (enemyCurrentHP <= 0)
                     {
                         battleMessage = "You win!";
+                        enemyFainting = true;
+                        enemyFaintTimer = 0.0;
                         endMessageActive = true;
                         endMessageTimer = 0.0;
                         currentTurn = BattleTurn.End;
@@ -464,7 +501,14 @@ public class TrainerBattleUI
                 }
                 // Apply red tint if taking damage
                 Color playerColorFight = playerTakingDamage ? Color.Red : Color.White;
-                currentMon.Draw(spriteBatch, playerColorFight, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)) + playerOffsetFight, 4f);
+                float playerScaleFight = 1.0f;
+                if (playerFainting)
+                {
+                    var (faintColor, faintScale) = faintState.GetFaintEffect(playerFaintTimer, FaintAnimationDurationMs);
+                    playerColorFight = faintColor;
+                    playerScaleFight = faintScale;
+                }
+                currentMon.Draw(spriteBatch, playerColorFight, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)) + playerOffsetFight, 4f * playerScaleFight);
                 // Draw HP just above player pokemon
                 DrawHP(spriteBatch, playerCurrentHP, playerMaxHP, new Vector2(playerPosition.X + 20, maxDrawPos.Y - (currentMon.Height * _scale) - 20), "Player");
                 
@@ -475,9 +519,16 @@ public class TrainerBattleUI
                 }
                 // Apply red tint if taking damage
                 Color enemyColorFight = enemyTakingDamage ? Color.Red : Color.White;
-                enemyPokemon.AnimatedSprite?.Draw(spriteBatch, enemyColorFight, enemysPokemonPosition + enemyOffsetFight, 4f);
+                float enemyScaleFight = 1.0f;
+                if (enemyFainting)
+                {
+                    var (faintColor, faintScale) = faintState.GetFaintEffect(enemyFaintTimer, FaintAnimationDurationMs);
+                    enemyColorFight = faintColor;
+                    enemyScaleFight = faintScale;
+                }
+                enemyPokemon.AnimatedSprite?.Draw(spriteBatch, enemyColorFight, enemysPokemonPosition + enemyOffsetFight, 4f * enemyScaleFight);
                 // Draw HP just above enemy pokemon
-                DrawHP(spriteBatch, enemyCurrentHP, enemyMaxHP, new Vector2(enemysPokemonPosition.X + 20, enemysPokemonPosition.Y - 20), "Enemy");
+                DrawHP(spriteBatch, enemyCurrentHP, enemyMaxHP, new Vector2(enemysPokemonPosition.X + 20, enemysPokemonPosition.Y - 40), "Enemy");
                 if (!string.IsNullOrEmpty(battleMessage))
                 {
                     DrawMessage(spriteBatch, battleMessage);
