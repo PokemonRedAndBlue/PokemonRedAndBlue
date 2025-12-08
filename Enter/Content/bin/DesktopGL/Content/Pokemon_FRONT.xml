@@ -381,7 +381,7 @@
             <Frame region="beedrill-front-attack" />
             <Frame region="beedrill-front-idle" />
         </Animation>
-        <Animation name="pidgey-front" frameCount="3" frameDuration="100" scale="4">
+        <Animation name="pidgey-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="pidgey-front-idle" />
             <Frame region="pidgey-front-attack" />
             <Frame region="pidgey-front-idle" />

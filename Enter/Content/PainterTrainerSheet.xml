@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+    <TextureAtlas>
+      <Texture>images/painterGymMapChar</Texture>
+        <Regions>
+          <Region name="painter-map-trainer" x="748" y="326" width="245" height="387"/>
+        </Regions>
+    </TextureAtlas>

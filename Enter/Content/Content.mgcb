@@ -1255,6 +1255,15 @@
 #begin Moves.xml
 /copy:Moves.xml
 
+#begin PainterBase.xml
+/copy:PainterBase.xml
+
+#begin PainterMadandLaughing.xml
+/copy:PainterMadandLaughing.xml
+
+#begin PainterTrainerSheet.xml
+/copy:PainterTrainerSheet.xml
+
 #begin Pokemon_BACK.xml
 /copy:Pokemon_BACK.xml
 
