@@ -306,77 +306,77 @@
         <Region name="mew-front-attack" x="75" y="827" width="38" height="38"/>
     </Regions>
     <Animations>
-        <Animation name="bulbasaur-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="bulbasaur-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="bulbasaur-front-idle" />
             <Frame region="bulbasaur-front-attack" />
             <Frame region="bulbasaur-front-idle" />
         </Animation>
-        <Animation name="ivysaur-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="ivysaur-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="ivysaur-front-idle" />
             <Frame region="ivysaur-front-attack" />
             <Frame region="ivysaur-front-idle" />
         </Animation>
-        <Animation name="venusaur-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="venusaur-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="venusaur-front-idle" />
             <Frame region="venusaur-front-attack" />
             <Frame region="venusaur-front-idle" />
         </Animation>
-        <Animation name="charmander-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="charmander-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="charmander-front-idle" />
             <Frame region="charmander-front-attack" />
             <Frame region="charmander-front-idle" />
         </Animation>
-        <Animation name="charmeleon-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="charmeleon-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="charmeleon-front-idle" />
             <Frame region="charmeleon-front-attack" />
             <Frame region="charmeleon-front-idle" />
         </Animation>
-        <Animation name="charizard-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="charizard-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="charizard-front-idle" />
             <Frame region="charizard-front-attack" />
             <Frame region="charizard-front-idle" />
         </Animation>
-        <Animation name="squirtle-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="squirtle-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="squirtle-front-idle" />
             <Frame region="squirtle-front-attack" />
             <Frame region="squirtle-front-idle" />
         </Animation>
-        <Animation name="wartortle-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="wartortle-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="wartortle-front-idle" />
             <Frame region="wartortle-front-attack" />
             <Frame region="wartortle-front-idle" />
         </Animation>
-        <Animation name="blastoise-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="blastoise-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="blastoise-front-idle" />
             <Frame region="blastoise-front-attack" />
             <Frame region="blastoise-front-idle" />
         </Animation>
-        <Animation name="caterpie-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="caterpie-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="caterpie-front-idle" />
             <Frame region="caterpie-front-attack" />
             <Frame region="caterpie-front-idle" />
         </Animation>
-        <Animation name="metapod-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="metapod-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="metapod-front-idle" />
             <Frame region="metapod-front-attack" />
             <Frame region="metapod-front-idle" />
         </Animation>
-        <Animation name="butterfree-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="butterfree-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="butterfree-front-idle" />
             <Frame region="butterfree-front-attack" />
             <Frame region="butterfree-front-idle" />
         </Animation>
-        <Animation name="weedle-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="weedle-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="weedle-front-idle" />
             <Frame region="weedle-front-attack" />
             <Frame region="weedle-front-idle" />
         </Animation>
-        <Animation name="kakuna-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="kakuna-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="kakuna-front-idle" />
             <Frame region="kakuna-front-attack" />
             <Frame region="kakuna-front-idle" />
         </Animation>
-        <Animation name="beedrill-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="beedrill-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="beedrill-front-idle" />
             <Frame region="beedrill-front-attack" />
             <Frame region="beedrill-front-idle" />
@@ -386,347 +386,347 @@
             <Frame region="pidgey-front-attack" />
             <Frame region="pidgey-front-idle" />
         </Animation>
-        <Animation name="pidgeotto-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="pidgeotto-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="pidgeotto-front-idle" />
             <Frame region="pidgeotto-front-attack" />
             <Frame region="pidgeotto-front-idle" />
         </Animation>
-        <Animation name="pidgeot-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="pidgeot-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="pidgeot-front-idle" />
             <Frame region="pidgeot-front-attack" />
             <Frame region="pidgeot-front-idle" />
         </Animation>
-        <Animation name="rattata-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="rattata-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="rattata-front-idle" />
             <Frame region="rattata-front-attack" />
             <Frame region="rattata-front-idle" />
         </Animation>
-        <Animation name="raticate-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="raticate-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="raticate-front-idle" />
             <Frame region="raticate-front-attack" />
             <Frame region="raticate-front-idle" />
         </Animation>
-        <Animation name="spearow-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="spearow-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="spearow-front-idle" />
             <Frame region="spearow-front-attack" />
             <Frame region="spearow-front-idle" />
         </Animation>
-        <Animation name="fearow-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="fearow-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="fearow-front-idle" />
             <Frame region="fearow-front-attack" />
             <Frame region="fearow-front-idle" />
         </Animation>
-        <Animation name="ekans-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="ekans-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="ekans-front-idle" />
             <Frame region="ekans-front-attack" />
             <Frame region="ekans-front-idle" />
         </Animation>
-        <Animation name="arbok-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="arbok-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="arbok-front-idle" />
             <Frame region="arbok-front-attack" />
             <Frame region="arbok-front-idle" />
         </Animation>
-        <Animation name="pikachu-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="pikachu-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="pikachu-front-idle" />
             <Frame region="pikachu-front-attack" />
             <Frame region="pikachu-front-idle" />
         </Animation>
-        <Animation name="raichu-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="raichu-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="raichu-front-idle" />
             <Frame region="raichu-front-attack" />
             <Frame region="raichu-front-idle" />
         </Animation>
-        <Animation name="sandshrew-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="sandshrew-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="sandshrew-front-idle" />
             <Frame region="sandshrew-front-attack" />
             <Frame region="sandshrew-front-idle" />
         </Animation>
-        <Animation name="sandslash-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="sandslash-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="sandslash-front-idle" />
             <Frame region="sandslash-front-attack" />
             <Frame region="sandslash-front-idle" />
         </Animation>
-        <Animation name="nidoran-f-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="nidoran-f-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="nidoran-f-front-idle" />
             <Frame region="nidoran-f-front-attack" />
             <Frame region="nidoran-f-front-idle" />
         </Animation>
-        <Animation name="nidorina-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="nidorina-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="nidorina-front-idle" />
             <Frame region="nidorina-front-attack" />
             <Frame region="nidorina-front-idle" />
         </Animation>
-        <Animation name="nidoqueen-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="nidoqueen-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="nidoqueen-front-idle" />
             <Frame region="nidoqueen-front-attack" />
             <Frame region="nidoqueen-front-idle" />
         </Animation>
-        <Animation name="nidoran-m-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="nidoran-m-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="nidoran-m-front-idle" />
             <Frame region="nidoran-m-front-attack" />
             <Frame region="nidoran-m-front-idle" />
         </Animation>
-        <Animation name="nidorino-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="nidorino-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="nidorino-front-idle" />
             <Frame region="nidorino-front-attack" />
             <Frame region="nidorino-front-idle" />
         </Animation>
-        <Animation name="nidoking-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="nidoking-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="nidoking-front-idle" />
             <Frame region="nidoking-front-attack" />
             <Frame region="nidoking-front-idle" />
         </Animation>
-        <Animation name="clefairy-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="clefairy-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="clefairy-front-idle" />
             <Frame region="clefairy-front-attack" />
             <Frame region="clefairy-front-idle" />
         </Animation>
-        <Animation name="clefable-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="clefable-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="clefable-front-idle" />
             <Frame region="clefable-front-attack" />
             <Frame region="clefable-front-idle" />
         </Animation>
-        <Animation name="vulpix-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="vulpix-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="vulpix-front-idle" />
             <Frame region="vulpix-front-attack" />
             <Frame region="vulpix-front-idle" />
         </Animation>
-        <Animation name="ninetales-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="ninetales-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="ninetales-front-idle" />
             <Frame region="ninetales-front-attack" />
             <Frame region="ninetales-front-idle" />
         </Animation>
-        <Animation name="jigglypuff-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="jigglypuff-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="jigglypuff-front-idle" />
             <Frame region="jigglypuff-front-attack" />
             <Frame region="jigglypuff-front-idle" />
         </Animation>
-        <Animation name="wigglytuff-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="wigglytuff-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="wigglytuff-front-idle" />
             <Frame region="wigglytuff-front-attack" />
             <Frame region="wigglytuff-front-idle" />
         </Animation>
-        <Animation name="zubat-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="zubat-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="zubat-front-idle" />
             <Frame region="zubat-front-attack" />
             <Frame region="zubat-front-idle" />
         </Animation>
-        <Animation name="golbat-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="golbat-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="golbat-front-idle" />
             <Frame region="golbat-front-attack" />
             <Frame region="golbat-front-idle" />
         </Animation>
-        <Animation name="oddish-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="oddish-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="oddish-front-idle" />
             <Frame region="oddish-front-attack" />
             <Frame region="oddish-front-idle" />
         </Animation>
-        <Animation name="gloom-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="gloom-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="gloom-front-idle" />
             <Frame region="gloom-front-attack" />
             <Frame region="gloom-front-idle" />
         </Animation>
-        <Animation name="vileplume-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="vileplume-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="vileplume-front-idle" />
             <Frame region="vileplume-front-attack" />
             <Frame region="vileplume-front-idle" />
         </Animation>
-        <Animation name="paras-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="paras-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="paras-front-idle" />
             <Frame region="paras-front-attack" />
             <Frame region="paras-front-idle" />
         </Animation>
-        <Animation name="parasect-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="parasect-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="parasect-front-idle" />
             <Frame region="parasect-front-attack" />
             <Frame region="parasect-front-idle" />
         </Animation>
-        <Animation name="venonat-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="venonat-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="venonat-front-idle" />
             <Frame region="venonat-front-attack" />
             <Frame region="venonat-front-idle" />
         </Animation>
-        <Animation name="venomoth-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="venomoth-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="venomoth-front-idle" />
             <Frame region="venomoth-front-attack" />
             <Frame region="venomoth-front-idle" />
         </Animation>
-        <Animation name="diglett-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="diglett-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="diglett-front-idle" />
             <Frame region="diglett-front-attack" />
             <Frame region="diglett-front-idle" />
         </Animation>
-        <Animation name="dugtrio-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="dugtrio-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="dugtrio-front-idle" />
             <Frame region="dugtrio-front-attack" />
             <Frame region="dugtrio-front-idle" />
         </Animation>
-        <Animation name="meowth-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="meowth-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="meowth-front-idle" />
             <Frame region="meowth-front-attack" />
             <Frame region="meowth-front-idle" />
         </Animation>
-        <Animation name="persian-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="persian-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="persian-front-idle" />
             <Frame region="persian-front-attack" />
             <Frame region="persian-front-idle" />
         </Animation>
-        <Animation name="psyduck-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="psyduck-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="psyduck-front-idle" />
             <Frame region="psyduck-front-attack" />
             <Frame region="psyduck-front-idle" />
         </Animation>
-        <Animation name="golduck-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="golduck-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="golduck-front-idle" />
             <Frame region="golduck-front-attack" />
             <Frame region="golduck-front-idle" />
         </Animation>
-        <Animation name="mankey-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="mankey-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="mankey-front-idle" />
             <Frame region="mankey-front-attack" />
             <Frame region="mankey-front-idle" />
         </Animation>
-        <Animation name="primeape-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="primeape-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="primeape-front-idle" />
             <Frame region="primeape-front-attack" />
             <Frame region="primeape-front-idle" />
         </Animation>
-        <Animation name="growlithe-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="growlithe-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="growlithe-front-idle" />
             <Frame region="growlithe-front-attack" />
             <Frame region="growlithe-front-idle" />
         </Animation>
-        <Animation name="arcanine-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="arcanine-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="arcanine-front-idle" />
             <Frame region="arcanine-front-attack" />
             <Frame region="arcanine-front-idle" />
         </Animation>
-        <Animation name="poliwag-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="poliwag-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="poliwag-front-idle" />
             <Frame region="poliwag-front-attack" />
             <Frame region="poliwag-front-idle" />
         </Animation>
-        <Animation name="poliwhirl-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="poliwhirl-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="poliwhirl-front-idle" />
             <Frame region="poliwhirl-front-attack" />
             <Frame region="poliwhirl-front-idle" />
         </Animation>
-        <Animation name="poliwrath-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="poliwrath-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="poliwrath-front-idle" />
             <Frame region="poliwrath-front-attack" />
             <Frame region="poliwrath-front-idle" />
         </Animation>
-        <Animation name="abra-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="abra-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="abra-front-idle" />
             <Frame region="abra-front-attack" />
             <Frame region="abra-front-idle" />
         </Animation>
-        <Animation name="kadabra-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="kadabra-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="kadabra-front-idle" />
             <Frame region="kadabra-front-attack" />
             <Frame region="kadabra-front-idle" />
         </Animation>
-        <Animation name="alakazam-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="alakazam-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="alakazam-front-idle" />
             <Frame region="alakazam-front-attack" />
             <Frame region="alakazam-front-idle" />
         </Animation>
-        <Animation name="machop-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="machop-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="machop-front-idle" />
             <Frame region="machop-front-attack" />
             <Frame region="machop-front-idle" />
         </Animation>
-        <Animation name="machoke-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="machoke-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="machoke-front-idle" />
             <Frame region="machoke-front-attack" />
             <Frame region="machoke-front-idle" />
         </Animation>
-        <Animation name="machamp-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="machamp-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="machamp-front-idle" />
             <Frame region="machamp-front-attack" />
             <Frame region="machamp-front-idle" />
         </Animation>
-        <Animation name="bellsprout-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="bellsprout-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="bellsprout-front-idle" />
             <Frame region="bellsprout-front-attack" />
             <Frame region="bellsprout-front-idle" />
         </Animation>
-        <Animation name="weepinbell-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="weepinbell-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="weepinbell-front-idle" />
             <Frame region="weepinbell-front-attack" />
             <Frame region="weepinbell-front-idle" />
         </Animation>
-        <Animation name="victreebel-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="victreebel-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="victreebel-front-idle" />
             <Frame region="victreebel-front-attack" />
             <Frame region="victreebel-front-idle" />
         </Animation>
-        <Animation name="tentacool-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="tentacool-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="tentacool-front-idle" />
             <Frame region="tentacool-front-attack" />
             <Frame region="tentacool-front-idle" />
         </Animation>
-        <Animation name="tentacruel-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="tentacruel-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="tentacruel-front-idle" />
             <Frame region="tentacruel-front-attack" />
             <Frame region="tentacruel-front-idle" />
         </Animation>
-        <Animation name="geodude-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="geodude-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="geodude-front-idle" />
             <Frame region="geodude-front-attack" />
             <Frame region="geodude-front-idle" />
         </Animation>
-        <Animation name="graveler-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="graveler-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="graveler-front-idle" />
             <Frame region="graveler-front-attack" />
             <Frame region="graveler-front-idle" />
         </Animation>
-        <Animation name="golem-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="golem-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="golem-front-idle" />
             <Frame region="golem-front-attack" />
             <Frame region="golem-front-idle" />
         </Animation>
-        <Animation name="ponyta-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="ponyta-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="ponyta-front-idle" />
             <Frame region="ponyta-front-attack" />
             <Frame region="ponyta-front-idle" />
         </Animation>
-        <Animation name="rapidash-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="rapidash-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="rapidash-front-idle" />
             <Frame region="rapidash-front-attack" />
             <Frame region="rapidash-front-idle" />
         </Animation>
-        <Animation name="slowpoke-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="slowpoke-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="slowpoke-front-idle" />
             <Frame region="slowpoke-front-attack" />
             <Frame region="slowpoke-front-idle" />
         </Animation>
-        <Animation name="slowbro-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="slowbro-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="slowbro-front-idle" />
             <Frame region="slowbro-front-attack" />
             <Frame region="slowbro-front-idle" />
         </Animation>
-        <Animation name="magnemite-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="magnemite-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="magnemite-front-idle" />
             <Frame region="magnemite-front-attack" />
             <Frame region="magnemite-front-idle" />
         </Animation>
-        <Animation name="magneton-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="magneton-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="magneton-front-idle" />
             <Frame region="magneton-front-attack" />
             <Frame region="magneton-front-idle" />
         </Animation>
-        <Animation name="farfetchd-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="farfetchd-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="farfetchd-front-idle" />
             <Frame region="farfetchd-front-attack" />
             <Frame region="farfetchd-front-idle" />
         </Animation>
-        <Animation name="doduo-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="doduo-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="doduo-front-idle" />
             <Frame region="doduo-front-attack" />
             <Frame region="doduo-front-idle" />
         </Animation>
-        <Animation name="dodrio-front" frameCount="3" frameDuration="20" scale="4">
+        <Animation name="dodrio-front" frameCount="3" frameDuration="15" scale="4">
             <Frame region="dodrio-front-idle" />
             <Frame region="dodrio-front-attack" />
             <Frame region="dodrio-front-idle" />

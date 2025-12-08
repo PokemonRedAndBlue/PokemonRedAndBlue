@@ -8,6 +8,7 @@ using Enter.Classes.Input;
 using Enter.Classes.Sprites;
 using Enter.Classes.Physics;
 using Enter.Interfaces;
+using Enter.Classes.Textures;
 
 namespace Enter.Classes.Scenes
 {
@@ -19,8 +20,7 @@ namespace Enter.Classes.Scenes
     {
         private const float ZoomLevel = 4f; 
         private SceneManager _sceneManager;
-        private SpriteFont _font; // Placeholder for UI/debug text
-        private Tilemap _tilemap;
+        private Trainer painterTrainer;
         private Camera Cam;
         private KeyboardController _controller;
         private Texture2D character;
@@ -84,16 +84,22 @@ namespace Enter.Classes.Scenes
 
             Cam.Update(player);
             Cam.Zoom = ZoomLevel; //Zoom level of world
-            trainer = new Trainer(
+
+            // prof painter trainer stuff
+            TextureAtlas painterStuff = content.Load<TextureAtlas>("images/PainterTrainerSheet");
+            character = painterStuff.GetRegion("trainer-painter").Texture;
+            painterTrainer = new Trainer(
                 character,
-                new Vector2(_game.Window.ClientBounds.Height, _game.Window.ClientBounds.Width) * 0.25f,
-                Facing.Right,
-                trainerId: "gym-leader"
+                new Vector2(5 * 32, 10 * 32),
+                Facing.Down,
+                false,
+                trainerId: "trainer-painter"
             );
             _currentMap = TilemapLoader.LoadTilemap("Content/GymMap.xml");
 
             // Collision wiring (minimal)
             player.Map = _currentMap;
+            painterTrainer.Map = _currentMap;
 
             // Build the solid tile index set from the "Ground" layer
             player.SolidTiles = Physics.Collision.BuildSolidIndexSet(

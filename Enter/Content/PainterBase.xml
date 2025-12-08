@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-    <TextureAtlas>
-      <Texture>images/profPainterTrainer</Texture>
-        <Regions>
-          <Region name="trainer-painter" x="82" y="23" width="492" height="492"/>
-        </Regions>
-    </TextureAtlas>
