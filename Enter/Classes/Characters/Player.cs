@@ -24,6 +24,8 @@ public class Player
 
     // Tile-space state
     public Point TilePos { get; private set; } // current tile position
+
+    public bool isMoving = false;
     public bool HasArrived { get; private set; } = false;
     private TileMoveCommand _activeMoveCommand;
     private bool _initializedTileFromPosition = false;
@@ -107,6 +109,7 @@ public class Player
         Vector2 newPos = _activeMoveCommand.Advance(_pixelPosition, SpeedPxPerSec, dt);
         Cam.DiffPos = newPos - _pixelPosition;
         _pixelPosition = newPos;
+        isMoving = true;
     }
 
     private void HandleArrivalAtTarget()
@@ -179,6 +182,7 @@ public class Player
     public void Draw(SpriteBatch spriteBatch, float scale = 1f)
     {
         _sprite.Draw(spriteBatch, _texture, scale, GetSnappedPixelPosition());
+        isMoving = false;
     }
 
     /// <summary>

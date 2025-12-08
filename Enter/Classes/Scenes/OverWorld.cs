@@ -22,7 +22,7 @@ namespace Enter.Classes.Scenes
     public class OverworldScene : IGameScene
     {
         private const float ZoomLevel = 4f; 
-        private const float WildEncounterTriggerChance = 0.5f;
+        private const float WildEncounterTriggerChance = 0.05f;
         private const double WildEncounterCooldown = 2.0;
         private const int WildGrassTileId = 5; // wild-grass-route1
         private SceneManager _sceneManager;
@@ -74,14 +74,14 @@ namespace Enter.Classes.Scenes
             BackgroundMusicPlayer.Play(SongId.RoadToViridianFromPallet, loop: true);
 
             // Only restore from Game1.SavedPlayerPosition if returning from a battle, else use this scene's last known position
-            // Vector2 spawn = _playerPosition;
-            // if ((_game as Game1)?.SavedPlayerPosition is Microsoft.Xna.Framework.Vector2 savedPos)
-            // {
-            //     spawn = savedPos;
-            //     // Clear after use so it doesn't leak between scenes
-            //     (_game as Game1).SavedPlayerPosition = null;
-            // }
-            // SetPlayerPosition(spawn);
+            Vector2 spawn = _playerPosition;
+            if ((_game as Game1)?.SavedPlayerPosition is Microsoft.Xna.Framework.Vector2 savedPos)
+            {
+                spawn = savedPos;
+                // Clear after use so it doesn't leak between scenes
+                (_game as Game1).SavedPlayerPosition = null;
+            }
+            SetPlayerPosition(spawn);
 
             if (_game.SavedPlayerTiles.TryGetValue("overworld", out Point savedTile))
             {
@@ -127,7 +127,7 @@ namespace Enter.Classes.Scenes
 
         private void WildEncounterTrigger(Player player)
         {
-            if (_currentMap.GetTileAt("Ground", player.TilePos.X, player.TilePos.Y) == WildGrassTileId)
+            if (_currentMap.GetTileAt("Ground", player.TilePos.X, player.TilePos.Y) == WildGrassTileId && player.isMoving)
                 if (_rand.NextSingle() <= WildEncounterTriggerChance)
                     _sceneManager.TransitionTo("wild");
         }
@@ -200,6 +200,8 @@ namespace Enter.Classes.Scenes
             _player.Draw(spriteBatch);
             trainer.Draw(spriteBatch);
             spriteBatch.End();
+
+            Console.WriteLine("Player:" + _player.isMoving);
 
             // no need for base.Draw here
         }
