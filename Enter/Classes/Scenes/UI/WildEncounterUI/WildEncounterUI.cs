@@ -33,7 +33,7 @@ public partial class WildEncounterUI
     private bool enemyAttackAnimationPlaying = false;
     private double playerAttackAnimationTimer = 0.0;
     private double enemyAttackAnimationTimer = 0.0;
-    private const double AttackAnimationDurationMs = 600.0;
+    private const double AttackAnimationDurationMs = 350.0;  // Faster player movement (reduced from 600ms)
     private FrontStateAction frontState = new FrontStateAction();
     private BackStateAction backState = new BackStateAction();
 
@@ -136,6 +136,12 @@ public partial class WildEncounterUI
             enemyAttackAnimationPlaying = true;
             enemyAttackAnimationTimer = 0.0;
             TrySetAnimation(_wildPokemonSpriteFront, new string[] { _wildPokemonID + "-front" });
+            // Slow down enemy animation playback to 0.2x speed (half of previous speed) for single play-through
+            if (_wildPokemonSpriteFront != null)
+            {
+                _wildPokemonSpriteFront.AnimationSpeedMultiplier = 0.2;
+                _wildPokemonSpriteFront.Loop = false;
+            }
         }
 
         if (shouldPlayPlayerAttackAnimation && !playerAttackAnimationPlaying)

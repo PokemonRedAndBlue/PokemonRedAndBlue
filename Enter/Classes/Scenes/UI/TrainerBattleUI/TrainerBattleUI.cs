@@ -75,7 +75,7 @@ public partial class TrainerBattleUI
     private bool enemyAttackAnimationPlaying = false;
     private double playerAttackAnimationTimer = 0.0;
     private double enemyAttackAnimationTimer = 0.0;
-    private const double AttackAnimationDurationMs = 600.0;
+    private const double AttackAnimationDurationMs = 350.0;  // Faster player movement (reduced from 600ms)
     // State action instances used to compute positional offsets for attack motions
     private FrontStateAction frontState = new FrontStateAction();
     private BackStateAction backState = new BackStateAction();
@@ -166,8 +166,9 @@ public partial class TrainerBattleUI
                 TrySetPokemonAnimation(enemyPokemon, new string[] {
                     enemyPokemon.Name.ToString().ToLower() + "-front",
                 });
-                // Slow down enemy animation playback to 0.4x speed
-                enemyPokemon.AnimatedSprite.AnimationSpeedMultiplier = 0.4;
+                // Slow down enemy animation playback to 0.2x speed (half of previous speed) for single play-through
+                enemyPokemon.AnimatedSprite.AnimationSpeedMultiplier = 0.2;
+                enemyPokemon.AnimatedSprite.Loop = false;
                 enemyAttackAnimationPlaying = true;
                 enemyAttackAnimationTimer = 0.0;
             }

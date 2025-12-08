@@ -9,6 +9,7 @@ public class AnimatedSprite : Sprites.Sprite
     private TimeSpan _elapsed;
     private Animation _animation;
     private double _animationSpeedMultiplier = 1.0; // Allow slowdown of animation playback
+    public bool Loop { get; set; } = true;
 
     /// <summary>
     /// Gets or Sets the animation playback speed multiplier (1.0 = normal, 0.5 = half speed, etc.)
@@ -69,7 +70,14 @@ public class AnimatedSprite : Sprites.Sprite
 
             if (_currentFrame >= _animation.Frames.Count)
             {
-                _currentFrame = 0;
+                if (Loop)
+                {
+                    _currentFrame = 0;
+                }
+                else
+                {
+                    _currentFrame = _animation.Frames.Count - 1; // Stay on last frame
+                }
             }
 
             Region = _animation.Frames[_currentFrame];
