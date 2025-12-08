@@ -13,8 +13,8 @@ public class PokeballthrowAnimation
 
     //If active frame is 0 when doesnt animate
 
-    private float initialPostionX;  //inital postion of x
-    private float initialPostionY;  //inital position of y
+    private float initialPositionX;  //inital postion of x
+    private float initialPositionY;  //inital position of y
     private float xParam;           // radian x value
     private float step;             // how much x increases each update
     private float maxHeight;        // maximum height of sin function
@@ -23,8 +23,8 @@ public class PokeballthrowAnimation
 
     public PokeballthrowAnimation(int x, int y)
     {
-        this.initialPostionX = x;
-        this.initialPostionY = y;
+        this.initialPositionX = x;
+        this.initialPositionY = y;
         this.position = new Vector2(x, y);
 
         xParam = 0f;
@@ -45,8 +45,8 @@ public class PokeballthrowAnimation
             xParam = 0f;
             //return;
         }
-        float px = initialPostionX + xParam * 100;
-        float py = initialPostionY - maxHeight * MathF.Sin(xParam);
+        float px = initialPositionX + xParam * 100;
+        float py = initialPositionY - maxHeight * MathF.Sin(xParam);
 
         position.X = px;
         position.Y = py;
