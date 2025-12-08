@@ -41,6 +41,10 @@ namespace Enter.Classes.Scenes
             // Load UI
             _font = content.Load<SpriteFont>("PokemonFont");
             trainerText = new TextSprite($"WILD ENCOUNTER", _font, Color.Black);
+            
+            // Load Background Music 
+            BackgroundMusicLibrary.Load(content);
+            BackgroundMusicPlayer.Play(SongId.BattleWildPokemon, loop: true);
 
             // Load all required atlases
             _UIAtlas = TextureAtlas.FromFile(content, "BattleInterface.xml");

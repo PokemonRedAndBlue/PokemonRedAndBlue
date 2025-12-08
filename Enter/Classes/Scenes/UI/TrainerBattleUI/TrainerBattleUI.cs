@@ -273,6 +273,9 @@ public partial class TrainerBattleUI
                 // Trigger enemy attack animation
                 shouldPlayEnemyAttackAnimation = true;
                 enemyAttackAnimationPlaying = false;
+
+                // CPU Attack SFX
+                SoundEffectPlayer.Play(SfxId.SFX_CYMBAL_3);
                 
                 // Trigger player damage flash
                 playerTakingDamage = true;

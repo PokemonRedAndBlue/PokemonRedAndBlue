@@ -30,6 +30,10 @@ public partial class TrainerBattleUI
             shouldPlayPlayerAttackAnimation = true;
             playerAttackAnimationPlaying = false; // Will be set true in Update when animation is triggered
             
+            //Attack SFX
+            SoundEffectPlayer.Play(SfxId.SFX_CYMBAL_3);
+            
+
             // Trigger enemy damage flash
             enemyTakingDamage = true;
             enemyDamageFlashTimer = 0.0;
@@ -42,6 +46,7 @@ public partial class TrainerBattleUI
                 enemyFaintTimer = 0.0;
                 endMessageActive = true;
                 endMessageTimer = 0.0;
+                BackgroundMusicPlayer.Play(SongId.VictoryTrainer, loop: false);
                 currentTurn = BattleTurn.End;
             }
             else
