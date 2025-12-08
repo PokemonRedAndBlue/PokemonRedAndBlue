@@ -13,6 +13,312 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Audio/01 Opening (part 1).mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/01 Opening (part 1).mp3
+
+#begin Audio/02 Opening (part 2).mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/02 Opening (part 2).mp3
+
+#begin Audio/03 To Bill's Origin ~ From Cerulean.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/03 To Bill's Origin ~ From Cerulean.mp3
+
+#begin Audio/04 Pallet Town's Theme.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/04 Pallet Town's Theme.mp3
+
+#begin Audio/05 Pokemon Center.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/05 Pokemon Center.mp3
+
+#begin Audio/06 Pokemon Gym.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/06 Pokemon Gym.mp3
+
+#begin Audio/07 Pewter City's Theme.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/07 Pewter City's Theme.mp3
+
+#begin Audio/08 Cerulean City's Theme.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/08 Cerulean City's Theme.mp3
+
+#begin Audio/09 Celadon City's Theme.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/09 Celadon City's Theme.mp3
+
+#begin Audio/10 Cinnabar Island's Theme.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/10 Cinnabar Island's Theme.mp3
+
+#begin Audio/11 Vermilion City's Theme.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/11 Vermilion City's Theme.mp3
+
+#begin Audio/12 Lavender Town's Theme.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/12 Lavender Town's Theme.mp3
+
+#begin Audio/13 St. Anne.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/13 St. Anne.mp3
+
+#begin Audio/14 Professor Oak.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/14 Professor Oak.mp3
+
+#begin Audio/15 Rival Appears.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/15 Rival Appears.mp3
+
+#begin Audio/16 Guide.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/16 Guide.mp3
+
+#begin Audio/17 Evolution.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/17 Evolution.mp3
+
+#begin Audio/18 The Road to Viridian City ~ from Pallet.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/18 The Road to Viridian City ~ from Pallet.mp3
+
+#begin Audio/19 The Road to Cerulean ~ from Mt. Moon.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/19 The Road to Cerulean ~ from Mt. Moon.mp3
+
+#begin Audio/20 The Road to Lavender Town ~ from Vermilion.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/20 The Road to Lavender Town ~ from Vermilion.mp3
+
+#begin Audio/21 The Last Road.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/21 The Last Road.mp3
+
+#begin Audio/22 Battle (VS Gym Leader).mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/22 Battle (VS Gym Leader).mp3
+
+#begin Audio/23 Battle (VS Trainer).mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/23 Battle (VS Trainer).mp3
+
+#begin Audio/24 Battle (VS Wild Pokemon).mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/24 Battle (VS Wild Pokemon).mp3
+
+#begin Audio/25 Last Battle (VS Rival).mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/25 Last Battle (VS Rival).mp3
+
+#begin Audio/26 Victory (VS Trainer).mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/26 Victory (VS Trainer).mp3
+
+#begin Audio/27 Victory (VS Wild Pokemon).mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/27 Victory (VS Wild Pokemon).mp3
+
+#begin Audio/28 Victory (VS Gym Leader).mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/28 Victory (VS Gym Leader).mp3
+
+#begin Audio/29 Ending.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/29 Ending.mp3
+
+#begin Audio/30 Into the Hall.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/30 Into the Hall.mp3
+
+#begin Audio/31 Oak Research Lab.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/31 Oak Research Lab.mp3
+
+#begin Audio/32 Jigglypuff's Song.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/32 Jigglypuff's Song.mp3
+
+#begin Audio/33 Cycling.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/33 Cycling.mp3
+
+#begin Audio/34 Ocean.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/34 Ocean.mp3
+
+#begin Audio/35 Casino.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/35 Casino.mp3
+
+#begin Audio/36 Team Rocket Hideout.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/36 Team Rocket Hideout.mp3
+
+#begin Audio/37 Viridian Forest.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/37 Viridian Forest.mp3
+
+#begin Audio/38 Mt. Moon Cave.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/38 Mt. Moon Cave.mp3
+
+#begin Audio/39 Pokemon Mansion.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/39 Pokemon Mansion.mp3
+
+#begin Audio/40 Pokemon Tower.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/40 Pokemon Tower.mp3
+
+#begin Audio/41 Sylph Company.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/41 Sylph Company.mp3
+
+#begin Audio/42 Trainer Appears (Bad Guy Version).mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/42 Trainer Appears (Bad Guy Version).mp3
+
+#begin Audio/43 Trainer Appears (Girl Version).mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/43 Trainer Appears (Girl Version).mp3
+
+#begin Audio/44 Trainer Appears (Boy Version).mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/44 Trainer Appears (Boy Version).mp3
+
+#begin Audio/45 Pokemon Recovery.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/45 Pokemon Recovery.mp3
+
+#begin Audio/46 Item Fanfare.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/46 Item Fanfare.mp3
+
+#begin Audio/47 Pokemon Received Fanfare.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/47 Pokemon Received Fanfare.mp3
+
+#begin Audio/48 Level Up Fanfare.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/48 Level Up Fanfare.mp3
+
+#begin Audio/49 Pokemon Capture Fanfare.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/49 Pokemon Capture Fanfare.mp3
+
+#begin Audio/50 Pokedex Fanfare 1.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/50 Pokedex Fanfare 1.mp3
+
+#begin Audio/51 Pokedex Fanfare 2.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/51 Pokedex Fanfare 2.mp3
+
 #begin Audio/SFX_59.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
