@@ -15,6 +15,9 @@ public class PokeballthrowAnimation
 
     private float initialPositionX;  //inital postion of x
     private float initialPositionY;  //inital position of y
+
+    public bool IsComplete { get; private set; }
+
     private float xParam;           // radian x value
     private float step;             // how much x increases each update
     private float maxHeight;        // maximum height of sin function
@@ -42,6 +45,7 @@ public class PokeballthrowAnimation
         xParam += step;
         if (xParam >= (3f * MathF.PI / 4f))
         {
+            IsComplete = true;  // Mark as complete
             xParam = 0f;
             //return;
         }
