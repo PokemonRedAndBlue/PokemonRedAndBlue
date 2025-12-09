@@ -53,7 +53,7 @@ namespace Enter.Classes.Scenes
         /// <summary>
         /// Unloads the current scene, loads the new one, and makes it active.
         /// </summary>
-        public void TransitionTo(string sceneName)
+        public void TransitionTo(string sceneName, Dictionary<string, object> newSceneArgs = null)
         {
             // Prevent transitioning to a scene that doesn't exist or while already transitioning
             if (_isTransitioning || !_scenes.ContainsKey(sceneName))
@@ -68,6 +68,12 @@ namespace Enter.Classes.Scenes
             // Load and set the new scene
             _currentScene = _scenes[sceneName];
             _currentScene.LoadContent(_content);
+
+            // If the new scene supports argument passing, deliver them
+            if (_currentScene is ISceneWithArgs argScene && newSceneArgs != null)
+            {
+                argScene.OnSceneArgs(newSceneArgs);
+            }
 
             _isTransitioning = false;
         }

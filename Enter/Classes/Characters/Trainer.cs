@@ -1,5 +1,7 @@
 using System;
 using Enter.Classes.Sprites;
+using System.Diagnostics.CodeAnalysis;
+#nullable enable
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Vector2 = Microsoft.Xna.Framework.Vector2;

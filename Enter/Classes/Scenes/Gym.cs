@@ -10,6 +10,7 @@ using Enter.Classes.Physics;
 using Enter.Interfaces;
 using Enter.Classes.Textures;
 using System;
+using System.Collections.Generic;
 
 namespace Enter.Classes.Scenes
 {
@@ -56,13 +57,13 @@ namespace Enter.Classes.Scenes
 
             // Only restore from Game1.SavedPlayerPosition if returning from a battle scene, else use this scene's last known position
             Point spawn = _playerPosition;
-            if (_game?.SavedPlayerPosition is Point savedPos)
+            if (_game?.SavedPlayerPosition is Vector2 savedPosVec)
             {
                 // Only use if coming from a battle scene (trainer or wild)
                 var prev = _sceneManager?.PreviousSceneName;
-                if (prev == "trainer" || prev == "wild")
+                if (prev == "trainer" || prev == "wild" || prev == "gym_trainer_painter")
                 {
-                    spawn = savedPos;
+                    spawn = new Point((int)savedPosVec.X, (int)savedPosVec.Y);
                 }
                 _game.SavedPlayerPosition = null;
             }
@@ -121,8 +122,8 @@ namespace Enter.Classes.Scenes
             {
                 // Save the actual player position before battle
                 _playerPosition = _player.TilePos;
-                _game.SavedPlayerPosition = _player.TilePos;
-                _sceneManager.TransitionTo("trainer");
+                _game.SavedPlayerPosition = new Vector2(_player.TilePos.X, _player.TilePos.Y);
+                _sceneManager.TransitionTo("gym_trainer_painter");
             }
             Point exit = _player.TilePos;
             //System.Console.WriteLine("exit Tile pos: " + exit);

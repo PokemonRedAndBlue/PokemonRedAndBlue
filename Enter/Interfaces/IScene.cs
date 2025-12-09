@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace Enter.Interfaces
 {
@@ -24,5 +25,11 @@ namespace Enter.Interfaces
         /// Called every frame. Contains all scene-specific draw calls.
         /// </summary>
         void Draw(SpriteBatch spriteBatch);
+    }
+    
+    // Optional interface for scenes that accept arguments on transition
+    public interface ISceneWithArgs
+    {
+        void OnSceneArgs(Dictionary<string, object> args);
     }
 }

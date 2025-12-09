@@ -62,9 +62,9 @@ namespace Enter.Classes.Scenes
 
             // Only restore from Game1.SavedPlayerPosition if available
             Point spawn = _playerPosition;
-            if (_game?.SavedPlayerPosition is Point savedPos)
+            if (_game?.SavedPlayerPosition is Vector2 savedPosVec)
             {
-                spawn = savedPos;
+                spawn = new Point((int)savedPosVec.X, (int)savedPosVec.Y);
                 _game.SavedPlayerPosition = null;
             }
 

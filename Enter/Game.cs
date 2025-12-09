@@ -27,7 +27,7 @@ public class Game1 : Core
 
     private SceneManager _sceneManager;
     // State that persists across scene transitions
-    public Point? SavedPlayerPosition { get; set; } = null;
+    public Microsoft.Xna.Framework.Vector2? SavedPlayerPosition { get; set; } = null;
 
     // Methods to check/update trainer defeat status
     public bool IsTrainerDefeated(string trainerId)
@@ -51,58 +51,44 @@ public class Game1 : Core
 
         // Initialize Scene Manager and Dependencies
         _sceneManager = new SceneManager(Content, SpriteBatch);
-
-        _sceneManager.AddScene("intro", new IntroScene(_sceneManager, this));
-        _sceneManager.AddScene("menu", new MenuScene(_sceneManager, this));
-        _sceneManager.AddScene("oakIntro", new OakIntroScene(_sceneManager, this));
         _sceneManager.AddScene("overworld", new OverworldScene(_sceneManager, this, _controller, player));
         _sceneManager.AddScene("overworld_city", new OverworldCityScene(_sceneManager, this, _controller, player));
         _sceneManager.AddScene("gym", new GymScene(_sceneManager, this, _controller, player));
         _sceneManager.AddScene("trainer", new TrainerBattleScene(_sceneManager, this, "youngster", player));
+        _sceneManager.AddScene("gym_trainer_painter", new TrainerBattleScene(_sceneManager, this, "trainer-painter", player, "gym"));
         _sceneManager.AddScene("city_trainer1", new TrainerBattleScene(_sceneManager, this, "hiker", player, "overworld_city"));
         _sceneManager.AddScene("city_trainer2", new TrainerBattleScene(_sceneManager, this, "blackbelt", player, "overworld_city"));
         _sceneManager.AddScene("wild", new WildEncounter(_sceneManager, this, player));
-        _sceneManager.TransitionTo("intro"); // <-- Set the starting scene
-
-        //Music && Sound effect
-        //BackgroundMusicLibrary.Load(Content);
-        //SoundEffectLibrary.Load(Content);
-
-
-        base.LoadContent();
+        _sceneManager.TransitionTo("overworld"); // <-- Set the starting scene
     }
 
     protected override void Update(GameTime gameTime)
     {
-        // basic update logic
-        _sceneManager.Update(gameTime);
-
-        // Check for reset key
-        if (ResetRequested) { Reset(); return; }
-        
-        // Cache keyboard state to avoid multiple calls
-        KeyboardState keyState = Keyboard.GetState();
-
-        base.Update(gameTime);
-
-        // Update window title with FPS and recent scene timings (update/draw ms)
-        try
+        if (ResetRequested)
         {
-            string baseTitle = Window.Title?.Split('|')[0].Trim() ?? "";
-            int fps = Core.CurrentFps;
-            double uMs = _sceneManager?.LastUpdateMs ?? 0.0;
-            double dMs = _sceneManager?.LastDrawMs ?? 0.0;
-            Window.Title = string.IsNullOrEmpty(baseTitle)
-                ? $"FPS: {fps} | U:{uMs:F1}ms D:{dMs:F1}ms"
-                : $"{baseTitle} | FPS: {fps} | U:{uMs:F1}ms D:{dMs:F1}ms";
+            Reset();
+            return;
         }
-        catch { }
+
+        KeyboardState keyState = Keyboard.GetState();
+        if (keyState.IsKeyDown(Keys.C))
+        {
+            _sceneManager.TransitionTo("overworld_city");
+        }
+
+        if (keyState.IsKeyDown(Keys.G))
+        {
+            _sceneManager.TransitionTo("gym");
+        }
+
+        _sceneManager.Update(gameTime);
+        base.Update(gameTime);
     }
 
     private void Reset()
     {
         // The new way to reset is to just reload the scene
-        SavedPlayerPosition = null;
+        SavedPlayerPosition = new Vector2(160, 0);
         _defeatedTrainers.Clear();
         _sceneManager.TransitionTo("overworld");
         ResetRequested = false;

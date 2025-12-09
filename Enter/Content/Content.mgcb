@@ -1261,6 +1261,9 @@
 #begin PainterTrainerSheet.xml
 /copy:PainterTrainerSheet.xml
 
+#begin PainterBattle.xml
+/copy:PainterBattle.xml
+
 #begin Pokemon_BACK.xml
 /copy:Pokemon_BACK.xml
 

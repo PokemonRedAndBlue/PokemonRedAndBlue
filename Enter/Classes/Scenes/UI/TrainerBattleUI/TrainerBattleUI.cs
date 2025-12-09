@@ -108,7 +108,7 @@ public partial class TrainerBattleUI
         _TrainerUIAtlas = trainerUIAtlas;
         _BattleCharactersAtlas = battleCharactersAtlas;
         _BordersAtlas = bordersAtlas;
-        _enemyTrainerString = enemyTrainerID.ToLower();
+        _enemyTrainerString = enemyTrainerID?.ToLower() ?? string.Empty;
         _font = content.Load<SpriteFont>("PokemonFont");
         _playerTeam = playerTeam;
         _enemyTeam = enemyTeam;
@@ -131,13 +131,22 @@ public partial class TrainerBattleUI
 
         // Load trainer sprites from the BattleCharacters atlas (use player-back like WildEncounterUI)
         _trainerSpriteBack = new Sprite(_BattleCharactersAtlas.GetRegion("player-back"));
-        _enemyTrainerSpriteFront = _BattleCharactersAtlas.CreateSprite(_enemyTrainerString);
 
         if (_enemyTrainerString == "trainer-painter")
         {
-            const float targetHeight = 32f;
-            float h = _enemyTrainerSpriteFront.Region.Height;
+            // Painter battle portrait comes from its own atlas; scale to roughly player trainer size
+            TextureAtlas painterAtlas = TextureAtlas.FromFile(content, "PainterBattle.xml");
+            var region = painterAtlas.GetRegion("trainer-painter");
+            _enemyTrainerSpriteFront = new Sprite(region);
+
+            // Match player trainer height (~player-back is ~30px tall, drawn at scale 8 -> ~240px onscreen)
+            const float targetHeight = 240f;
+            float h = region.Height;
             _enemyTrainerScale = h > 0 ? targetHeight / h : _enemyTrainerScale;
+        }
+        else
+        {
+            _enemyTrainerSpriteFront = _BattleCharactersAtlas.CreateSprite(_enemyTrainerString);
         }
 
         // Load enemy trainer ID sprite

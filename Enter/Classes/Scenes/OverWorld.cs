@@ -70,9 +70,9 @@ namespace Enter.Classes.Scenes
 
             // Only restore from Game1.SavedPlayerPosition if returning from a battle, else use this scene's last known position
             Point spawn = _playerPosition;
-            if (_game?.SavedPlayerPosition is Point savedPos)
+            if (_game?.SavedPlayerPosition is Vector2 savedPosVec)
             {
-                spawn = savedPos;
+                spawn = new Point((int)savedPosVec.X, (int)savedPosVec.Y);
                 // Clear after use so it doesn't leak between scenes
                 _game.SavedPlayerPosition = null;
             }

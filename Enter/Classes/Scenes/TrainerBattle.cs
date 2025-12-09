@@ -9,13 +9,14 @@ using Enter.Classes.Textures;
 using Enter.Interfaces;
 using Enter.Classes.Characters;
 using TrainerMethods;
+using System.Collections.Generic;
 
 namespace Enter.Classes.Scenes    
 {
     /// <summary>
     /// The scene for a battle against a Trainer.
     /// </summary>
-    public class TrainerBattleScene: IGameScene
+    public class TrainerBattleScene: IGameScene, ISceneWithArgs
     {
         // 4-argument constructor for backward compatibility
         public TrainerBattleScene(SceneManager sceneManager, Game1 game1, string trainerID, Player ourPlayer)
@@ -46,6 +47,21 @@ namespace Enter.Classes.Scenes
             _game = game1;
             // Store the scene to return to after battle
             _returnSceneName = returnSceneName ?? sceneManager.PreviousSceneName ?? "overworld";
+        }
+
+        public void OnSceneArgs(Dictionary<string, object> args)
+        {
+            if (args == null) return;
+
+            if (args.TryGetValue("trainerID", out var idObj) && idObj is string idStr)
+            {
+                _trainerID = idStr;
+            }
+
+            if (args.TryGetValue("returnScene", out var retObj) && retObj is string retStr)
+            {
+                _returnSceneName = retStr;
+            }
         }
 
         public void LoadContent(ContentManager content)
@@ -83,8 +99,9 @@ namespace Enter.Classes.Scenes
 
             if(_trainerUI.didRunOrCatch || _trainerUI.resetBattle){
                     // Save the player's last position for the overworld
-                    if (_game?.SavedPlayerPosition is Point savedPos)
+                    if (_game?.SavedPlayerPosition is Vector2 savedPosVec)
                     {
+                        Point savedPos = new Point((int)savedPosVec.X, (int)savedPosVec.Y);
                         OverworldScene.SetNextSpawn(savedPos);
                     }
                     _game?.MarkTrainerDefeated(_trainerID);

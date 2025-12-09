@@ -101,8 +101,9 @@ namespace Enter.Classes.Scenes
 
                 if(_wildUI.didRunOrCatch || _wildUI.resetBattle){
                     // Save the player's last position for the overworld
-                    if (_game?.SavedPlayerPosition is Point savedPos)
+                    if (_game?.SavedPlayerPosition is Vector2 savedPosVec)
                     {
+                        Point savedPos = new Point((int)savedPosVec.X, (int)savedPosVec.Y);
                         OverworldScene.SetNextSpawn(savedPos);
                     }
                     _sceneManager.TransitionTo("overworld");
