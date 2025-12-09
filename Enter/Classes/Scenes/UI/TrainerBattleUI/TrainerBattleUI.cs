@@ -21,6 +21,8 @@ public partial class TrainerBattleUI
     private TextureAtlas _creatureAtlas;
     private ContentManager _content;
     private bool _creatureSpriteMissing;
+    public bool ItemConfirmRequested { get; private set; }
+    private KeyboardState _prevItemKeyState;
     private TextSprite _trainerText;
     private SpriteFont _font;
     private BattleUIHelper battleUI = new BattleUIHelper();
@@ -165,6 +167,11 @@ public partial class TrainerBattleUI
         // Ensure battleUI state machine and timer are updated
         battleUI.Update(gameTime);
         _currentState = battleUI.getBattleState();
+
+        if (_currentState != "Item")
+        {
+            ItemConfirmRequested = false;
+        }
         
         // Update any animated sprites attached to the current pokémon
         try
@@ -334,9 +341,6 @@ public partial class TrainerBattleUI
         // Hard-code creature sprite hookup for painter battles even if atlas key resolution fails elsewhere
         EnsureEnemyCreatureSprite(enemyPokemon);
 
-        // Debug marker to verify creature sprite state on screen
-        _creatureSpriteMissing = _enemyTrainerString == "trainer-painter" && (enemyPokemon?.AnimatedSprite == null);
-        // Ensure the pokémon have an AnimatedSprite instance created once (do not recreate every draw)
         if (enemyPokemon.AnimatedSprite == null)
         {
             try

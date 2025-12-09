@@ -63,6 +63,9 @@ public class BattleUIHelper
         { (0, 1), botLeft },
         { (1, 1), botRight }
     };
+
+    // Expose the menu's top-left arrow location so other UI states can align arrows consistently.
+    public static Vector2 MenuTopLeftArrowPosition => topLeft;
     private static Vector2 _pokeballStartPosition;
     private static Vector2 _drawPostionArrow;
     static private Vector2 playerPokeballStartPosition = new Vector2(uiBasePosition.X + (88 * _scale) - 4, uiBasePosition.Y + (80 * _scale) - 4);

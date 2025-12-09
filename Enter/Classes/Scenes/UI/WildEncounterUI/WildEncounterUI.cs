@@ -61,6 +61,8 @@ public partial class WildEncounterUI
     static private Sprite _border;
     public Boolean resetBattle = false;
     public Boolean didRunOrCatch = false;
+    public bool BagConfirmRequested { get; private set; }
+    private KeyboardState _prevBagKeyState;
     
     private string _currentState = "Initial";
     private Dictionary<string, int> stateMapping = new Dictionary<string, int>
@@ -151,6 +153,12 @@ public partial class WildEncounterUI
     public void Update(GameTime gameTime)
     {
         KeyboardState keyboardState = Keyboard.GetState();
+
+        // Clear bag confirm flag when not in Bag state
+        if (_currentState != "Bag")
+        {
+            BagConfirmRequested = false;
+        }
 
         // Update UI state machine
         battleUI.Update(gameTime);
