@@ -85,6 +85,13 @@ namespace Enter.Classes.Scenes
                 SetPlayerPosition(new Point(5, 12));
             }
 
+            // If trainer already defeated, keep them non-collidable
+            if (_game.IsTrainerDefeated("trainer-painter"))
+            {
+                _trainer.HasBeenDefeated = true;
+                _trainer.colided = false;
+            }
+
             _cam.Update(_player);
             _cam.Zoom = ZoomLevel; //Zoom level of world
 
@@ -123,8 +130,17 @@ namespace Enter.Classes.Scenes
             _controller.Update(_game, gameTime, _cam, _player, _trainer);
             _cam.Update(_player);
 
+            // If already defeated, disable collision/interaction
+            if (_game.IsTrainerDefeated(_trainer.TrainerID))
+            {
+                _trainer.HasBeenDefeated = true;
+                _trainer.colided = false;
+                // Allow player to move if collision was sticking
+                _player.StopEnd();
+            }
+
             // Force a battle with trainer interaction
-            if (_trainer.colided)
+            if (_trainer.colided && !_game.IsTrainerDefeated(_trainer.TrainerID))
             {
                 // Save the actual player position before battle
                 _playerPosition = _player.TilePos;
