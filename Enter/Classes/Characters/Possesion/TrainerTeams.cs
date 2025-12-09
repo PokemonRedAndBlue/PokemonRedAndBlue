@@ -34,7 +34,7 @@ namespace TrainerMethods
             // painter aka gym leaders team
             Team painterTrainerTeam = new Team(new Pokemon[]
             {
-            new Pokemon("Snorlax", 18)
+            new Pokemon("the creature", 18)
             });
 
 

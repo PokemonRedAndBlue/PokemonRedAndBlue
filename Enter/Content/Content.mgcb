@@ -1009,6 +1009,9 @@
 #begin CerucleanCityMap.xml
 /copy:CerucleanCityMap.xml
 
+#begin creature.xml
+/copy:creature.xml
+
 #begin GymMap.xml
 /copy:GymMap.xml
 
@@ -1047,6 +1050,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:images/Characters (Battle).png
+
+#begin images/creature.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/creature.png
 
 #begin images/Game Boy _ GBC - Pokemon Red _ Blue - Backgrounds (Places) - Cerulean City.png
 /importer:TextureImporter
@@ -1255,14 +1270,14 @@
 #begin Moves.xml
 /copy:Moves.xml
 
+#begin PainterBattle.xml
+/copy:PainterBattle.xml
+
 #begin PainterMadandLaughing.xml
 /copy:PainterMadandLaughing.xml
 
 #begin PainterTrainerSheet.xml
 /copy:PainterTrainerSheet.xml
-
-#begin PainterBattle.xml
-/copy:PainterBattle.xml
 
 #begin Pokemon_BACK.xml
 /copy:Pokemon_BACK.xml
