@@ -81,8 +81,8 @@ namespace Enter.Classes.Scenes
             _cam.Zoom = ZoomLevel; //Zoom level of world
 
             // prof painter trainer stuff
-            TextureAtlas painterStuff = content.Load<TextureAtlas>("images/PainterTrainerSheet");
-            _character = painterStuff.GetRegion("trainer-painter").Texture;
+            TextureAtlas painterStuff = TextureAtlas.FromFile(content, "PainterTrainerSheet.xml");
+            _character = painterStuff.GetRegion("painter-map-trainer").Texture;
             _painterTrainer = new Trainer(
                 _character,
                 new Vector2(5 * 32, 10 * 32),
@@ -90,6 +90,7 @@ namespace Enter.Classes.Scenes
                 false,
                 trainerId: "trainer-painter"
             );
+            _trainer = _painterTrainer;
             _currentMap = TilemapLoader.LoadTilemap("Content/GymMap.xml");
 
             // Collision wiring (minimal)

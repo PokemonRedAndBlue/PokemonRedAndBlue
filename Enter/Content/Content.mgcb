@@ -1255,9 +1255,6 @@
 #begin Moves.xml
 /copy:Moves.xml
 
-#begin PainterBase.xml
-/copy:PainterBase.xml
-
 #begin PainterMadandLaughing.xml
 /copy:PainterMadandLaughing.xml
 
