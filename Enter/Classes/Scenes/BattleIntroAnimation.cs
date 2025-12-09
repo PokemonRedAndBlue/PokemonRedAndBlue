@@ -6,6 +6,9 @@ using System;
 
 namespace Enter.Classes.Scenes.IntroAnimations
 {
+    /// <summary>
+    /// The battle animation component between Gengar and Jigglypuff for the title screen sequence
+    /// </summary>
     public class BattleIntroAnimation
     {
         private enum State

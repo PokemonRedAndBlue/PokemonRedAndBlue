@@ -7,6 +7,9 @@ using System.Collections.Generic;
 
 namespace Enter.Classes.Scenes.IntroAnimations
 {
+    /// <summary>
+    /// The GAMEFREAK animation component for the title screen sequence
+    /// </summary>
     public class GameFreakAnimation
     {
         private enum State
