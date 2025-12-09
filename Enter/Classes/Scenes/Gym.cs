@@ -84,10 +84,10 @@ namespace Enter.Classes.Scenes
             // prof painter trainer stuff
             TextureAtlas painterStuff = TextureAtlas.FromFile(content, "PainterTrainerSheet.xml");
             var painterRegion = painterStuff.GetRegion("painter-map-trainer");
-            const float painterScale = 0.25f; // Quarter-scale the atlas art to fit the scene
+            const float painterScale = 0.07f; // scale the atlas art to fit the scene
             _painterTrainer = new Trainer(
                 painterRegion,
-                new Vector2(4 * 32, 2 * 32),
+                new Vector2(2 * 32, .7f * 32),
                 Facing.Down,
                 moving: false,
                 scale: painterScale,
