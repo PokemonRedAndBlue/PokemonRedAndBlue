@@ -1,5 +1,7 @@
 using System;
 using Enter.Classes.Sprites;
+using System.Diagnostics.CodeAnalysis;
+#nullable enable
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
@@ -30,6 +32,8 @@ public class Trainer
     private readonly int _visionRangeTiles = DefaultVisionRangeTiles;
     private readonly bool _moving = false;  // Whether the trainer will hang around when idling
     private readonly Texture2D _texture;
+    private readonly TextureRegion? _customRegion;
+    private readonly float _customScale = 1f;
     private TrainerSprite _sprite;
     private int _spriteIndex;
     private Facing _facing = Facing.Down; // Facing direction
@@ -57,6 +61,22 @@ public class Trainer
         _facing = facing;
         _moving = moving;
         _visionRangeTiles = visionRangeTiles;
+        TrainerID = trainerId;
+        colided = false;
+        _trainersTeam = new Team();
+    }
+
+    public Trainer(TextureRegion region, Vector2 Pos, Facing facing, bool moving, float scale, string trainerId)
+    {
+        _customRegion = region;
+        _customScale = scale;
+        _texture = region.Texture;
+        _spriteIndex = 0;
+        _sprite = new(_spriteIndex);
+        Position = Pos;
+        _facing = facing;
+        _moving = moving;
+        _visionRangeTiles = DefaultVisionRangeTiles;
         TrainerID = trainerId;
         colided = false;
         _trainersTeam = new Team();
@@ -158,6 +178,22 @@ public class Trainer
 
     public void Draw(SpriteBatch spriteBatch, float scale = 1f)
     {
+        if (_customRegion is not null)
+        {
+            spriteBatch.Draw(
+                _customRegion.Texture,
+                Position,
+                _customRegion.SourceRectangle,
+                Color.White,
+                0f,
+                Vector2.Zero,
+                _customScale,
+                SpriteEffects.None,
+                0f
+            );
+            return;
+        }
+
         _sprite.Draw(spriteBatch, _texture, scale, Position);
     }
 

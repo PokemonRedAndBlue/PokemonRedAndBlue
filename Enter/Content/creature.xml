@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+  <Texture>images/creature</Texture>
+  <Regions>
+    <Region name="the creature" x="850" y="142" width="1082" height="1248" />
+  </Regions>
+  <Animations>
+    <Animation name="the creature-front" frameCount="1" frameDuration="20" scale="4">
+      <Frame region="the creature"/>
+    </Animation>
+  </Animations>
+</TextureAtlas>

@@ -31,20 +31,21 @@ namespace TrainerMethods
             new Pokemon("abra", 8)
             });
 
-            // Create a team for the "GymLeader"
-            Team gymLeaderTeam = new Team(new Pokemon[]
+            // painter aka gym leaders team
+            Team painterTrainerTeam = new Team(new Pokemon[]
             {
-            new Pokemon("Onix", 14)
+            new Pokemon("the creature", 18)
             });
+
 
             //initialize the dictionary with our new teams
             _teamDatabase = new Dictionary<string, Team>
         {
             // The "key" is the string ID, the "value" is the Team object.
             { "youngster", youngsterTeam },
-            { "gymLeader", gymLeaderTeam },
             { "hiker", hikerTeam },
             { "blackbelt", blackbeltTeam },
+            { "trainer-painter", painterTrainerTeam },
             // You can add more teams here
         };
         }

@@ -68,6 +68,10 @@
         <Region name="player-fishing" x="100" y="562" width="32" height="32"/>
         <Region name="player-surfing" x="133" y="562" width="32" height="32"/>
     </Regions>
+    <Texture>images/profPainterTrainer</Texture>
+        <Regions>
+          <Region name="trainer-painter" x="82" y="23" width="492" height="492"/>
+        </Regions>
     <Animations>
     </Animations>
 </TextureAtlas>
