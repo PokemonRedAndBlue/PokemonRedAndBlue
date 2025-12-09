@@ -51,6 +51,11 @@ public class Game1 : Core
 
         // Initialize Scene Manager and Dependencies
         _sceneManager = new SceneManager(Content, SpriteBatch);
+
+        _sceneManager.AddScene("title_sequence", new TitleSequenceScene(_sceneManager, this));
+        _sceneManager.AddScene("intro", new IntroScene(_sceneManager, this));
+        _sceneManager.AddScene("menu", new MenuScene(_sceneManager, this));
+        _sceneManager.AddScene("oakIntro", new OakIntroScene(_sceneManager, this));
         _sceneManager.AddScene("overworld", new OverworldScene(_sceneManager, this, _controller, player));
         _sceneManager.AddScene("overworld_city", new OverworldCityScene(_sceneManager, this, _controller, player));
         _sceneManager.AddScene("gym", new GymScene(_sceneManager, this, _controller, player));
@@ -59,7 +64,14 @@ public class Game1 : Core
         _sceneManager.AddScene("city_trainer1", new TrainerBattleScene(_sceneManager, this, "hiker", player, "overworld_city"));
         _sceneManager.AddScene("city_trainer2", new TrainerBattleScene(_sceneManager, this, "blackbelt", player, "overworld_city"));
         _sceneManager.AddScene("wild", new WildEncounter(_sceneManager, this, player));
-        _sceneManager.TransitionTo("gym"); // <-- Set the starting scene
+        _sceneManager.TransitionTo("title_sequence"); // <-- Set the starting scene
+
+        //Music && Sound effect
+        BackgroundMusicLibrary.Load(Content);
+        SoundEffectLibrary.Load(Content);
+
+
+        base.LoadContent();
     }
 
     protected override void Update(GameTime gameTime)
