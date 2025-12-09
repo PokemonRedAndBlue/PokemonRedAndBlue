@@ -68,34 +68,33 @@ namespace Enter.Classes.Scenes
             //Music
             BackgroundMusicPlayer.Play(SongId.RoadToViridianFromPallet, loop: true);
 
+            bool spawnSet = false;
+
             // Highest priority: explicit next spawn set by other scenes (trainer/wild return)
             if (NextSpawnPosition is Point next)
             {
                 SetPlayerPosition(next);
                 NextSpawnPosition = null;
                 _game.SavedPlayerPosition = null;
+                spawnSet = true;
             }
-            else
+            else if (_game?.SavedPlayerPosition is Vector2 savedPosVec)
             {
                 // Next priority: SavedPlayerPosition (set before battle transitions)
-                Point spawn = _playerPosition;
-                if (_game?.SavedPlayerPosition is Vector2 savedPosVec)
-                {
-                    spawn = new Point((int)savedPosVec.X, (int)savedPosVec.Y);
-                    // Clear after use so it doesn't leak between scenes
-                    _game.SavedPlayerPosition = null;
-                }
-                SetPlayerPosition(spawn);
+                SetPlayerPosition(new Point((int)savedPosVec.X, (int)savedPosVec.Y));
+                _game.SavedPlayerPosition = null;
+                spawnSet = true;
+            }
+            else if (_game.SavedPlayerTiles.TryGetValue("overworld", out Point savedTile))
+            {
+                SetPlayerPosition(savedTile);
+                spawnSet = true;
             }
 
-            if (_game.SavedPlayerPosition is null && _game.SavedPlayerTiles.TryGetValue("overworld", out Point savedTile))
+            if (!spawnSet)
             {
-                _player.SetTilePosition(savedTile + new Point(0, -1));
-            }
-            else if (_game.SavedPlayerPosition is null)
-            {
-                // Default location for this scene if no saved tile, (on first visit)
-                _player.SetTilePosition(new Point(10, 0));
+                // Default location for this scene if no saved position
+                SetPlayerPosition(new Point(10, 0));
             }
 
             _cam.Update(_player);
