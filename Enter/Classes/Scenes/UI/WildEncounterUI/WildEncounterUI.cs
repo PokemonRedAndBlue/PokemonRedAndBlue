@@ -61,7 +61,7 @@ public partial class WildEncounterUI
     static private Sprite _border;
     public Boolean resetBattle = false;
     public Boolean didRunOrCatch = false;
-    public bool BagConfirmRequested { get; private set; }
+    public bool BagConfirmRequested { get; set; }
     private KeyboardState _prevBagKeyState;
     
     private string _currentState = "Initial";

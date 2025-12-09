@@ -34,9 +34,29 @@ public partial class WildEncounterUI
         }
 
         // Enter triggers bag confirm hook for throw/catch handling
-        if (currentState.IsKeyDown(Keys.Enter) && _prevBagKeyState.IsKeyUp(Keys.Enter))
+        if (currentState.IsKeyDown(Keys.Enter))
         {
             BagConfirmRequested = true; // external battle logic can process catch/animation here
+        }
+
+        if (BagConfirmRequested){
+            // throw pokeball
+
+            
+            // trigger pokemon being sucked up
+
+
+            // play ball wobble animation and sfx
+
+
+            // give catch result (for now, always succeed)
+
+
+            // add pokemon to player's party/storage
+
+
+            // finally set flag to indicate run/catch occurred
+            didRunOrCatch = true;
         }
 
         _prevBagKeyState = currentState;

@@ -33,13 +33,29 @@ public partial class TrainerBattleUI
             resetBattle = true;
         }
 
-        if (keyState.IsKeyDown(Keys.Enter) && _prevItemKeyState.IsKeyUp(Keys.Enter))
+        if (keyState.IsKeyDown(Keys.Enter))
         {
             ItemConfirmRequested = true; // external code can hook to throw/catch from this flag
         }
-        else if (_currentState != "Item")
-        {
-            ItemConfirmRequested = false;
+
+        if (ItemConfirmRequested){
+            // throw pokeball
+
+            
+            // trigger pokemon being sucked up
+
+
+            // play ball wobble animation and sfx
+
+
+            // give catch result (for now, always succeed)
+
+
+            // add pokemon to player's party/storage
+
+
+            // finally set flag to indicate run/catch occurred
+            didRunOrCatch = true;
         }
 
         _prevItemKeyState = keyState;

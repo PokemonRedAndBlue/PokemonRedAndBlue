@@ -79,7 +79,13 @@ namespace Enter.Classes.Scenes
                     // UI handles menu navigation
                     break;
                 case "Bag":
-                    // Handle bag logic
+                    // Handle bag logic (catch trigger)
+                    if (_wildUI.BagConfirmRequested)
+                    {
+                        // Flag a catch event; caller can replace with actual catch flow/animation
+                        _wildUI.didRunOrCatch = true;
+                        _wildUI.BagConfirmRequested = false;
+                    }
                     break;
                 case "Pokemon":
                     // Handle Pokemon switch logic
