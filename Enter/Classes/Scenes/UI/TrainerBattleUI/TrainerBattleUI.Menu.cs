@@ -57,7 +57,13 @@ public partial class TrainerBattleUI
             enemyColorMenu = faintColor;
             enemyScaleMenu = faintScale;
         }
-        enemyPokemon.AnimatedSprite?.Draw(spriteBatch, enemyColorMenu, enemysPokemonPosition + enemyOffsetMenu, 4f * enemyScaleMenu);
+        float enemyBaseScaleMenu = 4f;
+        // Creature atlas art is huge; shrink it so it stays on-screen
+        if (_enemyTrainerString == "trainer-painter")
+        {
+            enemyBaseScaleMenu = 0.2f;
+        }
+        enemyPokemon.AnimatedSprite?.Draw(spriteBatch, enemyColorMenu, enemysPokemonPosition + enemyOffsetMenu, enemyBaseScaleMenu * enemyScaleMenu);
         // Draw HP just above enemy pokemon (25px lower)
         DrawHP(spriteBatch, enemyCurrentHP, enemyMaxHP, new Vector2(enemysPokemonPosition.X + 20, enemysPokemonPosition.Y - 15), "Enemy");
     }

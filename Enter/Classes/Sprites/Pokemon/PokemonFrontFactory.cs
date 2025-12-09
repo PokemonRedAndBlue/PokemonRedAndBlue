@@ -54,4 +54,20 @@ public class PokemonFrontFactory
         // Fallback: try default atlas to surface an exception with context
         return _PokemonFrontAtlas.CreateAnimatedSprite(spriteName);
     }
+
+    public Sprite CreateStaticSprite(String spriteName)
+    {
+        string key = spriteName.ToLower();
+        if (_PokemonFrontAtlas != null && _PokemonFrontAtlas._regions.ContainsKey(key))
+        {
+            return _PokemonFrontAtlas.CreateSprite(key);
+        }
+
+        if (_creatureAtlas != null && _creatureAtlas._regions.ContainsKey(key))
+        {
+            return _creatureAtlas.CreateSprite(key);
+        }
+
+        return _PokemonFrontAtlas.CreateSprite(spriteName);
+    }
 }

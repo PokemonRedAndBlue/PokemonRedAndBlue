@@ -168,9 +168,6 @@ namespace Enter.Classes.Scenes
             _player.Draw(spriteBatch);
             _trainer.Draw(spriteBatch);
             spriteBatch.End();
-
-            // no need for base.Draw here
-            Console.WriteLine("Player:" + _player.TilePos);
         }
     }
 }

@@ -91,7 +91,12 @@ public partial class TrainerBattleUI
             enemyColorFight = faintColor;
             enemyScaleFight = faintScale;
         }
-        enemyPokemon.AnimatedSprite?.Draw(spriteBatch, enemyColorFight, enemysPokemonPosition + enemyOffsetFight, 4f * enemyScaleFight);
+        float enemyBaseScaleFight = 4f;
+        if (_enemyTrainerString == "trainer-painter")
+        {
+            enemyBaseScaleFight = 0.2f;
+        }
+        enemyPokemon.AnimatedSprite?.Draw(spriteBatch, enemyColorFight, enemysPokemonPosition + enemyOffsetFight, enemyBaseScaleFight * enemyScaleFight);
         // Draw HP just above enemy pokemon (25px lower)
         DrawHP(spriteBatch, enemyCurrentHP, enemyMaxHP, new Vector2(enemysPokemonPosition.X + 20, enemysPokemonPosition.Y - 15), "Enemy");
         if (!string.IsNullOrEmpty(battleMessage))

@@ -18,6 +18,9 @@ public partial class TrainerBattleUI
     private TextureAtlas _TrainerUIAtlas;
     private TextureAtlas _BattleCharactersAtlas;
     private TextureAtlas _BordersAtlas;
+    private TextureAtlas _creatureAtlas;
+    private ContentManager _content;
+    private bool _creatureSpriteMissing;
     private TextSprite _trainerText;
     private SpriteFont _font;
     private BattleUIHelper battleUI = new BattleUIHelper();
@@ -116,6 +119,7 @@ public partial class TrainerBattleUI
 
     public void LoadContent(ContentManager content)
     {
+        _content = content;
         // Load UI sprites from the TrainerUIAtlas
         greenBar = new Sprite(_TrainerUIAtlas.GetRegion("green-health"));
         yellowBar = new Sprite(_TrainerUIAtlas.GetRegion("yellow-health"));
@@ -326,6 +330,12 @@ public partial class TrainerBattleUI
         // always get players pokemon
         Pokemon currentPokemon = _playerTeam.Pokemons[0];
         Pokemon enemyPokemon = _enemyTeam.Pokemons[0];
+
+        // Hard-code creature sprite hookup for painter battles even if atlas key resolution fails elsewhere
+        EnsureEnemyCreatureSprite(enemyPokemon);
+
+        // Debug marker to verify creature sprite state on screen
+        _creatureSpriteMissing = _enemyTrainerString == "trainer-painter" && (enemyPokemon?.AnimatedSprite == null);
         // Ensure the pokémon have an AnimatedSprite instance created once (do not recreate every draw)
         if (enemyPokemon.AnimatedSprite == null)
         {
@@ -385,6 +395,12 @@ public partial class TrainerBattleUI
                 UIBaseSprites[0].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
                 break;
         }
+
+        // Overlay a debug text if the creature sprite failed to resolve
+        if (_creatureSpriteMissing)
+        {
+            spriteBatch.DrawString(_font, "Missing creature sprite", new Vector2(40, 40), Color.Red);
+        }
     }
 
     public string formatTrainerName(string trainerID)
@@ -443,6 +459,44 @@ public partial class TrainerBattleUI
                     pokemon.AnimatedSprite.Animation = atlas.GetAnimation(lower);
                     return;
                 }
+            }
+            catch { }
+        }
+    }
+
+    private void EnsureEnemyCreatureSprite(Pokemon enemyPokemon)
+    {
+        if (_enemyTrainerString != "trainer-painter") return;
+        if (enemyPokemon == null) return;
+
+        // Load creature atlas lazily
+        if (_creatureAtlas == null && _content != null)
+        {
+            try
+            {
+                _creatureAtlas = TextureAtlas.FromFile(_content, "creature.xml");
+            }
+            catch { }
+        }
+
+        // Force-create animated sprite from creature atlas if missing
+        if (enemyPokemon.AnimatedSprite == null && _creatureAtlas != null)
+        {
+            try
+            {
+                var anim = _creatureAtlas.GetAnimation("the creature-front");
+                enemyPokemon.SetAnimatedSprite(new AnimatedSprite(anim));
+            }
+            catch { }
+        }
+
+        // Last resort: try the shared front factory again (will throw if also missing)
+        if (enemyPokemon.AnimatedSprite == null)
+        {
+            try
+            {
+                var anim = PokemonFrontFactory.Instance.CreateAnimatedSprite("the creature-front");
+                enemyPokemon.SetAnimatedSprite(anim);
             }
             catch { }
         }
