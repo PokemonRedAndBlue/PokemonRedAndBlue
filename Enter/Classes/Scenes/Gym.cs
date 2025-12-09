@@ -30,6 +30,8 @@ namespace Enter.Classes.Scenes
         private Player _player;
         // Scene-managed player position (in pixels)
         private Point _playerPosition = new(1, 3); // Default spawn (tile 1,3)
+        // Allows other scenes to explicitly place the player when returning
+        public static Point? NextSpawnPosition = null;
                 public Point GetPlayerPosition() => _playerPosition;
 
                 public void SetPlayerPosition(Point pos)
@@ -49,34 +51,38 @@ namespace Enter.Classes.Scenes
             _player = p;
         }
 
+        public static void SetNextSpawn(Point pos)
+        {
+            NextSpawnPosition = pos;
+        }
+
         public void LoadContent(ContentManager content)
         {
             // Load tilemap, player sprites, NPCs, etc.
             _cam = new(((Game)_game).GraphicsDevice.Viewport);
             _character = content.Load<Texture2D>("images/Pokemon_Characters");
 
-            // Only restore from Game1.SavedPlayerPosition if returning from a battle scene, else use this scene's last known position
-            Point spawn = _playerPosition;
-            if (_game?.SavedPlayerPosition is Vector2 savedPosVec)
+            // Highest priority: explicit next spawn when returning from battle
+            if (NextSpawnPosition is Point next)
             {
-                // Only use if coming from a battle scene (trainer or wild)
-                var prev = _sceneManager?.PreviousSceneName;
-                if (prev == "trainer" || prev == "wild" || prev == "gym_trainer_painter")
-                {
-                    spawn = new Point((int)savedPosVec.X, (int)savedPosVec.Y);
-                }
+                SetPlayerPosition(next);
+                NextSpawnPosition = null;
                 _game.SavedPlayerPosition = null;
             }
-            SetPlayerPosition(spawn);
-
-            if (_game.SavedPlayerTiles.TryGetValue("gym", out Point savedTile))
+            else if (_game?.SavedPlayerPosition is Vector2 savedPosVec)
             {
-                _player.SetTilePosition(savedTile + new Point(0, -1));
+                // Coming back from a battle scene; use the saved tile position
+                SetPlayerPosition(new Point((int)savedPosVec.X, (int)savedPosVec.Y));
+                _game.SavedPlayerPosition = null;
+            }
+            else if (_game.SavedPlayerTiles.TryGetValue("gym", out Point savedTile))
+            {
+                SetPlayerPosition(savedTile);
             }
             else
             {
-                // Default location for this scene if no saved tile, (on first visit)
-                _player.SetTilePosition(new Point(5, 12));
+                // Default location for this scene if no saved tile
+                SetPlayerPosition(new Point(5, 12));
             }
 
             _cam.Update(_player);

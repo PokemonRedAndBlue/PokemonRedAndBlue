@@ -106,6 +106,11 @@ namespace Enter.Classes.Scenes
                         Point savedPos = new Point((int)savedPosVec.X, (int)savedPosVec.Y);
                         OverworldScene.SetNextSpawn(savedPos);
                     }
+                    else if (_game != null && _game.SavedPlayerTiles.TryGetValue("overworld", out Point tilePos))
+                    {
+                        OverworldScene.SetNextSpawn(tilePos);
+                    }
+                    _game.SavedPlayerPosition = null;
                     _sceneManager.TransitionTo("overworld");
                 }
 

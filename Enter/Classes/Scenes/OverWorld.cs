@@ -68,21 +68,31 @@ namespace Enter.Classes.Scenes
             //Music
             BackgroundMusicPlayer.Play(SongId.RoadToViridianFromPallet, loop: true);
 
-            // Only restore from Game1.SavedPlayerPosition if returning from a battle, else use this scene's last known position
-            Point spawn = _playerPosition;
-            if (_game?.SavedPlayerPosition is Vector2 savedPosVec)
+            // Highest priority: explicit next spawn set by other scenes (trainer/wild return)
+            if (NextSpawnPosition is Point next)
             {
-                spawn = new Point((int)savedPosVec.X, (int)savedPosVec.Y);
-                // Clear after use so it doesn't leak between scenes
+                SetPlayerPosition(next);
+                NextSpawnPosition = null;
                 _game.SavedPlayerPosition = null;
             }
-            SetPlayerPosition(spawn);
+            else
+            {
+                // Next priority: SavedPlayerPosition (set before battle transitions)
+                Point spawn = _playerPosition;
+                if (_game?.SavedPlayerPosition is Vector2 savedPosVec)
+                {
+                    spawn = new Point((int)savedPosVec.X, (int)savedPosVec.Y);
+                    // Clear after use so it doesn't leak between scenes
+                    _game.SavedPlayerPosition = null;
+                }
+                SetPlayerPosition(spawn);
+            }
 
-            if (_game.SavedPlayerTiles.TryGetValue("overworld", out Point savedTile))
+            if (_game.SavedPlayerPosition is null && _game.SavedPlayerTiles.TryGetValue("overworld", out Point savedTile))
             {
                 _player.SetTilePosition(savedTile + new Point(0, -1));
             }
-            else
+            else if (_game.SavedPlayerPosition is null)
             {
                 // Default location for this scene if no saved tile, (on first visit)
                 _player.SetTilePosition(new Point(10, 0));
@@ -124,7 +134,10 @@ namespace Enter.Classes.Scenes
         {
             if (_currentMap.GetTileAt("Ground", player.TilePos.X, player.TilePos.Y) == WildGrassTileId && player.isMoving)
                 if (_rand.NextSingle() <= WildEncounterTriggerChance)
+                {
+                    _game.SavedPlayerPosition = new Vector2(player.TilePos.X, player.TilePos.Y);
                     _sceneManager.TransitionTo("wild");
+                }
         }
 
         public void Update(GameTime gameTime)
@@ -144,9 +157,7 @@ namespace Enter.Classes.Scenes
                 if (!_game.IsTrainerDefeated(_trainer.TrainerID))
                 {
                     // Save the actual player position before battle
-                    // _playerPosition = _player.Position;
-                    // _game.SavedPlayerPosition = _player.Position;
-                    _game.SavedPlayerTiles["overworld"] = _player.TilePos + new Point(0, 1);
+                    _game.SavedPlayerPosition = new Vector2(_player.TilePos.X, _player.TilePos.Y);
                     _sceneManager.TransitionTo("trainer");
                 }
                 // If trainer is defeated, they're just interacting without battle
@@ -161,9 +172,7 @@ namespace Enter.Classes.Scenes
             if (keyState.IsKeyDown(Keys.W))
             {
                 // Save the actual player position before wild battle
-                // _playerPosition = _player.Position;
-                // _game.SavedPlayerPosition = _player.Position;
-                _game.SavedPlayerTiles["overworld"] = _player.TilePos + new Point(0, 1);    //TODO: why add (0,1)?
+                _game.SavedPlayerPosition = new Vector2(_player.TilePos.X, _player.TilePos.Y);
                 _sceneManager.TransitionTo("wild");
             }
 

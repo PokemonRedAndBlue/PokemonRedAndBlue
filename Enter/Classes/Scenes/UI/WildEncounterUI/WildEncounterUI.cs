@@ -24,7 +24,10 @@ public partial class WildEncounterUI
     static private float _scale = 4.0f;
     private Sprite _trainerSpriteBack;
     private String _wildPokemonID;
+    private Pokemon _enemyPokemon;
     private AnimatedSprite _wildPokemonSpriteFront;
+    private static readonly Random _rng = new Random();
+    private KeyboardState _prevKeyboardState;
     
     // Animation attack state tracking
     private bool shouldPlayPlayerAttackAnimation = false;
@@ -45,6 +48,7 @@ public partial class WildEncounterUI
     static private Vector2 enemyPokemonPosition = new Vector2(uiBasePosition.X, uiBasePosition.Y);
     static private Vector2 playerPosition = new Vector2(uiBasePosition.X + (8 * _scale) - 5, uiBasePosition.Y + (40 * _scale) - 5);
     static private Vector2 wildPokemonPosition = new Vector2(uiBasePosition.X + (96 * _scale), uiBasePosition.Y + 20);
+    static private Vector2 enemysPokemonPosition = new Vector2(uiBasePosition.X + (96 * _scale), uiBasePosition.Y + 20);
     static private Vector2 _wildPokemonMessagePos1 = new Vector2(uiBasePosition.X + (8 * _scale), uiBasePosition.Y + (110 * _scale) + 1);
     static private Vector2 _wildPokemonMessagePos2 = new Vector2(uiBasePosition.X + (8 * _scale), uiBasePosition.Y + (125 * _scale) + 1);
     static private Vector2 _borderPostion = new Vector2(uiBasePosition.X - (48 * _scale), uiBasePosition.Y - (40 * _scale) + 1);
@@ -68,12 +72,45 @@ public partial class WildEncounterUI
         { "Run", 5 }
     };
 
+    // Battle state tracking
+    private int playerCurrentHP = 0;
+    private int enemyCurrentHP = 0;
+    private int playerMaxHP = 0;
+    private int enemyMaxHP = 0;
+    private bool battleInitialized = false;
+    private string battleMessage = "";
+    private bool endMessageActive = false;
+    private double endMessageTimer = 0.0;
+    private const double EndMessagePauseMs = 4000.0;
+
+    // Damage flash effect timers
+    private double enemyDamageFlashTimer = 0.0;
+    private bool enemyTakingDamage = false;
+    private double playerDamageFlashTimer = 0.0;
+    private bool playerTakingDamage = false;
+    private const double DamageFlashDurationMs = 200.0; // How long the red flash lasts
+
+    // Faint/death animation
+    private FaintStateAction faintState = new FaintStateAction();
+    private bool enemyFainting = false;
+    private double enemyFaintTimer = 0.0;
+    private bool playerFainting = false;
+    private double playerFaintTimer = 0.0;
+    private const double FaintAnimationDurationMs = 1000.0; // How long the faint animation lasts
+
+    // Turn-based system
+    private enum BattleTurn { Player, Wild, Waiting, End }
+    private BattleTurn currentTurn = BattleTurn.Player;
+    private double turnTimer = 0.0;
+    private const double CpuAttackDelayMs = 2000.0;
+
     public WildEncounterUI(TextureAtlas wildUIAtlas, TextureAtlas battleCharactersAtlas, TextureAtlas bordersAtlas, ContentManager content, Player ourPlayer)
     {
         _WildUIAtlas = wildUIAtlas;
         _BattleCharactersAtlas = battleCharactersAtlas;
         _BordersAtlas = bordersAtlas;
-        _wildPokemonID = PokemonGenerator.GenerateWildPokemon().Species.Name.ToLower();
+        _enemyPokemon = PokemonGenerator.GenerateWildPokemon();
+        _wildPokemonID = _enemyPokemon.Species.Name.ToLower();
         _font = content.Load<SpriteFont>("PokemonFont");
         _Player = ourPlayer;
     }
@@ -100,6 +137,7 @@ public partial class WildEncounterUI
         PokemonFrontFactory.Instance.LoadAllTextures(content);
         PokemonBackFactory.Instance.LoadAllTextures(content);
         _wildPokemonSpriteFront = PokemonFrontFactory.Instance.CreateAnimatedSprite(_wildPokemonID + "-front");
+        _enemyPokemon?.SetAnimatedSprite(_wildPokemonSpriteFront);
 
         // Load border from Borders atlas
         _border = new Sprite(_BordersAtlas.GetRegion("blue-border"));
@@ -111,6 +149,8 @@ public partial class WildEncounterUI
 
     public void Update(GameTime gameTime)
     {
+        KeyboardState keyboardState = Keyboard.GetState();
+
         // Update UI state machine
         battleUI.Update(gameTime);
         _currentState = battleUI.getBattleState();
@@ -121,13 +161,10 @@ public partial class WildEncounterUI
             _wildPokemonSpriteFront?.Update(gameTime);
         }
 
-        // Input: pressing A triggers both player's back attack motion and wild front attack motion
-        if (Keyboard.GetState().IsKeyDown(Keys.A))
+        // Player input only during fight state
+        if (_currentState == "Fight" && currentTurn == BattleTurn.Player && !endMessageActive && keyboardState.IsKeyDown(Keys.A) && _prevKeyboardState.IsKeyUp(Keys.A))
         {
-            shouldPlayEnemyAttackAnimation = true;
-            enemyAttackAnimationPlaying = false;
-            shouldPlayPlayerAttackAnimation = true;
-            playerAttackAnimationPlaying = false;
+            ResolvePlayerAttack();
         }
 
         // Start animations when flagged
@@ -173,6 +210,59 @@ public partial class WildEncounterUI
                 playerAttackAnimationTimer = 0.0;
             }
         }
+
+        // Update damage flash timers
+        if (enemyTakingDamage)
+        {
+            enemyDamageFlashTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (enemyDamageFlashTimer >= DamageFlashDurationMs)
+            {
+                enemyTakingDamage = false;
+            }
+        }
+
+        if (playerTakingDamage)
+        {
+            playerDamageFlashTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (playerDamageFlashTimer >= DamageFlashDurationMs)
+            {
+                playerTakingDamage = false;
+            }
+        }
+
+        // Update faint timers
+        if (enemyFainting)
+        {
+            enemyFaintTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
+        }
+
+        if (playerFainting)
+        {
+            playerFaintTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
+        }
+
+        // Update end message timer
+        if (endMessageActive)
+        {
+            endMessageTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (endMessageTimer >= EndMessagePauseMs)
+            {
+                endMessageActive = false;
+                resetBattle = true;
+            }
+        }
+
+        // Handle turn transitions (wild attack after delay)
+        if (currentTurn == BattleTurn.Waiting)
+        {
+            turnTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (turnTimer >= CpuAttackDelayMs)
+            {
+                ResolveEnemyAttack();
+            }
+        }
+
+        _prevKeyboardState = keyboardState;
     }
 
     public void Draw(SpriteBatch spriteBatch)
@@ -182,6 +272,28 @@ public partial class WildEncounterUI
 
         // Always get player's pokemon
         Pokemon currentPokemon = _Player.thePlayersTeam.Pokemons[0];
+        Pokemon enemyPokemon = _enemyPokemon ?? PokemonGenerator.GenerateWildPokemon();
+
+        if (enemyPokemon.AnimatedSprite == null)
+        {
+            try
+            {
+                var s = PokemonFrontFactory.Instance.CreateAnimatedSprite(enemyPokemon.Name.ToString().ToLower() + "-front");
+                enemyPokemon.SetAnimatedSprite(s);
+            }
+            catch { }
+        }
+
+        // Initialize battle HP on first draw only
+        if (!battleInitialized)
+        {
+            playerCurrentHP = currentPokemon.Hp > 0 ? currentPokemon.Hp : 50;
+            playerMaxHP = currentPokemon.MaxHp > 0 ? currentPokemon.MaxHp : 50;
+            enemyCurrentHP = enemyPokemon.Hp > 0 ? enemyPokemon.Hp : 50;
+            enemyMaxHP = enemyPokemon.MaxHp > 0 ? enemyPokemon.MaxHp : 50;
+            battleInitialized = true;
+            battleMessage = "";
+        }
 
         // Draw the UI elements for wild encounter (state based)
         switch (_currentState)
@@ -193,7 +305,7 @@ public partial class WildEncounterUI
                 DrawState_Menu(spriteBatch, currentPokemon);
                 break;
             case "Fight":
-                DrawState_Fight(spriteBatch, currentPokemon);
+                DrawState_Fight(spriteBatch, currentPokemon, enemyPokemon);
                 break;
             case "Item": // Bag
                 DrawState_Bag(spriteBatch, currentPokemon);
@@ -238,5 +350,109 @@ public partial class WildEncounterUI
             }
             catch { }
         }
+    }
+
+    private void ResolvePlayerAttack()
+    {
+        int playerDmg = _rng.Next(0, 21);
+        string playerMsg = "Player attacks! ";
+        if (playerDmg == 20)
+            playerMsg += "Critical hit! ";
+        else if (playerDmg == 0)
+            playerMsg += "You missed! ";
+        else
+            playerMsg += $"Enemy loses {playerDmg} HP.";
+
+        enemyCurrentHP -= playerDmg;
+        if (enemyCurrentHP < 0) enemyCurrentHP = 0;
+
+        shouldPlayPlayerAttackAnimation = true;
+        playerAttackAnimationPlaying = false;
+
+        SoundEffectPlayer.Play(SfxId.SFX_CYMBAL_3);
+
+        enemyTakingDamage = true;
+        enemyDamageFlashTimer = 0.0;
+
+        battleMessage = playerMsg;
+        if (enemyCurrentHP <= 0)
+        {
+            battleMessage = "You win!";
+            enemyFainting = true;
+            enemyFaintTimer = 0.0;
+            endMessageActive = true;
+            endMessageTimer = 0.0;
+            BackgroundMusicPlayer.Play(SongId.VictoryTrainer, loop: false);
+            currentTurn = BattleTurn.End;
+        }
+        else
+        {
+            currentTurn = BattleTurn.Waiting;
+            turnTimer = 0.0;
+        }
+    }
+
+    private void ResolveEnemyAttack()
+    {
+        turnTimer = 0.0;
+        currentTurn = BattleTurn.Wild;
+
+        int cpuDmg = _rng.Next(0, 21);
+        string cpuMsg = "Enemy attacks! ";
+        if (cpuDmg == 20)
+            cpuMsg += "Critical hit! ";
+        else if (cpuDmg == 0)
+            cpuMsg += "Enemy missed! ";
+        else
+            cpuMsg += $"Player loses {cpuDmg} HP.";
+
+        playerCurrentHP -= cpuDmg;
+        if (playerCurrentHP < 0) playerCurrentHP = 0;
+
+        shouldPlayEnemyAttackAnimation = true;
+        enemyAttackAnimationPlaying = false;
+
+        SoundEffectPlayer.Play(SfxId.SFX_CYMBAL_3);
+
+        playerTakingDamage = true;
+        playerDamageFlashTimer = 0.0;
+
+        battleMessage = cpuMsg;
+        if (playerCurrentHP <= 0)
+        {
+            battleMessage = "You lose!";
+            playerFainting = true;
+            playerFaintTimer = 0.0;
+            endMessageActive = true;
+            endMessageTimer = 0.0;
+            currentTurn = BattleTurn.End;
+        }
+        else
+        {
+            currentTurn = BattleTurn.Player;
+        }
+    }
+
+    private void DrawHP(SpriteBatch spriteBatch, int hp, int maxHp, Vector2 pos, string label)
+    {
+        spriteBatch.DrawString(_font, $"{label}: {hp}/{maxHp}", pos, Color.Black);
+    }
+
+    private void DrawMessage(SpriteBatch spriteBatch, string message)
+    {
+        Vector2 msgPos = new Vector2(340, 320);
+        Color color = Color.Yellow;
+        if (message.Contains("You win!")) color = Color.LawnGreen;
+        else if (message.Contains("You lose!")) color = Color.Red;
+        else if (message.StartsWith("Player attacks!")) color = Color.LawnGreen;
+        else if (message.StartsWith("Enemy attacks!")) color = Color.Red;
+
+        if (message == "Press A to use Tackle" || message == "Use arrow keys to navigate and Enter to select")
+        {
+            msgPos.Y -= 50;
+            color = Color.Black;
+        }
+
+        spriteBatch.DrawString(_font, message, msgPos, color);
     }
 }

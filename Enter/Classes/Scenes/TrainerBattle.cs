@@ -98,14 +98,46 @@ namespace Enter.Classes.Scenes
             _trainerUI.Update(gameTime);
 
             if(_trainerUI.didRunOrCatch || _trainerUI.resetBattle){
-                    // Save the player's last position for the overworld
+                    // Compute the tile we should return to
+                    Point? spawn = null;
                     if (_game?.SavedPlayerPosition is Vector2 savedPosVec)
                     {
-                        Point savedPos = new Point((int)savedPosVec.X, (int)savedPosVec.Y);
-                        OverworldScene.SetNextSpawn(savedPos);
+                        spawn = new Point((int)savedPosVec.X, (int)savedPosVec.Y);
+                    }
+                    else if (_game != null && _game.SavedPlayerTiles.TryGetValue(_returnSceneName ?? "overworld", out Point tilePos))
+                    {
+                        spawn = tilePos;
+                    }
+
+                    // Route the spawn to the proper scene
+                    bool clearSavedPosition = true;
+                    if (spawn is Point p)
+                    {
+                        switch (_returnSceneName ?? "overworld")
+                        {
+                            case "overworld":
+                                OverworldScene.SetNextSpawn(p);
+                                break;
+                            case "overworld_city":
+                                OverworldCityScene.SetNextSpawn(p);
+                                break;
+                            case "gym":
+                                GymScene.SetNextSpawn(p);
+                                break;
+                            default:
+                                // Fallback: carry position via SavedPlayerPosition
+                                _game.SavedPlayerPosition = new Vector2(p.X, p.Y);
+                                clearSavedPosition = false;
+                                break;
+                        }
+                    }
+
+                    if (clearSavedPosition)
+                    {
+                        _game.SavedPlayerPosition = null;
                     }
                     _game?.MarkTrainerDefeated(_trainerID);
-                    _sceneManager.TransitionTo("overworld");
+                    _sceneManager.TransitionTo(_returnSceneName ?? "overworld");
                 }
 
             

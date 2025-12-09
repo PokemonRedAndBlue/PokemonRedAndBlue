@@ -31,6 +31,7 @@ namespace Enter.Classes.Scenes
         private Player _player;
         // Scene-managed player position (in pixels)
         private Point _playerPosition = new(0, 9); // Default spawn (tile 0,9)
+        public static Point? NextSpawnPosition = null;
         public Point GetPlayerPosition() => _playerPosition;
 
         public void SetPlayerPosition(Point pos)
@@ -48,6 +49,11 @@ namespace Enter.Classes.Scenes
             _player = p;
         }
 
+        public static void SetNextSpawn(Point pos)
+        {
+            NextSpawnPosition = pos;
+        }
+
         public void LoadContent(ContentManager content)
         {
             // Load tilemap, player sprites, NPCs, etc.
@@ -60,25 +66,27 @@ namespace Enter.Classes.Scenes
             //Music
             BackgroundMusicPlayer.Play(SongId.CeruleanCityTheme, loop: true);
 
-            // Only restore from Game1.SavedPlayerPosition if available
-            Point spawn = _playerPosition;
-            if (_game?.SavedPlayerPosition is Vector2 savedPosVec)
+            // Highest priority: explicit next spawn when returning from battle
+            if (NextSpawnPosition is Point next)
             {
-                spawn = new Point((int)savedPosVec.X, (int)savedPosVec.Y);
+                SetPlayerPosition(next);
+                NextSpawnPosition = null;
                 _game.SavedPlayerPosition = null;
             }
-
-            if (_game.SavedPlayerTiles.TryGetValue("overworld_city", out Point savedTile))
+            else if (_game?.SavedPlayerPosition is Vector2 savedPosVec)
             {
-                _player.SetTilePosition(savedTile);
+                SetPlayerPosition(new Point((int)savedPosVec.X, (int)savedPosVec.Y));
+                _game.SavedPlayerPosition = null;
+            }
+            else if (_game.SavedPlayerTiles.TryGetValue("overworld_city", out Point savedTile))
+            {
+                SetPlayerPosition(savedTile);
             }
             else
             {
                 // Default location for this scene if no saved tile, (on first visit)
-                _player.SetTilePosition(new Point(1, 18));
+                SetPlayerPosition(new Point(1, 18));
             }
-
-            //SetPlayerPosition(spawn);
             _cam.Update(_player);
             _cam.Zoom = ZoomLevel; //Zoom level of world
 
@@ -122,15 +130,13 @@ namespace Enter.Classes.Scenes
             // Prevent repeat battles and trigger correct battle scene
             if (_trainer1.colided && !_game.IsTrainerDefeated(_trainer1.TrainerID))
             {
-                // _playerPosition = _player.Position;
-                // _game.SavedPlayerPosition = _player.Position;
+                _game.SavedPlayerPosition = new Vector2(_player.TilePos.X, _player.TilePos.Y);
                 _game.SavedPlayerTiles["overworld_city"] = _player.TilePos;
                 _sceneManager.TransitionTo("city_trainer1");
             }
             else if (_trainer2.colided && !_game.IsTrainerDefeated(_trainer2.TrainerID))
             {
-                // _playerPosition = _player.Position;
-                // _game.SavedPlayerPosition = _player.Position;
+                _game.SavedPlayerPosition = new Vector2(_player.TilePos.X, _player.TilePos.Y);
                 _game.SavedPlayerTiles["overworld_city"] = _player.TilePos;
                 _sceneManager.TransitionTo("city_trainer2");
             }
