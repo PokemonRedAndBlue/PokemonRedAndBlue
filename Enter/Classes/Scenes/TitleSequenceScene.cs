@@ -99,7 +99,8 @@ namespace Enter.Classes.Scenes
             _stateTimer = 0f;
             
             // Play title screen music (commented out if not loaded)
-            // BackgroundMusicPlayer.Play(SongId.OpeningPart2);
+            BackgroundMusicLibrary.Load(content);
+            SoundEffectLibrary.Load(content);
             
             // Reset input states
             _previousKeyState = Keyboard.GetState();
@@ -146,17 +147,6 @@ namespace Enter.Classes.Scenes
             }
         }
 
-        private void UpdateBlankScreen(float deltaTime)
-        {
-            _stateTimer += deltaTime;
-            
-            if (IsAnyKeyPressed() || _stateTimer >= BLANK_DURATION)
-            {
-                _currentState = TitleState.GameFreakAnimation;
-                _stateTimer = 0f;
-            }
-        }
-
         private void UpdateGameFreakAnimation(GameTime gameTime)
         {
             _gameFreakAnim.Update(gameTime);
@@ -172,13 +162,18 @@ namespace Enter.Classes.Scenes
         private void UpdateBattleIntro(GameTime gameTime)
         {
             _battleIntroAnim.Update(gameTime);
-            
+            BackgroundMusicPlayer.Play(SongId.OpeningPart1);
+
             // Skip on any key press or when animation completes
             if (IsAnyKeyPressed() || _battleIntroAnim.IsComplete)
             {
                 _currentState = TitleState.Complete;
                 _stateTimer = 0f;
+
+                BackgroundMusicPlayer.Stop();
+
                 // Transition to actual title screen or game
+                
                 _sceneManager.TransitionTo("intro");
             }
         }
@@ -222,6 +217,8 @@ namespace Enter.Classes.Scenes
             
             _gameFreakAnim = new GameFreakAnimation(_titleAtlas, screenBounds);
             _battleIntroAnim = new BattleIntroAnimation(_titleAtlas, screenBounds);
+
+            BackgroundMusicPlayer.Stop();
         }
 
         private bool IsKeyPressed(Keys key)

@@ -31,7 +31,7 @@ namespace Enter.Classes.Scenes.IntroAnimations
         // ============================================================
         private const float SLIDE_DURATION = 3.0f;
         private const float HOP_TWICE_DURATION = 4.0f;
-        private const float HOP_DURATION = 2f;
+        private const float HOP_DURATION = 2.0f;
         private const float ARM_RAISED_MOVE_DURATION = 1.0f;
         private const float LUNGE_DURATION = 1.5f;
         private const float IDLE_DURATION = 0.5f;
@@ -84,11 +84,11 @@ namespace Enter.Classes.Scenes.IntroAnimations
                 scaledCenterY - 27 * (screenBounds.Height / 144f)
             );
             _gengarLungePosition = new Vector2(
-                _gengarIdlePosition.X - 40 * (screenBounds.Width / 160f),
+                _gengarIdlePosition.X - 30 * (screenBounds.Width / 160f),
                 scaledCenterY - 27 * (screenBounds.Height / 144f)
             );
             _gengarLungeForwardPosition = new Vector2(
-                _gengarLungePosition.X + 50 * (screenBounds.Width / 160f),
+                _gengarLungePosition.X + 40 * (screenBounds.Width / 160f),
                 scaledCenterY - 27 * (screenBounds.Height / 144f)
             );
             _gengarPosition = new Vector2(_screenBounds.Right + 64, scaledCenterY - 27 * (screenBounds.Height / 144f));
@@ -241,7 +241,7 @@ namespace Enter.Classes.Scenes.IntroAnimations
 
             if (progress < 1f)
             {
-                float horizontalMove = 20f * progress;
+                float horizontalMove = 50f * progress;
                 float verticalArc = (float)Math.Sin(progress * Math.PI) * 15f;
 
                 _jigglypuffPosition = new Vector2(
@@ -252,10 +252,9 @@ namespace Enter.Classes.Scenes.IntroAnimations
             else
             {
                 _jigglypuffPosition = new Vector2(
-                    _jigglypuffIdlePosition.X + 20f,
+                    _jigglypuffIdlePosition.X + 50f,
                     _jigglypuffIdlePosition.Y
                 );                
-                // FIX: Immediately transition to GengarReturn
                 _currentState = State.GengarReturn; 
                 _stateTimer = 0f;
             }
