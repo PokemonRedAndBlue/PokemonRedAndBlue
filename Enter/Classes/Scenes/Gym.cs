@@ -87,7 +87,7 @@ namespace Enter.Classes.Scenes
             const float painterScale = 0.07f; // scale the atlas art to fit the scene
             _painterTrainer = new Trainer(
                 painterRegion,
-                new Vector2(2 * 32, .7f * 32),
+                new Vector2(2 * 32, .6f * 32),
                 Facing.Down,
                 moving: false,
                 scale: painterScale,

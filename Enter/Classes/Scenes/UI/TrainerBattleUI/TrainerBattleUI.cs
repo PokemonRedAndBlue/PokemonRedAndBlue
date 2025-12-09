@@ -26,6 +26,7 @@ public partial class TrainerBattleUI
     private Sprite _trainerSpriteBack;
     // removed unused field _enemyPokemonSpriteFront (we use Pokemon.AnimatedSprite instead)
     private Sprite _enemyTrainerSpriteFront;
+    private float _enemyTrainerScale = 4.0f;
     private TextSprite _enemyTrainerIDSprite;
     private Sprite greenBar, yellowBar, redBar;
     private string _currentState = "Initial";
@@ -131,6 +132,13 @@ public partial class TrainerBattleUI
         // Load trainer sprites from the BattleCharacters atlas (use player-back like WildEncounterUI)
         _trainerSpriteBack = new Sprite(_BattleCharactersAtlas.GetRegion("player-back"));
         _enemyTrainerSpriteFront = _BattleCharactersAtlas.CreateSprite(_enemyTrainerString);
+
+        if (_enemyTrainerString == "trainer-painter")
+        {
+            const float targetHeight = 32f;
+            float h = _enemyTrainerSpriteFront.Region.Height;
+            _enemyTrainerScale = h > 0 ? targetHeight / h : _enemyTrainerScale;
+        }
 
         // Load enemy trainer ID sprite
         _enemyTrainerIDSprite = new TextSprite(formatTrainerName(_enemyTrainerString), _font, Color.Black);
