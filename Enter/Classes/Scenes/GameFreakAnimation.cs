@@ -79,8 +79,6 @@ namespace Enter.Classes.Scenes.IntroAnimations
         
         private void InitializeFallingStars()
         {
-            // Initialize falling stars at various positions
-            // These match the actual sprite names from your XML
             string[] starColors = new[] { 
                 "falling_star_red_orange",
                 "falling_star_orange", 
@@ -92,8 +90,7 @@ namespace Enter.Classes.Scenes.IntroAnimations
                 "falling_star_blue_green"
             };
             
-            // Create stars at different X positions
-            // Adjusted for 5x scale and positioned below GAME FREAK text
+            // Adjusted for 5x scale 
             // Game Boy screen center is at 80 pixels, GAME FREAK text ends around y=80
             // Stars should start around y=90 (in Game Boy coords) * 5 = 450 (screen coords)
             float[] xPositions = { 20, 40, 60, 80, 100, 120, 30, 50, 70, 90, 110, 130 };
@@ -247,12 +244,11 @@ namespace Enter.Classes.Scenes.IntroAnimations
                     break;
             }
             
-            // Draw the full screen background frame - extend to fill full window width (1280px)
             if (currentFrame != null)
             {
-                float gameScreenWidth = 160 * scale; // 800 pixels
+                float gameScreenWidth = 160 * scale; 
                 float windowWidth = 1280f;
-                float extraSpace = (windowWidth - gameScreenWidth) / 2; // 240 pixels each side
+                float extraSpace = (windowWidth - gameScreenWidth) / 2; 
                 
                 // Draw white rectangles on the sides (for white areas of the frame)
                 spriteBatch.Draw(

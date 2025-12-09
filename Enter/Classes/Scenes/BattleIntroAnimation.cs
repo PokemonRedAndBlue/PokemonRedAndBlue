@@ -62,8 +62,6 @@ namespace Enter.Classes.Scenes.IntroAnimations
 
         private Rectangle _screenBounds;
         private bool _jigglypuffIsPreparingAttack = false;
-        private bool _jigglypuffHopRightDone = false;
-        private bool _gengarReturned = false;
         public bool IsComplete => _currentState == State.Complete;
 
         public BattleIntroAnimation(TextureAtlas atlas, Rectangle screenBounds)
@@ -256,10 +254,7 @@ namespace Enter.Classes.Scenes.IntroAnimations
                 _jigglypuffPosition = new Vector2(
                     _jigglypuffIdlePosition.X + 20f,
                     _jigglypuffIdlePosition.Y
-                );
-
-                _jigglypuffHopRightDone = true;
-                
+                );                
                 // FIX: Immediately transition to GengarReturn
                 _currentState = State.GengarReturn; 
                 _stateTimer = 0f;
@@ -329,7 +324,6 @@ namespace Enter.Classes.Scenes.IntroAnimations
         {
             if (_stateTimer >= PREPARE_ATTACK_DURATION)
             {
-                // FIX: Sequence must go forward to JumpAttack, not back to GengarReturn
                 _currentState = State.JigglypuffJumpAttack;
                 _stateTimer = 0f;
             }
@@ -342,10 +336,7 @@ namespace Enter.Classes.Scenes.IntroAnimations
 
             if (_stateTimer >= RETURN_DURATION)
             {
-                _gengarPosition = _gengarIdlePosition;
-                _gengarReturned = true;
-                
-                // FIX: After Gengar returns, Jigglypuff does the Left-Right hop
+                _gengarPosition = _gengarIdlePosition;                
                 _currentState = State.JigglypuffHopLeftRight;
                 _stateTimer = 0f;
                 _hopCount = 0;
@@ -367,7 +358,6 @@ namespace Enter.Classes.Scenes.IntroAnimations
                     _jigglypuffIdlePosition.Y
                 );
 
-                // FIX: Subtract 30f from X to jump LEFT instead of adding to jump RIGHT
                 Vector2 endPos = new Vector2(
                     startPos.X - 160f, 
                     startPos.Y - 70f
