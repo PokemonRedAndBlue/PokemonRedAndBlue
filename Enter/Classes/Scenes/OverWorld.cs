@@ -189,8 +189,6 @@ namespace Enter.Classes.Scenes
             _trainer.Draw(spriteBatch);
             spriteBatch.End();
 
-            Console.WriteLine("Player:" + _player.isMoving);
-
             // no need for base.Draw here
         }
 

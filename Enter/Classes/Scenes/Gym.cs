@@ -9,6 +9,7 @@ using Enter.Classes.Sprites;
 using Enter.Classes.Physics;
 using Enter.Interfaces;
 using Enter.Classes.Textures;
+using System;
 
 namespace Enter.Classes.Scenes
 {
@@ -82,12 +83,14 @@ namespace Enter.Classes.Scenes
 
             // prof painter trainer stuff
             TextureAtlas painterStuff = TextureAtlas.FromFile(content, "PainterTrainerSheet.xml");
-            _character = painterStuff.GetRegion("painter-map-trainer").Texture;
+            var painterRegion = painterStuff.GetRegion("painter-map-trainer");
+            const float painterScale = 0.25f; // Quarter-scale the atlas art to fit the scene
             _painterTrainer = new Trainer(
-                _character,
-                new Vector2(5 * 32, 10 * 32),
+                painterRegion,
+                new Vector2(4 * 32, 2 * 32),
                 Facing.Down,
-                false,
+                moving: false,
+                scale: painterScale,
                 trainerId: "trainer-painter"
             );
             _trainer = _painterTrainer;
@@ -144,6 +147,7 @@ namespace Enter.Classes.Scenes
             spriteBatch.End();
 
             // no need for base.Draw here
+            Console.WriteLine("Player:" + _player.TilePos);
         }
     }
 }
