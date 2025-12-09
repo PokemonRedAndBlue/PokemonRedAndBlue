@@ -24,18 +24,17 @@ namespace Enter.Classes.Scenes.IntroAnimations
         private float _stateTimer = 0f;
         
         // ============================================================
-        // TIMING CONSTANTS - ADJUST THESE TO CHANGE ANIMATION SPEED
+        // TIMING CONSTANTS - ADJUST THESE TO CHANGE ANIMATION SPEED (seconds)
         // ============================================================
-        // How long each state lasts (in seconds):
         private const float BLACK_BLACK_DURATION = 0.5f;           // Initial black logo
         private const float STAR_SWEEP_DURATION = 1.5f;            // Star moving across screen
         private const float YELLOW_BLACK_DURATION = 0.3f;          // Text turns yellow
         private const float DARKYELLOW_YELLOW_DURATION = 0.3f;     // Text dark yellow, symbol yellow
         private const float BLACK_DARKYELLOW_DURATION = 0.3f;      // Text black, symbol dark yellow
-        private const float FALLING_STARS_DURATION = 2.5f;         // Stars falling animation
+        private const float FALLING_STARS_DURATION = 3.5f;         // Stars falling animation
         // ============================================================
         
-        // Full screen frame sprites (text + badge combined)
+        // Full screen frame sprites 
         private Sprite _gameFreakBlackBlack;
         private Sprite _gameFreakYellowBlack;
         private Sprite _gameFreakDarkYellowYellow;
@@ -103,9 +102,9 @@ namespace Enter.Classes.Scenes.IntroAnimations
                     Sprite = _atlas.CreateSprite(starColors[i % starColors.Length]),
                     Position = new Vector2(
                         _screenBounds.X + (xPositions[i] * 5),  // Scale X position by 5
-                        _screenBounds.Y + (90 * 5)               // Start at y=90 in GB coords = 450 in screen coords
+                        _screenBounds.Y + (90 * 5)              // Start at y=90 in GB coords = 450 in screen coords
                     ),
-                    Velocity = 100f, // pixels per second (was 80, increased slightly)
+                    Velocity = 25f, // pixels per second 
                     ShouldBlink = shouldBlink[i],
                     BlinkInterval = 0.2f,
                     BlinkTimer = 0f,
@@ -177,7 +176,6 @@ namespace Enter.Classes.Scenes.IntroAnimations
             float progress = _stateTimer / STAR_SWEEP_DURATION;
             _starPosition = Vector2.Lerp(_starStartPos, _starEndPos, progress);
             
-            // Transition when star is off screen
             if (_stateTimer >= STAR_SWEEP_DURATION)
             {
                 _currentState = State.YellowBlack;
@@ -199,10 +197,9 @@ namespace Enter.Classes.Scenes.IntroAnimations
                 if (star.Position.Y >= blackBarY)
                 {
                     star.IsVisible = false;
-                    continue; // Skip blinking logic for hidden stars
+                    continue; 
                 }
                 
-                // Update blink (only for visible stars)
                 if (star.ShouldBlink)
                 {
                     star.BlinkTimer += dt;

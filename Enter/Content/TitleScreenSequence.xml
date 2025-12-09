@@ -35,9 +35,9 @@
     <Region name="falling_stars_reference" x="822" y="318" width="160" height="144" />
     
     <!-- Gengar Sprites (Back View) -->
-    <Region name="gengar_idle" x="984" y="472" width="56" height="55" />
-    <Region name="gengar_arm_raised" x="1042" y="472" width="56" height="55" />
-    <Region name="gengar_lunge" x="1100" y="472" width="56" height="55" />
+    <Region name="gengar_idle" x="984" y="472" width="56" height="56" />
+    <Region name="gengar_arm_raised" x="1042" y="472" width="56" height="56" />
+    <Region name="gengar_lunge" x="1100" y="472" width="56" height="56" />
     
     <!-- Jigglypuff Sprites (Front View) -->
     <Region name="jigglypuff_idle" x="984" y="580" width="47" height="48" />
