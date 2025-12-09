@@ -212,14 +212,14 @@ public class Player
     /// The player's current pixel-space position (top-left of sprite).
     /// Used for saving/restoring position between scenes.
     /// </summary>
-    public Vector2 Position
-    {
-        get => _pixelPosition;
-        set
-        {
-            _pixelPosition = value;
-            _initializedTileFromPosition = false; // force re-snap on next update
-        }
-    }
+    // public Vector2 Position
+    // {
+    //     get => _pixelPosition;
+    //     set
+    //     {
+    //         _pixelPosition = value;
+    //         _initializedTileFromPosition = false; // force re-snap on next update
+    //     }
+    // }
 
 }

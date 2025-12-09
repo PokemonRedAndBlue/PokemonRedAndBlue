@@ -18,15 +18,15 @@ namespace Enter.Classes.Scenes
     public class TrainerBattleScene: IGameScene
     {
         // 4-argument constructor for backward compatibility
-        public TrainerBattleScene(SceneManager sceneManager, Game game1, string trainerID, Player ourPlayer)
+        public TrainerBattleScene(SceneManager sceneManager, Game1 game1, string trainerID, Player ourPlayer)
             : this(sceneManager, game1, trainerID, ourPlayer, null) { }
         private string _returnSceneName;
-        private Color pokemonBackgroundColor = new Color(246, 232, 248);
+        private Color _pokemonBackgroundColor = new Color(246, 232, 248);
         private SceneManager _sceneManager;
         private String _trainerID;
         private Vector2 _enemyPokemonPosition = new Vector2(800, 200);
         private Vector2 _playerPokemonPosition = new Vector2(400, 400);
-        private Game _game;
+        private Game1 _game;
         private Player _player;
         private Team _playersTeam;
         private Team _trainersTeam;
@@ -36,9 +36,9 @@ namespace Enter.Classes.Scenes
         private TextureAtlas _UIAtlas;
         private TextureAtlas _BattleCharactersAtlas;
         private TextureAtlas _BordersAtlas;
-        private TextSprite trainerText;
+        private TextSprite _trainerText;
         private SpriteFont _font;
-        public TrainerBattleScene(SceneManager sceneManager, Game game1, string trainerID, Player ourPlayer, string returnSceneName = null)
+        public TrainerBattleScene(SceneManager sceneManager, Game1 game1, string trainerID, Player ourPlayer, string returnSceneName = null)
         {
             _sceneManager = sceneManager;
             _trainerID = trainerID; // e.g., "TRAINER_BROCK"
@@ -71,7 +71,7 @@ namespace Enter.Classes.Scenes
 
             // Load UI
             _font = content.Load<SpriteFont>("PokemonFont");
-            trainerText = new TextSprite($"TRAINER BATTLE", _font, Color.Black);
+            _trainerText = new TextSprite($"TRAINER BATTLE", _font, Color.Black);
             _trainerUI = new TrainerBattleUI(_UIAtlas, _BattleCharactersAtlas, _BordersAtlas, content, _trainerID, _playersTeam, _trainersTeam);
             _trainerUI.LoadContent(content);
         }
@@ -83,11 +83,11 @@ namespace Enter.Classes.Scenes
 
             if(_trainerUI.didRunOrCatch || _trainerUI.resetBattle){
                     // Save the player's last position for the overworld
-                    if ((_game as Game1)?.SavedPlayerPosition is Microsoft.Xna.Framework.Vector2 savedPos)
+                    if (_game?.SavedPlayerPosition is Point savedPos)
                     {
-                        Enter.Classes.Scenes.OverworldScene.SetNextSpawn(savedPos);
+                        OverworldScene.SetNextSpawn(savedPos);
                     }
-                    (_game as Game1)?.MarkTrainerDefeated(_trainerID);
+                    _game?.MarkTrainerDefeated(_trainerID);
                     _sceneManager.TransitionTo("overworld");
                 }
 
@@ -96,7 +96,7 @@ namespace Enter.Classes.Scenes
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            spriteBatch.GraphicsDevice.Clear(pokemonBackgroundColor);
+            spriteBatch.GraphicsDevice.Clear(_pokemonBackgroundColor);
             // Draw UI elements
             _trainerUI.Draw(spriteBatch);
             spriteBatch.End();

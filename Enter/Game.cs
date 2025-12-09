@@ -27,7 +27,7 @@ public class Game1 : Core
 
     private SceneManager _sceneManager;
     // State that persists across scene transitions
-    public Microsoft.Xna.Framework.Vector2? SavedPlayerPosition { get; set; } = null;
+    public Point? SavedPlayerPosition { get; set; } = null;
 
     // Methods to check/update trainer defeat status
     public bool IsTrainerDefeated(string trainerId)
@@ -102,7 +102,7 @@ public class Game1 : Core
     private void Reset()
     {
         // The new way to reset is to just reload the scene
-        SavedPlayerPosition = new Vector2(160, 0);
+        SavedPlayerPosition = null;
         _defeatedTrainers.Clear();
         _sceneManager.TransitionTo("overworld");
         ResetRequested = false;
