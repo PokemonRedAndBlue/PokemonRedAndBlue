@@ -25,6 +25,7 @@ public partial class WildEncounterUI
     private Sprite _trainerSpriteBack;
     private String _wildPokemonID;
     private Pokemon _enemyPokemon;
+    private PokemonInstance _enemyInstance;
     private AnimatedSprite _wildPokemonSpriteFront;
     private static readonly Random _rng = new Random();
     private KeyboardState _prevKeyboardState;
@@ -109,8 +110,8 @@ public partial class WildEncounterUI
         _WildUIAtlas = wildUIAtlas;
         _BattleCharactersAtlas = battleCharactersAtlas;
         _BordersAtlas = bordersAtlas;
-        _enemyPokemon = PokemonGenerator.GenerateWildPokemon();
-        _wildPokemonID = _enemyPokemon.Species.Name.ToLower();
+        _enemyInstance = PokemonGenerator.GenerateWildPokemon();
+        _wildPokemonID = _enemyInstance.Species.Name.ToLower();
         _font = content.Load<SpriteFont>("PokemonFont");
         _Player = ourPlayer;
     }
@@ -137,7 +138,7 @@ public partial class WildEncounterUI
         PokemonFrontFactory.Instance.LoadAllTextures(content);
         PokemonBackFactory.Instance.LoadAllTextures(content);
         _wildPokemonSpriteFront = PokemonFrontFactory.Instance.CreateAnimatedSprite(_wildPokemonID + "-front");
-        _enemyPokemon?.SetAnimatedSprite(_wildPokemonSpriteFront);
+        _enemyPokemon = new Pokemon(_wildPokemonID, _enemyInstance?.Level ?? 5, PokemonView.Front, _wildPokemonSpriteFront, wildPokemonPosition);
 
         // Load border from Borders atlas
         _border = new Sprite(_BordersAtlas.GetRegion("blue-border"));
@@ -272,7 +273,7 @@ public partial class WildEncounterUI
 
         // Always get player's pokemon
         Pokemon currentPokemon = _Player.thePlayersTeam.Pokemons[0];
-        Pokemon enemyPokemon = _enemyPokemon ?? PokemonGenerator.GenerateWildPokemon();
+        Pokemon enemyPokemon = _enemyPokemon ?? new Pokemon(_wildPokemonID ?? "unknown", _enemyInstance?.Level ?? 5, PokemonView.Front, _wildPokemonSpriteFront, wildPokemonPosition);
 
         if (enemyPokemon.AnimatedSprite == null)
         {
