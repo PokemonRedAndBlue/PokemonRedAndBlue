@@ -40,6 +40,7 @@ public partial class TrainerBattleUI
     private TextSprite _enemyTrainerIDSprite;
     private Sprite greenBar, yellowBar, redBar;
     private string _currentState = "Initial";
+    private string _prevState = "Initial";
 
     // Pre defined regions within UI ADD TO A DICT LATER
     static private Vector2 uiBasePosition = new Vector2(340, 75);
@@ -176,6 +177,7 @@ public partial class TrainerBattleUI
     public void Update(GameTime gameTime)
     {
         var keyboardState = Keyboard.GetState();
+        var previousState = _currentState;
         // Update deploy throw animation
         if (_playerDeployThrow != null && _playerDeploying)
         {
@@ -188,6 +190,17 @@ public partial class TrainerBattleUI
         // Ensure battleUI state machine and timer are updated
         battleUI.Update(gameTime);
         _currentState = battleUI.getBattleState();
+        _prevState = previousState;
+
+        // Initialize deploy throw when first entering Menu
+        if (_currentState == "Menu" && _prevState != "Menu" && !_playerDeploySetup)
+        {
+            var currentPokemon = _playerTeam?.Pokemons?[0];
+            if (currentPokemon != null)
+            {
+                EnsurePlayerDeploySetup(currentPokemon);
+            }
+        }
 
         if (_currentState != "Item")
         {
@@ -395,8 +408,6 @@ public partial class TrainerBattleUI
             _playerMove = ResolveMoveForPokemonName(currentPokemon?.Name);
             _enemyMove = ResolveMoveForPokemonName(enemyPokemon?.Name);
         }
-
-        EnsurePlayerDeploySetup(currentPokemon);
 
         // draw the UI elements for trainer battle (state based)
         switch (_currentState)
