@@ -458,6 +458,7 @@ public partial class TrainerBattleUI
             throwStart += new Vector2(-32f, -16f); // ensure start and target differ so arc is visible
         }
         _playerDeployThrow = new PokeballthrowAnimation((int)throwStart.X, (int)throwStart.Y, _playerDeployTarget);
+        battleMessage = "Trainer deployed " + (currentPokemon?.Name ?? "Pokemon") + "!";
         if (_content != null)
         {
             _playerDeployThrow.LoadContent(_content);

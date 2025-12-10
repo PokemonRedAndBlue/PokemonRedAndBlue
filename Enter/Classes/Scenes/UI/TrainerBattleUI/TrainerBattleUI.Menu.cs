@@ -19,8 +19,11 @@ public partial class TrainerBattleUI
         {
             DrawMessage(spriteBatch, battleMessage);
         }
-        // Show menu navigation instructions
-        DrawMessage(spriteBatch, "Use arrow keys to navigate and Enter to select");
+        else
+        {
+            // Show menu navigation instructions when no other message is active
+            DrawMessage(spriteBatch, "Use arrow keys to navigate and Enter to select");
+        }
         // Enable menu navigation
         battleUI.moveArrow();
         battleUI.DrawArrow(_TrainerUIAtlas, spriteBatch);

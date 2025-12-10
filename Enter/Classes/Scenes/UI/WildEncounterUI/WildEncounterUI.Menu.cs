@@ -15,6 +15,12 @@ public partial class WildEncounterUI
         battleUI.drawHealthBar(playerCurrentHP, playerMaxHP, greenBar, yellowBar, redBar, spriteBatch, true);
         battleUI.drawHealthBar(enemyCurrentHP, enemyMaxHP, greenBar, yellowBar, redBar, spriteBatch, false);
 
+        // Show any active battle message (e.g., deploy text)
+        if (!string.IsNullOrEmpty(battleMessage))
+        {
+            DrawMessage(spriteBatch, battleMessage);
+        }
+
         // Arrow handling logic
         battleUI.DrawArrow(_WildUIAtlas, spriteBatch);
         battleUI.moveArrow();

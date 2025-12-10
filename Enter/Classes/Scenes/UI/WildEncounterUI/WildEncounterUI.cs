@@ -158,6 +158,8 @@ public partial class WildEncounterUI
             throwStart += new Vector2(-32f, -16f); // ensure start and target differ so arc is visible
         }
         _playerDeployThrow = new PokeballthrowAnimation((int)throwStart.X, (int)throwStart.Y, _playerDeployTarget);
+        var playersPokemon = _Player?.thePlayersTeam?.Pokemons?[0];
+        battleMessage = "Trainer deployed " + (playersPokemon?.Name ?? "Pokemon") + "!";
         if (_content != null)
         {
             _playerDeployThrow.LoadContent(_content);
