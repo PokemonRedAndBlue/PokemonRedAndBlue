@@ -1,4 +1,3 @@
-// MusicPlayer.cs
 using Microsoft.Xna.Framework.Media;
 
 public static class BackgroundMusicPlayer
