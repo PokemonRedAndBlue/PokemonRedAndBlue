@@ -1,6 +1,6 @@
 # PokemonRedAndBlue
 
-## Sprint 4 Progress Summary
+## Sprint 5 Progress Summary
 
 ### Initial Goals (Per Person)
 Our original Sprint 4 objectives were divided as follows:
@@ -10,9 +10,6 @@ Our original Sprint 4 objectives were divided as follows:
 ### Danial - Handle attack movesets and battle math
 ### Harshi - Help Danial and I where is most fit
 ### Kai - Overall Polish and Cohesiveness, any needed class refactoring to ensure code quality, other help where needed
----
-
-### What we would do if we had more time
 ---
 
 ### Other Notes

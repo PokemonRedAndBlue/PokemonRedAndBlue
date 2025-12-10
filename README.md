@@ -90,7 +90,7 @@ dotnet mgcb build Content/Content.mgcb
 - Slides: attatched on carmen
 
 ## Backlog
-No Backlog for this sprint yay! We did everything we planned from the begining (miraculously)!
+No Backlog for this sprint yay! We did everything we planned from the begining (miraculously)! Just contains a few of out goals at the begining of the sprint.
 
 ## License
 See LICENSE file.
