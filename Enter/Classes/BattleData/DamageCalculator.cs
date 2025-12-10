@@ -46,7 +46,7 @@ public static class DamageCalculator
         return 1.0;
     }
 
-    private static double GetTypeEffectiveness(string moveType, string defType1, string defType2)
+    public static double GetTypeEffectiveness(string moveType, string defType1, string defType2)
     {
         double multiplier = 1.0;
 

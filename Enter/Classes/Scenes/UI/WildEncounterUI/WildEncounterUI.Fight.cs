@@ -33,7 +33,8 @@ public partial class WildEncounterUI
         }
         currentMon.Draw(spriteBatch, playerColorFight, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)) + playerOffsetFight, 4f * playerScaleFight);
         // Draw HP just above player pokemon
-        DrawHP(spriteBatch, playerCurrentHP, playerMaxHP, new Vector2(playerPosition.X + 20, maxDrawPos.Y - (currentMon.Height * _scale) - 20), "Player");
+        var playerHpPos = new Vector2(uiBasePosition.X + (_scale * 95) - 4, uiBasePosition.Y + (_scale * 74) - 4 - 20);
+        DrawHP(spriteBatch, playerCurrentHP, playerMaxHP, currentPokemon?.Level ?? 1, playerHpPos, "Player");
         
         Vector2 enemyOffsetFight = Vector2.Zero;
         if (enemyAttackAnimationPlaying)
@@ -51,13 +52,14 @@ public partial class WildEncounterUI
         }
         enemyPokemon.AnimatedSprite?.Draw(spriteBatch, enemyColorFight, enemysPokemonPosition + enemyOffsetFight, 4f * enemyScaleFight);
         // Draw HP just above enemy pokemon (25px lower)
-        DrawHP(spriteBatch, enemyCurrentHP, enemyMaxHP, new Vector2(enemysPokemonPosition.X + 20, enemysPokemonPosition.Y - 15), "Enemy");
+        var enemyHpPos = new Vector2(uiBasePosition.X + (31 * _scale) - 4, uiBasePosition.Y + (18 * _scale) - 4 - 20);
+        DrawHP(spriteBatch, enemyCurrentHP, enemyMaxHP, enemyPokemon?.Level ?? 1, enemyHpPos, "Enemy");
         if (!string.IsNullOrEmpty(battleMessage))
         {
             DrawMessage(spriteBatch, battleMessage);
         }
         // Show fight instructions
         string moveName = (_playerMove ?? SafeDefaultMove()).Name;
-        DrawMessage(spriteBatch, "Press A to use " + moveName);
+        DrawMessage(spriteBatch, "press A to use " + moveName);
     }
 }

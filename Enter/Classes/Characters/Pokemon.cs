@@ -5,6 +5,8 @@ using PokemonGame.Engine;
 using Enter.Classes.Animations;
 using Enter.Classes.Sprites;
 using Enter.Interfaces;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace PokemonGame
 {
@@ -17,18 +19,22 @@ namespace PokemonGame
         public int Hp { get; private set; }
         public int MaxHp { get; }
         private int _level;
+        public int Level => _level;
         public PokemonView View { get; }
         public StateMachine StateMachine { get; }
         public Sprite Sprite { get; private set; }
         public AnimatedSprite AnimatedSprite { get; private set; }
         public Vector2 Position { get; set; }
         public Sprite _sprite;
+        public List<Move> Moves { get; private set; }
 
         public Pokemon(string name, int level)
         {
             Name = name;
             _level = level;
-             StateMachine = new StateMachine(this);
+            Moves = ResolveMoves(name);
+
+            StateMachine = new StateMachine(this);
             StateMachine.AddState("idle", new IdleState());
             StateMachine.AddState("attacking", new AttackingState());
             StateMachine.AddState("hurt", new HurtState());
@@ -46,6 +52,7 @@ namespace PokemonGame
             View = view;
             AnimatedSprite = animatedSprite;
             Position = position;
+            Moves = ResolveMoves(name);
 
             StateMachine = new StateMachine(this);
             StateMachine.AddState("idle", new IdleState());
@@ -77,6 +84,7 @@ namespace PokemonGame
             View = view;
             _sprite = sprite;
             Position = position;
+            Moves = ResolveMoves(name);
 
             StateMachine = new StateMachine(this);
             StateMachine.AddState("idle", new IdleState());
@@ -139,6 +147,40 @@ namespace PokemonGame
         private void UpdateDeathAnimation(Vector2 position)
         {
             Console.WriteLine($"{Name} death animation at {position}");
+        }
+
+        private static List<Move> ResolveMoves(string name)
+        {
+            var list = new List<Move>();
+            if (string.IsNullOrWhiteSpace(name)) return list;
+
+            try
+            {
+                var species = PokemonGenerator.GenerateSpeciesByName(name);
+                if (species?.Moves != null)
+                {
+                    foreach (var m in species.Moves)
+                    {
+                        if (string.IsNullOrWhiteSpace(m)) continue;
+                        try { list.Add(MoveDatabase.Get(m)); }
+                        catch { }
+                    }
+                }
+            }
+            catch { }
+
+            if (list.Count == 0)
+            {
+                list.Add(new Move
+                {
+                    Name = "Tackle",
+                    Type = "Normal",
+                    Power = 15,
+                    Category = MoveCategory.Physical
+                });
+            }
+
+            return list;
         }
     }
 

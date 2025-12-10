@@ -27,6 +27,8 @@ public partial class TrainerBattleUI
     private Move _enemyMove = SafeDefaultMove();
     public bool ItemConfirmRequested { get; private set; }
     private KeyboardState _prevItemKeyState;
+    private KeyboardState _prevFightKeyState;
+    private int _playerMoveIndex = 0;
     private TextSprite _trainerText;
     private SpriteFont _font;
     private BattleUIHelper battleUI = new BattleUIHelper();
@@ -168,6 +170,7 @@ public partial class TrainerBattleUI
 
     public void Update(GameTime gameTime)
     {
+        var keyboardState = Keyboard.GetState();
         // Ensure battleUI state machine and timer are updated
         battleUI.Update(gameTime);
         _currentState = battleUI.getBattleState();
@@ -175,6 +178,11 @@ public partial class TrainerBattleUI
         if (_currentState != "Item")
         {
             ItemConfirmRequested = false;
+        }
+
+        if (_currentState == "Fight" && currentTurn == BattleTurn.Player && !endMessageActive)
+        {
+            UpdateMoveSelectionFight(keyboardState);
         }
         
         // Update any animated sprites attached to the current pokémon
@@ -323,6 +331,8 @@ public partial class TrainerBattleUI
                 }
             }
         }
+
+        _prevFightKeyState = keyboardState;
     }
 
     public void Draw(SpriteBatch spriteBatch)
@@ -367,6 +377,7 @@ public partial class TrainerBattleUI
             battleMessage = "";
 
             // Seed default moves from species data
+            _playerMoveIndex = 0;
             _playerMove = ResolveMoveForPokemonName(currentPokemon?.Name);
             _enemyMove = ResolveMoveForPokemonName(enemyPokemon?.Name);
         }
@@ -460,6 +471,22 @@ public partial class TrainerBattleUI
         }
 
         int damage = ComputeDamage(move);
+
+        double typeMult = 1.0;
+        try
+        {
+            var targetSpecies = PokemonGenerator.GenerateSpeciesByName(targetName);
+            typeMult = DamageCalculator.GetTypeEffectiveness(move.Type, targetSpecies.Type1, targetSpecies.Type2);
+        }
+        catch { }
+
+        if (typeMult == 0)
+        {
+            message = attackerName + " used " + move.Name + "! It doesn't affect " + targetName + ".";
+            return 0;
+        }
+
+        damage = (int)Math.Round(damage * typeMult);
         if (crit)
         {
             damage = (int)Math.Round(damage * 1.5);
@@ -475,6 +502,15 @@ public partial class TrainerBattleUI
         else
         {
             message = attackerName + " used " + move.Name + "! " + targetName + " lost " + damage + " HP.";
+        }
+
+        if (typeMult > 1.01)
+        {
+            message += " It's super effective!";
+        }
+        else if (typeMult < 0.99)
+        {
+            message += " It's not very effective.";
         }
 
         return damage;
@@ -495,28 +531,75 @@ public partial class TrainerBattleUI
         }
     }
 
-    private void DrawHP(SpriteBatch spriteBatch, int hp, int maxHp, Vector2 pos, string label)
+    private void UpdateMoveSelectionFight(KeyboardState keyboardState)
     {
-        // Draw both HP in black
-        spriteBatch.DrawString(_font, $"{label}: {hp}/{maxHp}", pos, Color.Black);
+        var moves = _playerTeam?.Pokemons?[0]?.Moves;
+        if (moves == null || moves.Count == 0) return;
+
+        if (keyboardState.IsKeyDown(Keys.Left) && _prevFightKeyState.IsKeyUp(Keys.Left))
+        {
+            _playerMoveIndex = (_playerMoveIndex - 1 + moves.Count) % moves.Count;
+        }
+        else if (keyboardState.IsKeyDown(Keys.Right) && _prevFightKeyState.IsKeyUp(Keys.Right))
+        {
+            _playerMoveIndex = (_playerMoveIndex + 1) % moves.Count;
+        }
+
+        _playerMove = moves[Math.Clamp(_playerMoveIndex, 0, moves.Count - 1)];
+    }
+
+    private void DrawHP(SpriteBatch spriteBatch, int hp, int maxHp, int level, Vector2 pos, string label)
+    {
+        // Draw HP with level indicator and explicit HP label
+        spriteBatch.DrawString(_font, $"{label} Lv{level} HP: {hp}/{maxHp}", pos, Color.Black);
     }
 
     private void DrawMessage(SpriteBatch spriteBatch, string message)
     {
-        // Draw all messages at a slightly higher Y position
-        Vector2 msgPos = new Vector2(340, 320);
-        Color color = Color.Yellow;
-        if (message.Contains("You win!")) color = Color.LawnGreen;
-        else if (message.Contains("You lose!")) color = Color.Red;
-        else if (message.StartsWith("Player attacks!")) color = Color.LawnGreen;
-        else if (message.StartsWith("Enemy attacks!")) color = Color.Red;
-        // Draw instructional messages in black and higher
-        if (message.StartsWith("Press A to use") || message == "Use arrow keys to navigate and Enter to select")
+        // Damage/attack messages sit above HP display; instruction sits at bottom of play area
+        Vector2 dmgPos = new Vector2(345, 300); // shift right by 25 total
+        Vector2 instrPos = new Vector2(365, 530); // shift right by 20
+        Color color = Color.Black;
+
+        // Instruction: split onto two lines (prompt + move name)
+        if (message.StartsWith("press A to use"))
         {
-            msgPos.Y -= 50;
-            color = Color.Black;
+            string moveName = message.Length > "press A to use ".Length
+                ? message.Substring("press A to use ".Length)
+                : "";
+            spriteBatch.DrawString(_font, "press A to use", instrPos, color);
+            spriteBatch.DrawString(_font, moveName, instrPos + new Vector2(0, 20), color);
+            return;
         }
-        spriteBatch.DrawString(_font, message, msgPos, color);
+
+        // Effectiveness: split main line and effectiveness line
+        string effectLine = null;
+        string mainLine = message;
+        bool looksLikeAttack = message.Contains(" used ") || message.Contains(" lost ") || message.Contains(" damage") || message.Contains("attack");
+        if (message.Contains("It's super effective!"))
+        {
+            effectLine = "The attack was super effective!";
+            mainLine = message.Replace(" It's super effective!", "");
+        }
+        else if (message.Contains("It's not very effective."))
+        {
+            effectLine = "The attack was not very effective.";
+            mainLine = message.Replace(" It's not very effective.", "");
+        }
+        else if (message.Contains("doesn't affect"))
+        {
+            effectLine = "The attack had no effect.";
+        }
+        else if (looksLikeAttack)
+        {
+            effectLine = "The attack was effective.";
+        }
+
+        spriteBatch.DrawString(_font, mainLine, dmgPos, color);
+        if (!string.IsNullOrEmpty(effectLine))
+        {
+            spriteBatch.DrawString(_font, effectLine, dmgPos + new Vector2(0, 20), color);
+        }
     }
 
     private void TrySetPokemonAnimation(Pokemon pokemon, string[] candidates)
