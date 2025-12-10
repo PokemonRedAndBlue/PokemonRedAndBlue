@@ -67,6 +67,7 @@ public class PokeballCaptureAnimation
         Vector2 pokeballStartPos)
     {
         pokemonPosition = pokemonPos;
+        pokemonInitialPosition = pokemonPos;
         pokemonTexture = pokemonTex;
         _pokeballPosition = pokemonPos;
 
@@ -78,6 +79,11 @@ public class PokeballCaptureAnimation
         absorbTargetPos = pokemonPos;
         activeFrame = 1;
         frameCount = 0;
+    }
+
+    public void SetCaptureChance(double chance)
+    {
+        captureRate = MathHelper.Clamp((float)chance, 0.05f, 0.95f);
     }
 
     public void StartCapture()

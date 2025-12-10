@@ -22,6 +22,7 @@ public partial class WildEncounterUI
     private TextSprite _wildPokemonMessage1;
     private TextSprite _wildPokemonMessage2;
     private SpriteFont _font;
+    private ContentManager _content;
     static private float _scale = 4.0f;
     private Sprite _trainerSpriteBack;
     private String _wildPokemonID;
@@ -90,6 +91,10 @@ public partial class WildEncounterUI
     private double endMessageTimer = 0.0;
     private const double EndMessagePauseMs = 4000.0;
 
+    // Capture animation state
+    private PokeballCaptureAnimation _captureAnimation;
+    private bool captureInProgress = false;
+
     // Damage flash effect timers
     private double enemyDamageFlashTimer = 0.0;
     private bool enemyTakingDamage = false;
@@ -124,6 +129,7 @@ public partial class WildEncounterUI
 
     public void LoadContent(ContentManager content)
     {
+        _content = content;
         // Load health bar sprites from the WildUIAtlas
         greenBar = new Sprite(_WildUIAtlas.GetRegion("green-health"));
         yellowBar = new Sprite(_WildUIAtlas.GetRegion("yellow-health"));
@@ -277,6 +283,30 @@ public partial class WildEncounterUI
             if (turnTimer >= CpuAttackDelayMs)
             {
                 ResolveEnemyAttack();
+            }
+        }
+
+        // Update capture animation when in Bag state
+        if (_currentState == "Bag" && _captureAnimation != null)
+        {
+            _captureAnimation.Update(gameTime);
+
+            if (_captureAnimation.CaptureComplete)
+            {
+                captureInProgress = false;
+                if (_captureAnimation.CaptureSuccessful)
+                {
+                    battleMessage = "Gotcha! " + (_enemyPokemon?.Name ?? "Pokemon") + " was caught!";
+                    didRunOrCatch = true;
+                    endMessageActive = true;
+                    endMessageTimer = 0.0;
+                }
+                else
+                {
+                    battleMessage = "Oh no! The wild " + (_enemyPokemon?.Name ?? "pokemon") + " broke free!";
+                    BagConfirmRequested = false;
+                    _captureAnimation = null; // allow retry
+                }
             }
         }
 
@@ -587,6 +617,8 @@ public partial class WildEncounterUI
         Vector2 instrPos = new Vector2(365, 530); // shift right by 20
         float msgScale = 0.85f;
         Color color = Color.Black;
+        Color effectColor = color;
+        Color moveColor = Color.MediumPurple;
 
         // Instruction: split onto two lines (prompt + move name)
         if (message.StartsWith("press A to use"))
@@ -595,7 +627,7 @@ public partial class WildEncounterUI
                 ? message.Substring("press A to use ".Length)
                 : "";
             spriteBatch.DrawString(_font, "press A to use", instrPos, color, 0f, Vector2.Zero, msgScale, SpriteEffects.None, 0f);
-            spriteBatch.DrawString(_font, moveName, instrPos + new Vector2(0, 20), color, 0f, Vector2.Zero, msgScale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(_font, moveName, instrPos + new Vector2(0, 20), moveColor, 0f, Vector2.Zero, msgScale, SpriteEffects.None, 0f);
             return;
         }
 
@@ -607,25 +639,53 @@ public partial class WildEncounterUI
         {
             effectLine = "The attack was super effective!";
             mainLine = message.Replace(" It's super effective!", "");
+            effectColor = Color.Green;
         }
         else if (message.Contains("It's not very effective."))
         {
             effectLine = "The attack was not very effective.";
             mainLine = message.Replace(" It's not very effective.", "");
+            effectColor = Color.IndianRed;
         }
         else if (message.Contains("doesn't affect"))
         {
             effectLine = "The attack had no effect.";
+            effectColor = Color.IndianRed;
         }
         else if (looksLikeAttack)
         {
             effectLine = "The attack was effective.";
+            effectColor = Color.Green;
         }
 
-        spriteBatch.DrawString(_font, mainLine, dmgPos, color, 0f, Vector2.Zero, msgScale, SpriteEffects.None, 0f);
+        // Draw main line with colored move name when present
+        if (mainLine.Contains(" used "))
+        {
+            int usedIdx = mainLine.IndexOf(" used ", StringComparison.Ordinal);
+            int afterIdx = mainLine.IndexOf("!", usedIdx >= 0 ? usedIdx : 0);
+            if (afterIdx < 0) afterIdx = mainLine.Length;
+
+            string before = mainLine.Substring(0, usedIdx + 6); // include " used "
+            int nameStart = usedIdx + 6;
+            string moveName = mainLine.Substring(nameStart, Math.Max(0, afterIdx - nameStart));
+            string after = mainLine.Substring(afterIdx);
+
+            Vector2 pos = dmgPos;
+            spriteBatch.DrawString(_font, before, pos, color, 0f, Vector2.Zero, msgScale, SpriteEffects.None, 0f);
+            pos.X += _font.MeasureString(before).X * msgScale;
+
+            spriteBatch.DrawString(_font, moveName, pos, moveColor, 0f, Vector2.Zero, msgScale, SpriteEffects.None, 0f);
+            pos.X += _font.MeasureString(moveName).X * msgScale;
+
+            spriteBatch.DrawString(_font, after, pos, color, 0f, Vector2.Zero, msgScale, SpriteEffects.None, 0f);
+        }
+        else
+        {
+            spriteBatch.DrawString(_font, mainLine, dmgPos, color, 0f, Vector2.Zero, msgScale, SpriteEffects.None, 0f);
+        }
         if (!string.IsNullOrEmpty(effectLine))
         {
-            spriteBatch.DrawString(_font, effectLine, dmgPos + new Vector2(0, 20), color, 0f, Vector2.Zero, msgScale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(_font, effectLine, dmgPos + new Vector2(0, 20), effectColor, 0f, Vector2.Zero, msgScale, SpriteEffects.None, 0f);
         }
     }
 }

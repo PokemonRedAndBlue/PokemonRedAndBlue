@@ -561,6 +561,8 @@ public partial class TrainerBattleUI
         Vector2 instrPos = new Vector2(365, 530); // shift right by 20
         float msgScale = 0.85f;
         Color color = Color.Black;
+        Color effectColor = color;
+        Color moveColor = Color.MediumPurple;
 
         // Instruction: split onto two lines (prompt + move name)
         if (message.StartsWith("press A to use"))
@@ -569,7 +571,7 @@ public partial class TrainerBattleUI
                 ? message.Substring("press A to use ".Length)
                 : "";
             spriteBatch.DrawString(_font, "press A to use", instrPos, color, 0f, Vector2.Zero, msgScale, SpriteEffects.None, 0f);
-            spriteBatch.DrawString(_font, moveName, instrPos + new Vector2(0, 20), color, 0f, Vector2.Zero, msgScale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(_font, moveName, instrPos + new Vector2(0, 20), moveColor, 0f, Vector2.Zero, msgScale, SpriteEffects.None, 0f);
             return;
         }
 
@@ -581,25 +583,52 @@ public partial class TrainerBattleUI
         {
             effectLine = "The attack was super effective!";
             mainLine = message.Replace(" It's super effective!", "");
+            effectColor = Color.Green;
         }
         else if (message.Contains("It's not very effective."))
         {
             effectLine = "The attack was not very effective.";
             mainLine = message.Replace(" It's not very effective.", "");
+            effectColor = Color.IndianRed;
         }
         else if (message.Contains("doesn't affect"))
         {
             effectLine = "The attack had no effect.";
+            effectColor = Color.IndianRed;
         }
         else if (looksLikeAttack)
         {
             effectLine = "The attack was effective.";
+            effectColor = Color.Green;
         }
 
-        spriteBatch.DrawString(_font, mainLine, dmgPos, color, 0f, Vector2.Zero, msgScale, SpriteEffects.None, 0f);
+        if (mainLine.Contains(" used "))
+        {
+            int usedIdx = mainLine.IndexOf(" used ", StringComparison.Ordinal);
+            int afterIdx = mainLine.IndexOf("!", usedIdx >= 0 ? usedIdx : 0);
+            if (afterIdx < 0) afterIdx = mainLine.Length;
+
+            string before = mainLine.Substring(0, usedIdx + 6);
+            int nameStart = usedIdx + 6;
+            string moveName = mainLine.Substring(nameStart, Math.Max(0, afterIdx - nameStart));
+            string after = mainLine.Substring(afterIdx);
+
+            Vector2 pos = dmgPos;
+            spriteBatch.DrawString(_font, before, pos, color, 0f, Vector2.Zero, msgScale, SpriteEffects.None, 0f);
+            pos.X += _font.MeasureString(before).X * msgScale;
+
+            spriteBatch.DrawString(_font, moveName, pos, moveColor, 0f, Vector2.Zero, msgScale, SpriteEffects.None, 0f);
+            pos.X += _font.MeasureString(moveName).X * msgScale;
+
+            spriteBatch.DrawString(_font, after, pos, color, 0f, Vector2.Zero, msgScale, SpriteEffects.None, 0f);
+        }
+        else
+        {
+            spriteBatch.DrawString(_font, mainLine, dmgPos, color, 0f, Vector2.Zero, msgScale, SpriteEffects.None, 0f);
+        }
         if (!string.IsNullOrEmpty(effectLine))
         {
-            spriteBatch.DrawString(_font, effectLine, dmgPos + new Vector2(0, 20), color, 0f, Vector2.Zero, msgScale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(_font, effectLine, dmgPos + new Vector2(0, 20), effectColor, 0f, Vector2.Zero, msgScale, SpriteEffects.None, 0f);
         }
     }
 
