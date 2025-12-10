@@ -29,7 +29,6 @@ public partial class TrainerBattleUI
     private KeyboardState _prevItemKeyState;
     private KeyboardState _prevFightKeyState;
     private int _playerMoveIndex = 0;
-    private TextSprite _trainerText;
     private SpriteFont _font;
     private BattleUIHelper battleUI = new BattleUIHelper();
     private String _enemyTrainerString;
@@ -739,5 +738,7 @@ public partial class TrainerBattleUI
             }
             catch { }
         }
+
+        _creatureSpriteMissing = enemyPokemon.AnimatedSprite == null;
     }
 }

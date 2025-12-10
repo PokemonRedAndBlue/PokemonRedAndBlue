@@ -23,8 +23,7 @@ public class Trainer
     /// The trainer's current pixel-space position (top-left of sprite).
     /// </summary>
     public Vector2 Position { get; set; }
-    public Tilemap Map { get; set; }
-    private TextureAtlas battleCharsAtlas;
+    public Tilemap? Map { get; set; }
     private const float SpeedPxPerSec = 80f;
     private const float InteractionRange = 64f; // Use the larger value for more forgiving interaction
     private const int DefaultVisionRangeTiles = 4;
@@ -64,6 +63,7 @@ public class Trainer
         TrainerID = trainerId;
         colided = false;
         _trainersTeam = new Team();
+        Map = null;
     }
 
     public Trainer(TextureRegion region, Vector2 Pos, Facing facing, bool moving, float scale, string trainerId)
@@ -80,6 +80,7 @@ public class Trainer
         TrainerID = trainerId;
         colided = false;
         _trainersTeam = new Team();
+        Map = null;
     }
 
     public void Update(GameTime gametime, Player player)    // TODO: Sprites

@@ -6,7 +6,6 @@ using Enter.Classes.Animations;
 using Enter.Classes.Sprites;
 using Enter.Interfaces;
 using System.Linq;
-using System.Collections.Generic;
 
 namespace PokemonGame
 {

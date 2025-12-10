@@ -20,7 +20,6 @@ namespace Enter.Classes.Scenes
     {
         private const float ZoomLevel = 4f; 
         private SceneManager _sceneManager;
-        private SpriteFont _font; // Placeholder for UI/debug text
         private Camera _cam;
         private KeyboardController _controller;
         private Texture2D _character;
