@@ -309,6 +309,7 @@ public partial class WildEncounterUI
             playerMaxHP = currentPokemon.MaxHp > 0 ? currentPokemon.MaxHp : 50;
             enemyCurrentHP = enemyPokemon.Hp > 0 ? enemyPokemon.Hp : 50;
             enemyMaxHP = enemyPokemon.MaxHp > 0 ? enemyPokemon.MaxHp : 50;
+            enemyCurrentHP = Math.Clamp(enemyCurrentHP, 0, enemyMaxHP); // cap wild HP to its max
             battleInitialized = true;
             battleMessage = "";
 
@@ -317,6 +318,9 @@ public partial class WildEncounterUI
             _playerMove = ResolveMoveForPokemonName(currentPokemon?.Name);
             _enemyMove = ResolveMoveForEnemy();
         }
+
+        // Keep wild HP within valid range before drawing
+        enemyCurrentHP = Math.Clamp(enemyCurrentHP, 0, enemyMaxHP);
 
         // Draw the UI elements for wild encounter (state based)
         switch (_currentState)

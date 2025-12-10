@@ -33,7 +33,7 @@ public partial class WildEncounterUI
         }
         currentMon.Draw(spriteBatch, playerColorFight, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)) + playerOffsetFight, 4f * playerScaleFight);
         // Draw HP just above player pokemon
-        var playerHpPos = new Vector2(uiBasePosition.X + (_scale * 95) - 4, uiBasePosition.Y + (_scale * 74) - 4 - 20);
+        var playerHpPos = new Vector2(uiBasePosition.X + (_scale * 95) - 4, uiBasePosition.Y + (_scale * 74) - 4 - 25);
         DrawHP(spriteBatch, playerCurrentHP, playerMaxHP, currentPokemon?.Level ?? 1, playerHpPos, "Player");
         
         Vector2 enemyOffsetFight = Vector2.Zero;
@@ -59,6 +59,13 @@ public partial class WildEncounterUI
             DrawMessage(spriteBatch, battleMessage);
         }
         // Show fight instructions
+        var moves = _Player?.thePlayersTeam?.Pokemons?[0]?.Moves;
+        if (moves != null && moves.Count > 0)
+        {
+            _playerMoveIndex = Math.Clamp(_playerMoveIndex, 0, moves.Count - 1);
+            _playerMove = moves[_playerMoveIndex];
+        }
+
         string moveName = (_playerMove ?? SafeDefaultMove()).Name;
         DrawMessage(spriteBatch, "press A to use " + moveName);
     }
