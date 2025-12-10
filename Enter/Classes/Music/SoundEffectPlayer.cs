@@ -28,6 +28,11 @@ public static class SoundEffectPlayer
 
         // Create and play a new instance
         SoundEffect effect = SoundEffectLibrary.Get(id);
+        
+        // If effect is null (audio not loaded), skip playback
+        if (effect == null)
+            return;
+            
         SoundEffectInstance instance = effect.CreateInstance();
 
         instance.IsLooped = false;  // always play once

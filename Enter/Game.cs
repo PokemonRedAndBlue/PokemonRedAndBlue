@@ -24,7 +24,6 @@ public class Game1 : Core
     private Dictionary<string, bool> _defeatedTrainers = new Dictionary<string, bool>();
     private KeyboardController _controller = new KeyboardController();
     private Vector2 postion = new Vector2(100, 100);
-    private Tilemap _currentMap;
 
     private SceneManager _sceneManager;
     // State that persists across scene transitions
@@ -61,6 +60,7 @@ public class Game1 : Core
         _sceneManager.AddScene("overworld_city", new OverworldCityScene(_sceneManager, this, _controller, player));
         _sceneManager.AddScene("gym", new GymScene(_sceneManager, this, _controller, player));
         _sceneManager.AddScene("trainer", new TrainerBattleScene(_sceneManager, this, "youngster", player));
+        _sceneManager.AddScene("gym_trainer_painter", new TrainerBattleScene(_sceneManager, this, "trainer-painter", player, "gym"));
         _sceneManager.AddScene("city_trainer1", new TrainerBattleScene(_sceneManager, this, "hiker", player, "overworld_city"));
         _sceneManager.AddScene("city_trainer2", new TrainerBattleScene(_sceneManager, this, "blackbelt", player, "overworld_city"));
         _sceneManager.AddScene("wild", new WildEncounter(_sceneManager, this, player));
@@ -76,65 +76,25 @@ public class Game1 : Core
 
     protected override void Update(GameTime gameTime)
     {
-        // basic update logic
-        _sceneManager.Update(gameTime);
+        if (ResetRequested)
+        {
+            Reset();
+            return;
+        }
 
-        // Check for reset key
-        if (ResetRequested) { Reset(); return; }
-        
-        // Cache keyboard state to avoid multiple calls
         KeyboardState keyState = Keyboard.GetState();
-        
-        // If caught in trainer battle in scene, defaults back to Route 1 for now
-        if (keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.C))
+        if (keyState.IsKeyDown(Keys.C))
         {
             _sceneManager.TransitionTo("overworld_city");
         }
-        
-        if (keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.G))
+
+        if (keyState.IsKeyDown(Keys.G))
         {
             _sceneManager.TransitionTo("gym");
         }
 
-        //Music
         _sceneManager.Update(gameTime);
-        // ----------------------------------------
-        //  MUSIC TESTING KEYS (CAN BE REMOVED)
-        // ----------------------------------------
-        var kb = Keyboard.GetState();
-
-        if (kb.IsKeyDown(Keys.U))
-        {
-            BackgroundMusicPlayer.Play(SongId.OpeningPart2);
-        }
-        if (kb.IsKeyDown(Keys.O))
-        {
-            SoundEffectPlayer.Play(SfxId.SFX_LEVEL_UP);
-        }
-        if (kb.IsKeyDown(Keys.I))
-        {
-            BackgroundMusicPlayer.Play(SongId.BattleWildPokemon);
-        }
-
-        if (kb.IsKeyDown(Keys.Q))
-        {
-            BackgroundMusicPlayer.Stop();
-        }
-
         base.Update(gameTime);
-
-        // Update window title with FPS and recent scene timings (update/draw ms)
-        try
-        {
-            string baseTitle = Window.Title?.Split('|')[0].Trim() ?? "";
-            int fps = Core.CurrentFps;
-            double uMs = _sceneManager?.LastUpdateMs ?? 0.0;
-            double dMs = _sceneManager?.LastDrawMs ?? 0.0;
-            Window.Title = string.IsNullOrEmpty(baseTitle)
-                ? $"FPS: {fps} | U:{uMs:F1}ms D:{dMs:F1}ms"
-                : $"{baseTitle} | FPS: {fps} | U:{uMs:F1}ms D:{dMs:F1}ms";
-        }
-        catch { }
     }
 
     private void Reset()

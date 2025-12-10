@@ -8,6 +8,9 @@ using Enter.Classes.Input;
 using Enter.Classes.Sprites;
 using Enter.Classes.Physics;
 using Enter.Interfaces;
+using Enter.Classes.Textures;
+using System;
+using System.Collections.Generic;
 
 namespace Enter.Classes.Scenes
 {
@@ -19,26 +22,22 @@ namespace Enter.Classes.Scenes
     {
         private const float ZoomLevel = 4f; 
         private SceneManager _sceneManager;
-        private SpriteFont _font; // Placeholder for UI/debug text
-        private Tilemap _tilemap;
-        private Camera Cam;
+        private Trainer _painterTrainer;
+        private Camera _cam;
         private KeyboardController _controller;
-        private Texture2D character;
-        private Trainer trainer;
-        private Player player;
+        private Texture2D _character;
+        private Trainer _trainer;
+        private Player _player;
         // Scene-managed player position (in pixels)
-        private Vector2 _playerPosition = new Vector2(2 * 32, 6 * 32); // Default spawn (tile 1,3)
-                public Vector2 GetPlayerPosition() => _playerPosition;
+        private Point _playerPosition = new(1, 3); // Default spawn (tile 1,3)
+        // Allows other scenes to explicitly place the player when returning
+        public static Point? NextSpawnPosition = null;
+                public Point GetPlayerPosition() => _playerPosition;
 
-                public void SetPlayerPosition(Vector2 pos)
+                public void SetPlayerPosition(Point pos)
                 {
                     _playerPosition = pos;
-                    if (player != null)
-                    {
-                        player.Position = pos;
-                        Point tile = player.PixelToTile(pos);
-                        player.SetTilePosition(tile);
-                    }
+                    _player?.SetTilePosition(pos);
                 }
         private Game1 _game;
         private Tilemap _currentMap;
@@ -49,89 +48,113 @@ namespace Enter.Classes.Scenes
             _sceneManager = sceneManager;
             _game = game1;
             _controller = controller;
-            player = p;
+            _player = p;
+        }
+
+        public static void SetNextSpawn(Point pos)
+        {
+            NextSpawnPosition = pos;
         }
 
         public void LoadContent(ContentManager content)
         {
             // Load tilemap, player sprites, NPCs, etc.
-            Cam = new(((Game)_game).GraphicsDevice.Viewport);
-            character = content.Load<Texture2D>("images/Pokemon_Characters");
+            _cam = new(((Game)_game).GraphicsDevice.Viewport);
+            _character = content.Load<Texture2D>("images/Pokemon_Characters");
 
-            // Only restore from Game1.SavedPlayerPosition if returning from a battle scene, else use this scene's last known position
-            Vector2 spawn = _playerPosition;
-            if ((_game as Game1)?.SavedPlayerPosition is Microsoft.Xna.Framework.Vector2 savedPos)
+            // Highest priority: explicit next spawn when returning from battle
+            if (NextSpawnPosition is Point next)
             {
-                // Only use if coming from a battle scene (trainer or wild)
-                var prev = _sceneManager?.PreviousSceneName;
-                if (prev == "trainer" || prev == "wild")
-                {
-                    spawn = savedPos;
-                }
-                (_game as Game1).SavedPlayerPosition = null;
+                SetPlayerPosition(next);
+                NextSpawnPosition = null;
+                _game.SavedPlayerPosition = null;
             }
-            SetPlayerPosition(spawn);
-
-            if (_game.SavedPlayerTiles.TryGetValue("gym", out Point savedTile))
+            else if (_game?.SavedPlayerPosition is Vector2 savedPosVec)
             {
-                player.SetTilePosition(savedTile + new Point(0, -1));
+                // Coming back from a battle scene; use the saved tile position
+                SetPlayerPosition(new Point((int)savedPosVec.X, (int)savedPosVec.Y));
+                _game.SavedPlayerPosition = null;
+            }
+            else if (_game.SavedPlayerTiles.TryGetValue("gym", out Point savedTile))
+            {
+                SetPlayerPosition(savedTile);
             }
             else
             {
-                // Default location for this scene if no saved tile, (on first visit)
-                player.SetTilePosition(new Point(5, 12));
+                // Default location for this scene if no saved tile
+                SetPlayerPosition(new Point(5, 12));
             }
 
-            Cam.Update(player);
-            Cam.Zoom = ZoomLevel; //Zoom level of world
-            trainer = new Trainer(
-                character,
-                new Vector2(_game.Window.ClientBounds.Height, _game.Window.ClientBounds.Width) * 0.25f,
-                Facing.Right,
-                trainerId: "gym-leader"
+            // If trainer already defeated, keep them non-collidable
+            if (_game.IsTrainerDefeated("trainer-painter"))
+            {
+                _trainer.HasBeenDefeated = true;
+                _trainer.colided = false;
+            }
+
+            _cam.Update(_player);
+            _cam.Zoom = ZoomLevel; //Zoom level of world
+
+            // prof painter trainer stuff
+            TextureAtlas painterStuff = TextureAtlas.FromFile(content, "PainterTrainerSheet.xml");
+            var painterRegion = painterStuff.GetRegion("painter-map-trainer");
+            const float painterScale = 0.07f; // scale the atlas art to fit the scene
+            _painterTrainer = new Trainer(
+                painterRegion,
+                new Vector2(2 * 32, .6f * 32),
+                Facing.Down,
+                moving: false,
+                scale: painterScale,
+                trainerId: "trainer-painter"
             );
+            _trainer = _painterTrainer;
             _currentMap = TilemapLoader.LoadTilemap("Content/GymMap.xml");
 
             // Collision wiring (minimal)
-            player.Map = _currentMap;
+            _player.Map = _currentMap;
+            _painterTrainer.Map = _currentMap;
 
             // Build the solid tile index set from the "Ground" layer
-            player.SolidTiles = Physics.Collision.BuildSolidIndexSet(
+            _player.SolidTiles = Physics.Collision.BuildSolidIndexSet(
                 _currentMap,
                 "Ground",
                 Physics.SolidTileCollision.IsSolid
             );
 
-            Cam.Update(player);
+            _cam.Update(_player);
         }
 
         public void Update(GameTime gameTime)
         {
             // Update Objects
-            _controller.Update(_game, gameTime, Cam, player, trainer);
-            Cam.Update(player);
+            _controller.Update(_game, gameTime, _cam, _player, _trainer);
+            _cam.Update(_player);
+
+            // If already defeated, disable collision/interaction
+            if (_game.IsTrainerDefeated(_trainer.TrainerID))
+            {
+                _trainer.HasBeenDefeated = true;
+                _trainer.colided = false;
+                // Allow player to move if collision was sticking
+                _player.StopEnd();
+            }
 
             // Force a battle with trainer interaction
-            if (trainer.colided)
+            if (_trainer.colided && !_game.IsTrainerDefeated(_trainer.TrainerID))
             {
                 // Save the actual player position before battle
-                _playerPosition = player.Position;
-                _game.SavedPlayerPosition = player.Position;
-                _sceneManager.TransitionTo("trainer");
+                _playerPosition = _player.TilePos;
+                _game.SavedPlayerPosition = new Vector2(_player.TilePos.X, _player.TilePos.Y);
+                _sceneManager.TransitionTo("gym_trainer_painter");
             }
-            Vector2 PlayerPosition = GetPlayerPosition();
-            Point exit = player.TilePos;
+            Point exit = _player.TilePos;
             //System.Console.WriteLine("exit Tile pos: " + exit);
-            if (exit.X == 4 && exit.Y == 13)
+            if (exit.Y == 13 && ( exit.X == 4 || exit.X == 5 ) )
             {
-                _game.SavedPlayerTiles["gym"] = player.TilePos;
+                _game.SavedPlayerTiles["gym"] = _player.TilePos;
                 _sceneManager.TransitionTo("overworld_city");
             }
-            if (exit.X == 5 && exit.Y == 13)
-            {
-                _game.SavedPlayerTiles["gym"] = player.TilePos;
-                _sceneManager.TransitionTo("overworld_city");
-            }
+
             // no need for base.Update here
         }
 
@@ -140,13 +163,11 @@ namespace Enter.Classes.Scenes
             spriteBatch.GraphicsDevice.Clear(Color.Black); // Overworld color
 
             // map & world entities affected by camera movement
-            spriteBatch.Begin(transformMatrix: Cam.GetViewMatrix(), samplerState: SamplerState.PointClamp);
-            _currentMap?.DrawCropped(Cam.VisibleWorldRect);
-            player.Draw(spriteBatch);
-            trainer.Draw(spriteBatch);
+            spriteBatch.Begin(transformMatrix: _cam.GetViewMatrix(), samplerState: SamplerState.PointClamp);
+            _currentMap?.DrawCropped(_cam.VisibleWorldRect);
+            _player.Draw(spriteBatch);
+            _trainer.Draw(spriteBatch);
             spriteBatch.End();
-
-            // no need for base.Draw here
         }
     }
 }

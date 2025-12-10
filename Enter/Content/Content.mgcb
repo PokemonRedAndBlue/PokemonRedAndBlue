@@ -1000,16 +1000,22 @@
 #begin BattleChars.xml
 /copy:BattleChars.xml
 
+#begin BattleInterface.xml
+/copy:BattleInterface.xml
+
 #begin Borders.xml
 /copy:Borders.xml
 
 #begin CerucleanCityMap.xml
 /copy:CerucleanCityMap.xml
 
+#begin creature.xml
+/copy:creature.xml
+
 #begin GymMap.xml
 /copy:GymMap.xml
 
-#begin images/BattleInterface.png
+#begin images/BattleInterface.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1019,7 +1025,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:images/BattleInterface.png
+/build:images/BattleInterface.jpg
 
 #begin images/Borders.png
 /importer:TextureImporter
@@ -1044,6 +1050,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:images/Characters (Battle).png
+
+#begin images/creature.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/creature.png
 
 #begin images/Game Boy _ GBC - Pokemon Red _ Blue - Backgrounds (Places) - Cerulean City.png
 /importer:TextureImporter
@@ -1141,6 +1159,30 @@
 /processorParam:TextureFormat=Color
 /build:images/oak.png
 
+#begin images/painterGymMapChar.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/painterGymMapChar.png
+
+#begin images/PainterMadAndLaugh.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/PainterMadAndLaugh.png
+
 #begin images/Pokeball.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1201,6 +1243,18 @@
 /processorParam:TextureFormat=Color
 /build:images/Pokemon_FRONT.png
 
+#begin images/profPainterTrainer.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/profPainterTrainer.png
+
 #begin images/rival.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1227,6 +1281,15 @@
 
 #begin Moves.xml
 /copy:Moves.xml
+
+#begin PainterBattle.xml
+/copy:PainterBattle.xml
+
+#begin PainterMadandLaughing.xml
+/copy:PainterMadandLaughing.xml
+
+#begin PainterTrainerSheet.xml
+/copy:PainterTrainerSheet.xml
 
 #begin Pokemon_BACK.xml
 /copy:Pokemon_BACK.xml

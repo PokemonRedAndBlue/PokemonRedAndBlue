@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+    <TextureAtlas>
+      <Texture>images/PainterMadAndLaughing</Texture>
+        <Regions>
+          <Region name="painter-mad" x="38" y="62" width="932" height="387"/>
+          <Region name="painter-laughing" x="584" y="953" width="1075" height="1430"/>
+        </Regions>
+    </TextureAtlas>

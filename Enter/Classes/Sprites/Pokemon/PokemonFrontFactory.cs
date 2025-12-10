@@ -10,6 +10,7 @@ public class PokemonFrontFactory
     private static PokemonFrontFactory _instance;
     private ContentManager _content;
     private TextureAtlas _PokemonFrontAtlas;
+    private TextureAtlas _creatureAtlas;
     public TextureAtlas Atlas => _PokemonFrontAtlas;
 
 
@@ -34,9 +35,39 @@ public class PokemonFrontFactory
 
         // Example: Load your textures here
         _PokemonFrontAtlas = TextureAtlas.FromFile(_content, "Pokemon_FRONT.xml");
+        // Optional extra atlas for special cases (e.g., painter's creature)
+        _creatureAtlas = TextureAtlas.FromFile(_content, "creature.xml");
     }
     public AnimatedSprite CreateAnimatedSprite(String spriteName)
     {
+        string key = spriteName.ToLower();
+        if (_PokemonFrontAtlas != null && _PokemonFrontAtlas._animations.ContainsKey(key))
+        {
+            return _PokemonFrontAtlas.CreateAnimatedSprite(key);
+        }
+
+        if (_creatureAtlas != null && _creatureAtlas._animations.ContainsKey(key))
+        {
+            return _creatureAtlas.CreateAnimatedSprite(key);
+        }
+
+        // Fallback: try default atlas to surface an exception with context
         return _PokemonFrontAtlas.CreateAnimatedSprite(spriteName);
+    }
+
+    public Sprite CreateStaticSprite(String spriteName)
+    {
+        string key = spriteName.ToLower();
+        if (_PokemonFrontAtlas != null && _PokemonFrontAtlas._regions.ContainsKey(key))
+        {
+            return _PokemonFrontAtlas.CreateSprite(key);
+        }
+
+        if (_creatureAtlas != null && _creatureAtlas._regions.ContainsKey(key))
+        {
+            return _creatureAtlas.CreateSprite(key);
+        }
+
+        return _PokemonFrontAtlas.CreateSprite(spriteName);
     }
 }

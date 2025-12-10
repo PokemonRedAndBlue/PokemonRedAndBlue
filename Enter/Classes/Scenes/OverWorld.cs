@@ -9,6 +9,8 @@ using Enter.Classes.Sprites;
 using Enter.Classes.Physics;
 using Enter.Interfaces;
 using Enter.Classes.Textures;
+using System;
+using Enter.Classes.Behavior;
 
 
 namespace Enter.Classes.Scenes
@@ -20,31 +22,31 @@ namespace Enter.Classes.Scenes
     public class OverworldScene : IGameScene
     {
         private const float ZoomLevel = 4f; 
+        private const float WildEncounterTriggerChance = 0.035f;
+        private const double WildEncounterCooldown = 2.0;
+        private const int WildGrassTileId = 5; // wild-grass-route1
         private SceneManager _sceneManager;
-        private Camera Cam;
+        private Camera _cam;
         private KeyboardController _controller;
         private Texture2D character;
-        private Trainer trainer;
+        private Trainer _trainer;
         private Player _player;
         private Game1 _game;
         private Tilemap _currentMap;
+        private readonly Random _rand = new();
+        private double _encounterTimer = WildEncounterCooldown;
 
         // Scene-managed player position (in pixels)
-        private Vector2 _playerPosition = new Vector2(160, 0); // Default spawn
+        private Point _playerPosition = new(11, 0); // Default spawn
         // Static field to allow other scenes to set the next spawn position
-        public static Vector2? NextSpawnPosition = null;
+        public static Point? NextSpawnPosition = null;
 
-        public Vector2 GetPlayerPosition() => _playerPosition;
+        public Point GetPlayerPosition() => _playerPosition;
 
-        public void SetPlayerPosition(Vector2 pos)
+        public void SetPlayerPosition(Point pos)
         {
             _playerPosition = pos;
-            if (_player != null)
-            {
-                _player.Position = pos;
-                Point tile = _player.PixelToTile(pos);
-                _player.SetTilePosition(tile);
-            }
+            _player?.SetTilePosition(pos);
         }
 
         // We must pass in the SceneManager so this scene can request transitions
@@ -59,39 +61,48 @@ namespace Enter.Classes.Scenes
         public void LoadContent(ContentManager content)
         {
             // Load tilemap, player sprites, NPCs, etc.
-            Cam = new(((Game)_game).GraphicsDevice.Viewport);
+            _cam = new(((Game)_game).GraphicsDevice.Viewport);
 
             // Load Background Music
             BackgroundMusicLibrary.Load(content);
             //Music
             BackgroundMusicPlayer.Play(SongId.RoadToViridianFromPallet, loop: true);
 
-            // Only restore from Game1.SavedPlayerPosition if returning from a battle, else use this scene's last known position
-            // Vector2 spawn = _playerPosition;
-            // if ((_game as Game1)?.SavedPlayerPosition is Microsoft.Xna.Framework.Vector2 savedPos)
-            // {
-            //     spawn = savedPos;
-            //     // Clear after use so it doesn't leak between scenes
-            //     (_game as Game1).SavedPlayerPosition = null;
-            // }
-            // SetPlayerPosition(spawn);
+            bool spawnSet = false;
 
-            if (_game.SavedPlayerTiles.TryGetValue("overworld", out Point savedTile))
+            // Highest priority: explicit next spawn set by other scenes (trainer/wild return)
+            if (NextSpawnPosition is Point next)
             {
-                _player.SetTilePosition(savedTile + new Point(0, -1));
+                SetPlayerPosition(next);
+                NextSpawnPosition = null;
+                _game.SavedPlayerPosition = null;
+                spawnSet = true;
             }
-            else
+            else if (_game?.SavedPlayerPosition is Vector2 savedPosVec)
             {
-                // Default location for this scene if no saved tile, (on first visit)
-                _player.SetTilePosition(new Point(10, 0));
+                // Next priority: SavedPlayerPosition (set before battle transitions)
+                SetPlayerPosition(new Point((int)savedPosVec.X, (int)savedPosVec.Y));
+                _game.SavedPlayerPosition = null;
+                spawnSet = true;
+            }
+            else if (_game.SavedPlayerTiles.TryGetValue("overworld", out Point savedTile))
+            {
+                SetPlayerPosition(savedTile);
+                spawnSet = true;
             }
 
-            Cam.Update(_player);
-            Cam.Zoom = ZoomLevel; //Zoom level of world
+            if (!spawnSet)
+            {
+                // Default location for this scene if no saved position
+                SetPlayerPosition(new Point(10, 0));
+            }
+
+            _cam.Update(_player);
+            _cam.Zoom = ZoomLevel; //Zoom level of world
             // Create trainer with specific ID that matches what's used in TrainerBattle
             character = content.Load<Texture2D>("images/Pokemon_Characters");
             const string TRAINER_ID = "youngster"; // This should match the ID used in Game1's AddScene
-            trainer = new Trainer(
+            _trainer = new Trainer(
                 character,
                 new Vector2(_game.Window.ClientBounds.Height, _game.Window.ClientBounds.Width) * 0.25f,
                 Facing.Right,
@@ -99,7 +110,7 @@ namespace Enter.Classes.Scenes
                 TRAINER_ID
             );
             _currentMap = TilemapLoader.LoadTilemap("Content/Route1Map.xml");
-            trainer.Map = _currentMap;
+            _trainer.Map = _currentMap;
 
             // Collision wiring (minimal)
             _player.Map = _currentMap;
@@ -113,62 +124,64 @@ namespace Enter.Classes.Scenes
 
         }
         // Static helper for other scenes to set the next spawn position before transitioning to overworld
-        public static void SetNextSpawn(Vector2 pos)
+        public static void SetNextSpawn(Point pos)
         {
             NextSpawnPosition = pos;
+        }
+
+        private void WildEncounterTrigger(Player player)
+        {
+            if (_currentMap.GetTileAt("Ground", player.TilePos.X, player.TilePos.Y) == WildGrassTileId && player.isMoving)
+                if (_rand.NextSingle() <= WildEncounterTriggerChance)
+                {
+                    _game.SavedPlayerPosition = new Vector2(player.TilePos.X, player.TilePos.Y);
+                    _sceneManager.TransitionTo("wild");
+                }
         }
 
         public void Update(GameTime gameTime)
         {
             // Reset collision if trainer is defeated to prevent immediate retrigger
-            if (_game.IsTrainerDefeated(trainer.TrainerID)) {
-                trainer.HasBeenDefeated = true;
-                trainer.colided = false;
+            if (_game.IsTrainerDefeated(_trainer.TrainerID)) {
+                _trainer.HasBeenDefeated = true;
+                _trainer.colided = false;
             }
             // Update Objects
-            _controller.Update(_game, gameTime, Cam, _player, trainer);
-            Cam.Update(_player);
+            _controller.Update(_game, gameTime, _cam, _player, _trainer);
+            _cam.Update(_player);
 
             // Handle trainer interactions
-            if (trainer.colided && !trainer.IsApproachingPlayer)
+            if (_trainer.colided && !_trainer.IsApproachingPlayer)
             {
-                if (!_game.IsTrainerDefeated(trainer.TrainerID))
+                if (!_game.IsTrainerDefeated(_trainer.TrainerID))
                 {
                     // Save the actual player position before battle
-                    // _playerPosition = _player.Position;
-                    // _game.SavedPlayerPosition = _player.Position;
-                    _game.SavedPlayerTiles["overworld"] = _player.TilePos + new Point(0, 1);
+                    _game.SavedPlayerPosition = new Vector2(_player.TilePos.X, _player.TilePos.Y);
                     _sceneManager.TransitionTo("trainer");
                 }
                 // If trainer is defeated, they're just interacting without battle
                 // Could show dialogue here
             }
 
+            if (_encounterTimer > 0) _encounterTimer -= gameTime.ElapsedGameTime.TotalSeconds;
+            if (_encounterTimer <= 0 && _player.HasArrived) WildEncounterTrigger(_player);
+
             // check for wild encounter key (cache keyboard state)
             KeyboardState keyState = Keyboard.GetState();
-            if (keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.W))
+            if (keyState.IsKeyDown(Keys.W))
             {
                 // Save the actual player position before wild battle
-                // _playerPosition = _player.Position;
-                // _game.SavedPlayerPosition = _player.Position;
-                _game.SavedPlayerTiles["overworld"] = _player.TilePos + new Point(0, 1);
+                _game.SavedPlayerPosition = new Vector2(_player.TilePos.X, _player.TilePos.Y);
                 _sceneManager.TransitionTo("wild");
             }
 
-            Vector2 PlayerPosition = GetPlayerPosition();
             Point exit = _player.TilePos;
             //Console.WriteLine("exit Tile pos: " + exit);
-            if (exit.X == 10 && exit.Y == 35)
+            if ( exit.Y == 35 && (exit.X == 10 || exit.X == 11) )
             {
                 _game.SavedPlayerTiles["overworld"] = _player.TilePos;
                 _sceneManager.TransitionTo("overworld_city");
             }
-            if(exit.X == 11 && exit.Y == 35)
-            {
-                _game.SavedPlayerTiles["overworld"] = _player.TilePos;
-                _sceneManager.TransitionTo("overworld_city");
-            }
-
 
             // no need for base.Update here
         }
@@ -178,10 +191,10 @@ namespace Enter.Classes.Scenes
             spriteBatch.GraphicsDevice.Clear(Color.Black); // Overworld color
 
             // map & world entities affected by camera movement
-            spriteBatch.Begin(transformMatrix: Cam.GetViewMatrix(), samplerState: SamplerState.PointClamp);
-            _currentMap?.DrawCropped(Cam.VisibleWorldRect);
+            spriteBatch.Begin(transformMatrix: _cam.GetViewMatrix(), samplerState: SamplerState.PointClamp);
+            _currentMap?.DrawCropped(_cam.VisibleWorldRect);
             _player.Draw(spriteBatch);
-            trainer.Draw(spriteBatch);
+            _trainer.Draw(spriteBatch);
             spriteBatch.End();
 
             // no need for base.Draw here

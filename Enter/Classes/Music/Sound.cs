@@ -1,4 +1,3 @@
-// SfxId.cs
 public enum SfxId
 {
     SFX_59,
