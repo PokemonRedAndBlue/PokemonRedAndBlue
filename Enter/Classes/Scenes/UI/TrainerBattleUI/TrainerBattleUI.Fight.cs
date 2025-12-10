@@ -71,7 +71,7 @@ public partial class TrainerBattleUI
         }
         else
         {
-            currentMon.Draw(spriteBatch, playerColorFight, GetPlayerMonDrawPos(currentMon) + playerOffsetFight, 4f * playerScaleFight);
+            currentMon.Draw(spriteBatch, playerColorFight, GetPlayerMonDrawPosWithOffset(currentMon) + playerOffsetFight, PlayerBackScaleDraw * playerScaleFight);
         }
         // Draw HP just above player pokemon
         var playerHpPos = new Vector2(uiBasePosition.X + (_scale * 95) - 4, uiBasePosition.Y + (_scale * 74) - 4 - 25);

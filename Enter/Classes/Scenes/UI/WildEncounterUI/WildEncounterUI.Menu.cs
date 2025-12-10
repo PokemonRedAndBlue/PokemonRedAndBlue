@@ -40,7 +40,7 @@ public partial class WildEncounterUI
             }
             else
             {
-                currentMon.Draw(spriteBatch, Color.White, GetPlayerMonDrawPos(currentMon) + playerOffsetMenu, 4f);
+                currentMon.Draw(spriteBatch, Color.White, GetPlayerMonDrawPosWithOffset(currentMon) + playerOffsetMenu, PlayerBackScaleDraw);
             }
         // HP/Level overlays in menu
         var playerHpPos = new Vector2(uiBasePosition.X + (_scale * 95) - 4, uiBasePosition.Y + (_scale * 74) - 4 - 25);

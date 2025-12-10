@@ -41,6 +41,8 @@ public partial class TrainerBattleUI
     private Sprite greenBar, yellowBar, redBar;
     private string _currentState = "Initial";
     private string _prevState = "Initial";
+    private static readonly float PlayerBackScaleDraw = _scale * 1.75f; // 1.75x original (7f when _scale=4)
+    private static readonly float PlayerDrawYOffset = 60f;
 
     // Pre defined regions within UI ADD TO A DICT LATER
     static private Vector2 uiBasePosition = new Vector2(340, 75);
@@ -479,7 +481,13 @@ public partial class TrainerBattleUI
 
     private Vector2 GetPlayerMonDrawPos(Sprite backSprite)
     {
+        // Original target used for deploy arcs
         return new Vector2(playerPosition.X, maxDrawPos.Y + (-backSprite.Height * _scale));
+    }
+
+    private Vector2 GetPlayerMonDrawPosWithOffset(Sprite backSprite)
+    {
+        return GetPlayerMonDrawPos(backSprite) + new Vector2(0f, PlayerDrawYOffset);
     }
 
     private static Move SafeDefaultMove()
@@ -610,9 +618,10 @@ public partial class TrainerBattleUI
 
     private void DrawMessage(SpriteBatch spriteBatch, string message)
     {
-        // Damage/attack messages sit above HP display; instruction sits at bottom of play area
+        // Damage/attack messages sit above HP display
         Vector2 dmgPos = new Vector2(345, 300); // shift right by 25 total
-        Vector2 instrPos = new Vector2(365, 530); // shift right by 20
+        // Move selector sits 45px under battle message
+        Vector2 instrPos = dmgPos + new Vector2(0, 45);
         float msgScale = 1.05f; // enlarge battle and instruction text
         Color color = Color.Black;
         Color effectColor = color;

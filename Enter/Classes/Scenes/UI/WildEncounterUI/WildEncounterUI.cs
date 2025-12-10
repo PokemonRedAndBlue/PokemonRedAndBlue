@@ -168,9 +168,18 @@ public partial class WildEncounterUI
         _playerDeploying = true;
     }
 
+    private static readonly float PlayerBackScaleDraw = _scale * 1.75f; // 1.75x original (7f when _scale=4)
+    private static readonly float PlayerDrawYOffset = 60f;
+
     private Vector2 GetPlayerMonDrawPos(Sprite currentMon)
     {
+        // Original target used for deploy arcs
         return new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale));
+    }
+
+    private Vector2 GetPlayerMonDrawPosWithOffset(Sprite currentMon)
+    {
+        return GetPlayerMonDrawPos(currentMon) + new Vector2(0f, PlayerDrawYOffset);
     }
 
     // Damage flash effect timers
@@ -766,9 +775,10 @@ public partial class WildEncounterUI
 
     private void DrawMessage(SpriteBatch spriteBatch, string message)
     {
-        // Damage/attack messages sit above HP display; instruction sits at bottom of play area
+        // Damage/attack messages sit above HP display
         Vector2 dmgPos = new Vector2(345, 300); // shift right by 25 total
-        Vector2 instrPos = new Vector2(365, 530); // shift right by 20
+        // Move selector sits 45px under battle message
+        Vector2 instrPos = dmgPos + new Vector2(0, 45);
         float msgScale = 1.05f; // enlarge battle and instruction text
         Color color = Color.Black;
         Color effectColor = color;

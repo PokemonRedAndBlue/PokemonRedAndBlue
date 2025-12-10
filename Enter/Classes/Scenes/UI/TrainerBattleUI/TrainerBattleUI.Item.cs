@@ -25,7 +25,7 @@ public partial class TrainerBattleUI
         }
         else
         {
-            currentMon.Draw(spriteBatch, Color.White, GetPlayerMonDrawPos(currentMon), 4f);
+            currentMon.Draw(spriteBatch, Color.White, GetPlayerMonDrawPosWithOffset(currentMon), PlayerBackScaleDraw);
         }
         enemyPokemon.AnimatedSprite?.Draw(spriteBatch, Color.White, enemysPokemonPosition, _enemyTrainerString == "trainer-painter" ? 0.2f : 4f);
 
