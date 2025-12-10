@@ -33,6 +33,45 @@ public partial class WildEncounterUI
     private Move _playerMove = SafeDefaultMove();
     private Move _enemyMove = SafeDefaultMove();
     private KeyboardState _prevKeyboardState;
+    private static readonly Dictionary<string, SfxId> MoveSfxByName = new(StringComparer.OrdinalIgnoreCase)
+    {
+        { "tackle", SfxId.SFX_SNARE_2 },
+        { "scratch", SfxId.SFX_SNARE_3 },
+        { "ember", SfxId.SFX_INTRO_HIP },
+        { "water gun", SfxId.SFX_INTRO_WHOOSH },
+        { "vine whip", SfxId.SFX_CUT },
+        { "thunder shock", SfxId.SFX_TINK },
+        { "gust", SfxId.SFX_INTRO_LUNGE },
+        { "bite", SfxId.SFX_SNARE_5 },
+        { "ice beam", SfxId.SFX_TRIANGLE_2 },
+        { "quick attack", SfxId.SFX_SNARE_4 },
+        { "pound", SfxId.SFX_SNARE_1 },
+        { "poison sting", SfxId.SFX_POISONED },
+        { "double kick", SfxId.SFX_MUTED_SNARE_2 },
+        { "karate chop", SfxId.SFX_MUTED_SNARE_4 },
+        { "razor leaf", SfxId.SFX_CUT },
+        { "bubble", SfxId.SFX_INTRO_WHOOSH },
+        { "fire blast", SfxId.SFX_INTRO_CRASH },
+    };
+
+    private static readonly Dictionary<string, SfxId> MoveSfxByType = new(StringComparer.OrdinalIgnoreCase)
+    {
+        { "normal", SfxId.SFX_SNARE_2 },
+        { "fire", SfxId.SFX_INTRO_CRASH },
+        { "water", SfxId.SFX_INTRO_WHOOSH },
+        { "grass", SfxId.SFX_CUT },
+        { "electric", SfxId.SFX_TINK },
+        { "ice", SfxId.SFX_TRIANGLE_2 },
+        { "fighting", SfxId.SFX_MUTED_SNARE_3 },
+        { "poison", SfxId.SFX_POISONED },
+        { "ground", SfxId.SFX_FAINT_THUD },
+        { "flying", SfxId.SFX_INTRO_LUNGE },
+        { "psychic", SfxId.SFX_INTRO_RAISE },
+        { "rock", SfxId.SFX_FAINT_FALL },
+        { "bug", SfxId.SFX_MUTED_SNARE_1 },
+        { "ghost", SfxId.SFX_SILPH_SCOPE },
+        { "dragon", SfxId.SFX_INTRO_CRASH },
+    };
     
     // Animation attack state tracking
     private bool shouldPlayPlayerAttackAnimation = false;
@@ -459,7 +498,7 @@ public partial class WildEncounterUI
         shouldPlayPlayerAttackAnimation = true;
         playerAttackAnimationPlaying = false;
 
-        SoundEffectPlayer.Play(SfxId.SFX_CYMBAL_3);
+        SoundEffectPlayer.Play(ResolveMoveSfx(playerMove));
 
         enemyTakingDamage = true;
         enemyDamageFlashTimer = 0.0;
@@ -487,12 +526,13 @@ public partial class WildEncounterUI
         turnTimer = 0.0;
         currentTurn = BattleTurn.Wild;
 
-        ApplyAttack(_enemyPokemon, _enemyMove ?? SafeDefaultMove(), ref playerCurrentHP, _Player?.thePlayersTeam?.Pokemons?[0]?.Name ?? "Player", out var cpuMsg);
+        var enemyMove = _enemyMove ?? SafeDefaultMove();
+        ApplyAttack(_enemyPokemon, enemyMove, ref playerCurrentHP, _Player?.thePlayersTeam?.Pokemons?[0]?.Name ?? "Player", out var cpuMsg);
 
         shouldPlayEnemyAttackAnimation = true;
         enemyAttackAnimationPlaying = false;
 
-        SoundEffectPlayer.Play(SfxId.SFX_CYMBAL_3);
+        SoundEffectPlayer.Play(ResolveMoveSfx(enemyMove));
 
         playerTakingDamage = true;
         playerDamageFlashTimer = 0.0;
@@ -529,6 +569,22 @@ public partial class WildEncounterUI
                 Category = MoveCategory.Physical
             };
         }
+    }
+
+    private static SfxId ResolveMoveSfx(Move move)
+    {
+        if (move != null)
+        {
+            if (!string.IsNullOrEmpty(move.Name) && MoveSfxByName.TryGetValue(move.Name, out var byName))
+            {
+                return byName;
+            }
+            if (!string.IsNullOrEmpty(move.Type) && MoveSfxByType.TryGetValue(move.Type, out var byType))
+            {
+                return byType;
+            }
+        }
+        return SfxId.SFX_CYMBAL_3;
     }
 
     private static int ComputeDamage(Move move)
