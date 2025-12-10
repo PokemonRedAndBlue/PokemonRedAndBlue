@@ -84,6 +84,9 @@ namespace Enter.Classes.Scenes.IntroAnimations
         {
             _screenBounds = screenBounds;
 
+            float gameBoyWidth = 160f;
+            float gameBoyHeight = 144f;
+
             _gengarIdle = atlas.CreateSprite("gengar_idle");
             _gengarArmRaised = atlas.CreateSprite("gengar_arm_raised");
             _gengarLunge = atlas.CreateSprite("gengar_lunge");
@@ -93,27 +96,27 @@ namespace Enter.Classes.Scenes.IntroAnimations
             _jigglypuffJumpAttack = atlas.CreateSprite("jigglypuff_jump_attack");
 
             int contentCenterY = 84;
-            int scaledCenterY = (int)(_screenBounds.Y + contentCenterY * (screenBounds.Height / 144f));
+            int scaledCenterY = (int)(_screenBounds.Y + contentCenterY * (screenBounds.Height / gameBoyHeight));
 
             _gengarIdlePosition = new Vector2(
-                _screenBounds.Right - 135 * (screenBounds.Width / 160f),
-                scaledCenterY - 28 * (screenBounds.Height / 144f)
+                _screenBounds.Right - 135 * (screenBounds.Width / gameBoyWidth),
+                scaledCenterY - 28 * (screenBounds.Height / gameBoyHeight)
             );
             _gengarLungePosition = new Vector2(
-                _gengarIdlePosition.X - 20 * (screenBounds.Width / 160f),
-                scaledCenterY - 28 * (screenBounds.Height / 144f)
+                _gengarIdlePosition.X - 20 * (screenBounds.Width / gameBoyWidth),
+                scaledCenterY - 28 * (screenBounds.Height / gameBoyHeight)
             );
             _gengarLungeForwardPosition = new Vector2(
-                _gengarLungePosition.X + 40 * (screenBounds.Width / 160f),
-                scaledCenterY - 28 * (screenBounds.Height / 144f)
+                _gengarLungePosition.X + 40 * (screenBounds.Width / gameBoyWidth),
+                scaledCenterY - 28 * (screenBounds.Height / gameBoyHeight)
             );
-            _gengarPosition = new Vector2(_screenBounds.Right + 64, scaledCenterY - 27 * (screenBounds.Height / 144f));
+            _gengarPosition = new Vector2(_screenBounds.Right + 64, scaledCenterY - 27 * (screenBounds.Height / gameBoyHeight));
 
             _jigglypuffIdlePosition = new Vector2(
-                _screenBounds.X + 85 * (screenBounds.Width / 160f),
-                scaledCenterY - 23 * (screenBounds.Height / 144f)
+                _screenBounds.X + 85 * (screenBounds.Width / gameBoyWidth),
+                scaledCenterY - 23 * (screenBounds.Height / gameBoyHeight)
             );
-            _jigglypuffPosition = new Vector2(_screenBounds.X - 56, scaledCenterY - 23 * (screenBounds.Height / 144f));
+            _jigglypuffPosition = new Vector2(_screenBounds.X - 56, scaledCenterY - 23 * (screenBounds.Height / gameBoyHeight));
         }
 
         public void Update(GameTime gameTime)

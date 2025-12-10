@@ -47,9 +47,10 @@ namespace Enter.Classes.Scenes
         // ============================================================
         // How long each screen lasts (in seconds):
         private const float COPYRIGHT_DURATION = 1.0f;    // Copyright screen
+        
         private const float BLANK_DURATION = 0.3f;        // Blank screen between copyright and GAME FREAK
                                                           // ============================================================
-
+                                                          
         // State management
         private TitleState _currentState = TitleState.Copyright;
         private float _stateTimer = 0f;
