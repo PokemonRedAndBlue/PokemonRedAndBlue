@@ -52,6 +52,10 @@ public class PokeballthrowAnimation
 
     public void Draw(SpriteBatch spriteBatch)
     {
+        if (_texture == null)
+        {
+            return; // texture not loaded yet
+        }
         Rectangle sourceRect = new Rectangle(0, 48, 16, 24);
         Vector2 origin = new Vector2(sourceRect.Width / 2f, sourceRect.Height / 2f);
 

@@ -109,6 +109,7 @@ public partial class WildEncounterUI
     private int _playerMoveIndex = 0;
     
     private string _currentState = "Initial";
+    private string _prevState = "Initial";
     private Dictionary<string, int> stateMapping = new Dictionary<string, int>
     {
         { "Initial", 0 },
@@ -134,10 +135,41 @@ public partial class WildEncounterUI
     private PokeballCaptureAnimation _captureAnimation;
     private bool captureInProgress = false;
 
+    // Player deploy animation
+    private PokeballthrowAnimation _playerDeployThrow;
+    private bool _playerDeploying = true;
+    private Vector2 _playerDeployTarget;
+    private bool _playerDeploySetup = false;
+
     private bool ShouldHideWildSprite =>
         _captureAnimation != null && (_captureAnimation.HideWildForCapture || _captureAnimation.CaptureSuccessful);
 
     private bool HideWildInState(string state) => ShouldHideWildSprite;
+
+    private void EnsurePlayerDeploySetup(Sprite currentMon = null)
+    {
+        if (_playerDeploySetup || currentMon == null)
+            return;
+
+        _playerDeployTarget = GetPlayerMonDrawPos(currentMon);
+        var throwStart = playerPosition + new Vector2(-24f, -12f); // start slightly behind/above player
+        if (Vector2.Distance(throwStart, _playerDeployTarget) < 1f)
+        {
+            throwStart += new Vector2(-32f, -16f); // ensure start and target differ so arc is visible
+        }
+        _playerDeployThrow = new PokeballthrowAnimation((int)throwStart.X, (int)throwStart.Y, _playerDeployTarget);
+        if (_content != null)
+        {
+            _playerDeployThrow.LoadContent(_content);
+        }
+        _playerDeploySetup = true;
+        _playerDeploying = true;
+    }
+
+    private Vector2 GetPlayerMonDrawPos(Sprite currentMon)
+    {
+        return new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale));
+    }
 
     // Damage flash effect timers
     private double enemyDamageFlashTimer = 0.0;
@@ -208,6 +240,18 @@ public partial class WildEncounterUI
     {
         KeyboardState keyboardState = Keyboard.GetState();
 
+        // Update deploy throw animation (player) if active
+        if (_playerDeployThrow != null && _playerDeploying)
+        {
+            _playerDeployThrow.Update(gameTime);
+            if (_playerDeployThrow.IsComplete)
+            {
+                _playerDeploying = false;
+            }
+        }
+
+        var previousState = _currentState;
+
         // Clear bag confirm flag when not in Bag/Item state
         if (_currentState != "Bag" && _currentState != "Item")
         {
@@ -217,6 +261,18 @@ public partial class WildEncounterUI
         // Update UI state machine
         battleUI.Update(gameTime);
         _currentState = battleUI.getBattleState();
+        _prevState = previousState;
+
+        // Initialize deploy when entering Menu (not before)
+        if (_currentState == "Menu" && !_playerDeploySetup)
+        {
+            var playersPokemon = _Player?.thePlayersTeam?.Pokemons?[0];
+            if (playersPokemon != null)
+            {
+                var backSprite = PokemonBackFactory.Instance.CreateStaticSprite(playersPokemon.Name.ToString().ToLower() + "-back");
+                EnsurePlayerDeploySetup(backSprite);
+            }
+        }
 
         // Advance animated sprite frames only while attacking
         if (enemyAttackAnimationPlaying)

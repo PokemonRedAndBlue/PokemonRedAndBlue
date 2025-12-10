@@ -65,7 +65,14 @@ public partial class TrainerBattleUI
             playerColorFight = faintColor;
             playerScaleFight = faintScale;
         }
-        currentMon.Draw(spriteBatch, playerColorFight, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)) + playerOffsetFight, 4f * playerScaleFight);
+        if (_playerDeploying)
+        {
+            _playerDeployThrow?.Draw(spriteBatch);
+        }
+        else
+        {
+            currentMon.Draw(spriteBatch, playerColorFight, GetPlayerMonDrawPos(currentMon) + playerOffsetFight, 4f * playerScaleFight);
+        }
         // Draw HP just above player pokemon
         var playerHpPos = new Vector2(uiBasePosition.X + (_scale * 95) - 4, uiBasePosition.Y + (_scale * 74) - 4 - 25);
         DrawHP(spriteBatch, playerCurrentHP, playerMaxHP, currentPokemon?.Level ?? 1, playerHpPos, "Player");

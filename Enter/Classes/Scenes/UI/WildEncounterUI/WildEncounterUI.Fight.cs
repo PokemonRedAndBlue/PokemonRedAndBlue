@@ -12,6 +12,7 @@ public partial class WildEncounterUI
         UIBaseSprites[1].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
         String playersPokemon = currentPokemon.Name.ToString();
         Sprite currentMon = PokemonBackFactory.Instance.CreateStaticSprite(playersPokemon.ToLower() + "-back");
+        EnsurePlayerDeploySetup(currentMon);
 
         // Use updated HP for health bars (use Pokemon overload like WildEncounterUI)
         battleUI.drawHealthBar(playerCurrentHP, playerMaxHP, greenBar, yellowBar, redBar, spriteBatch, true);
@@ -31,7 +32,14 @@ public partial class WildEncounterUI
             playerColorFight = faintColor;
             playerScaleFight = faintScale;
         }
-        currentMon.Draw(spriteBatch, playerColorFight, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)) + playerOffsetFight, 4f * playerScaleFight);
+        if (_playerDeploying)
+        {
+            _playerDeployThrow?.Draw(spriteBatch);
+        }
+        else
+        {
+            currentMon.Draw(spriteBatch, playerColorFight, GetPlayerMonDrawPos(currentMon) + playerOffsetFight, 4f * playerScaleFight);
+        }
         // Draw HP just above player pokemon
         var playerHpPos = new Vector2(uiBasePosition.X + (_scale * 95) - 4, uiBasePosition.Y + (_scale * 74) - 4 - 25);
         DrawHP(spriteBatch, playerCurrentHP, playerMaxHP, currentPokemon?.Level ?? 1, playerHpPos, "Player");

@@ -19,7 +19,14 @@ public partial class TrainerBattleUI
 
         // Draw trainer back and enemy pokemon for context
         Sprite currentMon = PokemonBackFactory.Instance.CreateStaticSprite(currentPokemon.Name.ToLower() + "-back");
-        currentMon.Draw(spriteBatch, Color.White, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)), 4f);
+        if (_playerDeploying)
+        {
+            _playerDeployThrow?.Draw(spriteBatch);
+        }
+        else
+        {
+            currentMon.Draw(spriteBatch, Color.White, GetPlayerMonDrawPos(currentMon), 4f);
+        }
         enemyPokemon.AnimatedSprite?.Draw(spriteBatch, Color.White, enemysPokemonPosition, _enemyTrainerString == "trainer-painter" ? 0.2f : 4f);
 
         // Draw health bars using tracked HP values

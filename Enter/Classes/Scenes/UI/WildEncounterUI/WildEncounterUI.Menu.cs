@@ -20,14 +20,22 @@ public partial class WildEncounterUI
         battleUI.moveArrow();
 
         // Draw pokémon last (on top) with attack offsets
-        string playersPokemon = currentPokemon.Name.ToString();
-        Sprite currentMon = PokemonBackFactory.Instance.CreateStaticSprite(playersPokemon.ToLower() + "-back");
+            string playersPokemon = currentPokemon.Name.ToString();
+            Sprite currentMon = PokemonBackFactory.Instance.CreateStaticSprite(playersPokemon.ToLower() + "-back");
+            EnsurePlayerDeploySetup(currentMon);
         Vector2 playerOffsetMenu = Vector2.Zero;
         if (playerAttackAnimationPlaying)
         {
             playerOffsetMenu = backState.AttackBackAction(currentMon, playerAttackAnimationTimer, AttackAnimationDurationMs);
         }
-        currentMon.Draw(spriteBatch, Color.White, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)) + playerOffsetMenu, 4f);
+            if (_playerDeploying)
+            {
+                _playerDeployThrow?.Draw(spriteBatch);
+            }
+            else
+            {
+                currentMon.Draw(spriteBatch, Color.White, GetPlayerMonDrawPos(currentMon) + playerOffsetMenu, 4f);
+            }
         // HP/Level overlays in menu
         var playerHpPos = new Vector2(uiBasePosition.X + (_scale * 95) - 4, uiBasePosition.Y + (_scale * 74) - 4 - 25);
         DrawHP(spriteBatch, playerCurrentHP, playerMaxHP, currentPokemon?.Level ?? 1, playerHpPos, "Player");

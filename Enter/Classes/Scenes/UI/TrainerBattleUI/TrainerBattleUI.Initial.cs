@@ -12,5 +12,10 @@ public partial class TrainerBattleUI
         _enemyTrainerIDSprite.DrawTextSpriteWithScale(spriteBatch, enemyTrainerIDPosition, 2f);
         BattleUIHelper.drawPokeballSprites(_playerTeam, _TrainerUIAtlas, spriteBatch, true);
         BattleUIHelper.drawPokeballSprites(_enemyTeam, _TrainerUIAtlas, spriteBatch, false);
+
+        if (_playerDeploying)
+        {
+            _playerDeployThrow?.Draw(spriteBatch);
+        }
     }
 }

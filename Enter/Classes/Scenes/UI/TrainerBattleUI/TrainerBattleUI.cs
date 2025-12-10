@@ -113,6 +113,12 @@ public partial class TrainerBattleUI
     private double turnTimer = 0.0;
     private const double CpuAttackDelayMs = 2000.0;
 
+    // Deploy animation for player's pokemon
+    private PokeballthrowAnimation _playerDeployThrow;
+    private bool _playerDeploying = true;
+    private bool _playerDeploySetup = false;
+    private Vector2 _playerDeployTarget;
+
     public TrainerBattleUI(TextureAtlas trainerUIAtlas, TextureAtlas battleCharactersAtlas, TextureAtlas bordersAtlas, ContentManager content, String enemyTrainerID, Team playerTeam, Team enemyTeam)
     {
         // init class vars
@@ -171,6 +177,15 @@ public partial class TrainerBattleUI
     public void Update(GameTime gameTime)
     {
         var keyboardState = Keyboard.GetState();
+        // Update deploy throw animation
+        if (_playerDeployThrow != null && _playerDeploying)
+        {
+            _playerDeployThrow.Update(gameTime);
+            if (_playerDeployThrow.IsComplete)
+            {
+                _playerDeploying = false;
+            }
+        }
         // Ensure battleUI state machine and timer are updated
         battleUI.Update(gameTime);
         _currentState = battleUI.getBattleState();
@@ -382,6 +397,8 @@ public partial class TrainerBattleUI
             _enemyMove = ResolveMoveForPokemonName(enemyPokemon?.Name);
         }
 
+        EnsurePlayerDeploySetup(currentPokemon);
+
         // draw the UI elements for trainer battle (state based)
         switch (_currentState)
         {
@@ -426,6 +443,32 @@ public partial class TrainerBattleUI
             trainerID += " .";
         }
         return trainerID;
+    }
+
+    private void EnsurePlayerDeploySetup(Pokemon currentPokemon)
+    {
+        if (_playerDeploySetup || currentPokemon == null)
+            return;
+
+        var backSprite = PokemonBackFactory.Instance.CreateStaticSprite(currentPokemon.Name.ToLower() + "-back");
+        _playerDeployTarget = GetPlayerMonDrawPos(backSprite);
+        var throwStart = playerTrainerPosition + new Vector2(-24f, -12f); // start slightly behind/above trainer
+        if (Vector2.Distance(throwStart, _playerDeployTarget) < 1f)
+        {
+            throwStart += new Vector2(-32f, -16f); // ensure start and target differ so arc is visible
+        }
+        _playerDeployThrow = new PokeballthrowAnimation((int)throwStart.X, (int)throwStart.Y, _playerDeployTarget);
+        if (_content != null)
+        {
+            _playerDeployThrow.LoadContent(_content);
+        }
+        _playerDeploySetup = true;
+        _playerDeploying = true;
+    }
+
+    private Vector2 GetPlayerMonDrawPos(Sprite backSprite)
+    {
+        return new Vector2(playerPosition.X, maxDrawPos.Y + (-backSprite.Height * _scale));
     }
 
     private static Move SafeDefaultMove()
