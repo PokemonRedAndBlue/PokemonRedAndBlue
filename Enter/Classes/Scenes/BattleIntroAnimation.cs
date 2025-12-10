@@ -26,8 +26,13 @@ namespace Enter.Classes.Scenes.IntroAnimations
             Complete
         }
 
-        private State _currentState = State.SlideIn;
-        private float _stateTimer = 0f;
+        // ============================================================
+        // DISPLAY CONSTANTS
+        // ============================================================
+        private const float GAMEBOY_WIDTH = 160f;
+        private const float GAMEBOY_HEIGHT = 144f;
+        private const int CONTENT_CENTER_Y = 84;
+        private const float WINDOW_WIDTH = 1280f;
 
         // ============================================================
         // TIMING CONSTANTS - ADJUST THESE TO CHANGE ANIMATION SPEED (seconds)
@@ -42,7 +47,36 @@ namespace Enter.Classes.Scenes.IntroAnimations
         private const float PREPARE_ATTACK_DURATION = 2.57f;
         private const float RETURN_DURATION = 1.0f;
         private const float JUMP_ATTACK_DURATION = 2.0f;
+
         // ============================================================
+        // POSITION CONSTANTS (in Game Boy coordinates)
+        // ============================================================
+        private const float GENGAR_IDLE_X = 135f;
+        private const float GENGAR_IDLE_Y_OFFSET = 28f;
+        private const float GENGAR_LUNGE_X_OFFSET = 20f;
+        private const float GENGAR_LUNGE_FORWARD_OFFSET = 40f;
+        private const float GENGAR_SLIDE_START_OFFSET = 64f;
+        private const float GENGAR_SLIDE_START_Y_OFFSET = 27f;
+
+        private const float JIGGLYPUFF_IDLE_X = 85f;
+        private const float JIGGLYPUFF_IDLE_Y_OFFSET = 23f;
+        private const float JIGGLYPUFF_SLIDE_START_OFFSET = 56f;
+
+        // ============================================================
+        // ANIMATION CONSTANTS
+        // ============================================================
+        private const int TOTAL_HOPS = 2;
+        private const float HOP_FIRST_HORIZONTAL = 30f;
+        private const float HOP_FIRST_VERTICAL = 20f;
+        private const float HOP_AWAY_HORIZONTAL = 50f;
+        private const float HOP_AWAY_VERTICAL = 15f;
+        private const float HOP_LEFT_RIGHT_HORIZONTAL = 20f;
+        private const float HOP_LEFT_RIGHT_VERTICAL = 20f;
+        private const float JUMP_ATTACK_HORIZONTAL = 160f;
+        private const float JUMP_ATTACK_VERTICAL = 65f;
+
+        private State _currentState = State.SlideIn;
+        private float _stateTimer = 0f;
 
         private Sprite _gengarIdle;
         private Sprite _gengarArmRaised;
@@ -63,7 +97,6 @@ namespace Enter.Classes.Scenes.IntroAnimations
         // ============================================================
         // FLAGS - Make sure sound effects only play once per action
         // ============================================================
-
         private bool _hasPlayedSlideSound = false;
         private bool _hasPlayedHop1Sound = false;
         private bool _hasPlayedHop2Sound = false;
@@ -72,12 +105,12 @@ namespace Enter.Classes.Scenes.IntroAnimations
         private bool _hasPlayedHopAwaySound = false;
         private bool _hasPlayedAttackSound = false;
 
-        // ============================================================
         private int _hopCount = 0;
         private float _hopTimer = 0f;
 
         private Rectangle _screenBounds;
-        private bool _jigglypuffIsPreparingAttack = false; // prevents snappyness 
+        private bool _jigglypuffIsPreparingAttack = false;
+        
         public bool IsComplete => _currentState == State.Complete;
 
         public BattleIntroAnimation(TextureAtlas atlas, Rectangle screenBounds)
@@ -92,28 +125,35 @@ namespace Enter.Classes.Scenes.IntroAnimations
             _jigglypuffHop = atlas.CreateSprite("jigglypuff_hop");
             _jigglypuffJumpAttack = atlas.CreateSprite("jigglypuff_jump_attack");
 
-            int contentCenterY = 84;
-            int scaledCenterY = (int)(_screenBounds.Y + contentCenterY * (screenBounds.Height / 144f));
+            float scaleX = screenBounds.Width / GAMEBOY_WIDTH;
+            float scaleY = screenBounds.Height / GAMEBOY_HEIGHT;
+            int scaledCenterY = (int)(_screenBounds.Y + CONTENT_CENTER_Y * scaleY);
 
             _gengarIdlePosition = new Vector2(
-                _screenBounds.Right - 135 * (screenBounds.Width / 160f),
-                scaledCenterY - 28 * (screenBounds.Height / 144f)
+                _screenBounds.Right - GENGAR_IDLE_X * scaleX,
+                scaledCenterY - GENGAR_IDLE_Y_OFFSET * scaleY
             );
             _gengarLungePosition = new Vector2(
-                _gengarIdlePosition.X - 20 * (screenBounds.Width / 160f),
-                scaledCenterY - 28 * (screenBounds.Height / 144f)
+                _gengarIdlePosition.X - GENGAR_LUNGE_X_OFFSET * scaleX,
+                scaledCenterY - GENGAR_IDLE_Y_OFFSET * scaleY
             );
             _gengarLungeForwardPosition = new Vector2(
-                _gengarLungePosition.X + 40 * (screenBounds.Width / 160f),
-                scaledCenterY - 28 * (screenBounds.Height / 144f)
+                _gengarLungePosition.X + GENGAR_LUNGE_FORWARD_OFFSET * scaleX,
+                scaledCenterY - GENGAR_IDLE_Y_OFFSET * scaleY
             );
-            _gengarPosition = new Vector2(_screenBounds.Right + 64, scaledCenterY - 27 * (screenBounds.Height / 144f));
+            _gengarPosition = new Vector2(
+                _screenBounds.Right + GENGAR_SLIDE_START_OFFSET, 
+                scaledCenterY - GENGAR_SLIDE_START_Y_OFFSET * scaleY
+            );
 
             _jigglypuffIdlePosition = new Vector2(
-                _screenBounds.X + 85 * (screenBounds.Width / 160f),
-                scaledCenterY - 23 * (screenBounds.Height / 144f)
+                _screenBounds.X + JIGGLYPUFF_IDLE_X * scaleX,
+                scaledCenterY - JIGGLYPUFF_IDLE_Y_OFFSET * scaleY
             );
-            _jigglypuffPosition = new Vector2(_screenBounds.X - 56, scaledCenterY - 23 * (screenBounds.Height / 144f));
+            _jigglypuffPosition = new Vector2(
+                _screenBounds.X - JIGGLYPUFF_SLIDE_START_OFFSET, 
+                scaledCenterY - JIGGLYPUFF_IDLE_Y_OFFSET * scaleY
+            );
         }
 
         public void Update(GameTime gameTime)
@@ -160,7 +200,6 @@ namespace Enter.Classes.Scenes.IntroAnimations
 
         private void UpdateSlideIn(float dt)
         {
-
             if (!_hasPlayedSlideSound)
             {
                 SoundEffectPlayer.Play(SfxId.SFX_INTRO_WHOOSH);
@@ -170,13 +209,13 @@ namespace Enter.Classes.Scenes.IntroAnimations
             float progress = _stateTimer / SLIDE_DURATION;
 
             _gengarPosition = Vector2.Lerp(
-                new Vector2(_screenBounds.Width + 64, _gengarIdlePosition.Y),
+                new Vector2(_screenBounds.Width + GENGAR_SLIDE_START_OFFSET, _gengarIdlePosition.Y),
                 _gengarIdlePosition,
                 progress
             );
 
             _jigglypuffPosition = Vector2.Lerp(
-                new Vector2(-56, _jigglypuffIdlePosition.Y),
+                new Vector2(-JIGGLYPUFF_SLIDE_START_OFFSET, _jigglypuffIdlePosition.Y),
                 _jigglypuffIdlePosition,
                 progress
             );
@@ -194,12 +233,11 @@ namespace Enter.Classes.Scenes.IntroAnimations
         {
             _hopTimer += dt;
 
-            if (_hopTimer >= HOP_DURATION && _hopCount < 2)
+            if (_hopTimer >= HOP_DURATION && _hopCount < TOTAL_HOPS)
             {
                 _hopCount++;
                 _hopTimer = 0f;
 
-                // Play hop sound at start of each hop
                 if (_hopCount == 1 && !_hasPlayedHop1Sound)
                 {
                     SoundEffectPlayer.Play(SfxId.SFX_INTRO_HOP);
@@ -212,21 +250,14 @@ namespace Enter.Classes.Scenes.IntroAnimations
                 }
             }
 
-            if (_hopCount < 2)
+            if (_hopCount < TOTAL_HOPS)
             {
                 float hopProgress = _hopTimer / HOP_DURATION;
-                float horizontalMove;
+                float horizontalMove = (_hopCount == 0) 
+                    ? HOP_FIRST_HORIZONTAL * hopProgress 
+                    : HOP_FIRST_HORIZONTAL - (HOP_FIRST_HORIZONTAL * hopProgress);
 
-                if (_hopCount == 0)
-                {
-                    horizontalMove = 30f * hopProgress;
-                }
-                else
-                {
-                    horizontalMove = 30f - (30f * hopProgress);
-                }
-
-                float verticalArc = (float)Math.Sin(hopProgress * Math.PI) * 20f;
+                float verticalArc = (float)Math.Sin(hopProgress * Math.PI) * HOP_FIRST_VERTICAL;
 
                 _jigglypuffPosition = new Vector2(
                     _jigglypuffIdlePosition.X + horizontalMove,
@@ -268,6 +299,7 @@ namespace Enter.Classes.Scenes.IntroAnimations
                 SoundEffectPlayer.Play(SfxId.SFX_INTRO_LUNGE);
                 _hasPlayedLungeSound = true;
             }
+            
             float progress = _stateTimer / LUNGE_DURATION;
             _gengarPosition = Vector2.Lerp(_gengarLungePosition, _gengarLungeForwardPosition, progress);
 
@@ -293,8 +325,8 @@ namespace Enter.Classes.Scenes.IntroAnimations
 
             if (progress < 1f)
             {
-                float horizontalMove = 50f * progress;
-                float verticalArc = (float)Math.Sin(progress * Math.PI) * 15f;
+                float horizontalMove = HOP_AWAY_HORIZONTAL * progress;
+                float verticalArc = (float)Math.Sin(progress * Math.PI) * HOP_AWAY_VERTICAL;
 
                 _jigglypuffPosition = new Vector2(
                     _jigglypuffIdlePosition.X + horizontalMove,
@@ -304,15 +336,13 @@ namespace Enter.Classes.Scenes.IntroAnimations
             else
             {
                 _jigglypuffPosition = new Vector2(
-                    _jigglypuffIdlePosition.X + 50f,
+                    _jigglypuffIdlePosition.X + HOP_AWAY_HORIZONTAL,
                     _jigglypuffIdlePosition.Y
                 );
                 _currentState = State.GengarReturn;
                 _stateTimer = 0f;
             }
         }
-
-
 
         private void UpdateJigglypuffIdle(float dt)
         {
@@ -329,31 +359,21 @@ namespace Enter.Classes.Scenes.IntroAnimations
         {
             _hopTimer += dt;
 
-            if (_hopTimer >= HOP_DURATION && _hopCount < 2)
+            if (_hopTimer >= HOP_DURATION && _hopCount < TOTAL_HOPS)
             {
                 _hopCount++;
                 _hopTimer = 0f;
-
                 SoundEffectPlayer.Play(SfxId.SFX_INTRO_HOP);
             }
 
-            if (_hopCount < 2)
+            if (_hopCount < TOTAL_HOPS)
             {
                 float hopProgress = _hopTimer / HOP_DURATION;
-                float horizontalMove;
+                float horizontalMove = (_hopCount == 0) 
+                    ? HOP_LEFT_RIGHT_HORIZONTAL - (HOP_LEFT_RIGHT_HORIZONTAL * hopProgress)
+                    : HOP_LEFT_RIGHT_HORIZONTAL * hopProgress;
 
-                // Hop right to left 
-                if (_hopCount == 0)
-                {
-                    horizontalMove = 20f - (20f * hopProgress);
-                }
-                // Hop left to right 
-                else
-                {
-                    horizontalMove = 20f * hopProgress;
-                }
-
-                float verticalArc = (float)Math.Sin(hopProgress * Math.PI) * 20f;
+                float verticalArc = (float)Math.Sin(hopProgress * Math.PI) * HOP_LEFT_RIGHT_VERTICAL;
 
                 _jigglypuffPosition = new Vector2(
                     _jigglypuffIdlePosition.X + horizontalMove,
@@ -364,10 +384,9 @@ namespace Enter.Classes.Scenes.IntroAnimations
             if (_stateTimer >= HOP_LEFT_RIGHT_DURATION)
             {
                 _jigglypuffPosition = new Vector2(
-                    _jigglypuffIdlePosition.X + 20f,
+                    _jigglypuffIdlePosition.X + HOP_LEFT_RIGHT_HORIZONTAL,
                     _jigglypuffIdlePosition.Y
                 );
-
                 _currentState = State.JigglypuffPrepareAttack;
                 _stateTimer = 0f;
             }
@@ -397,15 +416,12 @@ namespace Enter.Classes.Scenes.IntroAnimations
             }
         }
 
-
-
-
         private void UpdateJigglypuffJumpAttack(float dt)
         {
             if (!_hasPlayedAttackSound)
             {
                 SoundEffectPlayer.Play(SfxId.SFX_INTRO_CRASH);
-                _hasPlayedSlideSound = true;
+                _hasPlayedAttackSound = true;
             }
 
             float progress = _stateTimer / JUMP_ATTACK_DURATION;
@@ -413,13 +429,13 @@ namespace Enter.Classes.Scenes.IntroAnimations
             if (progress < 1f)
             {
                 Vector2 startPos = new Vector2(
-                    _jigglypuffIdlePosition.X + 20f,
+                    _jigglypuffIdlePosition.X + HOP_LEFT_RIGHT_HORIZONTAL,
                     _jigglypuffIdlePosition.Y
                 );
 
                 Vector2 endPos = new Vector2(
-                    startPos.X - 160f,
-                    startPos.Y - 65f
+                    startPos.X - JUMP_ATTACK_HORIZONTAL,
+                    startPos.Y - JUMP_ATTACK_VERTICAL
                 );
 
                 _jigglypuffPosition = Vector2.Lerp(startPos, endPos, progress);
@@ -432,23 +448,25 @@ namespace Enter.Classes.Scenes.IntroAnimations
 
         public void Draw(SpriteBatch spriteBatch, Sprite blankScreen, Vector2 screenPos, float scale)
         {
-            float gameScreenWidth = 160 * scale;
-            float windowWidth = 1280f;
-            float extraSpace = (windowWidth - gameScreenWidth) / 2;
+            float gameScreenWidth = GAMEBOY_WIDTH * scale;
+            float extraSpace = (WINDOW_WIDTH - gameScreenWidth) / 2;
 
+            // Draw left border
             spriteBatch.Draw(
                 blankScreen.Region.Texture,
-                new Rectangle(0, (int)screenPos.Y, (int)extraSpace, (int)(144 * scale)),
-                new Rectangle(blankScreen.Region.SourceRectangle.X, blankScreen.Region.SourceRectangle.Y, 1, 144),
+                new Rectangle(0, (int)screenPos.Y, (int)extraSpace, (int)(GAMEBOY_HEIGHT * scale)),
+                new Rectangle(blankScreen.Region.SourceRectangle.X, blankScreen.Region.SourceRectangle.Y, 1, (int)GAMEBOY_HEIGHT),
                 Color.White
             );
 
+            // Draw center
             blankScreen.Draw(spriteBatch, Color.White, screenPos, scale);
 
+            // Draw right border
             spriteBatch.Draw(
                 blankScreen.Region.Texture,
-                new Rectangle((int)(screenPos.X + gameScreenWidth), (int)screenPos.Y, (int)extraSpace, (int)(144 * scale)),
-                new Rectangle(blankScreen.Region.SourceRectangle.Right - 1, blankScreen.Region.SourceRectangle.Y, 1, 144),
+                new Rectangle((int)(screenPos.X + gameScreenWidth), (int)screenPos.Y, (int)extraSpace, (int)(GAMEBOY_HEIGHT * scale)),
+                new Rectangle(blankScreen.Region.SourceRectangle.Right - 1, blankScreen.Region.SourceRectangle.Y, 1, (int)GAMEBOY_HEIGHT),
                 Color.White
             );
 
@@ -461,18 +479,9 @@ namespace Enter.Classes.Scenes.IntroAnimations
                     gengarSprite = _gengarArmRaised;
                     break;
                 case State.GengarLunge:
-                    gengarSprite = _gengarLunge;
-                    break;
                 case State.JigglypuffHopAwayRight:
-                    gengarSprite = _gengarLunge;
-                    break;
                 case State.GengarReturn:
                     gengarSprite = _gengarLunge;
-                    break;
-                case State.JigglypuffIdle:
-                case State.JigglypuffHopLeftRight:
-                case State.JigglypuffPrepareAttack:
-                case State.JigglypuffJumpAttack:
                     break;
             }
 
@@ -482,12 +491,10 @@ namespace Enter.Classes.Scenes.IntroAnimations
                 jigglypuffSprite = _jigglypuffHop;
             }
 
-            // Jump attack overrides everything
             if (_currentState == State.JigglypuffJumpAttack)
             {
                 jigglypuffSprite = _jigglypuffJumpAttack;
             }
-
 
             bool gengarBehind = _gengarPosition.Y > _jigglypuffPosition.Y;
 
