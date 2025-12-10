@@ -10,6 +10,7 @@ using Enter.Classes.Animations;
 using Enter.Classes.GameState;
 using Enter.Classes.Characters;
 using PokemonGame;
+using System.Linq;
 
 public partial class WildEncounterUI
 {
@@ -28,6 +29,8 @@ public partial class WildEncounterUI
     private PokemonInstance _enemyInstance;
     private AnimatedSprite _wildPokemonSpriteFront;
     private static readonly Random _rng = new Random();
+    private Move _playerMove = SafeDefaultMove();
+    private Move _enemyMove = SafeDefaultMove();
     private KeyboardState _prevKeyboardState;
     
     // Animation attack state tracking
@@ -302,6 +305,10 @@ public partial class WildEncounterUI
             enemyMaxHP = enemyPokemon.MaxHp > 0 ? enemyPokemon.MaxHp : 50;
             battleInitialized = true;
             battleMessage = "";
+
+            // Seed default moves from species data
+            _playerMove = ResolveMoveForPokemonName(currentPokemon?.Name);
+            _enemyMove = ResolveMoveForEnemy();
         }
 
         // Draw the UI elements for wild encounter (state based)
@@ -363,17 +370,10 @@ public partial class WildEncounterUI
 
     private void ResolvePlayerAttack()
     {
-        int playerDmg = _rng.Next(0, 21);
-        string playerMsg = "Player attacks! ";
-        if (playerDmg == 20)
-            playerMsg += "Critical hit! ";
-        else if (playerDmg == 0)
-            playerMsg += "You missed! ";
-        else
-            playerMsg += $"Enemy loses {playerDmg} HP.";
+        var attacker = _Player?.thePlayersTeam?.Pokemons?[0];
+        var playerMove = _playerMove ?? SafeDefaultMove();
 
-        enemyCurrentHP -= playerDmg;
-        if (enemyCurrentHP < 0) enemyCurrentHP = 0;
+        ApplyAttack(attacker, playerMove, ref enemyCurrentHP, _enemyPokemon?.Name ?? "Enemy", out var playerMsg);
 
         shouldPlayPlayerAttackAnimation = true;
         playerAttackAnimationPlaying = false;
@@ -406,17 +406,7 @@ public partial class WildEncounterUI
         turnTimer = 0.0;
         currentTurn = BattleTurn.Wild;
 
-        int cpuDmg = _rng.Next(0, 21);
-        string cpuMsg = "Enemy attacks! ";
-        if (cpuDmg == 20)
-            cpuMsg += "Critical hit! ";
-        else if (cpuDmg == 0)
-            cpuMsg += "Enemy missed! ";
-        else
-            cpuMsg += $"Player loses {cpuDmg} HP.";
-
-        playerCurrentHP -= cpuDmg;
-        if (playerCurrentHP < 0) playerCurrentHP = 0;
+        ApplyAttack(_enemyPokemon, _enemyMove ?? SafeDefaultMove(), ref playerCurrentHP, _Player?.thePlayersTeam?.Pokemons?[0]?.Name ?? "Player", out var cpuMsg);
 
         shouldPlayEnemyAttackAnimation = true;
         enemyAttackAnimationPlaying = false;
@@ -442,6 +432,96 @@ public partial class WildEncounterUI
         }
     }
 
+    private static Move SafeDefaultMove()
+    {
+        try
+        {
+            return MoveDatabase.Get("Tackle");
+        }
+        catch
+        {
+            return new Move
+            {
+                Name = "Tackle",
+                Type = "Normal",
+                Power = 15,
+                Category = MoveCategory.Physical
+            };
+        }
+    }
+
+    private static int ComputeDamage(Move move)
+    {
+        move ??= SafeDefaultMove();
+        int basePower = move.Power > 0 ? move.Power : 10;
+        int variance = _rng.Next(-5, 6);
+        return Math.Max(1, basePower + variance);
+    }
+
+    private static int ApplyAttack(Pokemon attacker, Move move, ref int targetHp, string targetName, out string message)
+    {
+        string attackerName = attacker?.Name ?? "Pokemon";
+        move ??= SafeDefaultMove();
+
+        bool miss = _rng.Next(0, 100) < 5;
+        bool crit = _rng.Next(0, 100) > 90;
+
+        if (miss)
+        {
+            message = attackerName + " used " + move.Name + ", but missed!";
+            return 0;
+        }
+
+        int damage = ComputeDamage(move);
+        if (crit)
+        {
+            damage = (int)Math.Round(damage * 1.5);
+        }
+
+        targetHp -= damage;
+        if (targetHp < 0) targetHp = 0;
+
+        if (crit)
+        {
+            message = attackerName + " used " + move.Name + "! Critical hit for " + damage + " damage.";
+        }
+        else
+        {
+            message = attackerName + " used " + move.Name + "! " + targetName + " lost " + damage + " HP.";
+        }
+
+        return damage;
+    }
+
+    private Move ResolveMoveForPokemonName(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name)) return SafeDefaultMove();
+        try
+        {
+            var species = PokemonGenerator.GenerateSpeciesByName(name);
+            var first = species?.Moves?.FirstOrDefault();
+            return !string.IsNullOrWhiteSpace(first) ? MoveDatabase.Get(first) : SafeDefaultMove();
+        }
+        catch
+        {
+            return SafeDefaultMove();
+        }
+    }
+
+    private Move ResolveMoveForEnemy()
+    {
+        try
+        {
+            var first = _enemyInstance?.Moves?.FirstOrDefault();
+            if (!string.IsNullOrWhiteSpace(first))
+            {
+                return MoveDatabase.Get(first);
+            }
+        }
+        catch { }
+        return SafeDefaultMove();
+    }
+
     private void DrawHP(SpriteBatch spriteBatch, int hp, int maxHp, Vector2 pos, string label)
     {
         spriteBatch.DrawString(_font, $"{label}: {hp}/{maxHp}", pos, Color.Black);
@@ -456,7 +536,7 @@ public partial class WildEncounterUI
         else if (message.StartsWith("Player attacks!")) color = Color.LawnGreen;
         else if (message.StartsWith("Enemy attacks!")) color = Color.Red;
 
-        if (message == "Press A to use Tackle" || message == "Use arrow keys to navigate and Enter to select")
+        if (message.StartsWith("Press A to use") || message == "Use arrow keys to navigate and Enter to select")
         {
             msgPos.Y -= 50;
             color = Color.Black;

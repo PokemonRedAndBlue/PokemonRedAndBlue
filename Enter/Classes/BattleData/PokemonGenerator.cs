@@ -46,6 +46,51 @@ class PokemonGenerator
         return instance;
     }
 
+    public static PokemonSpecies GenerateSpeciesByName(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+            throw new ArgumentException("Pokemon name cannot be empty", nameof(name));
+
+        if (!File.Exists(filePath))
+        {
+            throw new FileNotFoundException($"Pokémon file not found: {filePath}");
+        }
+
+        var xml = XDocument.Load(filePath);
+
+        var p = xml.Descendants("Pokemon")
+           .FirstOrDefault(e => string.Equals(e.Element("Name")?.Value, name, StringComparison.OrdinalIgnoreCase));
+
+        if (p == null)
+            throw new Exception($"No <Pokemon> element found for name {name}");
+
+        var moves = p.Element("Moves")
+                 .Elements("Move")
+                 .Select(m => m.Value)
+                 .ToList();
+
+        var species = new PokemonSpecies
+        {
+            Dex = int.Parse(p.Element("Dex").Value),
+            Name = p.Element("Name").Value,
+            Type1 = p.Element("Type1").Value,
+            Type2 = p.Element("Type2")?.Value ?? "",
+            BaseStats = new BaseStats
+            {
+                HP = int.Parse(p.Element("BaseStats").Element("HP").Value),
+                Attack = int.Parse(p.Element("BaseStats").Element("Attack").Value),
+                Defense = int.Parse(p.Element("BaseStats").Element("Defense").Value),
+                SpAttack = int.Parse(p.Element("BaseStats").Element("SpAttack").Value),
+                SpDefense = int.Parse(p.Element("BaseStats").Element("SpDefense").Value),
+                Speed = int.Parse(p.Element("BaseStats").Element("Speed").Value)
+            },
+            CatchRate = int.Parse(p.Element("CatchRate").Value),
+            Moves = moves
+        };
+
+        return species;
+    }
+
     public static IVSet RandomIV()
     {
         var ivs = new IVSet

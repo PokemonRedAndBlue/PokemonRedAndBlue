@@ -6,6 +6,7 @@ using Enter.Classes.Sprites;
 using System;
 using System.Data;
 using System.Collections.Generic;
+using System.Linq;
 using Enter.Classes.Animations;
 using Enter.Classes.GameState;
 using PokemonGame;
@@ -21,6 +22,9 @@ public partial class TrainerBattleUI
     private TextureAtlas _creatureAtlas;
     private ContentManager _content;
     private bool _creatureSpriteMissing;
+    private static readonly Random _rng = new Random();
+    private Move _playerMove = SafeDefaultMove();
+    private Move _enemyMove = SafeDefaultMove();
     public bool ItemConfirmRequested { get; private set; }
     private KeyboardState _prevItemKeyState;
     private TextSprite _trainerText;
@@ -287,17 +291,9 @@ public partial class TrainerBattleUI
                 Pokemon currentPokemon = _playerTeam?.Pokemons?[0];
                 Pokemon enemyPokemon = _enemyTeam?.Pokemons?[0];
                 
-                // CPU attacks player (random damage 0-20)
-                int cpuDmg = new Random().Next(0, 21);
-                string cpuMsg = "Enemy attacks! ";
-                if (cpuDmg == 20)
-                    cpuMsg += "Critical hit! ";
-                else if (cpuDmg == 0)
-                    cpuMsg += "Enemy missed! ";
-                else
-                    cpuMsg += $"Player loses {cpuDmg} HP.";
-                playerCurrentHP -= cpuDmg;
-                if (playerCurrentHP < 0) playerCurrentHP = 0;
+                string cpuMsg;
+                var enemyMove = _enemyMove ?? SafeDefaultMove();
+                ApplyAttack(enemyPokemon, enemyMove, ref playerCurrentHP, currentPokemon?.Name.ToString() ?? "Player", out cpuMsg);
                 
                 // Trigger enemy attack animation
                 shouldPlayEnemyAttackAnimation = true;
@@ -369,6 +365,10 @@ public partial class TrainerBattleUI
             enemyMaxHP = enemyPokemon.MaxHp > 0 ? enemyPokemon.MaxHp : 50;
             battleInitialized = true;
             battleMessage = "";
+
+            // Seed default moves from species data
+            _playerMove = ResolveMoveForPokemonName(currentPokemon?.Name);
+            _enemyMove = ResolveMoveForPokemonName(enemyPokemon?.Name);
         }
 
         // draw the UI elements for trainer battle (state based)
@@ -417,6 +417,84 @@ public partial class TrainerBattleUI
         return trainerID;
     }
 
+    private static Move SafeDefaultMove()
+    {
+        try
+        {
+            return MoveDatabase.Get("Tackle");
+        }
+        catch
+        {
+            return new Move
+            {
+                Name = "Tackle",
+                Type = "Normal",
+                Power = 15,
+                Category = MoveCategory.Physical
+            };
+        }
+    }
+
+    private static int ComputeDamage(Move move)
+    {
+        move ??= SafeDefaultMove();
+        int basePower = move.Power > 0 ? move.Power : 10;
+        int variance = _rng.Next(-5, 6); // small +/- variance
+        int damage = Math.Max(1, basePower + variance);
+        return damage;
+    }
+
+    private static int ApplyAttack(Pokemon attacker, Move move, ref int targetHp, string targetName, out string message)
+    {
+        string attackerName = attacker?.Name ?? "Pokemon";
+        move ??= SafeDefaultMove();
+
+        // Simple miss/crit logic to keep battles dynamic
+        bool miss = _rng.Next(0, 100) < 5;          // 5% miss chance
+        bool crit = _rng.Next(0, 100) > 90;         // 9% crit chance
+
+        if (miss)
+        {
+            message = attackerName + " used " + move.Name + ", but missed!";
+            return 0;
+        }
+
+        int damage = ComputeDamage(move);
+        if (crit)
+        {
+            damage = (int)Math.Round(damage * 1.5);
+        }
+
+        targetHp -= damage;
+        if (targetHp < 0) targetHp = 0;
+
+        if (crit)
+        {
+            message = attackerName + " used " + move.Name + "! Critical hit for " + damage + " damage.";
+        }
+        else
+        {
+            message = attackerName + " used " + move.Name + "! " + targetName + " lost " + damage + " HP.";
+        }
+
+        return damage;
+    }
+
+    private Move ResolveMoveForPokemonName(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name)) return SafeDefaultMove();
+        try
+        {
+            var species = PokemonGenerator.GenerateSpeciesByName(name);
+            var first = species?.Moves?.FirstOrDefault();
+            return !string.IsNullOrWhiteSpace(first) ? MoveDatabase.Get(first) : SafeDefaultMove();
+        }
+        catch
+        {
+            return SafeDefaultMove();
+        }
+    }
+
     private void DrawHP(SpriteBatch spriteBatch, int hp, int maxHp, Vector2 pos, string label)
     {
         // Draw both HP in black
@@ -433,7 +511,7 @@ public partial class TrainerBattleUI
         else if (message.StartsWith("Player attacks!")) color = Color.LawnGreen;
         else if (message.StartsWith("Enemy attacks!")) color = Color.Red;
         // Draw instructional messages in black and higher
-        if (message == "Press A to use Tackle" || message == "Use arrow keys to navigate and Enter to select")
+        if (message.StartsWith("Press A to use") || message == "Use arrow keys to navigate and Enter to select")
         {
             msgPos.Y -= 50;
             color = Color.Black;
