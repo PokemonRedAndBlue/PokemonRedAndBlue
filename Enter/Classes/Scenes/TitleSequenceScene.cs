@@ -24,6 +24,24 @@ namespace Enter.Classes.Scenes
             Complete
         }
 
+        // ============================================================
+        // DISPLAY CONSTANTS
+        // ============================================================
+        private const float SCREEN_SCALE = 5f; // Game Boy 160x144 scaled to 800x720
+        private const int GAMEBOY_WIDTH = 160;
+        private const int GAMEBOY_HEIGHT = 144;
+        
+        // ============================================================
+        // TIMING CONSTANTS - ADJUST THESE TO CHANGE ANIMATION SPEED
+        // ============================================================
+        private const float COPYRIGHT_DURATION = 1.0f;    // Copyright screen
+        private const float BLANK_DURATION = 0.3f;        // Blank screen between copyright and GAME FREAK
+        
+        // ============================================================
+        // COLOR CONSTANTS
+        // ============================================================
+        private static readonly Color BACKGROUND_COLOR = new Color(246, 232, 248);
+
         private SceneManager _sceneManager;
         private Game1 _game;
 
@@ -41,26 +59,12 @@ namespace Enter.Classes.Scenes
         // Input handling
         private KeyboardState _previousKeyState;
         private KeyboardState _currentKeyState;
-
-        // ============================================================
-        // TIMING CONSTANTS - ADJUST THESE TO CHANGE ANIMATION SPEED
-        // ============================================================
-        // How long each screen lasts (in seconds):
-        private const float COPYRIGHT_DURATION = 1.0f;    // Copyright screen
-        
-        private const float BLANK_DURATION = 0.3f;        // Blank screen between copyright and GAME FREAK
-                                                          // ============================================================
                                                           
         // State management
         private TitleState _currentState = TitleState.Copyright;
         private float _stateTimer = 0f;
 
-        // Screen scale - 5x fills a 1280x720 window nicely
-        private const float SCREEN_SCALE = 5f; // Game Boy 160x144 scaled to 800x720
         private Vector2 _screenPosition;
-
-        // Colors
-        private Color _backgroundColor = Color.White;
 
         public TitleSequenceScene(SceneManager sceneManager, Game1 game)
         {
@@ -81,16 +85,16 @@ namespace Enter.Classes.Scenes
             int screenWidth = _game.Window.ClientBounds.Width;
             int screenHeight = _game.Window.ClientBounds.Height;
             _screenPosition = new Vector2(
-                (screenWidth - 160 * SCREEN_SCALE) / 2,
-                (screenHeight - 144 * SCREEN_SCALE) / 2
+                (screenWidth - GAMEBOY_WIDTH * SCREEN_SCALE) / 2,
+                (screenHeight - GAMEBOY_HEIGHT * SCREEN_SCALE) / 2
             );
 
             // Create animation controllers
             Rectangle screenBounds = new Rectangle(
                 (int)_screenPosition.X,
                 (int)_screenPosition.Y,
-                (int)(160 * SCREEN_SCALE),
-                (int)(144 * SCREEN_SCALE)
+                (int)(GAMEBOY_WIDTH * SCREEN_SCALE),
+                (int)(GAMEBOY_HEIGHT * SCREEN_SCALE)
             );
 
             _gameFreakAnim = new GameFreakAnimation(_titleAtlas, screenBounds);
@@ -100,7 +104,7 @@ namespace Enter.Classes.Scenes
             _currentState = TitleState.Copyright;
             _stateTimer = 0f;
 
-            // Play title screen music (commented out if not loaded)
+            // Play title screen music
             BackgroundMusicLibrary.Load(content);
             SoundEffectLibrary.Load(content);
 
@@ -177,7 +181,6 @@ namespace Enter.Classes.Scenes
                 BackgroundMusicPlayer.Stop();
 
                 // Transition to actual title screen or game
-
                 _sceneManager.TransitionTo("intro");
             }
         }
@@ -215,8 +218,8 @@ namespace Enter.Classes.Scenes
             Rectangle screenBounds = new Rectangle(
                 (int)_screenPosition.X,
                 (int)_screenPosition.Y,
-                (int)(160 * SCREEN_SCALE),
-                (int)(144 * SCREEN_SCALE)
+                (int)(GAMEBOY_WIDTH * SCREEN_SCALE),
+                (int)(GAMEBOY_HEIGHT * SCREEN_SCALE)
             );
 
             _gameFreakAnim = new GameFreakAnimation(_titleAtlas, screenBounds);
@@ -232,8 +235,7 @@ namespace Enter.Classes.Scenes
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.GraphicsDevice.Clear(new Color(246, 232, 248));
-
+            spriteBatch.GraphicsDevice.Clear(BACKGROUND_COLOR);
 
             spriteBatch.Begin(samplerState: SamplerState.PointClamp);
 

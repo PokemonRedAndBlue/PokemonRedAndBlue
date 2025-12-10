@@ -23,8 +23,12 @@ namespace Enter.Classes.Scenes.IntroAnimations
             Complete
         }
         
-        private State _currentState = State.BlackBlack;
-        private float _stateTimer = 0f;
+        // ============================================================
+        // DISPLAY CONSTANTS
+        // ============================================================
+        private const float WINDOW_WIDTH = 1280f;
+        private const int GAMEBOY_WIDTH = 160;
+        private const int GAMEBOY_HEIGHT = 144;
         
         // ============================================================
         // TIMING CONSTANTS - ADJUST THESE TO CHANGE ANIMATION SPEED (seconds)
@@ -35,7 +39,19 @@ namespace Enter.Classes.Scenes.IntroAnimations
         private const float DARKYELLOW_YELLOW_DURATION = 0.3f;     // Text dark yellow, symbol yellow
         private const float BLACK_DARKYELLOW_DURATION = 0.3f;      // Text black, symbol dark yellow
         private const float FALLING_STARS_DURATION = 3.5f;         // Stars falling animation
+        
         // ============================================================
+        // STAR ANIMATION CONSTANTS
+        // ============================================================
+        private const float STAR_SWEEP_START_OFFSET = 32f;
+        private const float FALLING_STAR_START_Y = 90f;            // Game Boy Y coordinate
+        private const float FALLING_STAR_VELOCITY = 25f;           // Pixels per second
+        private const float BLACK_BAR_Y = 105f;                    // Game Boy Y coordinate where stars hide
+        private const float STAR_BLINK_INTERVAL = 0.2f;            // Seconds between blinks
+        private const int GAMEBOY_SCALE = 5;                       // Scale multiplier for Game Boy coordinates
+        
+        private State _currentState = State.BlackBlack;
+        private float _stateTimer = 0f;
         
         // Full screen frame sprites 
         private Sprite _gameFreakBlackBlack;
@@ -72,8 +88,14 @@ namespace Enter.Classes.Scenes.IntroAnimations
             _sweepStar = atlas.CreateAnimatedSprite("sweep_star_cycle");
             
             // Setup star sweep path (top-right to bottom-left)
-            _starStartPos = new Vector2(screenBounds.Width + 32, -32);
-            _starEndPos = new Vector2(-32, screenBounds.Height + 32);
+            _starStartPos = new Vector2(
+                screenBounds.Width + STAR_SWEEP_START_OFFSET, 
+                -STAR_SWEEP_START_OFFSET
+            );
+            _starEndPos = new Vector2(
+                -STAR_SWEEP_START_OFFSET, 
+                screenBounds.Height + STAR_SWEEP_START_OFFSET
+            );
             _starPosition = _starStartPos;
             
             InitializeFallingStars();
@@ -92,9 +114,6 @@ namespace Enter.Classes.Scenes.IntroAnimations
                 "falling_star_blue_green"
             };
             
-            // Adjusted for 5x scale 
-            // Game Boy screen center is at 80 pixels, GAME FREAK text ends around y=80
-            // Stars should start around y=90 (in Game Boy coords) * 5 = 450 (screen coords)
             float[] xPositions = { 20, 40, 60, 80, 100, 120, 30, 50, 70, 90, 110, 130 };
             bool[] shouldBlink = { true, false, true, false, true, false, false, true, false, true, false, true };
             
@@ -104,12 +123,12 @@ namespace Enter.Classes.Scenes.IntroAnimations
                 {
                     Sprite = _atlas.CreateSprite(starColors[i % starColors.Length]),
                     Position = new Vector2(
-                        _screenBounds.X + (xPositions[i] * 5),  // Scale X position by 5
-                        _screenBounds.Y + (90 * 5)              // Start at y=90 in GB coords = 450 in screen coords
+                        _screenBounds.X + (xPositions[i] * GAMEBOY_SCALE),
+                        _screenBounds.Y + (FALLING_STAR_START_Y * GAMEBOY_SCALE)
                     ),
-                    Velocity = 25f, // pixels per second 
+                    Velocity = FALLING_STAR_VELOCITY,
                     ShouldBlink = shouldBlink[i],
-                    BlinkInterval = 0.2f,
+                    BlinkInterval = STAR_BLINK_INTERVAL,
                     BlinkTimer = 0f,
                     IsVisible = true
                 };
@@ -188,15 +207,17 @@ namespace Enter.Classes.Scenes.IntroAnimations
         
         private void UpdateFallingStars(float dt)
         {
+            float blackBarY = _screenBounds.Y + (BLACK_BAR_Y * GAMEBOY_SCALE);
+            
             foreach (var star in _fallingStars)
             {
                 // Move star down
-                star.Position = new Vector2(star.Position.X, star.Position.Y + star.Velocity * dt);
+                star.Position = new Vector2(
+                    star.Position.X, 
+                    star.Position.Y + star.Velocity * dt
+                );
                 
                 // Hide stars when they enter the bottom black bar
-                // Black bar starts at y=112 in Game Boy coords (out of 144)
-                // In screen coords: _screenBounds.Y + (105 * 5)
-                float blackBarY = _screenBounds.Y + (105 * 5);
                 if (star.Position.Y >= blackBarY)
                 {
                     star.IsVisible = false;
@@ -222,11 +243,7 @@ namespace Enter.Classes.Scenes.IntroAnimations
             switch (_currentState)
             {
                 case State.BlackBlack:
-                    currentFrame = _gameFreakBlackBlack;
-                    break;
-                    
                 case State.StarSweep:
-                    // Just show the normal black logo during star sweep
                     currentFrame = _gameFreakBlackBlack;
                     break;
                     
@@ -246,26 +263,25 @@ namespace Enter.Classes.Scenes.IntroAnimations
             
             if (currentFrame != null)
             {
-                float gameScreenWidth = 160 * scale; 
-                float windowWidth = 1280f;
-                float extraSpace = (windowWidth - gameScreenWidth) / 2; 
+                float gameScreenWidth = GAMEBOY_WIDTH * scale; 
+                float extraSpace = (WINDOW_WIDTH - gameScreenWidth) / 2; 
                 
-                // Draw white rectangles on the sides (for white areas of the frame)
+                // Draw left border
                 spriteBatch.Draw(
                     currentFrame.Region.Texture,
-                    new Rectangle(0, (int)screenPos.Y, (int)extraSpace, (int)(144 * scale)),
-                    new Rectangle(currentFrame.Region.SourceRectangle.X, currentFrame.Region.SourceRectangle.Y, 1, 144),
+                    new Rectangle(0, (int)screenPos.Y, (int)extraSpace, (int)(GAMEBOY_HEIGHT * scale)),
+                    new Rectangle(currentFrame.Region.SourceRectangle.X, currentFrame.Region.SourceRectangle.Y, 1, GAMEBOY_HEIGHT),
                     Color.White
                 );
                 
                 // Draw center (actual frame)
                 currentFrame.Draw(spriteBatch, Color.White, screenPos, scale);
                 
-                // Draw white rectangles on right side
+                // Draw right border
                 spriteBatch.Draw(
                     currentFrame.Region.Texture,
-                    new Rectangle((int)(screenPos.X + gameScreenWidth), (int)screenPos.Y, (int)extraSpace, (int)(144 * scale)),
-                    new Rectangle(currentFrame.Region.SourceRectangle.Right - 1, currentFrame.Region.SourceRectangle.Y, 1, 144),
+                    new Rectangle((int)(screenPos.X + gameScreenWidth), (int)screenPos.Y, (int)extraSpace, (int)(GAMEBOY_HEIGHT * scale)),
+                    new Rectangle(currentFrame.Region.SourceRectangle.Right - 1, currentFrame.Region.SourceRectangle.Y, 1, GAMEBOY_HEIGHT),
                     Color.White
                 );
             }
