@@ -39,6 +39,11 @@ public class PokeballCaptureAnimation
     private const double ABSORB_DURATION = 800; // milliseconds
     private double successPauseTimer = 0;
     private const double SUCCESS_PAUSE_MS = 4000; // pause after shakes end
+    private bool throwSoundPlayed = false;
+    private bool hitSoundPlayed = false;
+    private bool successSoundPlayed = false;
+    private bool failSoundPlayed = false;
+    private int lastShakesLeft = 0;
 
     // Shake timing
     private double shakeTimer = 0;
@@ -95,6 +100,7 @@ public class PokeballCaptureAnimation
         absorbTargetPos = targetPosition;
         activeFrame = 1;
         frameCount = 0;
+        lastShakesLeft = shakesLeft;
     }
 
     public void SetCaptureChance(double chance)
@@ -104,6 +110,13 @@ public class PokeballCaptureAnimation
 
     public void StartCapture()
     {
+        throwSoundPlayed = false;
+        hitSoundPlayed = false;
+        successSoundPlayed = false;
+        failSoundPlayed = false;
+        shakesLeft = 3;
+        lastShakesLeft = shakesLeft;
+        shakeTimer = 0;
         _state = CaptureState.Throwing;
     }
 
@@ -125,6 +138,11 @@ public class PokeballCaptureAnimation
                 break;
 
             case CaptureState.Throwing:
+                if (!throwSoundPlayed)
+                {
+                    SoundEffectPlayer.Play(SfxId.SFX_BALL_TOSS);
+                    throwSoundPlayed = true;
+                }
                 throwAnim.Update(gameTime);
                 
                 //Check if throw animation has completed its arc
@@ -150,6 +168,11 @@ public class PokeballCaptureAnimation
                 // Brief pause at impact, then start absorbing
                 absorbTimer = 0;
                 _pokeballPosition = targetPosition; // Ball is now at target position
+                if (!hitSoundPlayed)
+                {
+                    SoundEffectPlayer.Play(SfxId.SFX_BALL_POOF);
+                    hitSoundPlayed = true;
+                }
                 _state = CaptureState.Absorbing;
                 break;
 
@@ -196,6 +219,11 @@ public class PokeballCaptureAnimation
                 {
                     shakeTimer = 0;
                     shakesLeft--;
+                    if (shakesLeft < lastShakesLeft)
+                    {
+                        SoundEffectPlayer.Play(SfxId.SFX_BALL_POOF);
+                        lastShakesLeft = shakesLeft;
+                    }
 
                     if (shakesLeft <= 0)
                     {
@@ -216,6 +244,11 @@ public class PokeballCaptureAnimation
 
             case CaptureState.SuccessPause:
                 successPauseTimer += dt;
+                if (!successSoundPlayed)
+                {
+                    SoundEffectPlayer.Play(SfxId.SFX_CAUGHT_MON);
+                    successSoundPlayed = true;
+                }
                 if (successPauseTimer >= SUCCESS_PAUSE_MS)
                 {
                     _state = CaptureState.Success;
@@ -228,6 +261,11 @@ public class PokeballCaptureAnimation
                 break;
 
             case CaptureState.Fail:
+                if (!failSoundPlayed)
+                {
+                    SoundEffectPlayer.Play(SfxId.SFX_DENIED);
+                    failSoundPlayed = true;
+                }
                 // Pokemon escapes - show the pokemon again
                 pokemonVisible = true;
                 pokemonColor = Color.White;

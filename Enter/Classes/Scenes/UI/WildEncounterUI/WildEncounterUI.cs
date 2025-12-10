@@ -307,10 +307,8 @@ public partial class WildEncounterUI
                     _captureAnimation = new PokeballCaptureAnimation(wildPokemonPosition, pokeRegion, startPos);
                     _captureAnimation.LoadContent(_content);
 
-                    // Simple capture odds: higher at lower HP
-                    double hpRatio = enemyMaxHP > 0 ? (double)enemyCurrentHP / enemyMaxHP : 1.0;
-                    double captureChance = Math.Clamp(0.8 - (hpRatio * 0.5), 0.25, 0.9);
-                    _captureAnimation.SetCaptureChance(captureChance);
+                    // Force 100% capture rate
+                    _captureAnimation.SetCaptureChance(1.0);
 
                     _captureAnimation.StartCapture();
                     captureInProgress = true;
