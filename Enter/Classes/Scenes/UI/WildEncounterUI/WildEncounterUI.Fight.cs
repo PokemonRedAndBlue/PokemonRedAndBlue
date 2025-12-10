@@ -57,6 +57,7 @@ public partial class WildEncounterUI
             DrawMessage(spriteBatch, battleMessage);
         }
         // Show fight instructions
-        DrawMessage(spriteBatch, "Press A to use Tackle");
+        string moveName = (_playerMove ?? SafeDefaultMove()).Name;
+        DrawMessage(spriteBatch, "Press A to use " + moveName);
     }
 }

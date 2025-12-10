@@ -14,17 +14,9 @@ public partial class TrainerBattleUI
         Sprite currentMon = PokemonBackFactory.Instance.CreateStaticSprite(playersPokemon.ToLower() + "-back");
         if (!endMessageActive && currentTurn == BattleTurn.Player && Keyboard.GetState().IsKeyDown(Keys.A))
         {
-            // Player attacks enemy (random damage 0-20)
-            int playerDmg = new Random().Next(0, 21);
-            string playerMsg = "Player attacks! ";
-            if (playerDmg == 20)
-                playerMsg += "Critical hit! ";
-            else if (playerDmg == 0)
-                playerMsg += "You missed! ";
-            else
-                playerMsg += $"Enemy loses {playerDmg} HP.";
-            enemyCurrentHP -= playerDmg;
-            if (enemyCurrentHP < 0) enemyCurrentHP = 0;
+            var playerMove = _playerMove ?? SafeDefaultMove();
+            string playerMsg;
+            ApplyAttack(currentPokemon, playerMove, ref enemyCurrentHP, enemyPokemon?.Name.ToString() ?? "Enemy", out playerMsg);
             
             // Trigger player attack animation when player attacks
             shouldPlayPlayerAttackAnimation = true;
@@ -104,6 +96,7 @@ public partial class TrainerBattleUI
             DrawMessage(spriteBatch, battleMessage);
         }
         // Show fight instructions
-        DrawMessage(spriteBatch, "Press A to use Tackle");
+        string moveName = (_playerMove ?? SafeDefaultMove()).Name;
+        DrawMessage(spriteBatch, "Press A to use " + moveName);
     }
 }
