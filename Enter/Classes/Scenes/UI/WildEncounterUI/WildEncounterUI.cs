@@ -164,8 +164,8 @@ public partial class WildEncounterUI
     {
         KeyboardState keyboardState = Keyboard.GetState();
 
-        // Clear bag confirm flag when not in Bag state
-        if (_currentState != "Bag")
+        // Clear bag confirm flag when not in Bag/Item state
+        if (_currentState != "Bag" && _currentState != "Item")
         {
             BagConfirmRequested = false;
         }
@@ -286,28 +286,62 @@ public partial class WildEncounterUI
             }
         }
 
-        // Update capture animation when in Bag state
-        if (_currentState == "Bag" && _captureAnimation != null)
+        // Update capture animation when in Bag/Item state
+        if (_currentState == "Bag" || _currentState == "Item")
         {
-            _captureAnimation.Update(gameTime);
+            var currentState = Keyboard.GetState();
 
-            if (_captureAnimation.CaptureComplete)
+            // Edge-triggered Enter to start capture
+            if (_captureAnimation == null && !captureInProgress && currentState.IsKeyDown(Keys.Enter) && _prevBagKeyState.IsKeyUp(Keys.Enter))
             {
-                captureInProgress = false;
-                if (_captureAnimation.CaptureSuccessful)
+                BagConfirmRequested = true;
+                var pokeRegion = _wildPokemonSpriteFront?.Region;
+                if (pokeRegion?.Texture != null)
                 {
-                    battleMessage = "Gotcha! " + (_enemyPokemon?.Name ?? "Pokemon") + " was caught!";
-                    didRunOrCatch = true;
-                    endMessageActive = true;
-                    endMessageTimer = 0.0;
-                }
-                else
-                {
-                    battleMessage = "Oh no! The wild " + (_enemyPokemon?.Name ?? "pokemon") + " broke free!";
-                    BagConfirmRequested = false;
-                    _captureAnimation = null; // allow retry
+                    var startPos = playerPosition; // throw starts from player
+                    _captureAnimation = new PokeballCaptureAnimation(wildPokemonPosition, pokeRegion, startPos);
+                    _captureAnimation.LoadContent(_content);
+
+                    // Simple capture odds: higher at lower HP
+                    double hpRatio = enemyMaxHP > 0 ? (double)enemyCurrentHP / enemyMaxHP : 1.0;
+                    double captureChance = Math.Clamp(0.8 - (hpRatio * 0.5), 0.25, 0.9);
+                    _captureAnimation.SetCaptureChance(captureChance);
+
+                    _captureAnimation.StartCapture();
+                    captureInProgress = true;
                 }
             }
+
+            // Update capture animation when active
+            if (_captureAnimation != null)
+            {
+                _captureAnimation.Update(gameTime);
+
+                if (_captureAnimation.CaptureComplete)
+                {
+                    captureInProgress = false;
+                    if (_captureAnimation.CaptureSuccessful)
+                    {
+                        battleMessage = "Gotcha! " + (_enemyPokemon?.Name ?? "Pokemon") + " was caught!";
+                        didRunOrCatch = true;
+                        endMessageActive = true;
+                        endMessageTimer = 0.0;
+                    }
+                    else
+                    {
+                        battleMessage = "Oh no! The wild " + (_enemyPokemon?.Name ?? "pokemon") + " broke free!";
+                        BagConfirmRequested = false;
+                        _captureAnimation = null; // allow retry
+                    }
+                }
+            }
+
+            _prevBagKeyState = currentState;
+        }
+        else
+        {
+            // Keep prev state fresh so Enter edge detection works when re-entering Bag
+            _prevBagKeyState = Keyboard.GetState();
         }
 
         _prevKeyboardState = keyboardState;

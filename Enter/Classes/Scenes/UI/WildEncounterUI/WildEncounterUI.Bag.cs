@@ -5,6 +5,7 @@ using System;
 using Enter.Classes.Characters;
 using Enter.Classes.Sprites;
 using Enter.Classes.Animations;
+using Enter.Classes.Textures;
 using PokemonGame;
 
 public partial class WildEncounterUI
@@ -35,27 +36,6 @@ public partial class WildEncounterUI
         // Check for Tab key to reset battle (escape from item selection)
         KeyboardState currentState = Keyboard.GetState();
 
-        // Trigger capture animation on Enter if not already running
-        if (_captureAnimation == null && !captureInProgress && currentState.IsKeyDown(Keys.Enter))
-        {
-            BagConfirmRequested = true;
-            var pokeTexture = _wildPokemonSpriteFront?.Region?.Texture;
-            if (pokeTexture != null)
-            {
-                var startPos = playerPosition; // throw starts from player
-                _captureAnimation = new PokeballCaptureAnimation(wildPokemonPosition, pokeTexture, startPos);
-                _captureAnimation.LoadContent(_content);
-
-                // Simple capture odds: higher at lower HP
-                double hpRatio = enemyMaxHP > 0 ? (double)enemyCurrentHP / enemyMaxHP : 1.0;
-                double captureChance = Math.Clamp(0.8 - (hpRatio * 0.5), 0.25, 0.9);
-                _captureAnimation.SetCaptureChance(captureChance);
-
-                _captureAnimation.StartCapture();
-                captureInProgress = true;
-            }
-        }
-
         // Draw capture animation overlay if active
         if (_captureAnimation != null)
         {
@@ -65,13 +45,5 @@ public partial class WildEncounterUI
         {
             resetBattle = true;
         }
-
-        // Enter triggers bag confirm hook for throw/catch handling
-        if (currentState.IsKeyDown(Keys.Enter))
-        {
-            BagConfirmRequested = true; // external battle logic can process catch/animation here
-        }
-
-        _prevBagKeyState = currentState;
     }
 }

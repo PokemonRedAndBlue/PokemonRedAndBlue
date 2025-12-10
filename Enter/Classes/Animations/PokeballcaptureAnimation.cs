@@ -1,4 +1,5 @@
 using Enter.Classes.GameState;
+using Enter.Classes.Textures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -45,7 +46,7 @@ public class PokeballCaptureAnimation
     // Pokemon state
     private Vector2 pokemonPosition;
     private Vector2 pokemonInitialPosition;
-    private Texture2D pokemonTexture;
+    private TextureRegion _pokemonRegion;
     private bool pokemonVisible = true;
     private float pokemonScale = 1f;
     private Color pokemonColor = Color.White;
@@ -63,12 +64,12 @@ public class PokeballCaptureAnimation
 
     public PokeballCaptureAnimation(
         Vector2 pokemonPos,
-        Texture2D pokemonTex,
+        TextureRegion pokemonRegion,
         Vector2 pokeballStartPos)
     {
         pokemonPosition = pokemonPos;
         pokemonInitialPosition = pokemonPos;
-        pokemonTexture = pokemonTex;
+        _pokemonRegion = pokemonRegion;
         _pokeballPosition = pokemonPos;
 
         throwAnim = new PokeballthrowAnimation(
@@ -219,24 +220,6 @@ public class PokeballCaptureAnimation
 
     public void Draw(SpriteBatch spriteBatch)
     {
-        // Draw Pokemon (only if visible)
-        if (pokemonVisible)
-        {
-            spriteBatch.Draw(
-                pokemonTexture,
-                pokemonPosition,
-                null,
-                pokemonColor,
-                0f,
-                new Vector2(
-                    pokemonTexture.Width / 2f,
-                    pokemonTexture.Height / 2f),
-                pokemonScale,
-                SpriteEffects.None,
-                0f
-            );
-        }
-
         // Draw throw animation during throwing
         if (_state == CaptureState.Throwing)
         {
