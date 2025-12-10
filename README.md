@@ -43,26 +43,12 @@ Or use the CLI:
 dotnet mgcb build Content/Content.mgcb
 ```
 
-## Key Features
-- Tile-based collision system that prevents the player from walking through solid objects
-- Accurate map boundary detection that keeps the player within the playable world
-- Scene handling for battles and wild encounters
-- Background on player and trainer removed
-- Pseudo route walkable by player and trainer approachable with triggerable battle
-- Tile-memory system using a dictionary, so tile positions are saved per scene
-- Level-transitioning logic between scenes which is built upon the new tile-based movement
-- Turn-based battle UI with state machine
-- Health bar logic: color-only (green/yellow/red, always full width) or percent-based (scaled by HP)
-- Sprite and texture atlas system
-- XML-driven data for Pokémon, moves, maps, etc.
-- Music and sound effect code/assets present (see below)
-
 ## Controls
 ### Action  Key(s)
 - Move player:  Arrow Keys
 - Exit game:  Escape
 - Exit the battle scene with trainer: Tab
-- Enter Wild Encounter Scene - 'w' key press
+- Enter Wild Encounter Scene - 'w' key press (only a debug feature but if you cant get one by chance test this way!)
 - Enter Trainer Battle - approach the trainer from the side
 - Walk to the bottom of Route 1 to get to Cerulean City
 - Walk to the left of Cerulean City to get to Route 1
@@ -72,51 +58,39 @@ dotnet mgcb build Content/Content.mgcb
 | Action                        | Key(s)         |
 |-------------------------------|----------------|
 | Move player                   | Arrow Keys     |
+| Change Move in Battle         | Arrow L and R  |
 | Exit game                     | Escape         |
-| Exit a battle scene           | Tab            |
+| Force Exit a battle scene     | Tab            |
 | Enter Wild Encounter Scene    | W              |
 | Enter Trainer Battle          | Approach trainer from the side |
-| Transport to Gym              | G              |
-| Transport to City             | C              |
 | Reset Game                    | R              |
 
 ## Known Bugs & Limitations
-- Collision tiles are manually defined, requiring updates to TileCollisionProfile.cs whenever new tiles are added
-- Data handling for Pokémon and trainers is spread out over multiple classes (needs centralization)
-- Some merges occurred without full code review or did not follow the review template
-- Music and sound effect code/assets are present, but not yet fully implemented in gameplay
-- There is giant gray bars extending off HP bars, im not sure why that is happening, xml looks fine, will fix.
-- Ending a fight in the city sends you back to the first route aka the overworld
+- You cannot go from the city back to the overworld, and when you come from the overworld to the city you are   facing down instead of right
+- Bag/Pokémon submenus are stubbed/blank in battle (tab out to exit)
+- Limited move set and AI depth; balance is minimal
 
-## Planned Improvements
-- Add clear separation between walkable, solid, and interactive tiles within TileCollisionProfile.cs
-- Centralize Pokémon and trainer data handling
-- Refactor floating files into appropriate subfolders
-- Improve code review process and consistency
-- Integrate music and sound effects into gameplay
-- Add dialogue and more animations for battle scenes
-- Expand XML-driven content (Pokémon, moves, maps)
+## Recent Improvements
+- Added player deploy pokéball animation
+- Enlarged battle/instruction text and improved effectiveness messaging layout
+- Treated warnings as errors and removed unused/useless fields/usings to keep builds clean
+- Dynamic movesets and damage; damage is calculated based on type level and move!
+- Custom gym leader and 'pokemon'
+- Title Screen and multiple intros!
 
-### Short-Term Goals
-- Add clear separation between walkable, solid, and interactive tiles within TileCollisionProfile.cs
-- Preserve player position when entering a battle scene
-- Use the Pokémon generator to make wild Pokémon truly random (including stats, etc).
-- Extract common scene initialization into one base class to reduce code duplication
-## Recent Developments
-- Health bars now use color-only logic (green/yellow/red) and reflect local HP values
-- Instructional messages:
-  - In Fight: "Press A to use Tackle" (drawn in black, 50px higher)
-  - In Menu: "Use arrow keys to navigate and Enter to select" (drawn in black, 50px higher)
-- Random damage, critical/miss messages, and win/lose color feedback
-- No more reflection or temp objects for HP bar drawing; now uses explicit HP values
-- Refactored UI code for clarity and maintainability
-- Music and sound effect libraries and assets added (not yet fully implemented)
-- Added full Pokémon data systems: move loading, stat generation (IV-based), and species catch rates.
-- Implemented core battle math including damage calculation (STAB, typing, physical/special) and trainer AI move selection.
-- Added catching probability logic and separate generation paths for wild vs. trainer Pokémon.
+## If We Had More Time
+- Flesh out Bag/Pokémon/Run submenus with real interactions and UI states
+- Add richer AI, move pools, and status effects
+- Implement overworld backtracking (city <-> route) and polish spawn/orientation persistence
+- Add battle transitions, camera polish, and additional animations (hit, faint, idle variants)
+- Introduce save/load slots and in-game settings (audio, speed, accessibility)
+
+## Additional Doccumentation
+- Demo Video: https://youtu.be/DWcQq7iNob4 (or attatched in carmen)
+- Slides: attatched on carmen
 
 ## Backlog
-See [`backlog.md`](backlog.md) for current backlog, sprint summaries, and future plans.
+No Backlog for this sprint yay! We did everything we planned from the begining (miraculously)!
 
 ## License
 See LICENSE file.
