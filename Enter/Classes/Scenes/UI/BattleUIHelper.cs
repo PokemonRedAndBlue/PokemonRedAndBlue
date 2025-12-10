@@ -261,22 +261,20 @@ public String handleArrowEvent(int currentCol, int currentRow)
         double midThird = poke.MaxHp * (1.0 / 3.0);
         double currentHp = poke.Hp;
 
-        if(isPlayersTeam)
-        {
-            healthBarPosition = new Vector2( uiBasePosition.X + (_scale * 95) - 4, uiBasePosition.Y + (_scale * 74) - 4);
-        }
+        healthBarPosition = isPlayersTeam
+            ? new Vector2(uiBasePosition.X + (_scale * 95) - 4, uiBasePosition.Y + (_scale * 74) - 4)
+            : new Vector2(uiBasePosition.X + (31 * _scale) - 4, uiBasePosition.Y + (18 * _scale) - 4);
 
-        if(currentHp > topThird)
+        if (currentHp > topThird)
         {
-            // draw green
             greenMax.Draw(spriteBatch, Color.White, healthBarPosition, _scale);
-        } else if(currentHp > midThird)
+        }
+        else if (currentHp > midThird)
         {
-            // draw yellow
             midYellow.Draw(spriteBatch, Color.White, healthBarPosition, _scale);
-        } else if(midThird > currentHp)
+        }
+        else
         {
-            // draw red
             redLow.Draw(spriteBatch, Color.White, healthBarPosition, _scale);
         }
     }

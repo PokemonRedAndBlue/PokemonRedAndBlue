@@ -22,9 +22,9 @@ public partial class TrainerBattleUI
         currentMon.Draw(spriteBatch, Color.White, new Vector2(playerPosition.X, maxDrawPos.Y + (-currentMon.Height * _scale)), 4f);
         enemyPokemon.AnimatedSprite?.Draw(spriteBatch, Color.White, enemysPokemonPosition, _enemyTrainerString == "trainer-painter" ? 0.2f : 4f);
 
-        // Draw health bars
-        battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, true);
-        battleUI.drawHealthBar(enemyPokemon, greenBar, yellowBar, redBar, spriteBatch, false);
+        // Draw health bars using tracked HP values
+        battleUI.drawHealthBar(playerCurrentHP, playerMaxHP, greenBar, yellowBar, redBar, spriteBatch, true);
+        battleUI.drawHealthBar(enemyCurrentHP, enemyMaxHP, greenBar, yellowBar, redBar, spriteBatch, false);
 
         // Input: Tab exits, Enter requests pokeball use (hook for animation/catch)
         KeyboardState keyState = Keyboard.GetState();

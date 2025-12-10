@@ -12,9 +12,9 @@ public partial class TrainerBattleUI
         UIBaseSprites[1].Draw(spriteBatch, Color.White, new Vector2(340, 75), 4f);
         String playersPokemon = currentPokemon.Name.ToString();
         Sprite currentMon = PokemonBackFactory.Instance.CreateStaticSprite(playersPokemon.ToLower() + "-back");
-        // Use updated HP for health bars (use Pokemon overload like WildEncounterUI)
-        battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, true);
-        battleUI.drawHealthBar(enemyPokemon, greenBar, yellowBar, redBar, spriteBatch, false);
+        // Use tracked HP so bars reflect damage
+        battleUI.drawHealthBar(playerCurrentHP, playerMaxHP, greenBar, yellowBar, redBar, spriteBatch, true);
+        battleUI.drawHealthBar(enemyCurrentHP, enemyMaxHP, greenBar, yellowBar, redBar, spriteBatch, false);
         if (!string.IsNullOrEmpty(battleMessage))
         {
             DrawMessage(spriteBatch, battleMessage);
@@ -65,6 +65,6 @@ public partial class TrainerBattleUI
         }
         enemyPokemon.AnimatedSprite?.Draw(spriteBatch, enemyColorMenu, enemysPokemonPosition + enemyOffsetMenu, enemyBaseScaleMenu * enemyScaleMenu);
         // Draw HP just above enemy pokemon (25px lower)
-        DrawHP(spriteBatch, enemyCurrentHP, enemyMaxHP, enemyPokemon?.Level ?? 1, new Vector2(enemysPokemonPosition.X + 20, enemysPokemonPosition.Y - 15), "Enemy");
+        DrawHP(spriteBatch, enemyCurrentHP, enemyMaxHP, enemyPokemon?.Level ?? 1, new Vector2(enemysPokemonPosition.X + 0, enemysPokemonPosition.Y - 15), "Enemy");
     }
 }

@@ -47,6 +47,7 @@ namespace PokemonGame
         public Pokemon(string name, int level, PokemonView view, AnimatedSprite animatedSprite, Vector2 position)
         {
             Name = name;
+            _level = Math.Max(1, level);
             MaxHp = 100;
             Hp = MaxHp;
             View = view;
@@ -79,6 +80,7 @@ namespace PokemonGame
         public Pokemon(string name, int level, PokemonView view, Sprite sprite, Vector2 position)
         {
             Name = name;
+            _level = Math.Max(1, level);
             MaxHp = 100;
             Hp = MaxHp;
             View = view;

@@ -22,9 +22,9 @@ public partial class WildEncounterUI
         _trainerSpriteBack.Draw(spriteBatch, Color.White, playerPosition, 8f);
         _wildPokemonSpriteFront.Draw(spriteBatch, Color.White, wildPokemonPosition, 4f);
 
-        // Draw health bars
-        battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, true);
-        battleUI.drawHealthBar(_enemyPokemon, greenBar, yellowBar, redBar, spriteBatch, false);
+        // Draw health bars using current HP so they reflect changes
+        battleUI.drawHealthBar(playerCurrentHP, playerMaxHP, greenBar, yellowBar, redBar, spriteBatch, true);
+        battleUI.drawHealthBar(enemyCurrentHP, enemyMaxHP, greenBar, yellowBar, redBar, spriteBatch, false);
 
         // Check for Tab key to reset battle (escape from item selection)
         KeyboardState currentState = Keyboard.GetState();

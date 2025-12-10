@@ -14,8 +14,8 @@ public partial class WildEncounterUI
         Sprite currentMon = PokemonBackFactory.Instance.CreateStaticSprite(playersPokemon.ToLower() + "-back");
 
         // Use updated HP for health bars (use Pokemon overload like WildEncounterUI)
-        battleUI.drawHealthBar(currentPokemon, greenBar, yellowBar, redBar, spriteBatch, true);
-        battleUI.drawHealthBar(enemyPokemon, greenBar, yellowBar, redBar, spriteBatch, false);
+        battleUI.drawHealthBar(playerCurrentHP, playerMaxHP, greenBar, yellowBar, redBar, spriteBatch, true);
+        battleUI.drawHealthBar(enemyCurrentHP, enemyMaxHP, greenBar, yellowBar, redBar, spriteBatch, false);
         // draw after HP bars so its on top of gaint gray bars
         Vector2 playerOffsetFight = Vector2.Zero;
         if (playerAttackAnimationPlaying)
@@ -52,7 +52,7 @@ public partial class WildEncounterUI
         }
         enemyPokemon.AnimatedSprite?.Draw(spriteBatch, enemyColorFight, enemysPokemonPosition + enemyOffsetFight, 4f * enemyScaleFight);
         // Draw HP just above enemy pokemon (25px lower)
-        var enemyHpPos = new Vector2(uiBasePosition.X + (31 * _scale) - 4, uiBasePosition.Y + (18 * _scale) - 4 - 20);
+        var enemyHpPos = new Vector2(uiBasePosition.X + (31 * _scale) - 4 - 20, uiBasePosition.Y + (18 * _scale) - 4 - 20);
         DrawHP(spriteBatch, enemyCurrentHP, enemyMaxHP, enemyPokemon?.Level ?? 1, enemyHpPos, "Enemy");
         if (!string.IsNullOrEmpty(battleMessage))
         {

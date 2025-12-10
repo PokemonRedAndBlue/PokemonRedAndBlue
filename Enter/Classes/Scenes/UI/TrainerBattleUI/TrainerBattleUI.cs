@@ -559,6 +559,7 @@ public partial class TrainerBattleUI
         // Damage/attack messages sit above HP display; instruction sits at bottom of play area
         Vector2 dmgPos = new Vector2(345, 300); // shift right by 25 total
         Vector2 instrPos = new Vector2(365, 530); // shift right by 20
+        float msgScale = 0.85f;
         Color color = Color.Black;
 
         // Instruction: split onto two lines (prompt + move name)
@@ -567,8 +568,8 @@ public partial class TrainerBattleUI
             string moveName = message.Length > "press A to use ".Length
                 ? message.Substring("press A to use ".Length)
                 : "";
-            spriteBatch.DrawString(_font, "press A to use", instrPos, color);
-            spriteBatch.DrawString(_font, moveName, instrPos + new Vector2(0, 20), color);
+            spriteBatch.DrawString(_font, "press A to use", instrPos, color, 0f, Vector2.Zero, msgScale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(_font, moveName, instrPos + new Vector2(0, 20), color, 0f, Vector2.Zero, msgScale, SpriteEffects.None, 0f);
             return;
         }
 
@@ -595,10 +596,10 @@ public partial class TrainerBattleUI
             effectLine = "The attack was effective.";
         }
 
-        spriteBatch.DrawString(_font, mainLine, dmgPos, color);
+        spriteBatch.DrawString(_font, mainLine, dmgPos, color, 0f, Vector2.Zero, msgScale, SpriteEffects.None, 0f);
         if (!string.IsNullOrEmpty(effectLine))
         {
-            spriteBatch.DrawString(_font, effectLine, dmgPos + new Vector2(0, 20), color);
+            spriteBatch.DrawString(_font, effectLine, dmgPos + new Vector2(0, 20), color, 0f, Vector2.Zero, msgScale, SpriteEffects.None, 0f);
         }
     }
 
