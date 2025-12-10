@@ -10,29 +10,24 @@ public class PokeballthrowAnimation
     private Texture2D _texture;
 
     private Vector2 position;
-
-    //If active frame is 0 when doesnt animate
-
-    private float initialPositionX;  //inital postion of x
-    private float initialPositionY;  //inital position of y
+    private Vector2 startPosition;
+    private Vector2 targetPosition;
 
     public bool IsComplete { get; private set; }
 
-    private float xParam;           // radian x value
-    private float step;             // how much x increases each update
-    private float maxHeight;        // maximum height of sin function
+    private float t;                // normalized progress 0..1
+    private float step;             // how much t increases each update
+    private float maxHeight;        // maximum arc height
 
-
-
-    public PokeballthrowAnimation(int x, int y)
+    public PokeballthrowAnimation(int startX, int startY, Vector2 target)
     {
-        this.initialPositionX = x;
-        this.initialPositionY = y;
-        this.position = new Vector2(x, y);
+        startPosition = new Vector2(startX, startY);
+        targetPosition = target;
+        position = startPosition;
 
-        xParam = 0f;
-        step = 0.03f;    // smaller = smoother and slower
-        maxHeight = 100;
+        t = 0f;
+        step = 0.035f;   // smaller = smoother and slower
+        maxHeight = 110;
     }
 
     public void LoadContent(ContentManager content)
@@ -42,18 +37,17 @@ public class PokeballthrowAnimation
 
     public void Update(GameTime gameTime)
     {
-        xParam += step;
-        if (xParam >= (3f * MathF.PI / 4f))
-        {
-            IsComplete = true;  // Mark as complete
-            xParam = 0f;
-            //return;
-        }
-        float px = initialPositionX + xParam * 100;
-        float py = initialPositionY - maxHeight * MathF.Sin(xParam);
+        if (IsComplete) return;
 
-        position.X = px;
-        position.Y = py;
+        t += step;
+        if (t >= 1f)
+        {
+            t = 1f;
+            IsComplete = true;
+        }
+
+        float arc = MathF.Sin(t * MathF.PI) * maxHeight;
+        position = Vector2.Lerp(startPosition, targetPosition, t) + new Vector2(0f, -arc);
     }
 
     public void Draw(SpriteBatch spriteBatch)

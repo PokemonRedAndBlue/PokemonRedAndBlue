@@ -18,6 +18,7 @@ public class PokeballCaptureAnimation
         Absorbing,
         InBall,
         Shaking,
+        SuccessPause,
         Success,
         Fail
     }
@@ -31,12 +32,13 @@ public class PokeballCaptureAnimation
 
     // Throw animation
     private PokeballthrowAnimation throwAnim;
-    private bool throwAnimComplete = false;
 
     // Absorb effect
-    private AbsorbStateAction absorbEffect = new AbsorbStateAction();
+    private FaintStateAction faintEffect = new FaintStateAction();
     private double absorbTimer = 0;
     private const double ABSORB_DURATION = 800; // milliseconds
+    private double successPauseTimer = 0;
+    private const double SUCCESS_PAUSE_MS = 4000; // pause after shakes end
 
     // Shake timing
     private double shakeTimer = 0;
@@ -50,6 +52,8 @@ public class PokeballCaptureAnimation
     private bool pokemonVisible = true;
     private float pokemonScale = 1f;
     private Color pokemonColor = Color.White;
+    private Vector2 targetPosition;
+    private SpriteFont _font;
 
     private Vector2 absorbTargetPos;
     private System.Random rng = new System.Random();
@@ -62,6 +66,13 @@ public class PokeballCaptureAnimation
 
     public bool CaptureSuccessful => _state == CaptureState.Success;
 
+    // When true, caller should hide the normal wild sprite (capture anim will render it)
+    public bool HideWildForCapture =>
+        _state == CaptureState.Absorbing ||
+        _state == CaptureState.InBall ||
+        _state == CaptureState.Shaking ||
+        _state == CaptureState.Success;
+
     public PokeballCaptureAnimation(
         Vector2 pokemonPos,
         TextureRegion pokemonRegion,
@@ -70,14 +81,17 @@ public class PokeballCaptureAnimation
         pokemonPosition = pokemonPos;
         pokemonInitialPosition = pokemonPos;
         _pokemonRegion = pokemonRegion;
-        _pokeballPosition = pokemonPos;
+        // Aim slightly inset near the upper-left quadrant of the wild sprite (avoid border)
+        targetPosition = pokemonPos + new Vector2(12f, -12f);
+        _pokeballPosition = pokeballStartPos;
 
         throwAnim = new PokeballthrowAnimation(
             (int)pokeballStartPos.X,
-            (int)pokeballStartPos.Y
+            (int)pokeballStartPos.Y,
+            targetPosition
         );
 
-        absorbTargetPos = pokemonPos;
+        absorbTargetPos = targetPosition;
         activeFrame = 1;
         frameCount = 0;
     }
@@ -95,6 +109,7 @@ public class PokeballCaptureAnimation
     public void LoadContent(ContentManager content)
     {
         _pokeballTexture = content.Load<Texture2D>("images/Pokeball");
+        _font = content.Load<SpriteFont>("PokemonFont");
         throwAnim.LoadContent(content);
     }
 
@@ -115,7 +130,7 @@ public class PokeballCaptureAnimation
                 if (throwAnim.IsComplete)
                 {
                     _state = CaptureState.Hit;
-                    _pokeballPosition = pokemonPosition;
+                    _pokeballPosition = targetPosition;
                 }
 
                 // if (!throwAnimComplete)
@@ -133,27 +148,21 @@ public class PokeballCaptureAnimation
             case CaptureState.Hit:
                 // Brief pause at impact, then start absorbing
                 absorbTimer = 0;
-                _pokeballPosition = pokemonPosition; // Ball is now at pokemon position
+                _pokeballPosition = targetPosition; // Ball is now at target position
                 _state = CaptureState.Absorbing;
                 break;
 
             case CaptureState.Absorbing:
                 absorbTimer += dt;
 
-                // Get the absorption effect
-                var (color, scale, yOffset) = absorbEffect.GetAbsorbEffect(absorbTimer, ABSORB_DURATION);
+                // Combine faint fade/scale with an upward arc into the ball
+                var (faintColor, faintScale) = faintEffect.GetFaintEffect(absorbTimer, ABSORB_DURATION);
+                pokemonColor = faintColor;
+                pokemonScale = faintScale;
 
-                pokemonColor = color;
-                pokemonScale = scale;
-
-                // Apply the vertical offset as pokemon is absorbed
-                pokemonPosition = pokemonInitialPosition + new Vector2(0, yOffset);
-
-                // Smoothly move Pokemon toward center of ball horizontally
-                pokemonPosition = new Vector2(
-                    MathHelper.Lerp(pokemonPosition.X, absorbTargetPos.X, 0.08f),
-                    pokemonPosition.Y
-                );
+                // Pull the sprite toward the ball while easing upward
+                pokemonPosition = Vector2.Lerp(pokemonPosition, absorbTargetPos, 0.12f);
+                pokemonPosition.Y -= 0.4f * (float)(dt / 16.0); // small lift while being absorbed
 
                 if (absorbTimer >= ABSORB_DURATION)
                 {
@@ -192,7 +201,8 @@ public class PokeballCaptureAnimation
                         // Decide success or fail based on capture rate
                         if (rng.NextDouble() < captureRate)
                         {
-                            _state = CaptureState.Success;
+                            successPauseTimer = 0;
+                            _state = CaptureState.SuccessPause;
                             activeFrame = 1; // Reset to neutral frame
                         }
                         else
@@ -200,6 +210,14 @@ public class PokeballCaptureAnimation
                             _state = CaptureState.Fail;
                         }
                     }
+                }
+                break;
+
+            case CaptureState.SuccessPause:
+                successPauseTimer += dt;
+                if (successPauseTimer >= SUCCESS_PAUSE_MS)
+                {
+                    _state = CaptureState.Success;
                 }
                 break;
 
@@ -220,6 +238,25 @@ public class PokeballCaptureAnimation
 
     public void Draw(SpriteBatch spriteBatch)
     {
+        // Draw the pokemon being absorbed with faint effect
+        if (pokemonVisible && (_state == CaptureState.Absorbing))
+        {
+            Rectangle source = _pokemonRegion.SourceRectangle;
+            Vector2 origin = Vector2.Zero;
+            float scale = 4f * pokemonScale;
+            spriteBatch.Draw(
+                _pokemonRegion.Texture,
+                pokemonPosition,
+                source,
+                pokemonColor,
+                0f,
+                origin,
+                scale,
+                SpriteEffects.None,
+                0f
+            );
+        }
+
         // Draw throw animation during throwing
         if (_state == CaptureState.Throwing)
         {
@@ -230,6 +267,7 @@ public class PokeballCaptureAnimation
         // Don't know what I did here :(
         if (_state == CaptureState.Shaking || 
             _state == CaptureState.Success || 
+            _state == CaptureState.SuccessPause ||
             _state == CaptureState.InBall ||
             _state == CaptureState.Absorbing)
         {
@@ -248,6 +286,17 @@ public class PokeballCaptureAnimation
                 SpriteEffects.None,
                 0f
             );
+
+            if (_state == CaptureState.SuccessPause && _font != null)
+            {
+                string msg = "POKEMON CAUGHT";
+                Vector2 textSize = _font.MeasureString(msg);
+                // Position text centered under the ball
+                Vector2 textPos = _pokeballPosition + new Vector2(-textSize.X / 2f, sourceRect.Height * scale / 2f + 8f);
+                // Drop shadow then main text for visibility
+                spriteBatch.DrawString(_font, msg, textPos + new Vector2(2f, 2f), Color.Black);
+                spriteBatch.DrawString(_font, msg, textPos, Color.White);
+            }
         }
     }
 
