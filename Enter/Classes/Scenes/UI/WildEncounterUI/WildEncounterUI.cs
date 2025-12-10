@@ -769,7 +769,7 @@ public partial class WildEncounterUI
         // Damage/attack messages sit above HP display; instruction sits at bottom of play area
         Vector2 dmgPos = new Vector2(345, 300); // shift right by 25 total
         Vector2 instrPos = new Vector2(365, 530); // shift right by 20
-        float msgScale = 0.85f;
+        float msgScale = 1.05f; // enlarge battle and instruction text
         Color color = Color.Black;
         Color effectColor = color;
         Color moveColor = Color.MediumPurple;
@@ -781,7 +781,7 @@ public partial class WildEncounterUI
                 ? message.Substring("press A to use ".Length)
                 : "";
             spriteBatch.DrawString(_font, "press A to use", instrPos, color, 0f, Vector2.Zero, msgScale, SpriteEffects.None, 0f);
-            spriteBatch.DrawString(_font, moveName, instrPos + new Vector2(0, 20), moveColor, 0f, Vector2.Zero, msgScale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(_font, moveName, instrPos + new Vector2(0, 24), moveColor, 0f, Vector2.Zero, msgScale, SpriteEffects.None, 0f);
             return;
         }
 
