@@ -26,7 +26,7 @@ public class PokeballthrowAnimation
         position = startPosition;
 
         t = 0f;
-        step = 0.035f;   // smaller = smoother and slower
+        step = 0.025f;   // smaller = smoother and slower
         maxHeight = 110;
     }
 

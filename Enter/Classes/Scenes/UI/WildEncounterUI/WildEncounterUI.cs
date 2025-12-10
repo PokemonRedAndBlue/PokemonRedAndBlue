@@ -95,6 +95,11 @@ public partial class WildEncounterUI
     private PokeballCaptureAnimation _captureAnimation;
     private bool captureInProgress = false;
 
+    private bool ShouldHideWildSprite =>
+        _captureAnimation != null && (_captureAnimation.HideWildForCapture || _captureAnimation.CaptureSuccessful);
+
+    private bool HideWildInState(string state) => ShouldHideWildSprite;
+
     // Damage flash effect timers
     private double enemyDamageFlashTimer = 0.0;
     private bool enemyTakingDamage = false;
@@ -332,6 +337,9 @@ public partial class WildEncounterUI
                         battleMessage = "Oh no! The wild " + (_enemyPokemon?.Name ?? "pokemon") + " broke free!";
                         BagConfirmRequested = false;
                         _captureAnimation = null; // allow retry
+                        // Ensure wild is visible again on fail
+                        _prevBagKeyState = currentState;
+                        return;
                     }
                 }
             }

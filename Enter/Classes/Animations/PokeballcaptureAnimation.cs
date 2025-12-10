@@ -71,6 +71,7 @@ public class PokeballCaptureAnimation
         _state == CaptureState.Absorbing ||
         _state == CaptureState.InBall ||
         _state == CaptureState.Shaking ||
+        _state == CaptureState.SuccessPause ||
         _state == CaptureState.Success;
 
     public PokeballCaptureAnimation(
@@ -81,8 +82,8 @@ public class PokeballCaptureAnimation
         pokemonPosition = pokemonPos;
         pokemonInitialPosition = pokemonPos;
         _pokemonRegion = pokemonRegion;
-        // Aim slightly inset near the upper-left quadrant of the wild sprite (avoid border)
-        targetPosition = pokemonPos + new Vector2(12f, -12f);
+        // Aim inset near the upper-left quadrant of the wild sprite, shifted further right/down
+        targetPosition = pokemonPos + new Vector2(42f, 78f);
         _pokeballPosition = pokeballStartPos;
 
         throwAnim = new PokeballthrowAnimation(
@@ -287,7 +288,7 @@ public class PokeballCaptureAnimation
                 0f
             );
 
-            if (_state == CaptureState.SuccessPause && _font != null)
+            if ((_state == CaptureState.SuccessPause || _state == CaptureState.Success) && _font != null)
             {
                 string msg = "POKEMON CAUGHT";
                 Vector2 textSize = _font.MeasureString(msg);

@@ -26,7 +26,10 @@ public partial class WildEncounterUI
         {
             wildOffsetInit = frontState.AttackFrontAction(_wildPokemonSpriteFront, enemyAttackAnimationTimer, AttackAnimationDurationMs);
         }
-        _wildPokemonSpriteFront.Draw(spriteBatch, Color.White, wildPokemonPosition + wildOffsetInit, 4f);
+        if (!HideWildInState(_currentState))
+        {
+            _wildPokemonSpriteFront.Draw(spriteBatch, Color.White, wildPokemonPosition + wildOffsetInit, 4f);
+        }
 
         // Draw player trainer party bar
         BattleUIHelper.drawPokeballSprites(_Player.thePlayersTeam, _WildUIAtlas, spriteBatch, true);

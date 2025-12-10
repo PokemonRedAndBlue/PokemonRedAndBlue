@@ -50,7 +50,10 @@ public partial class WildEncounterUI
             enemyColorFight = faintColor;
             enemyScaleFight = faintScale;
         }
-        enemyPokemon.AnimatedSprite?.Draw(spriteBatch, enemyColorFight, enemysPokemonPosition + enemyOffsetFight, 4f * enemyScaleFight);
+        if (!HideWildInState(_currentState))
+        {
+            enemyPokemon.AnimatedSprite?.Draw(spriteBatch, enemyColorFight, enemysPokemonPosition + enemyOffsetFight, 4f * enemyScaleFight);
+        }
         // Draw HP just above enemy pokemon (25px lower)
         var enemyHpPos = new Vector2(uiBasePosition.X + (31 * _scale) - 4 - 20, uiBasePosition.Y + (18 * _scale) - 4 - 20);
         DrawHP(spriteBatch, enemyCurrentHP, enemyMaxHP, enemyPokemon?.Level ?? 1, enemyHpPos, "Enemy");

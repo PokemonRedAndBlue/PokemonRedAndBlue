@@ -23,7 +23,7 @@ public partial class WildEncounterUI
 
         // Draw trainer back and wild pokemon (unless absorbed in animation)
         _trainerSpriteBack.Draw(spriteBatch, Color.White, playerPosition, 8f);
-        bool showWild = _captureAnimation == null || (!_captureAnimation.CaptureComplete && !_captureAnimation.HideWildForCapture);
+        bool showWild = !ShouldHideWildSprite;
         if (showWild)
         {
             _wildPokemonSpriteFront.Draw(spriteBatch, Color.White, wildPokemonPosition, 4f);

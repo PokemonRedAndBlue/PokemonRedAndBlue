@@ -38,7 +38,10 @@ public partial class WildEncounterUI
         {
             wildOffset = frontState.AttackFrontAction(_wildPokemonSpriteFront, enemyAttackAnimationTimer, AttackAnimationDurationMs);
         }
-        _wildPokemonSpriteFront.Draw(spriteBatch, Color.White, wildPokemonPosition + wildOffset, 4f);
+        if (!HideWildInState(_currentState))
+        {
+            _wildPokemonSpriteFront.Draw(spriteBatch, Color.White, wildPokemonPosition + wildOffset, 4f);
+        }
         var enemyHpPos = new Vector2(uiBasePosition.X + (31 * _scale) - 4 - 20, uiBasePosition.Y + (18 * _scale) - 4 - 20);
         DrawHP(spriteBatch, enemyCurrentHP, enemyMaxHP, _enemyPokemon?.Level ?? (_enemyInstance?.Level ?? 1), enemyHpPos, "Enemy");
     }
