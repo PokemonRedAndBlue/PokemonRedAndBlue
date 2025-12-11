@@ -22,7 +22,7 @@ namespace Enter.Classes.Scenes
     public class OverworldScene : IGameScene
     {
         private const float ZoomLevel = 4f; 
-        private const float WildEncounterTriggerChance = 0.035f;
+        private const float WildEncounterTriggerChance = 0.05f;
         private const double WildEncounterCooldown = 2.0;
         private const int WildGrassTileId = 5; // wild-grass-route1
         private SceneManager _sceneManager;
